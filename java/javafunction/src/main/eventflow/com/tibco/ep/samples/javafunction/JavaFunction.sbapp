@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.0_c1dc2b237e10c176316f34eed9838c59eb59b00d">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.javafunction.JavaFunction"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <implements module-reference="com.tibco.ep.samples.javafunction.javafunctionSchemaDefs"/>
+        <import from="com.tibco.ep.samples.javafunction.javafunctionSchemaDefs"/>
+        <dynamic-variables/>
+        <stream name="calculate">
+            <schema/>
+        </stream>
+        <stream name="things" schema="ThingSchema"/>
+        <box name="go" type="map">
+            <input port="1" stream="calculate"/>
+            <output port="1" stream="out:go_1"/>
+            <target-list>
+                <item name="input" selection="all"/>
+                <expressions>
+                    <include field="go">true</include>
+                </expressions>
+            </target-list>
+        </box>
+        <box name="u" type="union">
+            <input port="1" stream="things"/>
+            <input port="2" stream="out:go_1"/>
+            <output port="1" stream="out:u_1"/>
+            <param name="strict" value="false"/>
+        </box>
+        <box name="makeList" type="aggregate">
+            <input port="1" stream="out:u_1"/>
+            <output port="1" stream="out:makeList_1"/>
+            <param name="dimension-name.0" value="Dimension1"/>
+            <param name="dimension-type.0" value="Predicate"/>
+            <param name="dimension-partial.0" value="no"/>
+            <param name="dimension-close-predicate.0" value="go"/>
+            <param name="dimension-emit-close-first.0" value="false"/>
+            <param name="output-group-by" value="true"/>
+            <target-list>
+                <expressions>
+                    <include field="things">aggregatelist(ThingSchema(name, width, height, depth, weightKg))</include>
+                </expressions>
+            </target-list>
+        </box>
+        <box name="CalcDensity" type="map">
+            <input port="1" stream="out:makeList_1"/>
+            <output port="1" stream="out"/>
+            <target-list>
+                <item name="input" selection="none"/>
+                <expressions>
+                    <include field="density">density(things)</include>
+                </expressions>
+            </target-list>
+        </box>
+        <output-stream name="out"/>
+    </add>
+</modify>

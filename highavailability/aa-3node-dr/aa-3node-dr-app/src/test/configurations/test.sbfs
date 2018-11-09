@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbfs:Simulation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sbfs="http://www.streambase.com/schemas/feedsim/02/SBFS">
+  <SimStreams Name="UpdateStream">
+    <ProcessingOptions MaxTuples="10" DataGenRateMethod="AsFastAsPossible" LogToInput="false"/>
+    <Schema>
+      <Fields Name="name" DataTypeName="string" Description=""/>
+      <Fields Name="value" DataTypeName="string" Description=""/>
+    </Schema>
+  </SimStreams>
+</sbfs:Simulation>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.0_fc6039aa3ab3645431a40ff91436802290821a77">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.highavailability.aa_3node_dr.ThreeNodeActiveActiveEventFlowFragment"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <named-schemas>
+            <schema name="Name">
+                <field name="name" type="string"/>
+            </schema>
+            <schema name="NameValue">
+                <field name="name" type="string"/>
+                <field name="value" type="string"/>
+            </schema>
+            <schema name="NameValueSource">
+                <field name="name" partitioning-field="true" type="string"/>
+                <field name="value" type="string"/>
+                <field name="createdon" type="string"/>
+            </schema>
+        </named-schemas>
+        <dynamic-variables/>
+        <data name="QueryTable" shared="false" source="concrete" type="querytable">
+            <param name="storage-method" value="transactional_memory"/>
+            <param name="replicated" value="false"/>
+            <table-schema schema="NameValueSource">
+                <primary-index type="btree">
+                    <field name="name"/>
+                </primary-index>
+            </table-schema>
+            <param name="truncate" value="false"/>
+            <preload format="csv" mode="empty"/>
+            <table-partitioning>
+                <param name="data-distribution-policy-name" value="default-dynamic-data-distribution-policy"/>
+                <param name="data-mapper-type" value="distributed-hash"/>
+            </table-partitioning>
+        </data>
+        <stream name="DeleteStream" schema="Name"/>
+        <stream name="ReadStream" schema="Name"/>
+        <stream name="UpdateStream" schema="NameValue"/>
+        <box name="DistributedRouterDelete" type="java">
+            <input port="1" stream="DeleteStream"/>
+            <output port="1" stream="out:DistributedRouterDelete_1"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.operator.router.RouterOperator"/>
+            <param name="availabilityZone" value="default-cluster-wide-availability-zone"/>
+            <param name="enableCompletionPort" value="false"/>
+            <param name="enableQueueControlPort" value="false"/>
+            <param name="enableQueueStatusPort" value="false"/>
+            <param name="inputFieldNames.0" value="name"/>
+            <param name="outputHostField" value="sourcenode"/>
+            <param name="queueDepth" value="0"/>
+            <param name="queueDepthPolicy" value="Replace Old"/>
+            <param name="queueTuples" value="false"/>
+            <param name="requestType" value="Synchronous"/>
+            <param name="routerPolicy" value="Hash"/>
+        </box>
+        <box name="ReadDistributedRouter" type="java">
+            <input port="1" stream="ReadStream"/>
+            <output port="1" stream="out:ReadDistributedRouter_1"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.operator.router.RouterOperator"/>
+            <param name="availabilityZone" value="default-cluster-wide-availability-zone"/>
+            <param name="enableCompletionPort" value="false"/>
+            <param name="enableQueueControlPort" value="false"/>
+            <param name="enableQueueStatusPort" value="false"/>
+            <param name="inputFieldNames.0" value="name"/>
+            <param name="outputHostField" value="sourcenode"/>
+            <param name="queueDepth" value="0"/>
+            <param name="queueDepthPolicy" value="Replace Old"/>
+            <param name="queueTuples" value="false"/>
+            <param name="requestType" value="Synchronous"/>
+            <param name="routerPolicy" value="Hash"/>
+        </box>
+        <box name="UpdateDistributedRouter" type="java">
+            <input port="1" stream="UpdateStream"/>
+            <output port="1" stream="out:UpdateDistributedRouter_1"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.operator.router.RouterOperator"/>
+            <param name="availabilityZone" value="default-cluster-wide-availability-zone"/>
+            <param name="enableCompletionPort" value="false"/>
+            <param name="enableQueueControlPort" value="false"/>
+            <param name="enableQueueStatusPort" value="false"/>
+            <param name="inputFieldNames.0" value="name"/>
+            <param name="outputHostField" value="sourcenode"/>
+            <param name="queueDepth" value="0"/>
+            <param name="queueDepthPolicy" value="Replace Old"/>
+            <param name="queueTuples" value="false"/>
+            <param name="requestType" value="Synchronous"/>
+            <param name="routerPolicy" value="Hash"/>
+        </box>
+        <box name="Delete" type="query">
+            <input port="1" stream="out:DistributedRouterDelete_1"/>
+            <output port="1" stream="out:Delete_1"/>
+            <dataref id="querytable" name="QueryTable"/>
+            <param name="operation" value="delete"/>
+            <param name="where" value="primary-key"/>
+            <param name="key-field.0" value="name"/>
+            <param name="key-lowerbound-value.0" value="name"/>
+            <param name="key-lowerbound-operation.0" value="eq"/>
+            <param name="key-upperbound-operation.0" value="none"/>
+            <param name="write-type" value="insert"/>
+            <param name="if-write-fails" value="ignore"/>
+            <param name="no-match-mode" value="output-no-match-null"/>
+            <param name="order-by-direction" value="none"/>
+            <target-list>
+                <item name="input" selection="all"/>
+                <item name="old" selection="none"/>
+                <item name="new" selection="none"/>
+                <item name="current" selection="none"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="insert">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="update">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="no-match">
+                <item name="input" selection="all"/>
+            </target-list>
+        </box>
+        <box name="Read" type="query">
+            <input port="1" stream="out:ReadDistributedRouter_1"/>
+            <output port="1" stream="out:Read_1"/>
+            <dataref id="querytable" name="QueryTable"/>
+            <param name="operation" value="read"/>
+            <param name="where" value="primary-key"/>
+            <param name="key-field.0" value="name"/>
+            <param name="key-lowerbound-value.0" value="name"/>
+            <param name="key-lowerbound-operation.0" value="eq"/>
+            <param name="key-upperbound-operation.0" value="none"/>
+            <param name="write-type" value="insert"/>
+            <param name="if-write-fails" value="ignore"/>
+            <param name="no-match-mode" value="output-no-match-null"/>
+            <param name="order-by-direction" value="none"/>
+            <target-list>
+                <item name="input" selection="none">
+                    <include field="sourcenode"/>
+                </item>
+                <item name="current" selection="all">
+                    <remove field="createdon"/>
+                </item>
+                <item name="old" selection="none"/>
+                <item name="new" selection="none"/>
+            </target-list>
+            <target-list goal-schema="NameValueSource" name="insert">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValueSource" name="update">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValueSource" name="no-match">
+                <item name="input" selection="all"/>
+            </target-list>
+        </box>
+        <box name="Update" type="query">
+            <input port="1" stream="out:UpdateDistributedRouter_1"/>
+            <output port="1" stream="out:Update_1"/>
+            <dataref id="querytable" name="QueryTable"/>
+            <param name="operation" value="write"/>
+            <param name="where" value="primary-key"/>
+            <param name="key-field.0" value="name"/>
+            <param name="key-value.0" value="name"/>
+            <param name="write-type" value="update"/>
+            <param name="if-write-fails" value="force"/>
+            <param name="no-match-mode" value="output-no-match-null"/>
+            <param name="order-by-direction" value="none"/>
+            <target-list>
+                <item name="input" selection="all"/>
+                <item name="old" selection="none"/>
+                <item name="new" selection="none"/>
+                <item name="current" selection="none"/>
+            </target-list>
+            <target-list goal-schema="NameValueSource" name="insert">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValueSource" name="update">
+                <item name="input" selection="all"/>
+                <expressions>
+                    <set field="createdon">systemproperty("com.kabira.platform.node.name", "junk")</set>
+                </expressions>
+            </target-list>
+            <target-list goal-schema="NameValueSource" name="no-match">
+                <item name="input" selection="all"/>
+            </target-list>
+        </box>
+        <box name="ReadDistributedRouterReturn" type="java">
+            <input port="1" stream="out:Read_1"/>
+            <output port="1" stream="OutputStream"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.operator.router.RouterOperator"/>
+            <param name="availabilityZone" value="default-cluster-wide-availability-zone"/>
+            <param name="enableCompletionPort" value="false"/>
+            <param name="enableQueueControlPort" value="false"/>
+            <param name="enableQueueStatusPort" value="false"/>
+            <param name="inputFieldNames.0" value="sourcenode"/>
+            <param name="outputHostField" value=""/>
+            <param name="queueDepth" value="0"/>
+            <param name="queueDepthPolicy" value="Replace Old"/>
+            <param name="queueTuples" value="false"/>
+            <param name="requestType" value="Synchronous"/>
+            <param name="routerPolicy" value="Custom Node"/>
+        </box>
+        <output-stream name="OutputStream"/>
+    </add>
+</modify>

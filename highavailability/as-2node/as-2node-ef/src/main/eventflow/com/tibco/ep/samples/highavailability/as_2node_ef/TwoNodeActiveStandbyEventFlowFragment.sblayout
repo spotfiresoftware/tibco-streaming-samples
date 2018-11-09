@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="DeleteStream">
+        <param name="gui:x" value="-819"/>
+        <param name="gui:y" value="57"/>
+    </component>
+    <component name="ReadStream">
+        <param name="gui:x" value="-819"/>
+        <param name="gui:y" value="-62"/>
+    </component>
+    <component name="UpdateStream">
+        <param name="gui:x" value="-819"/>
+        <param name="gui:y" value="-269"/>
+    </component>
+    <component name="QueryTable">
+        <param name="gui:x" value="-702"/>
+        <param name="gui:y" value="-165"/>
+        <param name="gui:width" value="80"/>
+        <param name="gui:height" value="56"/>
+    </component>
+    <component name="Delete">
+        <param name="gui:x" value="-692"/>
+        <param name="gui:y" value="57"/>
+    </component>
+    <component name="Read">
+        <param name="gui:x" value="-692"/>
+        <param name="gui:y" value="-61"/>
+    </component>
+    <component name="Update">
+        <param name="gui:x" value="-692"/>
+        <param name="gui:y" value="-269"/>
+    </component>
+    <component name="OutputStream">
+        <param name="gui:x" value="-545"/>
+        <param name="gui:y" value="-61"/>
+    </component>
+</application-layout>

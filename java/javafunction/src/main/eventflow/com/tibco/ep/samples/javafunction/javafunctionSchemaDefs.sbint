@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application version="10.4.0_ae8a2373734cb038c204d02d49d67898d7150e7e">
+    <annotations>
+        <annotation name="hygienic"/>
+    </annotations>
+    <type-metadata>
+        <param name="type" value="interface"/>
+        <param name="fully-qualified-name" value="com.tibco.ep.samples.javafunction.javafunctionSchemaDefs"/>
+    </type-metadata>
+    <memory-model-settings/>
+    <named-schemas>
+        <schema name="ThingSchema">
+            <field name="name" type="string"/>
+            <field name="width" type="double"/>
+            <field name="height" type="double"/>
+            <field name="depth" type="double"/>
+            <field name="weightKg" type="double"/>
+        </schema>
+    </named-schemas>
+    <dynamic-variables/>
+</application>

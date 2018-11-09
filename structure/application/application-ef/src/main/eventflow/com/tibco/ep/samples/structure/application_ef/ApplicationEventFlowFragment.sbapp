@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.0_fc6039aa3ab3645431a40ff91436802290821a77">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.structure.application_ef.ApplicationEventFlowFragment"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <dynamic-variables/>
+    </add>
+</modify>

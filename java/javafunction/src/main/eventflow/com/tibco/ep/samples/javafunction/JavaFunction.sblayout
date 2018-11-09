@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="calculate">
+        <param name="gui:x" value="-619"/>
+        <param name="gui:y" value="-137"/>
+    </component>
+    <component name="things">
+        <param name="gui:x" value="-539"/>
+        <param name="gui:y" value="-232"/>
+    </component>
+    <component name="CalcDensity">
+        <param name="gui:x" value="-277"/>
+        <param name="gui:y" value="-185"/>
+    </component>
+    <component name="go">
+        <param name="gui:x" value="-539"/>
+        <param name="gui:y" value="-137"/>
+    </component>
+    <component name="makeList">
+        <param name="gui:x" value="-354"/>
+        <param name="gui:y" value="-185"/>
+    </component>
+    <component name="u">
+        <param name="gui:x" value="-434"/>
+        <param name="gui:y" value="-185"/>
+    </component>
+    <component name="out">
+        <param name="gui:x" value="-191"/>
+        <param name="gui:y" value="-185"/>
+    </component>
+</application-layout>

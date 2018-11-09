@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.0_c1dc2b237e10c176316f34eed9838c59eb59b00d">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.nativelibrary.nareventflow.NarEventFlow"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <dynamic-variables/>
+        <stream name="increment">
+            <schema>
+                <field name="i" type="int"/>
+            </schema>
+        </stream>
+        <stream name="set">
+            <schema>
+                <field name="i" type="int"/>
+            </schema>
+        </stream>
+        <box name="callIncrement" type="map">
+            <input port="1" stream="increment"/>
+            <output port="1" stream="incOut"/>
+            <target-list>
+                <item name="input" selection="none"/>
+                <expressions>
+                    <include field="i">incrementCppInt(i)</include>
+                </expressions>
+            </target-list>
+        </box>
+        <box name="callSet" type="map">
+            <input port="1" stream="set"/>
+            <output port="1" stream="setOut"/>
+            <target-list>
+                <item name="input" selection="all"/>
+                <expressions>
+                    <include field="oldVal">setCppInt(i)</include>
+                </expressions>
+            </target-list>
+        </box>
+        <output-stream name="incOut"/>
+        <output-stream name="setOut"/>
+    </add>
+</modify>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="DeleteStream">
+        <param name="gui:x" value="-1540"/>
+        <param name="gui:y" value="66"/>
+    </component>
+    <component name="ReadStream">
+        <param name="gui:x" value="-1540"/>
+        <param name="gui:y" value="-53"/>
+    </component>
+    <component name="UpdateStream">
+        <param name="gui:x" value="-1540"/>
+        <param name="gui:y" value="-260"/>
+    </component>
+    <component name="QueryTable">
+        <param name="gui:x" value="-1200"/>
+        <param name="gui:y" value="-157"/>
+        <param name="gui:width" value="80"/>
+        <param name="gui:height" value="56"/>
+    </component>
+    <component name="Delete">
+        <param name="gui:x" value="-1190"/>
+        <param name="gui:y" value="65"/>
+    </component>
+    <component name="DistributedRouterDelete">
+        <param name="gui:x" value="-1351"/>
+        <param name="gui:y" value="65"/>
+    </component>
+    <component name="Read">
+        <param name="gui:x" value="-1190"/>
+        <param name="gui:y" value="-53"/>
+    </component>
+    <component name="ReadDistributedRouter">
+        <param name="gui:x" value="-1351"/>
+        <param name="gui:y" value="-53"/>
+    </component>
+    <component name="ReadDistributedRouterReturn">
+        <param name="gui:x" value="-1020"/>
+        <param name="gui:y" value="-53"/>
+    </component>
+    <component name="Update">
+        <param name="gui:x" value="-1190"/>
+        <param name="gui:y" value="-261"/>
+    </component>
+    <component name="UpdateDistributedRouter">
+        <param name="gui:x" value="-1351"/>
+        <param name="gui:y" value="-261"/>
+    </component>
+    <component name="OutputStream">
+        <param name="gui:x" value="-857"/>
+        <param name="gui:y" value="-52"/>
+    </component>
+</application-layout>

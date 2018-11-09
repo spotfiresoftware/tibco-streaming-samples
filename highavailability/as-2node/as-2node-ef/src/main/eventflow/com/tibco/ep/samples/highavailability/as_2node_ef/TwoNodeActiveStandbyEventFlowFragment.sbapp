@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.0_58ceebaf38a0ab16beff768d373c11188b35ebba">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.highavailability.as_2node_ef.TwoNodeActiveStandbyEventFlowFragment"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <named-schemas>
+            <schema name="Name">
+                <field name="name" type="string"/>
+            </schema>
+            <schema name="NameValue">
+                <field name="name" partitioning-field="true" type="string"/>
+                <field name="value" type="string"/>
+            </schema>
+        </named-schemas>
+        <dynamic-variables/>
+        <data name="QueryTable" shared="false" source="concrete" type="querytable">
+            <param name="storage-method" value="transactional_memory"/>
+            <param name="replicated" value="false"/>
+            <table-schema schema="NameValue">
+                <primary-index type="btree">
+                    <field name="name"/>
+                </primary-index>
+            </table-schema>
+            <param name="truncate" value="false"/>
+            <preload format="csv" mode="empty"/>
+            <table-partitioning>
+                <param name="data-distribution-policy-name" value="static-data-distribution-policy"/>
+                <param name="data-mapper-type" value="distributed-hash"/>
+            </table-partitioning>
+        </data>
+        <stream name="DeleteStream" schema="Name"/>
+        <stream name="ReadStream" schema="Name"/>
+        <stream name="UpdateStream" schema="NameValue"/>
+        <box name="Delete" type="query">
+            <input port="1" stream="DeleteStream"/>
+            <output port="1" stream="out:Delete_1"/>
+            <dataref id="querytable" name="QueryTable"/>
+            <param name="operation" value="delete"/>
+            <param name="where" value="primary-key"/>
+            <param name="key-field.0" value="name"/>
+            <param name="key-lowerbound-value.0" value="name"/>
+            <param name="key-lowerbound-operation.0" value="eq"/>
+            <param name="key-upperbound-operation.0" value="none"/>
+            <param name="write-type" value="insert"/>
+            <param name="if-write-fails" value="ignore"/>
+            <param name="no-match-mode" value="output-no-match-null"/>
+            <param name="order-by-direction" value="none"/>
+            <target-list>
+                <item name="input" selection="all"/>
+                <item name="old" selection="none"/>
+                <item name="new" selection="none"/>
+                <item name="current" selection="none"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="insert">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="update">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="no-match">
+                <item name="input" selection="all"/>
+            </target-list>
+        </box>
+        <box name="Read" type="query">
+            <input port="1" stream="ReadStream"/>
+            <output port="1" stream="OutputStream"/>
+            <dataref id="querytable" name="QueryTable"/>
+            <param name="operation" value="read"/>
+            <param name="where" value="primary-key"/>
+            <param name="key-field.0" value="name"/>
+            <param name="key-lowerbound-value.0" value="name"/>
+            <param name="key-lowerbound-operation.0" value="eq"/>
+            <param name="key-upperbound-operation.0" value="none"/>
+            <param name="write-type" value="insert"/>
+            <param name="if-write-fails" value="ignore"/>
+            <param name="no-match-mode" value="output-no-match-null"/>
+            <param name="order-by-direction" value="none"/>
+            <target-list>
+                <item name="input" selection="none"/>
+                <item name="current" selection="all"/>
+                <item name="old" selection="none"/>
+                <item name="new" selection="none"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="insert">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="update">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="no-match">
+                <item name="input" selection="all"/>
+            </target-list>
+        </box>
+        <box name="Update" type="query">
+            <input port="1" stream="UpdateStream"/>
+            <output port="1" stream="out:Update_1"/>
+            <dataref id="querytable" name="QueryTable"/>
+            <param name="operation" value="write"/>
+            <param name="where" value="primary-key"/>
+            <param name="key-field.0" value="name"/>
+            <param name="key-value.0" value="name"/>
+            <param name="write-type" value="update"/>
+            <param name="if-write-fails" value="force"/>
+            <param name="no-match-mode" value="output-no-match-null"/>
+            <param name="order-by-direction" value="none"/>
+            <target-list>
+                <item name="input" selection="all"/>
+                <item name="old" selection="none"/>
+                <item name="new" selection="none"/>
+                <item name="current" selection="none"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="insert">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list name="update">
+                <item name="input" selection="all"/>
+            </target-list>
+            <target-list goal-schema="NameValue" name="no-match">
+                <item name="input" selection="all"/>
+            </target-list>
+        </box>
+        <output-stream name="OutputStream"/>
+    </add>
+</modify>
