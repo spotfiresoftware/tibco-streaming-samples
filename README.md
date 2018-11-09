@@ -14,6 +14,4 @@ Sample categories:
 * [How to test TIBCO&reg; Streaming 10.4.0 projects.](testing)
 * [How to use native libraries in TIBCO&reg; Streaming 10.4.0 projects.](nativelibrary)
 * [How to invoke Java from TIBCO&reg; Streaming 10.4.0 projects.](java)
-* [How to use adapters in TIBCO&reg; Streaming 10.4.0 projects.](adapter)
 * [How to build Highly Available TIBCO&reg; Streaming 10.4.0 projects.](highavailability)
-* [How to use Docker in TIBCO&reg; Streaming 10.4.0 projects.](docker)

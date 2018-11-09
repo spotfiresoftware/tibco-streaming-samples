@@ -8,4 +8,3 @@ Samples :
 * [How to build a 2-node active active deployment with dynamic data distribution policy.](aa-2node)
 * [How to build a 3-node active active deployment with dynamic data distribution policy.](aa-3node)
 * [How to build a 3-node active active deployment with dynamic data distribution policy and disaster recovery.](aa-3node-dr)
-* [How to build a 2-node active active deployment with dynamic data distribution policy and proxy discovery.](pd-2node)
