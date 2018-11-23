@@ -1,0 +1,14 @@
+{
+	"name": "com.tibco.sb.ldm.web.plugins.sample",
+	"module": {
+		"core" : ["com.tibco.sb.ldm.web.plugins.sample.js"],
+		"addons" : [
+			"lvSampleVis.js",
+			"lvSampleVisEditor.js"
+		]
+	},
+	"staticContents": [{
+		"core" : ["css/com.tibco.sb.ldm.web.plugins.sample.css"]
+	}],
+	"dependencies": []
+}

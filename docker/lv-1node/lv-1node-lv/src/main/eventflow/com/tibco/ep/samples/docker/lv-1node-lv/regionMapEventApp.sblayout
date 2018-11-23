@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="InputAdapter">
+        <param name="gui:x" value="-258"/>
+        <param name="gui:y" value="11"/>
+    </component>
+    <component name="Map">
+        <param name="gui:x" value="-94"/>
+        <param name="gui:y" value="11"/>
+    </component>
+    <component name="DataOut">
+        <param name="gui:x" value="100"/>
+        <param name="gui:y" value="10"/>
+    </component>
+</application-layout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liveview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.streambase.com/schemas/lvconf/">
+	
+	<!-- This file configures a table, often referred to as an "Aggregate Table",
+	      since it will not receive data from external sources, but rather populate
+	      and update in response to data in another table. -->
+	<data-table id="ItemsInventory"
+		        description="Live view of total quantity and average last sold price, aggregating by category of items"
+	            short-description="Rollup of items by category">
+	    <!-- This table will aggregate the Items table by (category,color)... -->
+		<fields>
+			<field name="category" type="string"></field>
+			<field name="quantityAvg" type="double"></field>
+			<!-- ... and is maintaining a total quantity count, as well as the average
+			         "last sold price" within that group  -->
+			<field name="priceAvg" type="double"></field>
+			<field name="priceMin" type="double"></field>
+			<field name="priceMax" type="double"></field>
+			<field name="totalSales" type="int"></field>
+			<field name="totalInventory" type="double"></field>
+		</fields>
+		<primary-key>
+		    <!-- This is the aggregate key, or the "group by" in SQL terms -->
+			<field ref="category"/>
+		</primary-key>
+		
+		<!-- This declares that this table is sourced from the Items table for aggregation.
+		     With this declaration, the LiveView server is always updating fields in this
+		     table based on the mapping below. -->
+		<data-sources>
+			<data-source>
+				<aggregation table-ref="ItemsSales">
+					<query>
+						<!-- This aggregate projection is a standard StreamBase SSQL expression -->
+						<projection>avg(quantityRemaining) as quantityAvg,
+avg(lastSoldPrice) as priceAvg,
+min(lastSoldPrice) as priceMin,
+max(lastSoldPrice) as priceMax,
+count() as totalSales, 
+avg(lastSoldPrice*quantityRemaining) as totalInventory
+						</projection>
+					</query>
+				</aggregation>
+			</data-source>
+		</data-sources>
+	</data-table>
+</liveview-configuration>

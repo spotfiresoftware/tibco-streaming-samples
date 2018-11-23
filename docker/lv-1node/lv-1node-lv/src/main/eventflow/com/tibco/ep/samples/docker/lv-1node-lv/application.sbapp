@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.0">
+    <add>
+        <gui.metadata>
+            <property name="description" value="This application is started automatically by the LiveView server after all LiveView tables are ready (the reference can be found in the &quot;ItemsSalesDataSource.lvconf&quot; file). This example application executes a feed simulation that simulates a sale event. The feed data is then passed through the &quot;GetNow&quot; Map operator which sets the transactionTime field to be the current system time before being sent out via the &quot;DataOut&quot; Output Stream."/>
+        </gui.metadata>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.docker.lv-1node-lv.application"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <implements module-reference="com.tibco.ep.samples.docker.lv-1node-lv.ItemsSalesDataSource"/>
+        <import from="com.tibco.ep.samples.docker.lv-1node-lv.ItemsSalesSchemas"/>
+        <dynamic-variables/>
+        <stream name="DataControl" scope="public">
+            <property name="description" value="The DataControl stream can be used to suspend, resume, or scale the output of the FeedSimulation adapter.&#13;&#10;&#13;&#10;For more details about the control port, see the &quot;Feed Simulation Input Adapter&quot; documentation."/>
+            <schema>
+                <field name="command" type="string"/>
+                <field name="value" type="double"/>
+            </schema>
+        </stream>
+        <box name="FeedSimulation" type="inputadapter">
+            <input port="1" stream="DataControl"/>
+            <output port="1" stream="outFeedSimulation_1"/>
+            <output port="2" stream="out:FeedSimulation_2"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.adapter.sbfeedsim.SBFeedsim"/>
+            <param name="enableControlPort" value="true"/>
+            <param name="logLevel" value="INFO"/>
+            <param name="reportRateS" value="0"/>
+            <param name="sbfsFileName" value="ItemsSales.sbfs"/>
+            <param name="waitForStartCommand" value="false"/>
+        </box>
+        <output-stream name="outFeedSimulation_1"/>
+        <box name="GetNow" type="map">
+            <input port="1" stream="out:FeedSimulation_2"/>
+            <output port="1" stream="DataOut"/>
+            <target-list>
+                <item name="input" selection="all">
+                    <replace field="transactionTime">now()</replace>
+                    <remove field="CQSDelete"/>
+                </item>
+            </target-list>
+        </box>
+        <output-stream name="DataOut" schema="ItemsSalesDataInSchema" scope="public"/>
+        <gui.note name="Note">
+            <property name="description" value="See the Metadata tab for a description of this application."/>
+        </gui.note>
+    </add>
+</modify>

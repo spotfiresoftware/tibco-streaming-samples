@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application version="10.4.0_9f5865625b09ce66821c4543dee336a232c0d34a">
+    <gui.metadata>
+        <property name="description" value="This is a generated file, do not edit. It defines the named schemas for the ItemsSales LiveView table."/>
+    </gui.metadata>
+    <annotations>
+        <annotation name="hygienic"/>
+    </annotations>
+    <type-metadata>
+        <param name="type" value="interface"/>
+        <param name="fully-qualified-name" value="com.tibco.ep.samples.docker.lv-1node-lv.ItemsSalesSchemas"/>
+    </type-metadata>
+    <memory-model-settings/>
+    <named-schemas>
+        <schema name="ItemsSalesDataInSchema">
+            <field name="PublisherID" type="string"/>
+            <field name="PublisherSN" type="long"/>
+            <field name="CQSDataUpdatePredicate" type="string"/>
+            <field name="CQSReferredCount" type="long"/>
+            <field name="transactionID" type="long"/>
+            <field name="transactionTime" type="timestamp"/>
+            <field name="sku" type="string"/>
+            <field name="category" type="string"/>
+            <field name="color" type="string"/>
+            <field name="quantityRemaining" type="int"/>
+            <field name="lastSoldPrice" type="double"/>
+        </schema>
+        <schema name="ItemsSalesDataOutSchema">
+            <field name="PublisherID" type="string"/>
+            <field name="PublisherSN" type="long"/>
+            <field name="CQSReferredCount" type="long"/>
+            <field name="transactionID" type="long"/>
+            <field name="transactionTime" type="timestamp"/>
+            <field name="sku" type="string"/>
+            <field name="category" type="string"/>
+            <field name="color" type="string"/>
+            <field name="quantityRemaining" type="int"/>
+            <field name="lastSoldPrice" type="double"/>
+        </schema>
+        <schema name="ItemsSalesTableSchema">
+            <field name="transactionID" type="long"/>
+            <field name="transactionTime" type="timestamp"/>
+            <field name="sku" type="string"/>
+            <field name="category" type="string"/>
+            <field name="color" type="string"/>
+            <field name="quantityRemaining" type="int"/>
+            <field name="lastSoldPrice" type="double"/>
+        </schema>
+    </named-schemas>
+    <dynamic-variables/>
+</application>

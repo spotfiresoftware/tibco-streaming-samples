@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application version="10.4.0_9f5865625b09ce66821c4543dee336a232c0d34a">
+    <gui.metadata>
+        <property name="description" value="This is a generated file, do not edit. It defines the named schemas for the geoMapTable LiveView table."/>
+    </gui.metadata>
+    <annotations>
+        <annotation name="hygienic"/>
+    </annotations>
+    <type-metadata>
+        <param name="type" value="interface"/>
+        <param name="fully-qualified-name" value="com.tibco.ep.samples.docker.lv-1node-lv.geoMapTableSchemas"/>
+    </type-metadata>
+    <memory-model-settings/>
+    <import alias="geoMapNames" from="com.tibco.ep.samples.docker.lv-1node-lv.geoMapSchemas" item="geoMapNames"/>
+    <named-schemas>
+        <schema name="geoMapTableDataInSchema">
+            <parent-schemas>
+                <parent-schema name="geoMapNames"/>
+            </parent-schemas>
+            <field name="PublisherID" type="string"/>
+            <field name="PublisherSN" type="long"/>
+            <field name="CQSDataUpdatePredicate" type="string"/>
+            <field name="CQSDelete" type="bool"/>
+            <field name="CQSReferredCount" type="long"/>
+        </schema>
+        <schema name="geoMapTableDataOutSchema">
+            <parent-schemas>
+                <parent-schema name="geoMapNames"/>
+            </parent-schemas>
+            <field name="PublisherID" type="string"/>
+            <field name="PublisherSN" type="long"/>
+            <field name="CQSReferredCount" type="long"/>
+        </schema>
+        <schema name="geoMapTableInputControlFields">
+            <field name="PublisherID" type="string"/>
+            <field name="PublisherSN" type="long"/>
+            <field name="CQSDataUpdatePredicate" type="string"/>
+            <field name="CQSDelete" type="bool"/>
+            <field name="CQSReferredCount" type="long"/>
+        </schema>
+        <schema name="geoMapTableTableSchema">
+            <parent-schemas>
+                <parent-schema name="geoMapNames"/>
+            </parent-schemas>
+        </schema>
+    </named-schemas>
+    <dynamic-variables/>
+</application>

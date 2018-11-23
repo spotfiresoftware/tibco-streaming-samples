@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.0">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.docker.lv-1node-lv.geoMapEventApp"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <implements module-reference="com.tibco.ep.samples.docker.lv-1node-lv.geoMapTableDataSource"/>
+        <import alias="geoMapTableDataInSchema" from="com.tibco.ep.samples.docker.lv-1node-lv.geoMapTableSchemas" item="geoMapTableDataInSchema"/>
+        <import alias="geoMapTableInputControlFields" from="com.tibco.ep.samples.docker.lv-1node-lv.geoMapTableSchemas" item="geoMapTableInputControlFields"/>
+        <dynamic-variables/>
+        <box name="InputAdapter" type="inputadapter">
+            <output port="1" stream="out:InputAdapter_1"/>
+            <output port="2" stream="out:InputAdapter_2"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.adapter.sbfeedsim.SBFeedsim"/>
+            <param name="enableControlPort" value="false"/>
+            <param name="logLevel" value="INFO"/>
+            <param name="reportRateS" value="0"/>
+            <param name="sbfsFileName" value="geoSimulation.sbfs"/>
+            <param name="waitForStartCommand" value="false"/>
+        </box>
+        <box name="Map" type="map">
+            <input port="1" stream="out:InputAdapter_2"/>
+            <output port="1" stream="DataOut"/>
+            <target-list>
+                <item name="input" selection="all"/>
+                <expressions>
+                    <replace field="sTime">now()</replace>
+                    <include field="*">geoMapTableInputControlFields(). * AS *</include>
+                </expressions>
+            </target-list>
+        </box>
+        <output-stream name="DataOut" schema="geoMapTableDataInSchema" scope="public"/>
+    </add>
+</modify>

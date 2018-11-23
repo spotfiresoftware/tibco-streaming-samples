@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbfs:Simulation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sbfs="http://www.streambase.com/schemas/feedsim/02/SBFS">
+  <SimStreams Name="regionMapNames">
+    <ProcessingOptions DataRatePerSecond="1.0" DataGenerationMethod="Custom"/>
+    <Schema>
+      <Fields Name="editor_statecode" DataTypeName="string" Description="">
+        <Distribution GenerationMethod="Enumerated" UseRandomSize="true" NumRandomEnumValues="1" EnumeratedDistMethod="SpecifiedValues" BlobMinSize="4">
+          <EnumeratedDist weight="1.0" value="WA"/>
+          <EnumeratedDist weight="1.0" value="OR"/>
+          <EnumeratedDist weight="1.0" value="CA"/>
+          <EnumeratedDist weight="1.0" value="NV"/>
+          <EnumeratedDist weight="1.0" value="ID"/>
+          <EnumeratedDist weight="1.0" value="MT"/>
+          <EnumeratedDist weight="1.0" value="WY"/>
+          <EnumeratedDist weight="1.0" value="CO"/>
+          <EnumeratedDist weight="1.0" value="UT"/>
+          <EnumeratedDist weight="1.0" value="AZ"/>
+          <EnumeratedDist weight="1.0" value="NM"/>
+          <EnumeratedDist weight="1.0" value="ND"/>
+          <EnumeratedDist weight="1.0" value="SD"/>
+          <EnumeratedDist weight="1.0" value="NE"/>
+          <EnumeratedDist weight="1.0" value="KS"/>
+          <EnumeratedDist weight="1.0" value="OK"/>
+          <EnumeratedDist weight="1.0" value="TX"/>
+          <EnumeratedDist weight="1.0" value="MN"/>
+          <EnumeratedDist weight="1.0" value="IA"/>
+          <EnumeratedDist weight="1.0" value="MO"/>
+          <EnumeratedDist weight="1.0" value="AR"/>
+          <EnumeratedDist weight="1.0" value="LA"/>
+          <EnumeratedDist weight="1.0" value="WI"/>
+          <EnumeratedDist weight="1.0" value="IL"/>
+          <EnumeratedDist weight="1.0" value="MS"/>
+          <EnumeratedDist weight="1.0" value="MI"/>
+          <EnumeratedDist weight="1.0" value="IN"/>
+          <EnumeratedDist weight="1.0" value="KY"/>
+          <EnumeratedDist weight="1.0" value="TN"/>
+          <EnumeratedDist weight="1.0" value="AL"/>
+          <EnumeratedDist weight="1.0" value="OH"/>
+          <EnumeratedDist weight="1.0" value="GA"/>
+          <EnumeratedDist weight="1.0" value="FL"/>
+          <EnumeratedDist weight="1.0" value="WV"/>
+          <EnumeratedDist weight="1.0" value="ME"/>
+          <EnumeratedDist weight="1.0" value="VT"/>
+          <EnumeratedDist weight="1.0" value="NY"/>
+          <EnumeratedDist weight="1.0" value="PA"/>
+          <EnumeratedDist weight="1.0" value="VA"/>
+          <EnumeratedDist weight="1.0" value="NC"/>
+          <EnumeratedDist weight="1.0" value="SC"/>
+          <EnumeratedDist weight="1.0" value="MA"/>
+          <EnumeratedDist weight="1.0" value="NJ"/>
+          <EnumeratedDist weight="1.0" value="MD"/>
+          <EnumeratedDist weight="1.0" value="AK"/>
+          <EnumeratedDist weight="1.0" value="HI"/>
+        </Distribution>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="editcount" DataTypeName="int" Description="">
+        <Distribution GenerationMethod="Random" MaxValue="9.99999999E8"/>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="regionTime" DataTypeName="timestamp" Description="">
+        <Distribution GenerationMethod="Constant" ConstantValue="null"/>
+        <DataSourceMapping/>
+      </Fields>
+    </Schema>
+  </SimStreams>
+</sbfs:Simulation>

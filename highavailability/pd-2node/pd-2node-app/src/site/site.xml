@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
+
+<project>
+
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.7</version>
+    </skin>
+
+    <custom>
+        <fluidoSkin>
+            <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+            <leftColumnClass>span2</leftColumnClass>
+            <bodyColumnClass>span10</bodyColumnClass>
+        </fluidoSkin>
+    </custom>
+
+    <body>
+        <menu name="Overview">
+            <item name="Introduction" href="index.html" />
+            <item name="Using" href="using.html" />
+        </menu>
+
+        <menu ref="reports" />
+
+    </body>
+</project>

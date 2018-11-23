@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application version="10.4.0_9f5865625b09ce66821c4543dee336a232c0d34a">
+    <gui.metadata>
+        <property name="description" value="This is a generated file, do not edit. It defines the interface to which data sources for the ItemsInventoryNew LiveView table must conform."/>
+    </gui.metadata>
+    <annotations>
+        <annotation name="hygienic"/>
+    </annotations>
+    <type-metadata>
+        <param name="type" value="interface"/>
+        <param name="fully-qualified-name" value="com.tibco.ep.samples.docker.lv-1node-lv.ItemsInventoryNewDataSource"/>
+    </type-metadata>
+    <memory-model-settings/>
+    <import alias="ItemsInventoryNewDataInSchema" from="com.tibco.ep.samples.docker.lv-1node-lv.ItemsInventoryNewSchemas" item="ItemsInventoryNewDataInSchema"/>
+    <dynamic-variables/>
+    <output-stream name="DataOut" schema="ItemsInventoryNewDataInSchema"/>
+</application>

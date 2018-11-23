@@ -1,0 +1,12 @@
+.table-sample {
+	width: 100%;
+}
+
+.table-sample > thead > tr > th {
+	width: 50%;
+	padding: 5px;
+}
+
+.table-sample > tbody > tr > td {
+	width: 50%;
+}

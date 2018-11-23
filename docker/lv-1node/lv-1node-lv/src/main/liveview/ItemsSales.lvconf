@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liveview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.streambase.com/schemas/lvconf/">
+
+    <!-- This file configures our primary data table of Items. Below, this configuration
+         declares a StreamBase EventFlow application file as the data source (meaning
+         that the application file should be streaming data to this table), but there
+         are commented-out lines that allow you to run this example by sending data
+         to this table using sbfeedsim (that is, by connecting an external client). 
+         See the README for details on running this example that way. -->
+	<data-table id="ItemsSales"
+	            description="Live view of all items, quantity in stock and the last sold price"
+	            short-description="Quantity and last-sold prices">
+		<fields>		
+			<field name="transactionID" type="long"></field> <!-- the Feed Simulation or the application sets this field -->
+			<field name="transactionTime" type="timestamp"></field> <!-- the Feed Simulation or the application sets this field -->
+			<field name="sku" type="string"></field> <!-- the Feed Simulation or the application sets this field -->
+			<field name="category" type="string">
+			    <!-- uncomment this block if you disconnect the data-source below and use
+			         the Feed Simulation Items.sbfs connecting to LiveView externally.  -->
+				<!-- <insert-rule>if (hash(sku) % 4 == 0) then 'toys' else
+				             if (hash(sku) % 4 == 1) then 'automotive' else
+				             if (hash(sku) % 4 == 2) then 'electronics' else 'books'</insert-rule> -->
+				<!-- <update-rule>old.category</update-rule> --> <!--  this maintains the value even when the Simulator sends null again -->
+			</field>
+			<field name="color" type="string">
+				<!-- as above -->
+				<!-- <insert-rule>if (hash(sku) % 3 == 0) then 'red' else
+				         if (hash(sku) % 3 == 1) then 'green' else 'blue'</insert-rule>
+				<update-rule>old.color</update-rule> -->
+			</field>
+			<field name="quantityRemaining" type="int"></field> <!-- see the comment for 'sku' -->
+			<field name="lastSoldPrice" type="double"></field> <!-- see the comment for 'sku' -->
+		</fields>
+		<primary-key>
+			<field ref="transactionID" />
+		</primary-key>
+		<!-- This declares that an output stream from our data source application (defined
+		     in ItemsDataSource.lvconf) feeds our table. This application is started as
+		     soon as all LiveView tables have loaded. -->
+		<data-sources>
+			<data-source>
+				<application output-stream="DataOut" application-ref="ItemsSalesDataSource" />
+			</data-source>
+		</data-sources>
+	</data-table>
+
+</liveview-configuration>

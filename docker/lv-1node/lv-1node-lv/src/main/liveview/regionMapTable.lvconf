@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liveview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.streambase.com/schemas/lvconf/">
+  <data-table id="regionMapTable">
+    <import-schema from="com.tibco.ep.samples.docker.lv-1node-lv.regionMapSchemas"
+        schema="regionMapNames"/>
+    <primary-key>
+      <field ref="editor_statecode"/>
+    </primary-key>
+    <data-sources>
+      <data-source>
+        <application application-ref="regionMapApp" output-stream="DataOut"/>
+      </data-source>
+    </data-sources>
+  </data-table>
+</liveview-configuration>

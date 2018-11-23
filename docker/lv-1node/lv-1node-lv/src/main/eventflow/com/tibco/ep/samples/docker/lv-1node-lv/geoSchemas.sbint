@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application version="10.4.0_9f5865625b09ce66821c4543dee336a232c0d34a">
+    <annotations>
+        <annotation name="hygienic"/>
+    </annotations>
+    <type-metadata>
+        <param name="type" value="interface"/>
+        <param name="fully-qualified-name" value="com.tibco.ep.samples.docker.lv-1node-lv.geoSchemas"/>
+    </type-metadata>
+    <memory-model-settings/>
+    <named-schemas>
+        <schema name="geoNames">
+            <field name="editor_statecode" type="string"/>
+            <field name="editcount" type="double"/>
+            <field name="geoTime" type="timestamp"/>
+        </schema>
+    </named-schemas>
+    <dynamic-variables/>
+</application>

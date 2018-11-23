@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>66</x>
+      <y>55</y>
+      <w>462</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>default-cluster-wide-availability-zone
+lt=.
+fg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>88</x>
+      <y>99</y>
+      <w>198</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>Node A
+layer=0
+lw=2.5
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>132</x>
+      <y>143</y>
+      <w>110</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+layer=1
+valign=center
+halign=center
+VP0 (A)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>308</x>
+      <y>99</y>
+      <w>198</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>Node B
+layer=0
+fg=blue
+lw=2.5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>363</x>
+      <y>143</y>
+      <w>110</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+layer=1
+valign=center
+halign=center
+VP0 (R)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>154</y>
+      <w>154</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>363</x>
+      <y>198</y>
+      <w>110</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+layer=1
+valign=center
+halign=center
+VP1 (A)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>132</x>
+      <y>198</y>
+      <w>110</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+layer=1
+valign=center
+halign=center
+VP1 (R)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>209</y>
+      <w>154</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+</diagram>

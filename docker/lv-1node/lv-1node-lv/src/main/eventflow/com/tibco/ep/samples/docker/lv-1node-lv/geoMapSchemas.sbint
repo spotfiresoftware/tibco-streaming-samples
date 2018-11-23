@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application version="10.4.0_9f5865625b09ce66821c4543dee336a232c0d34a">
+    <annotations>
+        <annotation name="hygienic"/>
+    </annotations>
+    <type-metadata>
+        <param name="type" value="interface"/>
+        <param name="fully-qualified-name" value="com.tibco.ep.samples.docker.lv-1node-lv.geoMapSchemas"/>
+    </type-metadata>
+    <memory-model-settings/>
+    <named-schemas>
+        <schema name="geoMapNames">
+            <field name="sId" type="long"/>
+            <field name="sTime" type="timestamp"/>
+            <field name="val" type="int"/>
+            <field name="lon" type="double"/>
+            <field name="lat" type="double"/>
+        </schema>
+    </named-schemas>
+    <dynamic-variables/>
+</application>

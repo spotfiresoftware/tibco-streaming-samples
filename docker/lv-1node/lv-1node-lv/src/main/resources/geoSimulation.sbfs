@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbfs:Simulation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sbfs="http://www.streambase.com/schemas/feedsim/02/SBFS">
+  <SimStreams Name="geoMapNames">
+    <ProcessingOptions DataRatePerSecond="1.0" DataGenerationMethod="Custom"/>
+    <Schema>
+      <Fields Name="sId" DataTypeName="long" Description="">
+        <Distribution GenerationMethod="Incremented" MaxValue="9.99999999E8"/>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="sTime" DataTypeName="timestamp" Description="">
+        <Distribution GenerationMethod="Constant" ConstantValue="null"/>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="val" DataTypeName="int" Description="">
+        <Distribution GenerationMethod="Constant" ConstantValue="1"/>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="lon" DataTypeName="double" Description="">
+        <Distribution GenerationMethod="Uniform" MinValue="51.45" MaxValue="51.52"/>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="lat" DataTypeName="double" Description="">
+        <Distribution GenerationMethod="Uniform" MinValue="-0.2" MaxValue="0.005"/>
+        <DataSourceMapping/>
+      </Fields>
+    </Schema>
+  </SimStreams>
+</sbfs:Simulation>

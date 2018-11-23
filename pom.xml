@@ -47,6 +47,7 @@
         <module>nativelibrary</module>
         <module>java</module>
         <module>highavailability</module>
+        <module>docker</module>
     </modules>
 
     <!-- skip site docs in this aggregator -->

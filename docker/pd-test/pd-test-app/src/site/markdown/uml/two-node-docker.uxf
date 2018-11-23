@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>50</x>
+      <y>70</y>
+      <w>290</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Container A.pd-test-app
+Hostname A.example.com</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>60</x>
+      <y>130</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Node A.pd-test-app
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>330</y>
+      <w>360</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-()
+example.com Docker network</panel_attributes>
+    <additional_attributes>10.0;20.0;340.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>70</x>
+      <y>180</y>
+      <w>100</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>admin
+port
+2000
+lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;80.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>50</x>
+      <y>330</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>180</y>
+      <w>90</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>discovery
+port
+54321
+lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>390</x>
+      <y>130</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Node B.pd-test-app
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>330</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>10</x>
+      <y>10</y>
+      <w>690</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>Docker host
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>180</y>
+      <w>110</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>distribution
+port
+3000
+
+
+
+
+
+lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>380</x>
+      <y>70</y>
+      <w>290</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Container B.pd-test-app
+Hostname B.example.com</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>180</y>
+      <w>100</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>admin
+port
+2000
+lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;80.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>180</y>
+      <w>110</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>distribution
+port
+3000
+
+
+
+
+
+lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>180</y>
+      <w>90</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>discovery
+port
+54321
+lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>270</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>firewall
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>270</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>firewall
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

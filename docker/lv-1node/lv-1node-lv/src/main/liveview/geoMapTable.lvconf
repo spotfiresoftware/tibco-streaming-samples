@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liveview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.streambase.com/schemas/lvconf/">
+  <data-table id="geoMapTable">
+    <import-schema from="com.tibco.ep.samples.docker.lv-1node-lv.geoMapSchemas" schema="geoMapNames"/>
+    <primary-key>
+      <field ref="sId"/>
+    </primary-key>
+    <data-sources>
+      <data-source>
+        <application application-ref="geoMapApp" output-stream="DataOut"/>
+      </data-source>
+    </data-sources>
+  </data-table>
+</liveview-configuration>

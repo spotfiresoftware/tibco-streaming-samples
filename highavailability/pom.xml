@@ -46,6 +46,7 @@
         <module>aa-2node</module>
         <module>aa-3node</module>
         <module>aa-3node-dr</module>
+        <module>pd-2node</module>
     </modules>
 
     <!-- skip site docs in this aggregator -->

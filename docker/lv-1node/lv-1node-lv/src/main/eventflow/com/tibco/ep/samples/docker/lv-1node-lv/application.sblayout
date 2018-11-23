@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="DataControl">
+        <param name="gui:x" value="-138"/>
+        <param name="gui:y" value="-144"/>
+    </component>
+    <component name="FeedSimulation">
+        <param name="gui:x" value="12"/>
+        <param name="gui:y" value="-149"/>
+        <param name="gui:height" value="70"/>
+    </component>
+    <component name="GetNow">
+        <param name="gui:x" value="147"/>
+        <param name="gui:y" value="-53"/>
+        <param name="gui:bends:1" value="92,-100;110,-23"/>
+    </component>
+    <component name="DataOut">
+        <param name="gui:x" value="229"/>
+        <param name="gui:y" value="-53"/>
+    </component>
+    <component name="outFeedSimulation_1">
+        <param name="gui:x" value="221"/>
+        <param name="gui:y" value="-272"/>
+    </component>
+    <component name="Note">
+        <param name="gui:x" value="-228"/>
+        <param name="gui:y" value="-49"/>
+        <param name="gui:width" value="239"/>
+        <param name="gui:height" value="86"/>
+    </component>
+</application-layout>

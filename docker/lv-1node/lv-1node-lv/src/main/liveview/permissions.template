@@ -1,0 +1,27 @@
+#Export Syntax
+#ResourceType/ResourceId=<comma-separated list of allowed permissions>
+#	where
+#		Resource Type can be one of [DASHBOARD, PAGE, CARD, LINKAGE]	
+#		Resource Id is the id of the resource or -1 for any.
+#		Permissions are based on the resource type
+#			DASHBOARD can have a combination of [CREATE, READ, UPDATE, DELETE, PERSONALIZE] or ANY
+#			PAGE can have a combination of [CREATE, READ, UPDATE, DELETE, PERSONALIZE] or ANY
+#			CARD can have a combination of [CREATE, READ, UPDATE, DELETE, PERSONALIZE, EXPORT_DATA] or ANY
+#			LINKAGE can have a combination of [CREATE, READ, UPDATE, DELETE, PERSONALIZE] or ANY
+#
+# Allows creation of dashboards 
+dashboard/-1=create
+
+# Allows creation of pages
+page/-1=create
+
+# Allows creation of cards
+card/-1=create
+
+# Allows creation of linkage
+linkage/-1=create
+
+page/1/*=read,personalize
+page/2/*=read,personalize
+page/3/*=read,personalize
+page/4/*=read,personalize

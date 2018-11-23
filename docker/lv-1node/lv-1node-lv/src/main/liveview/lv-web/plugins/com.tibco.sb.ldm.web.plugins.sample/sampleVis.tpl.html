@@ -1,0 +1,16 @@
+<div class="common-vis-element" style="height: 100%;overflow: auto">
+	<table class="table-bordered table-hover table-sample">
+		<thead>
+			<tr>
+				<th>Field</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="(fieldName, field) in vm.fields track by fieldName" data-ng-hide="field.hide">
+				<td>{{fieldName}}</td>
+				<td>{{field.value}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

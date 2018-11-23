@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.0">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.docker.lv-1node-lv.regionMapEventApp"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <implements module-reference="com.tibco.ep.samples.docker.lv-1node-lv.regionMapTableDataSource"/>
+        <import alias="regionMapTableDataInSchema" from="com.tibco.ep.samples.docker.lv-1node-lv.regionMapTableSchemas" item="regionMapTableDataInSchema"/>
+        <import alias="regionMapTableInputControlFields" from="com.tibco.ep.samples.docker.lv-1node-lv.regionMapTableSchemas" item="regionMapTableInputControlFields"/>
+        <dynamic-variables/>
+        <box name="InputAdapter" type="inputadapter">
+            <output port="1" stream="out:InputAdapter_1"/>
+            <output port="2" stream="out:InputAdapter_2"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.adapter.sbfeedsim.SBFeedsim"/>
+            <param name="enableControlPort" value="false"/>
+            <param name="logLevel" value="INFO"/>
+            <param name="reportRateS" value="0"/>
+            <param name="sbfsFileName" value="regionSimulation.sbfs"/>
+            <param name="waitForStartCommand" value="false"/>
+        </box>
+        <box name="Map" type="map">
+            <input port="1" stream="out:InputAdapter_2"/>
+            <output port="1" stream="DataOut"/>
+            <target-list>
+                <item name="input" selection="all"/>
+                <expressions>
+                    <replace field="regionTime">now()</replace>
+                    <include field="*">regionMapTableInputControlFields(). * AS *</include>
+                </expressions>
+            </target-list>
+        </box>
+        <output-stream name="DataOut" schema="regionMapTableDataInSchema" scope="public"/>
+    </add>
+</modify>

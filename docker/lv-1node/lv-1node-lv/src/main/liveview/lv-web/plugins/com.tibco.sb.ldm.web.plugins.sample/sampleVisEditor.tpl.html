@@ -1,0 +1,8 @@
+<div>
+	<h4>Enable/Disable Fields:</h4>
+	<div class="checkbox" data-ng-repeat="(fieldName, field) in vm.model.visualization.config.availableFields track by fieldName">
+		<label>
+			<input type="checkbox" data-ng-model="field.enabled"> {{fieldName}}
+		</label>
+	</div>
+</div>

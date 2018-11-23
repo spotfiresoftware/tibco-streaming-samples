@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<modify version="10.4.0_58ceebaf38a0ab16beff768d373c11188b35ebba">
+<modify version="10.4.0a">
     <add>
         <annotations>
             <annotation name="hygienic"/>
