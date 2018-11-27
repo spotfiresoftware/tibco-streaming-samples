@@ -10,6 +10,8 @@ This sample describes how to deploy an application archive containing an EventFl
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Example docker commands](#example-docker-commands)
 
+See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
+
 ## Prerequisites
 
 Docker must first be downloaded and installed - see https://www.docker.com/ for further details.  Any 

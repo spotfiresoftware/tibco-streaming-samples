@@ -8,6 +8,8 @@ do not block the discovery messages.  This sample describes how to use docker to
 * [Changes to the default configurations](#changes-to-the-default-configurations)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 
+See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
+
 ## Creating an application archive project for Docker from TIBCO StreamBase Studio&trade;
 
 TIBCO StreamBase Studio&trade; can generate a project containing the necessary files to build and 
