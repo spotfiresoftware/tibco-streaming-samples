@@ -205,6 +205,40 @@ $ docker logs A.ef-2node-app
 COMMAND FINISHED
 ```
 
+
+### Include application logs to the container logs
+
+To include the application logs to the container console logs, add the following file as **src/main/resources/logback.xml** in the application maven module :
+
+```xml
+<configuration>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %10.10thread %-5level %20.20logger{5} : %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="Console" />
+    </root>
+</configuration>
+```
+
+and add the **--tty** option when starting the container :
+
+```shell
+$ docker run --tty --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-app --network=example.com --env=NODENAME=A.ef-2node-app docker/ef-2node-app:1.0.0
+d8d73429fa8097d313b95b64f96aaf5c09a8bae385429d84858c1aeaa2753e05
+$ docker run --tty --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-app --network=example.com --env=NODENAME=B.ef-2node-app docker/ef-2node-app:1.0.0
+6f3053e69eeeda61ae48c98bbcd037aae60e7555570cf810e7de856d550d66bc
+```
+
+```shell
+$ docker logs A.ef-2node-app
+...
+14:26:29.000        222 INFO  t.e.d.h.distribution : Node B.ef-2node-app has new interface: 'IPv4:B.example.com:38290,IPv4:B.example.com:38289, old interface: 'IPv4:B.example.com:38289'.
+14:26:33.188 adPool - 1 INFO  StreamBaseHTTPServer : sbd at A.example.com:10000; pid=165; version=10.4.0_e8c1cd91cb86ef9bc5f543e75582ef26f4ea36ca; Listening
+```
+
 ### Run epadmin commands
 
 Use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command on one of the containers :
