@@ -41,27 +41,10 @@
     <name>Structure : LiveView</name>
     <description>How to structure an LiveView fragment.</description>
 
-    <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
-
-    <inceptionYear>2018</inceptionYear>
-
-    <organization>
-        <name>TIBCO Software Inc.</name>
-        <url>http://www.tibco.com</url>
-    </organization>
-
-    <licenses>
-        <license>
-            <name>BSD 3-Clause License</name>
-            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/master/docs/LICENSE</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
-        <artifactId>ep-liveview-fragment</artifactId>
+        <artifactId>ep-liveview-fragment-samples</artifactId> <!-- replace with ep-liveview-fragment to avoid sample metadata -->
         <version>[10.4.0,99.99.99)</version>
         <relativePath/>
     </parent>
@@ -77,22 +60,4 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <!--  deploy site documentation to github pages -->
-            <!--  in CI use mvn site com.github.github:site-maven-plugin:site -->
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <server>github</server>
-                    <message>Updated site documentation from jenkins</message>
-                    <path>${project.parent.version}/structure/liveview</path>
-                    <merge>true</merge>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    
 </project>

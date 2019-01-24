@@ -41,27 +41,10 @@
     <name>HA : 3-node active active + DR - Application</name>
     <description>How to build a 3-node active active deployment with disaster recovery. - Application</description>
 
-    <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
-
-    <inceptionYear>2018</inceptionYear>
-
-    <organization>
-        <name>TIBCO Software Inc.</name>
-        <url>http://www.tibco.com</url>
-    </organization>
-
-    <licenses>
-        <license>
-            <name>BSD 3-Clause License</name>
-            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/master/docs/LICENSE</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
-        <artifactId>ep-application</artifactId>
+        <artifactId>ep-application-samples</artifactId> <!-- replace with ep-application to avoid sample metadata -->
         <version>[10.4.0,99.99.99)</version>
         <relativePath/>
     </parent>
@@ -79,51 +62,8 @@
         </dependency>
     </dependencies>
 
-    <!-- use mvn -P uml install to re-generate svg from source ( then commit ) -->
-    <profiles>
-        <profile>
-            <id>uml</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.kryshchuk.maven.plugins</groupId>
-                        <artifactId>umlet-maven-plugin</artifactId>
-                        <version>1.2</version>
-                        <executions>
-                            <execution>
-                                <id>create svg</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>convert</goal>
-                                </goals>
-                                <configuration>
-                                    <format>svg</format>
-                                    <outputDirectory>src/site/markdown/images</outputDirectory>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <build>
         <plugins>
-
-            <!--  deploy site documentation to github pages -->
-            <!--  in CI use mvn site com.github.github:site-maven-plugin:site -->
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <server>github</server>
-                    <message>Updated site documentation from jenkins</message>
-                    <path>${project.parent.version}/highavailability/aa-3node-dr/${project.artifactId}</path>
-                    <merge>true</merge>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>com.tibco.ep</groupId>
