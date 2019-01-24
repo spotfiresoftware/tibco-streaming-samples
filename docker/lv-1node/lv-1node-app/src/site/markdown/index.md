@@ -12,12 +12,16 @@ This sample describes how to deploy an application archive containing a TIBCO Li
 
 See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
 
+<a name="prerequisites"></a>
+
 ## Prerequisites
 
 Docker must first be downloaded and installed - see https://www.docker.com/ for further details.
 
 On MacOS, the resources available to docker may need to be increased beyond the default - see
 CPUs and Memory settings on the Advanced tab of Docker preferences.
+
+<a name="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
 
 ## Creating an application archive project for Docker from TIBCO StreamBase Studio&trade;
 
@@ -38,12 +42,16 @@ Such a project includes :
 
 Note that whilst this project will create a simple Docker image, changes to the project may be required for additional behaviours. 
 
+<a name="containers-and-nodes"></a>
+
 ## Containers and nodes
 
 In this sample we name the docker container as **A.lv-1node-app**,  which hosts the StreamBase node **A.lv-1node-app**, the TIBCO LiveView&trade; Web port 
 10080 is published to the host :
 
 ![nodes](images/lv-docker.svg)
+
+<a name="changes-to-the-default-docker-configurations"></a>
 
 ## Changes to the default docker configurations
 
@@ -118,6 +126,8 @@ integration testing and wait until the web server is running :
     </wait>
 ```
 
+<a name="building-and-running-from-tibco-streambase-studio-trade"></a>
+
 ## Building and running from TIBCO StreamBase Studio&trade;
 
 Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade; or Run As shortcut.  Tests can
@@ -131,11 +141,15 @@ manage containers :
 
 ![maven](images/studio-run.gif)
 
+<a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
+
 ## Building this sample from the command line and running the integration test cases
 
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system :
 
 ![maven](images/maven.gif)
+
+<a name="example-docker-commands"></a>
 
 ## Example docker commands
 

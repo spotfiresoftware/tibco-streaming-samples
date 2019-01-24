@@ -9,6 +9,8 @@ This sample describes how to deploy an EventFlow fragment in a 2-node active act
 * [Failure scenarios](#failure-scenarios)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 
+<a name="machines-and-nodes"></a>
+
 ## Machines and nodes
 
 In this sample we name the machines as **A**,  which hosts the StreamBase node **A**, 
@@ -27,6 +29,8 @@ Note that UDP discovery is blocked between the machines, this might be due to :
 
 ( service names are omitted in descriptions for clarity )
 
+<a name="data-partitioning"></a>
+
 ## Data partitioning
 
 To support an active active configuration, the query table data must be replicated between the nodes.  
@@ -37,6 +41,7 @@ partitions are created to evenly balance and replicate data around the cluster :
 
 ( only 2 virtual partitions are shown - the default is 64 )
 
+<a name="define-the-node-deployment-configuration"></a>
 
 ## Define the node deployment configuration
 
@@ -100,11 +105,15 @@ configuration = {
 }
 ```
 
+<a name="design-notes"></a>
+
 ## Design notes
 
 * The default dynamic data distribution policy is chosen to distribute the data across the cluster
 * Most of the data distribution policy and the availability zone configuration values are not set since defaults work well
 * Proxy discovery is used
+
+<a name="failure-scenarios"></a>
 
 ## Failure scenarios
 
@@ -119,6 +128,8 @@ Network fails  | 1 irtual partitions become active on both A and B<br/>**multi-m
 With a 2 node configuration node quorums don't apply hence a multi-master scenario is possible on network failure.  
 To avoid the risk of data loss when restoring the availability zone, multiple network paths ( such as network bonding )
 is recommended.
+
+<a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
 
 ## Building this sample from the command line and running the integration test cases
 

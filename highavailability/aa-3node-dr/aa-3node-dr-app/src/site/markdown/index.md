@@ -10,6 +10,8 @@ This sample describes how to deploy an EventFlow fragment in a 3-node active act
 * [Failure scenarios](#failure-scenarios)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 
+<a name="machines-and-nodes"></a>
+
 ## Machines and nodes
 
 In this sample we name the machines as **A**,  which hosts the StreamBase node **A**, 
@@ -23,6 +25,8 @@ A client that uses the service can connect to any of the main data center machin
 
 ( service names are omitted in descriptions for clarity )
 
+<a name="data-partitioning"></a>
+
 ## Data partitioning
 
 In this sample the default **default-cluster-wide-availability-zone** is used to distribute the data across
@@ -33,6 +37,8 @@ is used across the wide are network to avoid impacts due to network latency :
 ![partitions](images/three-node-active-active-dr-partitions.svg)
 
 ( only 3 virtual partitions are shown - the default is 64 )
+
+<a name="define-the-application-definition-configuration"></a>
 
 ## Define the application definition configuration
 
@@ -75,6 +81,8 @@ configuration = {
     }
 }
 ```
+
+<a name="define-the-node-deployment-configuration"></a>
 
 ## Define the node deployment configuration
 
@@ -176,11 +184,15 @@ configuration = {
 Note that **percentageOfVotes** could be used instead.  An alternative configuration for quorums could
 use **quorumMemberPattern**.
 
+<a name="design-notes"></a>
+
 ## Design notes
 
 * The default dynamic data distribution policy is chosen to distribute the data across the cluster
 * An addition data distribution policy and availability zone is used to hold the quorum configuration for the main data center
 * Most of the data distribution policy and the availability zone configuration values are not set since defaults work well
+
+<a name="failure-scenarios"></a>
 
 ## Failure scenarios
 
@@ -199,6 +211,8 @@ Network fails to C | 1 Quorum on C fails and takes itself offline to avoid multi
 
 
 With a 3 node configuration node quorums can be applied to avoid a multi-master scenario.
+
+<a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
 
 ## Building this sample from the command line and running the integration test cases
 

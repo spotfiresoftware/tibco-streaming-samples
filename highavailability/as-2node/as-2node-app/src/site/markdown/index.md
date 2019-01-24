@@ -10,6 +10,8 @@ This sample describes how to deploy an EventFlow fragment in a 2-node active sta
 * [Failure scenarios](#failure-scenarios)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 
+<a name="machines-and-nodes"></a>
+
 ## Machines and nodes
 
 In this sample we name the initially active machine as **A** which hosts the StreamBase node **A**.  
@@ -21,6 +23,8 @@ A client that uses the service initially connects to machine **A**.
 
 ( service names are omitted in descriptions for clarity )
 
+<a name="data-partitioning"></a>
+
 ## Data partitioning
 
 To support an active standby configuration, the query table data must be replicated from the active node to the
@@ -28,6 +32,8 @@ standby.  In this sample a static partition **P1** is defined that is initially 
 with a replica defined on node **B** :
 
 ![partitions](images/two-node-active-standby-partitions.svg)
+
+<a name="define-the-application-definition-configuration"></a>
 
 ## Define the application definition configuration
 
@@ -59,6 +65,8 @@ configuration = {
     }
 }
 ```
+
+<a name="define-the-node-deployment-configuration"></a>
 
 ## Define the node deployment configuration
 
@@ -120,11 +128,14 @@ configuration = {
 }
 ```
 
+<a name="design-notes"></a>
+
 ## Design notes
 
 * A static data distribution policy is chosen ( over the default dynamic data distribution policy ) to specifically set the partition as initially active on A
 * Most of the data distribution policy and the availability zone configuration values are not set since defaults work well
 
+<a name="failure-scenarios"></a>
 
 ## Failure scenarios
 
@@ -139,6 +150,8 @@ Network fails  | 1 Partition becomes active on both A and B<br/>**multi-master**
 With a 2 node configuration node quorums don't apply hence a multi-master scenario is possible on network failure.  
 To avoid the risk of data loss when restoring the availability zone, multiple network paths ( such as network bonding )
 is recommended.
+
+<a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
 
 ## Building this sample from the command line and running the integration test cases
 

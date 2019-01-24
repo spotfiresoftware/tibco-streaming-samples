@@ -9,6 +9,8 @@ resulting archive can then be used in a downstream EventFlow fragment.
 * [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
+<a name="c-source"></a>
+
 ## C++ Source
 
 The sample C++ source code provides functions to manipulate a static int :
@@ -41,6 +43,8 @@ JNIEXPORT jint JNICALL Java_com_tibco_ep_samples_nativelibrary_narcpplib_CallCpp
 }
 ```
 
+<a name="compilation-to-native-library-and-generate-nar-archive"></a>
+
 ## Compilation to native library and generate NAR archive
 
 The [maven nar plugin](http://maven-nar.github.io/) is used to invoke the native complier and build the Native ARchive file (.nar).  
@@ -62,6 +66,8 @@ The following maven build rule is used :
             </plugin>
 ```
 
+<a name="environmental-requirements"></a>
+
 ## Environmental requirements
 
 To build a shared library from source, native compilers must be correctly installed - see [maven nar plugin](http://maven-nar.github.io/)
@@ -77,11 +83,15 @@ For windows, ensure the COMNTOOLS environment variable is set, for example :
 VS120COMNTOOLS=C:\\Program Files\ (x86)\\Microsoft\ Visual\ Studio\ 12.0\\Common7\\Tools\\
 ```
 
+<a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
+
 ## Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases
 
 Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade; :
 
 ![studio](images/studiounit.gif)
+
+<a name="building-this-sample-from-the-command-line-and-running-the-unit-test-cases"></a>
 
 ## Building this sample from the command line and running the unit test cases
 

@@ -8,6 +8,8 @@ This sample describes how to build an EventFlow fragment suitable for 2-node act
 * [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
+<a name="store-tuples-in-a-query-table-backed-by-transactional-memory"></a>
+
 ## Store tuples in a query table backed by transactional memory
 
 In this sample, a query table is used to update, read and delete tuples, so :
@@ -29,12 +31,16 @@ Finally, the tuples stored in the query table are partitioned by the **name** fi
 
 ![Schema](images/studioschema.png)
 
+<a name="design-notes"></a>
+
 ## Design notes
 
 Processing is always on the local node, hence :
 
 * Routing to a remote node is not required
 * Query scope is local ( ie not cluster wide )
+
+<a name="running-this-sample-from-tibco-streambase-studio-trade"></a>
 
 ## Running this sample from TIBCO StreamBase Studio&trade;
 
@@ -46,11 +52,15 @@ of the application definition and node deployment configuration files.
 
 ![RunFromStudio](images/studio.gif)
 
+<a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
+
 ## Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases
 
 Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from TIBCO StreamBase Studio&trade; :
 
 ![RunFromStudio](images/studiounit.gif)
+
+<a name="building-this-sample-from-the-command-line-and-running-the-unit-test-cases"></a>
 
 ## Building this sample from the command line and running the unit test cases
 

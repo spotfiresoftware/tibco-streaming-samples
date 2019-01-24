@@ -9,6 +9,8 @@ This sample describes how to use a Native ARchive (.nar) dependency in an EventF
 * [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
+<a name="declare-the-nar-as-a-dependency"></a>
+
 ## Declare the NAR as a dependency
 
 A NAR can be used in the same way as any other maven dependency, except that a platform-specific
@@ -82,6 +84,8 @@ test on Linux servers ) - this can be achieved with maven profiles :
 
 ```
 
+<a name="declare-a-java-wrapper-class"></a>
+
 ## Declare a java wrapper class
 
 A java wrapper class is required to load the native shared library and provide JNI access :
@@ -124,6 +128,8 @@ public class CallCpp {
 }
 ```
 
+<a name="provide-a-engine-configuration-for-eventflow-use"></a>
+
 ## Provide a engine configuration for EventFlow use
 
 A engine configuration is required to declare the functions available :
@@ -164,17 +170,23 @@ configuration =
 }
 ```
 
+<a name="using-in-eventflow"></a>
+
 ## Using in EventFlow
 
 These functions can now be used in EventFlow :
 
 ![studio](images/studioFunction.png)
 
+<a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
+
 ## Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases
 
 Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade; :
 
 ![studio](images/studiounit.gif)
+
+<a name="building-this-sample-from-the-command-line-and-running-the-unit-test-cases"></a>
 
 ## Building this sample from the command line and running the unit test cases
 
