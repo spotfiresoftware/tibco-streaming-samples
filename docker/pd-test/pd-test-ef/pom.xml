@@ -49,11 +49,4 @@
         <relativePath/>
     </parent>
 
-    <dependencies>
-    	<dependency>
-    		<groupId>com.tibco.ep.sb</groupId>
-    		<artifactId>standard-extensions</artifactId>
-    	</dependency>
-    </dependencies>
-
 </project>
