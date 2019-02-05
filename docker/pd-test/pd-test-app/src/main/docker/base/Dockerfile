@@ -50,7 +50,6 @@ ENV USER_NAME        tibco
 # java      required for applications
 # zip       required for snapshots
 # unzip     required to unpack runtime on windows
-# perl      required to create certificates
 # net-tools useful to diagnose network issues
 # iptables  useful to simulate network issues
 # tc        useful to simulate network issues
@@ -61,7 +60,6 @@ RUN yum --assumeyes install \
     java-1.8.0-openjdk \
     zip \
     unzip \
-    perl \
     net-tools \
     iptables \
     tc \

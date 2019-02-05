@@ -80,7 +80,6 @@ RUN yum --assumeyes install \
     java-1.8.0-openjdk \
     zip \
     unzip \
-    perl \
     net-tools \
     iptables \
     tc \
