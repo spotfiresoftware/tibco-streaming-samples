@@ -53,7 +53,7 @@
     <licenses>
         <license>
             <name>BSD 3-Clause License</name>
-            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/10.4.1/docs/LICENSE</url>
+            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/10.4.2/docs/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
