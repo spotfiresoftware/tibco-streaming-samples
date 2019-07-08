@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab :
+
+  Copyright (C) 2019, TIBCO Software Inc.
+  
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+  
+  1. Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+  
+  2. Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+  
+  3. Neither the name of the copyright holder nor the names of its contributors
+     may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+  
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tibco.ep.samples.highavailability</groupId>
+    <artifactId>ca-polling-app</artifactId>
+    <packaging>ep-application</packaging>
+    <version>1.0.0</version>
+    <name>HA : cluster aware polling - Application</name>
+    <description>How to build Highly Available TIBCO Streaming projects - Application</description>
+
+    <!-- common definitions for this version of StreamBase -->
+    <parent>
+        <groupId>com.tibco.ep.sb.parent</groupId>
+        <artifactId>ep-application-samples</artifactId> <!-- replace with ep-application to avoid sample metadata -->
+        <version>[10.5.0-SNAPSHOT,99.99.99)</version>
+        <relativePath/>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.tibco.ep.samples.highavailability</groupId>
+            <artifactId>ca-polling-ef</artifactId>
+            <version>1.0.0</version>
+            <type>ep-eventflow-fragment</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.tibco.ep</groupId>
+                <artifactId>ep-maven-plugin</artifactId>
+                <extensions>true</extensions>
+
+                <executions>
+
+                    <!-- start one at a time for test consistency -->
+                    <execution>
+                        <id>start node A</id>
+                        <phase>pre-integration-test</phase>
+                        <goals><goal>start-nodes</goal></goals>
+                        <configuration>
+                            <nodes>
+                                <node>A</node>
+                            </nodes>
+                            <installArguments>
+                                <substitutions>PollDirectory=${project.build.directory}/poll</substitutions>
+                            </installArguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>start node B</id>
+                        <phase>pre-integration-test</phase>
+                        <goals><goal>start-nodes</goal></goals>
+                        <configuration>
+                            <nodes>
+                                <node>B</node>
+                            </nodes>
+                            <installArguments>
+                                <substitutions>PollDirectory=${project.build.directory}/poll</substitutions>
+                            </installArguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>display adapters 1</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>administer-nodes</goal>
+                        </goals>
+                        <configuration>
+                            <command>display</command>
+                            <target>adapter</target>
+                            <arguments>
+                                <path>default.FileMonitor</path>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>stop node A</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>stop-nodes</goal></goals>
+                        <configuration>
+                            <nodes>
+                                <node>A</node>
+                            </nodes>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>display adapters 2</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>administer-nodes</goal>
+                        </goals>
+                        <configuration>
+                            <command>display</command>
+                            <target>adapter</target>
+                            <arguments>
+                                <path>default.FileMonitor</path>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>stop node B</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>stop-nodes</goal></goals>
+                        <configuration>
+                            <nodes>
+                                <node>B</node>
+                            </nodes>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <!-- create poll directory -->
+                    <execution>
+                        <id>create poll directory</id>
+                        <phase>package</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${project.build.directory}/poll"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <!-- wait for application to finish starting -->
+                    <execution>
+                        <id>wait for applications to start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <!-- wait for max 10 minutes checking every 500ms -->
+                                <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="atimeout">
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/ca-polling-app.log" substring=" sbd at "/>
+                                </waitfor>
+                                <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="btimeout">
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/B.${project.artifactId}/logs/ca-polling-app.log" substring=" sbd at "/>
+                                </waitfor>
+                                <fail message="Application on node A failed to startup in time">
+                                    <condition>
+                                        <isset property="atimeout"/>
+                                    </condition>
+                                </fail>
+                                <fail message="Application on node B failed to startup in time">
+                                    <condition>
+                                        <isset property="btimeout"/>
+                                    </condition>
+                                </fail>
+                            </target>
+                            <skip>${skipTests}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

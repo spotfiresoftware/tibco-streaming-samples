@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="FileMonitor">
+        <param name="gui:x" value="-294"/>
+        <param name="gui:y" value="-127"/>
+    </component>
+    <component name="FileReader">
+        <param name="gui:x" value="110"/>
+        <param name="gui:y" value="-128"/>
+    </component>
+    <component name="Filter">
+        <param name="gui:x" value="-145"/>
+        <param name="gui:y" value="-128"/>
+    </component>
+    <component name="Logger">
+        <param name="gui:x" value="255"/>
+        <param name="gui:y" value="-127"/>
+    </component>
+    <component name="Map">
+        <param name="gui:x" value="-30"/>
+        <param name="gui:y" value="-128"/>
+    </component>
+</application-layout>
