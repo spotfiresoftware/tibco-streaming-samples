@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.5.0-SNAPSHOT_ea90c9abf2721ce6735011b326b34b9b8d2b1abf">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.highavailability.ca-polling-ef"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <parameter-definitions>
+            <parameter default="/tmp" name="PollDirectory"/>
+        </parameter-definitions>
+        <dynamic-variables/>
+        <box name="FileMonitor" type="inputadapter">
+            <output port="1" stream="out:FileMonitor_1"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.adapter.filemonitor.FileMonitor"/>
+            <param name="enableControlPort" value="false"/>
+            <param name="enableStatusPort" value="false"/>
+            <param name="ignoreDuplicateUpdates" value="true"/>
+            <param name="ignoreDuplicateUpdatesMilliseconds" value="5000"/>
+            <param name="logLevel" value="INFO"/>
+            <param name="notifyOnCreateFieldName" value="NotifyOnCreate"/>
+            <param name="notifyOnDeleteFieldName" value="NotifyOnDelete"/>
+            <param name="notifyOnModifiedFieldName" value="NotifyOnModified"/>
+            <param name="outputFileNamesOnMonitor" value="false"/>
+            <param name="outputFileNamesOnMonitorFieldName" value=""/>
+            <param name="pathFieldName" value="Path"/>
+            <param name="watchCreate" value="true"/>
+            <param name="watchDelete" value="true"/>
+            <param name="watchModified" value="true"/>
+            <param name="watchPath" value="${PollDirectory}"/>
+            <param name="watchSubDirectories" value="false"/>
+            <param name="watchSubDirectoriesFieldName" value="WatchSubDirectories"/>
+            <clusteraware type="active_single_node"/>
+        </box>
+        <box name="Filter" type="filter">
+            <input port="1" stream="out:FileMonitor_1"/>
+            <output port="1" stream="out:Filter_1"/>
+            <param name="autogen-nomatch-port" value="false"/>
+            <param name="expression.0" value="Event = &quot;Created&quot;"/>
+        </box>
+        <box name="Map" type="map">
+            <input port="1" stream="out:Filter_1"/>
+            <output port="1" stream="out:Map_1"/>
+            <target-list>
+                <item name="input" selection="none"/>
+                <expressions>
+                    <include field="FileName">Path</include>
+                </expressions>
+            </target-list>
+        </box>
+        <box name="FileReader" type="inputadapter">
+            <input port="1" stream="out:Map_1"/>
+            <output port="1" stream="out:FileReader_1"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.adapter.filereader.FileReader"/>
+            <param name="Charset" value=""/>
+            <param name="UseDefaultCharset" value="true"/>
+            <param name="blobData" value="false"/>
+            <param name="defaultFileName" value=""/>
+            <param name="enableControlPort" value="true"/>
+            <param name="enableStatusPort" value="false"/>
+            <param name="extractCompressedBlobData" value="true"/>
+            <param name="fileContentsFieldName" value="FileContents"/>
+            <param name="filePattern" value="*.*"/>
+            <param name="filePatternField" value=""/>
+            <param name="filenameField" value=""/>
+            <param name="lineSeparator" value=""/>
+            <param name="logLevel" value="INFO"/>
+            <param name="oneTuplePerLine" value="false"/>
+            <param name="passThroughFields" value="false"/>
+            <param name="preserveNewLines" value="false"/>
+            <param name="readAsResource" value="true"/>
+            <param name="readDefaultFileAtStartup" value="false"/>
+            <param name="readFilesSynchronously" value="false"/>
+            <param name="recurseSubFolders" value="true"/>
+            <param name="recurseSubFoldersField" value=""/>
+            <param name="replacementDataFieldName" value=""/>
+        </box>
+        <box name="Logger" type="outputadapter">
+            <input port="1" stream="out:FileReader_1"/>
+            <output port="1" stream="out:Logger_1"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.adapter.logger.Log"/>
+            <param name="CaptureStrategy" value="FLATTEN"/>
+            <param name="asyncEnabled" value="true"/>
+            <param name="compressFrequentMessages" value="false"/>
+            <param name="compressMaxWindowSize" value="5.0"/>
+            <param name="customFormat" value=""/>
+            <param name="customFormatExpression" value=""/>
+            <param name="customFormatType" value="Basic"/>
+            <param name="emitLoggedTuples" value="true"/>
+            <param name="encodeSubType" value="Map"/>
+            <param name="hexEncodeBlobs" value="false"/>
+            <param name="includeNullFields" value="false"/>
+            <param name="logLevel" value="Info"/>
+            <param name="logLevelOverrideFieldName" value=""/>
+            <param name="loggerFormatType" value="CSV"/>
+            <param name="messageIdentifier" value="Logger"/>
+            <param name="messageIdentifierExpression" value=""/>
+            <param name="messageIdentifierType" value="Basic"/>
+            <param name="messagePrefix" value=""/>
+            <param name="quoteNullStrings" value="true"/>
+            <param name="timestampAsLong" value="false"/>
+            <param name="timestampFormat" value="yyyy-MM-dd HH:mm:ss.SSSZ"/>
+            <param name="verbose" value="false"/>
+        </box>
+    </add>
+</modify>

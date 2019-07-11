@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (C) 2018, TIBCO Software Inc.
+  Copyright (C) 2019, TIBCO Software Inc.
   
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -27,26 +27,41 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
---><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tibco.ep.samples</groupId>
-    <artifactId>highavailability</artifactId>
+    <groupId>com.tibco.ep.samples.highavailability</groupId>
+    <artifactId>ca-polling</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>HA</name>
-    <description>How to build Highly Available TIBCO Streaming projects.</description>
+    <name>HA : cluster aware polling</name>
+    <description>How to poll the filesystem with cluster aware operators</description>
 
+    <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
+
+    <inceptionYear>2019</inceptionYear>
+
+    <organization>
+        <name>TIBCO Software Inc.</name>
+        <url>http://www.tibco.com</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/master/docs/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- Aggregator pom -->
     <modules>
-        <module>as-2node</module>
-        <module>aa-2node</module>
-        <module>aa-3node</module>
-        <module>aa-3node-dr</module>
-        <module>pd-2node</module>
-        <module>ca-polling</module>
+        <module>ca-polling-ef</module>
+        <module>ca-polling-app</module>
     </modules>
 
     <!-- skip site docs in this aggregator -->
