@@ -125,18 +125,42 @@
                             <command>wait</command>
                             <target>playback</target>
                             <serviceName>A.${project.artifactId}</serviceName>
-
                         </configuration>
                     </execution>
 
                     <execution>
-                        <id>Display objects prior to failure</id>
+                        <id>Display objects prior to failure - A</id>
                         <phase>integration-test</phase>
                         <goals><goal>administer-nodes</goal></goals>
                         <configuration>
                             <skip>${skipTests}</skip>
                             <command>read</command>
                             <target>querytable</target>
+                            <serviceName>A.${project.artifactId}</serviceName>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>Display objects prior to failure - B</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>administer-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <command>read</command>
+                            <target>querytable</target>
+                            <serviceName>B.${project.artifactId}</serviceName>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>Display objects prior to failure - C</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>administer-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <command>read</command>
+                            <target>querytable</target>
+                            <serviceName>C.${project.artifactId}</serviceName>
                         </configuration>
                     </execution>
 
@@ -153,13 +177,26 @@
                     </execution>
 
                     <execution>
-                        <id>Display objects after failure</id>
+                        <id>Display objects after failure - B</id>
                         <phase>integration-test</phase>
                         <goals><goal>administer-nodes</goal></goals>
                         <configuration>
                             <skip>${skipTests}</skip>
                             <command>read</command>
                             <target>querytable</target>
+                            <serviceName>B.${project.artifactId}</serviceName>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>Display objects after failure - C</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>administer-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <command>read</command>
+                            <target>querytable</target>
+                            <serviceName>C.${project.artifactId}</serviceName>
                         </configuration>
                     </execution>
 

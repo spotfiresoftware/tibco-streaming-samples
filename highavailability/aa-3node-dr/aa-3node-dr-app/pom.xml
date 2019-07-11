@@ -146,11 +146,9 @@
                         <goals><goal>administer-nodes</goal></goals>
                         <configuration>
                             <skip>${skipTests}</skip>
-                            <nodes>
-                                <node>A</node>
-                            </nodes>
                             <command>read</command>
                             <target>querytable</target>
+                            <serviceName>A.${project.artifactId}</serviceName>
                         </configuration>
                     </execution>
 
@@ -174,11 +172,9 @@
                         <goals><goal>administer-nodes</goal></goals>
                         <configuration>
                             <skip>${skipTests}</skip>
-                            <nodes>
-                                <node>D</node>
-                            </nodes>
                             <command>read</command>
                             <target>querytable</target>
+                            <serviceName>D.${project.artifactId}</serviceName>
                         </configuration>
                     </execution>
 
