@@ -41,6 +41,11 @@
     <name>HA : cluster aware polling - EventFlow Fragment</name>
     <description>How to build Highly Available TIBCO Streaming projects - EventFlow Fragment</description>
 
+    <properties>
+	    <!-- see SB-46972 -->
+	    <skipTests>true</skipTests>
+    </properties>
+
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
