@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2018, TIBCO Software Inc.
+  
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+  
+  1. Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+  
+  2. Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+  
+  3. Neither the name of the copyright holder nor the names of its contributors
+     may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+  
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tibco.ep.samples.docker</groupId>
+    <artifactId>ef-2node-app</artifactId>
+    <packaging>ep-application</packaging>
+    <version>1.0.0</version>
+    <name>Docker : 2-node EventFlow - Application</name>
+    <description>How to deploy a 2-node EventFlow application in Docker - Application</description>
+
+    <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
+
+    <inceptionYear>2018</inceptionYear>
+
+    <organization>
+        <name>TIBCO Software Inc.</name>
+        <url>http://www.tibco.com</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/10.4.3/docs/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- common definitions for this version of StreamBase -->
+    <parent>
+        <groupId>com.tibco.ep.sb.parent</groupId>
+        <artifactId>ep-application-docker</artifactId>
+<!--        <version>[10.4.0,99.99.99)</version> -->
+        <version>10.5.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <dockerDomain>example.com</dockerDomain>
+        <skipApplicationDocker>false</skipApplicationDocker>
+        <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+        <skipDockerTests>false</skipDockerTests>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.tibco.ep.samples.docker</groupId>
+            <artifactId>ef-2node-ef</artifactId>
+            <version>1.0.0</version>
+            <type>ep-eventflow-fragment</type>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <!-- use mvn -P uml install to re-generate svg from source ( then commit ) -->
+        <profile>
+            <id>uml</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.kryshchuk.maven.plugins</groupId>
+                        <artifactId>umlet-maven-plugin</artifactId>
+                        <version>1.2</version>
+                        <executions>
+                            <execution>
+                                <id>create svg</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>convert</goal>
+                                </goals>
+                                <configuration>
+                                    <format>svg</format>
+                                    <outputDirectory>src/site/markdown/images</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
+    <build>
+        <plugins>
+
+            <!--  deploy site documentation to github pages -->
+            <!--  in CI use mvn site com.github.github:site-maven-plugin:site -->
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <server>github</server>
+                    <message>Updated site documentation from jenkins</message>
+                    <path>${project.parent.version}/docker/ef-2node-ansible/${project.artifactId}</path>
+                    <merge>true</merge>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.tibco.ep</groupId>
+                <artifactId>ep-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <skipTests>${skipLocalTests}</skipTests>
+                    <nodes>
+                        <node>A</node>
+                        <node>B</node>
+                     </nodes>
+                 </configuration>
+            </plugin>
+            <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-dependency-plugin</artifactId>
+        	<executions>
+          	  <execution>
+            		<id>copy-dependencies</id>
+            		<phase>package</phase>
+            			<goals>
+              			  <goal>copy-dependencies</goal>
+            			</goals>
+            			<configuration>
+              			  <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+          			  <includeArtifactIds>platform_linuxx86_64</includeArtifactIds>
+          			  <stripVersion>true</stripVersion>
+            			</configuration>
+          	  </execution>
+        	</executions>
+      	    </plugin>
+            <plugin>
+		 <groupId>co.escapeideas.maven</groupId>
+		 <artifactId>ansible-maven-plugin</artifactId>
+		 <version>1.3.0</version>
+		 <executions>
+		   <execution>
+		       <id>ansible-playbook</id>
+		           <goals>
+		             <goal>playbook</goal>
+		           </goals>
+		            <configuration>
+                                <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook>
+                                <promoteDebugAsInfo>true</promoteDebugAsInfo>
+                                <failOnAnsibleError>true</failOnAnsibleError>
+                                <extraVars>
+                        	   <variable>platform=platform_linuxx86_64</variable>
+<!--                        	   <variable>sbrt_ver={sbrt.version}</variable>   -->
+                        	   <variable>sbrt_ver=10.5.0-SNAPSHOT</variable>
+                        	   <variable>projectId=ef-2node-app</variable>
+                        	   <variable>projectId_ver=1.0.0</variable>
+                                </extraVars>
+                            </configuration>
+		     </execution>
+		  </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
