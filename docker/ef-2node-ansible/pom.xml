@@ -58,6 +58,10 @@
         </license>
     </licenses>
 
+    <properties>
+        <studioSample>true</studioSample>
+    </properties>
+
     <!-- if Ansible is available, run playbook and build docker images -->
     <profiles>
 	<profile>
