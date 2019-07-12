@@ -41,6 +41,10 @@
     <name>Testing : Junit</name>
     <description>How to write unit tests for EventFlow fragments.</description>
 
+    <properties>
+        <studioSample>true</studioSample>
+    </properties>
+
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>

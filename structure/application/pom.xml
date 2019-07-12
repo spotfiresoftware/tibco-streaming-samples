@@ -58,6 +58,10 @@
         </license>
     </licenses>
 
+    <properties>
+        <studioSample>true</studioSample>
+    </properties>
+
     <!-- Aggregator pom -->
     <modules>
         <module>application-ef</module>

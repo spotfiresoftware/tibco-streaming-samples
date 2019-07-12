@@ -41,6 +41,10 @@
     <name>Structure : Java</name>
     <description>How to structure an Java fragment.</description>
 
+    <properties>
+        <studioSample>true</studioSample>
+    </properties>
+
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>

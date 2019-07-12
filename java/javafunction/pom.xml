@@ -41,6 +41,10 @@
     <name>Java : Java Function</name>
     <description>How to invoke java code from EventFlow.</description>
 
+    <properties>
+        <studioSample>true</studioSample>
+    </properties>
+
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
