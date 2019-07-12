@@ -46,17 +46,14 @@ public class TestCase extends UnitTest {
      */
     @BeforeClass
     public static void setupServer() throws StreamBaseException, ConfigurationException, InterruptedException, IOException {
-    	// create a temp directory to poll
-    	//
-    	File myTempDir = Files.createTempDirectory("poll").toFile();
-    	myTempDir.deleteOnExit();
-    	Map<String, String> subs = new HashMap<>();
-    	subs.put("PollDirectory", myTempDir.getAbsolutePath());
-    	
-    	LOGGER.info("PollDirectory "+myTempDir.getAbsolutePath());
-    	
-    	Configuration.forFile("engine.conf", subs).load().activate();
-    	
+        // create a temp directory to poll
+        //
+        File myTempDir = Files.createTempDirectory("poll").toFile();
+        myTempDir.deleteOnExit();
+        Map<String, String> subs = new HashMap<>();
+        subs.put("PollDirectory", myTempDir.getAbsolutePath().replace("\\","\\\\"));
+        Configuration.forFile("engine.conf", subs).load().activate();
+
         // create a StreamBase server and load modules once for all tests in this class
         server = ServerManagerFactory.getEmbeddedServer();
         server.startServer();
@@ -71,7 +68,6 @@ public class TestCase extends UnitTest {
      */
     @AfterClass
     public static void stopServer() throws InterruptedException, StreamBaseException {
-    	LOGGER.info("stopServer");
         try {
             assertNotNull(server);
             server.shutdownServer();
@@ -79,7 +75,6 @@ public class TestCase extends UnitTest {
         } finally {
             Configuration.deactiveAndRemoveAll();
         }
-        LOGGER.info("finished stopServer");
     }
 
     /**
@@ -88,9 +83,7 @@ public class TestCase extends UnitTest {
      * @throws StreamBaseException on start container error
      */
     @Before
-    public void startContainers() throws StreamBaseException {
-    	 LOGGER.info("startContainers");
-    	     	 
+    public void startContainers() throws StreamBaseException { 
         // before each test, startup fresh container instances
         server.startContainers();
 
@@ -104,21 +97,10 @@ public class TestCase extends UnitTest {
     @Test
     public void test1() {
         LOGGER.info("Test Case 1");
-        
-        Administration admin = new Administration();
-        
-        LOGGER.info(admin.execute("display", "adapter").toString());
-        
-       /*
-        LOGGER.info(admin.execute("get", "tunable").toString());
-        
-    	Map<String, String> parameters = new HashMap<>();
-    	parameters.put("name", "engine.shutdownTimerSeconds");
-    	parameters.put("value", "2");
-        LOGGER.info(admin.execute("set", "tunable", parameters).toString());
-        LOGGER.info(admin.execute("get", "tunable").toString());
-        */
 
+        Administration admin = new Administration();
+
+        LOGGER.info(admin.execute("display", "adapter").toString());
     }
 
     /**
@@ -130,14 +112,11 @@ public class TestCase extends UnitTest {
      */
     @After
     public void stopContainers() throws StreamBaseException, TransactionalMemoryLeakException, TransactionalDeadlockDetectedException {
-    	LOGGER.info("stopContainers");
         // Complete test framework and check for any errors
         this.complete();
 
         // after each test, dispose of the container instances
         server.stopContainers();
-        
-    	LOGGER.info("finish stopContainers");
 
     }
 }
