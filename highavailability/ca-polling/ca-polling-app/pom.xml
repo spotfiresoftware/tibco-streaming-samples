@@ -61,6 +61,27 @@
 
     <build>
         <plugins>
+            <!-- escape windows path -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>regex-property</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>poll.directory</name>
+                            <value>${project.build.directory}/poll</value>
+                            <regex>\\</regex>
+                            <replacement>\\\\</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.tibco.ep</groupId>
                 <artifactId>ep-maven-plugin</artifactId>
@@ -78,7 +99,7 @@
                                 <node>A</node>
                             </nodes>
                             <installArguments>
-                                <substitutions>PollDirectory=${project.build.directory}/poll</substitutions>
+                                <substitutions>PollDirectory=${poll.directory}</substitutions>
                             </installArguments>
                         </configuration>
                     </execution>
@@ -92,7 +113,7 @@
                                 <node>B</node>
                             </nodes>
                             <installArguments>
-                                <substitutions>PollDirectory=${project.build.directory}/poll</substitutions>
+                                <substitutions>PollDirectory=${poll.directory}</substitutions>
                             </installArguments>
                         </configuration>
                     </execution>
