@@ -130,6 +130,7 @@
                             <arguments>
                                 <path>default.FileMonitor</path>
                             </arguments>
+                            <skip>${skipTests}</skip>
                         </configuration>
                     </execution>
 
@@ -156,6 +157,7 @@
                             <arguments>
                                 <path>default.FileMonitor</path>
                             </arguments>
+                            <skip>${skipTests}</skip>
                         </configuration>
                     </execution>
 
