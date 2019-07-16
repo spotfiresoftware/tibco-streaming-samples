@@ -43,7 +43,7 @@
 
     <properties>
 	    <!-- see SB-46972 -->
-	    <skipTests>true</skipTests>
+	    <!--<skipTests>true</skipTests> -->
     </properties>
 
     <!-- common definitions for this version of StreamBase -->
