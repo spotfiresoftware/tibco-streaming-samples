@@ -63,8 +63,7 @@ Machine A fails | File monitor adapter on node B is automatically started  | 1 F
 Machine B fails | No impact to reading filesystem | 1 Fix machine B<br/>2 Use **epadmin install node** and **epadmin start node** | 1 No data loss<br/>2 No service loss
 
 With a 2 node configuration node quorums don't apply hence a multi-master scenario is possible on network failure.
-To avoid the risk of data loss when restoring the availability zone, multiple network paths ( such as network bonding )
-is recommended.
+Multiple network paths ( such as network bonding ) is recommended.
 
 <a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
 
