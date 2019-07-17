@@ -10,7 +10,7 @@ The samples can also be imported into TIBCO StreamBase Studio&trade; :
 
 * Use **Import -> Git -> Projects from Git ( with smart import )** menu option.  
 * Select **Clone URI -> Next**
-* Specify the github URL ( https://github.com/TIBCOSoftware/tibco-streaming-samples.git 
+* Specify the github URL ( https://github.com/TIBCOSoftware/tibco-streaming-samples.git )
 * Select the branch that corresponds to the product version you are using
 * Choose what sample(s) to import :
 
