@@ -1,0 +1,157 @@
+---
+- name: StreamBase create base and application docker image based on Centos7
+  hosts: localhost
+  tasks:
+  - name: pull Centos image
+    docker_image:
+      name: centos:7
+      source: pull
+
+  - name: Create work directory for base image
+    file:
+      path: ../docker/base/maven
+      state: directory
+
+  - name: Copy platform.zip file into work directory
+    copy:
+      src: ../../../target/dependencies/{{ platform }}.zip
+      dest: ../docker/base/maven
+
+  - name: Copy start-node script to base image work directory
+    copy:
+      src: ../docker/base/start-node
+      dest: ../docker/base/maven
+
+  - name: Generate id for itermediate image - custom label
+    set_fact:
+      num1: "{{ 1000 | random(1,2) }}"
+      num2: "{{ 1000 | random(2,2) }}"
+
+  - name: Update dockerfile before building base image
+    replace:
+      path: ../docker/base/Dockerfile
+      regexp: "{{ item.search }}"
+      replace: "{{ item.replace }}"
+    with_items:
+      - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ num1 }}{{ num2 }}" }
+      - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }   
+
+  - name: Building SB base image - sbrt-base
+    docker_image:
+      path: ../docker/base
+      pull: no
+      push: no
+      name: sbrt-base
+      repository: sbrt-base
+      tag: "{{sbrt_ver }}"
+      source: build
+
+  - name: Clean up work directory for base image
+    file:
+      path: ../docker/base/maven
+      state: absent
+
+  - name: Remove itermediate image with LABEL build-image={{ num1 }}{{ num2 }}
+    shell: docker image prune --filter label=build-image={{ num1 }}{{ num2 }} -f
+
+  - name: Create source directory for app image
+    file:
+      path: ../docker/application/maven
+      state: directory
+
+  - name: Create a copy of platform zip file into application docker image work directory
+    copy:
+      src: ../../../target/{{ projectId }}-{{ projectId_ver }}-ep-application.zip
+      dest: ../docker/application/maven/{{ projectId }}-{{ projectId_ver }}.zip
+
+  - name: Update dockerfile before building app image
+    replace:
+      path: ../docker/application/Dockerfile
+      regexp: "{{ item.search }}"
+      replace: "{{ item.replace }}"
+    with_items:
+      - { search: '(^FROM\s)(.*)$', replace: "FROM sbrt-base:{{ sbrt_ver }}" }
+      - { search: '(^###Note:\s)(.*)$', replace: '###Note: FROM statement build by Ansible playbook' }
+      - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ num1 }}{{ num2 }}" }
+      - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }   
+    
+  - name: Building StreamBase application image
+    docker_image:
+      path: ../docker/application
+      pull: no
+      name: "docker/{{ projectId }}"
+      repository: "docker/{{ projectId }}"
+      tag: "{{ projectId_ver }}"
+      source: build
+
+  - name: Clean up work directory for application image
+    file:
+      path: ../docker/application/maven
+      state: absent
+      
+  - name: Create example.com network
+    docker_network:
+      name: example.com
+      state: present
+      
+  - name: Start container A.{{ projectId }}
+    docker_container:
+      name: A.{{ projectId }}
+      image: docker/{{ projectId }}:{{ projectId_ver }}
+      hostname: A.example.com
+      networks: 
+        - name: example.com
+          aliases: 
+            - A.example.com
+      env:
+        NODENAME: A.{{ projectId }}
+      state: started
+
+  - name: Waiting for Node A to start
+    shell: until docker logs A.{{ projectId }} | grep -q "COMMAND FINISHED"; do sleep 1; done
+
+  - name: Start container B.{{ projectId }}
+    docker_container:
+      name: B.{{ projectId }}
+      image: docker/{{ projectId }}:{{ projectId_ver }}
+      hostname: B.example.com
+      networks:
+        - name: example.com
+          aliases:
+            - B.example.com
+      env:
+        NODENAME: B.{{ projectId }}
+      state: started
+
+  - name: Waiting for Node B to start
+    shell: until docker logs B.{{ projectId }} | grep -q "COMMAND FINISHED"; do sleep 1; done
+
+  - name: Run epadmin command on Node A
+    shell: docker exec A.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
+    register: NodeAresults
+  - name: Node A
+    debug: var=NodeAresults.stdout_lines
+
+  - name: Run epadmin command on Node B
+    shell: docker exec B.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
+    register: NodeBresults
+  - name:  Node B
+    debug: var=NodeBresults.stdout_lines
+
+  - name: Stop and remove container A
+    docker_container:
+      name: A.{{ projectId }}
+      state: absent
+
+  - name: Stop and remove container B
+    docker_container:
+      name: B.{{ projectId }}
+      state: absent
+
+  - name: Remove example.com network
+    docker_network:
+      name: example.com
+      state: absent
+
+  - name: Remove Docker images
+    shell: docker rmi $( docker images --filter label=build-image={{ num1 }}{{ num2 }} | awk '{print $3}' | tail -2 )
