@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.5.0-SNAPSHOT_650a9f7a183f39767a4ce12ec9f2c6ab713aeaaa">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.highavailability.ca-statefilter-ef"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <parameter-definitions>
+            <parameter default="/tmp" name="PollDirectory"/>
+        </parameter-definitions>
+        <dynamic-variables/>
+        <box name="Metronome" type="metronome">
+            <output port="1" stream="out:Metronome_1"/>
+            <param name="interval" value="1"/>
+            <param name="timestamp-field" value="time"/>
+        </box>
+        <box name="ClusterStateFilter" type="java">
+            <input port="1" stream="out:Metronome_1"/>
+            <output port="1" stream="OutputStream"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.operator.clusteraware.ClusterStateFilter"/>
+            <clusteraware type="active_single_node"/>
+        </box>
+        <output-stream name="OutputStream"/>
+    </add>
+</modify>
