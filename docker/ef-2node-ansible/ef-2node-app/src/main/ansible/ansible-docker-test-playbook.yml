@@ -1,8 +1,0 @@
----
-- name: StreamBase create base and custom project image based on Centos7
-  hosts: localhost
-  tasks:
-  - name: pull Centos image
-    docker_image:
-      name: centos:7
-      source: pull
