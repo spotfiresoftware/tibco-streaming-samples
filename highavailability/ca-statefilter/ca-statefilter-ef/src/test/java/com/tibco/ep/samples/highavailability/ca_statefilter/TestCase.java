@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2019, TIBCO Software Inc.
+ * Copyright (C) 2018-2019, TIBCO Software Inc.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -108,11 +108,13 @@ public class TestCase extends UnitTest {
     }
 
     /**
-     * test case
+     * Display operator
+     * 
+     * Example test case that simply displays the operator
      */
     @Test
-    public void test1() {
-        LOGGER.info("Test Case 1");
+    public void displayOperator() {
+        LOGGER.info("display operator");
 
         Administration admin = new Administration();
 

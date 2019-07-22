@@ -27,68 +27,63 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-package com.tibco.ep.samples.javafunction;
+package com.tibco.ep.samples.highavailability.ca_polling;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static org.junit.Assert.assertNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import com.streambase.sb.Tuple;
-import com.tibco.ep.samples.javafunction.UtilFunctions;
-import com.tibco.ep.testing.framework.TransactionalDeadlockDetectedException;
-import com.tibco.ep.testing.framework.TransactionalMemoryLeakException;
-import com.tibco.ep.testing.framework.UnitTest;
+import com.tibco.ep.dtm.management.DtmResults;
+import com.tibco.ep.dtm.management.DtmRow;
+import com.tibco.ep.dtm.management.IDtmProgress;
 
 /**
- * Unit tests for java function
+ * Display progress of admin command
  *
  */
-public class UtilFunctionsTest extends UnitTest {
+public class Progress implements IDtmProgress{
 
     /**
-     * Setup test framework before running tests
-     * 
+     * Logger
      */
-    @Before
-    public void initializeTest()  {
-        this.initialize();
+    static final Logger logger = LoggerFactory.getLogger(Progress.class);
+
+    private String output = "";
+
+    /**
+     * Get the results of the command
+     *
+     * @return Output string
+     */
+    String getOutput() {
+        return output;
     }
 
-    /**
-     * Complete test framework and check for any errors
-     * 
-     * @throws TransactionalMemoryLeakException Leak detected
-     * @throws TransactionalDeadlockDetectedException Deadlock detected
-     */
-    @After
-    public void completeTest() throws TransactionalMemoryLeakException, TransactionalDeadlockDetectedException {
-        this.complete();
+    @Override
+    public void start() {
     }
 
-    /**
-     * Test null list
-     */
-    @Test
-    public void testNullList() {
-        List<Tuple> t = null;
-
-        assertNull(UtilFunctions.Density(t));
+    @Override
+    public void results(DtmResults results) {
+        for (DtmRow row : results.getResultSet().getRows()) {
+            String out = String.join(", ", (row.getColumns()));
+            logger.info("["+results.source()+"] results: "+out);
+            output += out;
+            output += "\n";
+        }
     }
 
-    /**
-     * Test zero szie
-     */
-    @Test
-    public void testZeroSize() {
-        List<Tuple> t = new ArrayList<Tuple>();
+    @Override
+    public void status(String source, String message) {
+        logger.info("["+source+"] status: "+message);
+        output += message;
+    }
 
-        assertNull(UtilFunctions.Density(t));
+    @Override
+    public void cancel() {
+    }
+
+    @Override
+    public void complete() {
     }
 
 }

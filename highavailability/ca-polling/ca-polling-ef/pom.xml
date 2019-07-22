@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (C) 2019, TIBCO Software Inc.
+  Copyright (C) 2018-2019, TIBCO Software Inc.
   
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -39,11 +39,11 @@
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
     <name>HA : cluster aware polling - EventFlow Fragment</name>
-    <description>How to build Highly Available TIBCO Streaming projects - EventFlow Fragment</description>
+    <description>How to use cluster aware in TIBCO Streaming projects - EventFlow Fragment</description>
 
     <properties>
-	    <!-- see SB-46972 -->
-	    <skipTests>true</skipTests>
+	    <!-- FIXTHIS - see SB-46972 -->
+        <skipTests>true</skipTests>
     </properties>
 
     <!-- common definitions for this version of StreamBase -->

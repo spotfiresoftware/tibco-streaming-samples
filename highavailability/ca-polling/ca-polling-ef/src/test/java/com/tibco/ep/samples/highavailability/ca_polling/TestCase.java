@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2018, TIBCO Software Inc.
+ * Copyright (C) 2018-2019, TIBCO Software Inc.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -31,11 +31,14 @@ package com.tibco.ep.samples.highavailability.ca_polling;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -65,6 +68,8 @@ public class TestCase extends UnitTest {
 
     private static SBServerManager server;
 
+    private static File tempDirectory;
+    
     /**
      * Set up the server
      *
@@ -76,11 +81,11 @@ public class TestCase extends UnitTest {
     @BeforeClass
     public static void setupServer() throws StreamBaseException, ConfigurationException, InterruptedException, IOException {
         // create a temp directory to poll
-        //
-        File myTempDir = Files.createTempDirectory("poll").toFile();
-        myTempDir.deleteOnExit();
+        tempDirectory = Files.createTempDirectory("poll").toFile();
+        tempDirectory = new File("poll");
+        tempDirectory.mkdirs();
         Map<String, String> subs = new HashMap<>();
-        subs.put("PollDirectory", myTempDir.getAbsolutePath().replace("\\","\\\\"));
+        subs.put("PollDirectory", tempDirectory.getAbsolutePath().replace("\\","\\\\"));
         Configuration.forFile("engine.conf", subs).load().activate();
 
         // create a StreamBase server and load modules once for all tests in this class
@@ -121,15 +126,27 @@ public class TestCase extends UnitTest {
     }
 
     /**
-     * test case
+     * Test file reading
+     * 
+     * @throws IOException On file write error
+     * @throws StreamBaseException On dequeue error
      */
     @Test
-    public void test1() {
-        LOGGER.info("Test Case 1");
+    public void testFilePoll() throws IOException, StreamBaseException {
+        LOGGER.info("Test file poll");
 
         Administration admin = new Administration();
 
         LOGGER.info(admin.execute("display", "adapter").toString());
+
+        File testFile = new File(tempDirectory, "testfile.txt");
+        // write a test file to poll directory
+        try (FileWriter fileWriter = new FileWriter(testFile); BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            bufferedWriter.write("Hello World");
+        }
+        
+        // print file contents on dequeue
+        LOGGER.info("File contents = "+server.getDequeuer("default.OutputStream").dequeue(1, 10, TimeUnit.SECONDS).get(0).getString("FileContents"));
     }
 
     /**

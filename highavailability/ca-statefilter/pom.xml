@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (C) 2019, TIBCO Software Inc.
+  Copyright (C) 2018-2019, TIBCO Software Inc.
   
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -59,7 +59,7 @@
     </licenses>
 
     <properties>
-        <studioSample>true</studioSample>
+        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
     </properties>
 
     <!-- Aggregator pom -->

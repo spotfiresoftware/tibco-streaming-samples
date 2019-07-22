@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<modify version="10.5.0-SNAPSHOT_6a795656890b9d6344390324277fc149a32fe2f1">
+<modify version="10.5.0-SNAPSHOT_650a9f7a183f39767a4ce12ec9f2c6ab713aeaaa">
     <add>
         <annotations>
             <annotation name="hygienic"/>
@@ -32,7 +32,7 @@
             <param name="watchDelete" value="true"/>
             <param name="watchModified" value="true"/>
             <param name="watchPath" value="${PollDirectory}"/>
-            <param name="watchSubDirectories" value="false"/>
+            <param name="watchSubDirectories" value="true"/>
             <param name="watchSubDirectoriesFieldName" value="WatchSubDirectories"/>
             <clusteraware type="active_single_node"/>
         </box>
