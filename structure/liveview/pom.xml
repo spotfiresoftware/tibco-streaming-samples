@@ -42,7 +42,7 @@
     <description>How to structure an LiveView fragment.</description>
 
     <properties>
-        <studioSample>true</studioSample>
+        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
     </properties>
 
     <!-- common definitions for this version of StreamBase -->

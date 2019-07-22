@@ -59,7 +59,7 @@
     </licenses>
 
     <properties>
-        <studioSample>true</studioSample>
+        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
     </properties>
 
     <!-- Aggregator pom -->
