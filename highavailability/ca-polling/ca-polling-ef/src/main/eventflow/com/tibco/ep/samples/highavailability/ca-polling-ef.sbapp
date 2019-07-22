@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<modify version="10.5.0-SNAPSHOT_ea90c9abf2721ce6735011b326b34b9b8d2b1abf">
+<modify version="10.5.0-SNAPSHOT_6a795656890b9d6344390324277fc149a32fe2f1">
     <add>
         <annotations>
             <annotation name="hygienic"/>
@@ -19,8 +19,8 @@
             <param name="javaclass" value="com.streambase.sb.adapter.filemonitor.FileMonitor"/>
             <param name="enableControlPort" value="false"/>
             <param name="enableStatusPort" value="false"/>
-            <param name="ignoreDuplicateUpdates" value="true"/>
-            <param name="ignoreDuplicateUpdatesMilliseconds" value="5000"/>
+            <param name="ignoreDuplicateUpdates" value="false"/>
+            <param name="ignoreDuplicateUpdatesMilliseconds" value="500"/>
             <param name="logLevel" value="INFO"/>
             <param name="notifyOnCreateFieldName" value="NotifyOnCreate"/>
             <param name="notifyOnDeleteFieldName" value="NotifyOnDelete"/>
@@ -54,7 +54,7 @@
         </box>
         <box name="FileReader" type="inputadapter">
             <input port="1" stream="out:Map_1"/>
-            <output port="1" stream="out:FileReader_1"/>
+            <output port="1" stream="OutputStream"/>
             <param name="start:state" value="true"/>
             <param name="javaclass" value="com.streambase.sb.adapter.filereader.FileReader"/>
             <param name="Charset" value=""/>
@@ -80,33 +80,6 @@
             <param name="recurseSubFoldersField" value=""/>
             <param name="replacementDataFieldName" value=""/>
         </box>
-        <box name="Logger" type="outputadapter">
-            <input port="1" stream="out:FileReader_1"/>
-            <output port="1" stream="out:Logger_1"/>
-            <param name="start:state" value="true"/>
-            <param name="javaclass" value="com.streambase.sb.adapter.logger.Log"/>
-            <param name="CaptureStrategy" value="FLATTEN"/>
-            <param name="asyncEnabled" value="true"/>
-            <param name="compressFrequentMessages" value="false"/>
-            <param name="compressMaxWindowSize" value="5.0"/>
-            <param name="customFormat" value=""/>
-            <param name="customFormatExpression" value=""/>
-            <param name="customFormatType" value="Basic"/>
-            <param name="emitLoggedTuples" value="true"/>
-            <param name="encodeSubType" value="Map"/>
-            <param name="hexEncodeBlobs" value="false"/>
-            <param name="includeNullFields" value="false"/>
-            <param name="logLevel" value="Info"/>
-            <param name="logLevelOverrideFieldName" value=""/>
-            <param name="loggerFormatType" value="CSV"/>
-            <param name="messageIdentifier" value="Logger"/>
-            <param name="messageIdentifierExpression" value=""/>
-            <param name="messageIdentifierType" value="Basic"/>
-            <param name="messagePrefix" value=""/>
-            <param name="quoteNullStrings" value="true"/>
-            <param name="timestampAsLong" value="false"/>
-            <param name="timestampFormat" value="yyyy-MM-dd HH:mm:ss.SSSZ"/>
-            <param name="verbose" value="false"/>
-        </box>
+        <output-stream name="OutputStream"/>
     </add>
 </modify>

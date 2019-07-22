@@ -47,6 +47,7 @@
         <module>aa-3node-dr</module>
         <module>pd-2node</module>
         <module>ca-polling</module>
+        <module>ca-statefilter</module>
     </modules>
 
     <!-- skip site docs in this aggregator -->

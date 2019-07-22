@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="ClusterStateFilter">
+        <param name="gui:x" value="-110"/>
+        <param name="gui:y" value="-126"/>
+    </component>
+    <component name="Metronome">
+        <param name="gui:x" value="-245"/>
+        <param name="gui:y" value="-126"/>
+    </component>
+    <component name="OutputStream">
+        <param name="gui:x" value="27"/>
+        <param name="gui:y" value="-126"/>
+    </component>
+</application-layout>

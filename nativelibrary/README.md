@@ -1,6 +1,6 @@
 # Native
 
-How to use native libraries in TIBCO&reg; Streaming 10.4.0 projects.
+How to use native libraries in TIBCO&reg; Streaming master projects.
 
 Samples :
 

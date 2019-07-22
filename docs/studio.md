@@ -9,7 +9,8 @@ The samples can also be imported into TIBCO StreamBase Studio&trade; :
 ## Using smart import
 
 * Use **Import -> Git -> Projects from Git ( with smart import )** menu option.  
-* Specify the github URL ( https://github.com/TIBCOSoftware/tibco-streaming-samples.git 
+* Select **Clone URI -> Next**
+* Specify the github URL ( https://github.com/TIBCOSoftware/tibco-streaming-samples.git )
 * Select the branch that corresponds to the product version you are using
 * Choose what sample(s) to import :
 
@@ -19,7 +20,7 @@ The samples can also be imported into TIBCO StreamBase Studio&trade; :
 be installed by :
 
 1.  Help -> Install new software
-2.  In the Work with field enter **http://download.eclipse.org/egit/updates-5.1**
+2.  In the Work with field enter **http://download.eclipse.org/egit/updates-5.2**
 3.  Find and select **Git integration for Eclipse - auto-import for Eclipse >= 4.6**
 4.  Select next and Finish
 
