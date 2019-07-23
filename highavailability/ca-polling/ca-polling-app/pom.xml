@@ -200,10 +200,10 @@
                             <target>
                                 <!-- wait for max 10 minutes checking every 500ms -->
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="atimeout">
-                                    <resourcecontains resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.ca-polling-app.log" substring=" sbd at "/>
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.ca-polling-ef.log" substring=" sbd at "/>
                                 </waitfor>
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="btimeout">
-                                    <resourcecontains resource="${project.build.directory}/test-nodes/B.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.ca-polling-app.log" substring=" sbd at "/>
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/B.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.ca-polling-ef.log" substring=" sbd at "/>
                                 </waitfor>
                                 <fail message="Application on node A failed to startup in time">
                                     <condition>
