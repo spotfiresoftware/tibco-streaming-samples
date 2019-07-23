@@ -61,3 +61,5 @@ This is a maven aggregator project consisting of the following maven modules :
 
 * [HA : proxy discovery - EventFlow Fragment](pd-2node-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/highavailability/pd-2node/pd-2node-ef/))
 * [HA : proxy discovery - Application](pd-2node-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/highavailability/pd-2node/pd-2node-app/))
+
+:white_check_mark: Tibco approved sample
