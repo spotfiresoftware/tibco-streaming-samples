@@ -105,7 +105,7 @@ public class TestCase extends UnitTest {
         server.startContainers();
 
         // Setup test framework before running tests
-        this.initialize();
+        initialize();
     }
 
     /**
@@ -126,7 +126,7 @@ public class TestCase extends UnitTest {
     @After
     public void stopContainers() throws StreamBaseException, TransactionalMemoryLeakException, TransactionalDeadlockDetectedException {
         // Complete test framework and check for any errors
-        this.complete();
+        complete();
 
         // after each test, dispose of the container instances
         server.stopContainers();

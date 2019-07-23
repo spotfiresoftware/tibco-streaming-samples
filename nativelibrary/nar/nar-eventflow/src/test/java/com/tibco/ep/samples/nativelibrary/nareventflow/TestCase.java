@@ -108,7 +108,7 @@ public class TestCase extends UnitTest {
         clearCppVar();
 
         // Setup test framework before running tests
-        this.initialize();
+        initialize();
     }
 
     /** the static C++ variable doesn't get reset when the SB container is reset so we need to do it explicitly */
@@ -188,7 +188,7 @@ public class TestCase extends UnitTest {
     @After
     public void stopContainers() throws StreamBaseException, TransactionalMemoryLeakException, TransactionalDeadlockDetectedException {
         // Complete test framework and check for any errors
-        this.complete();
+        complete();
 
         // after each test, dispose of the container instances
         server.stopContainers();

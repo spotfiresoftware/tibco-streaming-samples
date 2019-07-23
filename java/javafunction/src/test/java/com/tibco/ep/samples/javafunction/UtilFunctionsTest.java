@@ -57,7 +57,7 @@ public class UtilFunctionsTest extends UnitTest {
      */
     @Before
     public void initializeTest()  {
-        this.initialize();
+        initialize();
     }
 
     /**
@@ -68,7 +68,7 @@ public class UtilFunctionsTest extends UnitTest {
      */
     @After
     public void completeTest() throws TransactionalMemoryLeakException, TransactionalDeadlockDetectedException {
-        this.complete();
+        complete();
     }
 
     /**
