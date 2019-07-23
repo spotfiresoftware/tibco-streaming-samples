@@ -105,11 +105,6 @@ prodxy discovery configuration :
         nodes = {
             "A.pd-test-app" = { 
                 nodeType = docker
-                engines = {
-                    pd-test-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.docker.pd-test-ef"
-                    }
-                }
                 communication = {
                     administration = {
                         address = ${A_HOSTNAME:-A.example.com}

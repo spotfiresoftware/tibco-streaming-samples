@@ -57,7 +57,7 @@
         <dependency>
             <groupId>com.tibco.ep.samples.structure</groupId>
             <artifactId>application-ef</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
             <type>ep-eventflow-fragment</type>
         </dependency>
     </dependencies>

@@ -94,27 +94,7 @@ partitions are created to evenly balance and replicate data around the cluster :
 ## Define the node deployment configuration
 
 Since this sample uses the default availability zone, it doesn't need to be specified again, so
-the node deployment configuration is :
-
-```scala
-name = "aa-2node-app"
-version = "1.0.0"
-type = "com.tibco.ep.dtm.configuration.node"
-
-configuration = {
-    NodeDeploy = {
-        nodes = {
-            "${EP_NODE_NAME}" = { 
-                engines = {
-                    aa-2node-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.aa-2node-ef"                                                                
-                    }                                                    
-                }
-            }
-        }
-    }
-}
-```
+no node deployment configuration is required/
 
 <a name="design-notes"></a>
 

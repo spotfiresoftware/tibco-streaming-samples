@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.tibco.ep.samples.docker</groupId>
             <artifactId>lv-1node-lv</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
             <type>ep-liveview-fragment</type>
         </dependency>
     </dependencies>

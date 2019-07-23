@@ -164,7 +164,7 @@
                             <target>playback</target>
                             <serviceName>A.${project.artifactId}</serviceName>
                             <arguments>
-                                <engine>pd-2node-ef</engine>
+                                <engine>default-engine-for-com.tibco.ep.samples.highavailability.pd-2node-ef</engine>
                                 <simulationfile>${project.basedir}/src/test/configurations/test.sbfs</simulationfile>
                             </arguments>
                         </configuration>
@@ -247,10 +247,10 @@
                             <target>
                                 <!-- wait for max 10 minutes checking every 500ms -->
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="atimeout">
-                                    <resourcecontains resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/pd-2node-ef.log" substring=" sbd at "/>
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.pd-2node-ef.log" substring=" sbd at "/>
                                 </waitfor>
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="btimeout">
-                                    <resourcecontains resource="${project.build.directory}/test-nodes/B.${project.artifactId}/logs/pd-2node-ef.log" substring=" sbd at "/>
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/B.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.pd-2node-ef.log" substring=" sbd at "/>
                                 </waitfor>
                                 <fail message="Application on node A failed to startup in time">
                                     <condition>

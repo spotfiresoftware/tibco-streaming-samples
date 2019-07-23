@@ -154,11 +154,6 @@ configuration = {
     NodeDeploy = {
         nodes = {
             "A.aa-3node-dr-app" = {
-                engines = {
-                    aa-3node-dr-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.aa-3node-dr-ef"                                                                
-                    }                                                    
-                }
                 availabilityZoneMemberships = {
                     default-cluster-wide-availability-zone = {
                         dynamicPartitionBinding = {
@@ -170,11 +165,6 @@ configuration = {
                 }
             }
             "B.aa-3node-dr-app" = {
-                engines = {
-                    aa-3node-dr-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.aa-3node-dr-ef"                                                                
-                    }                                                    
-                }
                 availabilityZoneMemberships = {
                     default-cluster-wide-availability-zone = {
                         dynamicPartitionBinding = {
@@ -186,11 +176,6 @@ configuration = {
                 }
             }
             "C.aa-3node-dr-app" = {
-                engines = {
-                    aa-3node-dr-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.aa-3node-dr-ef"                                                                
-                    }                                                    
-                }
                 availabilityZoneMemberships = {
                     default-cluster-wide-availability-zone = {
                         dynamicPartitionBinding = {
@@ -202,11 +187,6 @@ configuration = {
                 }
             }
             "D.aa-3node-dr-app" = {
-                engines = {
-                    aa-3node-dr-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.aa-3node-dr-ef"                                                                
-                    }                                                    
-                }
                 availabilityZoneMemberships = {
                     default-cluster-wide-availability-zone = {
                         dynamicPartitionBinding = {

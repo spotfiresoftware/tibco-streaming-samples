@@ -136,11 +136,6 @@ configuration = {
     NodeDeploy = {
         nodes = {
             "A.as-2node-app" = {
-                engines = {
-                    as-2node-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.as-2node-ef"                                                                
-                    }                                                    
-                }
                 availabilityZoneMemberships = {
                     static-availability-zone = {
                         staticPartitionBindings = {
@@ -152,11 +147,6 @@ configuration = {
                 }
             }
             "B.as-2node-app" = {
-                engines = {
-                    as-2node-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.as-2node-ef"                                                                
-                    }                                                    
-                }
                 availabilityZoneMemberships = {
                     static-availability-zone = {
                         staticPartitionBindings = {

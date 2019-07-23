@@ -57,7 +57,7 @@
         <dependency>
             <groupId>com.tibco.ep.samples.highavailability</groupId>
             <artifactId>aa-3node-dr-ef</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
             <type>ep-eventflow-fragment</type>
         </dependency>
     </dependencies>
@@ -122,7 +122,7 @@
                             <target>playback</target>
                             <serviceName>A.${project.artifactId}</serviceName>
                             <arguments>
-                                <engine>aa-3node-dr-ef</engine>
+                                <engine>default-engine-for-com.tibco.ep.samples.highavailability.aa-3node-dr-ef</engine>
                                 <simulationfile>${project.basedir}/src/test/configurations/test.sbfs</simulationfile>
                             </arguments>
                         </configuration>
@@ -206,16 +206,16 @@
                             <target>
                                 <!-- wait for max 10 minutes checking every 500ms -->
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="atimeout">
-                                    <resourcecontains resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/aa-3node-dr-ef.log" substring=" sbd at "/>
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.aa-3node-dr-ef.log" substring=" sbd at "/>
                                 </waitfor>
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="btimeout">
-                                    <resourcecontains resource="${project.build.directory}/test-nodes/B.${project.artifactId}/logs/aa-3node-dr-ef.log" substring=" sbd at "/>
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/B.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.aa-3node-dr-ef.log" substring=" sbd at "/>
                                 </waitfor>
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="ctimeout">
-                                    <resourcecontains resource="${project.build.directory}/test-nodes/C.${project.artifactId}/logs/aa-3node-dr-ef.log" substring=" sbd at "/>
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/C.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.aa-3node-dr-ef.log" substring=" sbd at "/>
                                 </waitfor>
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"  timeoutproperty="dtimeout">
-                                    <resourcecontains resource="${project.build.directory}/test-nodes/D.${project.artifactId}/logs/aa-3node-dr-ef.log" substring=" sbd at "/>
+                                    <resourcecontains resource="${project.build.directory}/test-nodes/D.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.highavailability.aa-3node-dr-ef.log" substring=" sbd at "/>
                                 </waitfor>
                                 <fail message="Application on node A failed to startup in time">
                                     <condition>

@@ -105,11 +105,6 @@ configuration = {
     NodeDeploy = {
         nodes = {
             "${EP_NODE_NAME}" = {
-                engines = {
-                    aa-3node-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.aa-3node-ef"                                                                
-                    }                                                    
-                }
                 availabilityZoneMemberships = {
                     default-cluster-wide-availability-zone = {
                     }

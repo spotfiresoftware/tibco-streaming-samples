@@ -83,8 +83,7 @@ This sample's structure is shown below :
 │   └── src
 │       ├── main
 │       │   ├── configurations
-│       │   │   ├── app.conf
-│       │   │   └── defaultnode.conf
+│       │   │   └── app.conf
 │       │   └── docker
 │       │       ├── application
 │       │       │   └── Dockerfile

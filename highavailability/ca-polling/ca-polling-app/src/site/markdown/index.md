@@ -78,27 +78,8 @@ Both nodes access the common filesystem.
 
 ## Define the node deployment configuration
 
-This sample uses no special node deployment configuration, so we have : :
-
-```scala
-name = "ca-polling-node"
-version = "1.0.0"
-type = "com.tibco.ep.dtm.configuration.node"
-
-configuration = {
-    NodeDeploy = {
-        nodes = {
-            "${EP_NODE_NAME}" = {
-                engines = {
-                    ca-polling-app = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.ca-polling-ef"
-                    }
-                }
-            }
-        }
-    }
-}
-```
+This sample uses no special node deployment configuration, so no node deployment
+configuration is required.
 
 <a name="design-notes"></a>
 

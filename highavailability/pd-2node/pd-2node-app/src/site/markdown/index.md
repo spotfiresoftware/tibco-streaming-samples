@@ -112,11 +112,6 @@ configuration = {
     NodeDeploy = {
         nodes = {
             "A.pd-2node-app" = { 
-                engines = {
-                    pd-2node-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.pd-2node-ef"                                                                
-                    }                                                    
-                }
                 communication = {
                     numberSearchPorts = 5
                     administration = {
@@ -134,11 +129,6 @@ configuration = {
                 }
             }
             "B.pd-2node-app" = { 
-                engines = {
-                    pd-2node-ef = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.pd-2node-ef"                                                                
-                    }                                                    
-                }
                 communication = {
                     numberSearchPorts = 5
                     administration = {

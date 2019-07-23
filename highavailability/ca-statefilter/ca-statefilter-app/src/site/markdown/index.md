@@ -76,27 +76,8 @@ and **B**, which hosts the StreamBase node **B**.
 
 ## Define the node deployment configuration
 
-This sample uses no special node deployment configuration, so we have : :
-
-```scala
-name = "ca-statefilter-node"
-version = "1.0.0"
-type = "com.tibco.ep.dtm.configuration.node"
-
-configuration = {
-    NodeDeploy = {
-        nodes = {
-            "${EP_NODE_NAME}" = {
-                engines = {
-                    ca-statefilter-app = {
-                        fragmentIdentifier = "com.tibco.ep.samples.highavailability.ca-statefilter-ef"
-                    }
-                }
-            }
-        }
-    }
-}
-```
+This sample uses no special node deployment configurations, so node deployment configuration
+file is not required.
 
 <a name="design-notes"></a>
 

@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.tibco.ep.samples.docker</groupId>
             <artifactId>ef-2node-ansible-ef</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
             <type>ep-eventflow-fragment</type>
         </dependency>
     </dependencies>
