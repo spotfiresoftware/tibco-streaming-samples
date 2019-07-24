@@ -58,7 +58,7 @@
     	<dependency>
     		<groupId>com.tibco.ep.sb.adapter</groupId>
     		<artifactId>fileio</artifactId>
-    		<version>[10.5.0-SNAPSHOT,99.99.99)</version>
+            <version>${sbrt.version}</version>
     	</dependency>
     </dependencies>
 

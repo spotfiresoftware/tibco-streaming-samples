@@ -51,12 +51,12 @@
 
     <dependencies>
 
-    	<dependency>
-    		<groupId>com.tibco.ep.sb.adapter</groupId>
-    		<artifactId>feedsim</artifactId>
-    		<version>[10.5.0-SNAPSHOT,99.99.99)</version>
-    	</dependency>
-    	
+        <dependency>
+            <groupId>com.tibco.ep.sb.adapter</groupId>
+            <artifactId>feedsim</artifactId>
+            <version>${sbrt.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.tibco.ep.lvweb</groupId>
             <artifactId>lvweb</artifactId>
