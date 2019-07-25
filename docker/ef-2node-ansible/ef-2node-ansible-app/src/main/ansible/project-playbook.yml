@@ -153,5 +153,15 @@
       name: example.com
       state: absent
 
-  - name: Remove Docker images
-    shell: docker rmi $( docker images --filter label=build-image={{ num1 }}{{ num2 }} | awk '{print $3}' | tail -2 )
+  - name: Platform check
+    shell: uname
+    ignore_errors: yes
+    register: platform_results
+
+  - name: Remove Docker images [Linux]
+    shell: docker images --filter label=build-image={{ num1 }}{{ num2 }} | awk '{print $3}' | tail -n +2 | xargs -r --no-run-if-empty docker rmi 
+    when: platform_results.stdout == 'Linux'
+
+  - name: Remove Docker images 
+    shell: docker images --filter label=build-image={{ num1 }}{{ num2 }} | awk '{print $3}' | tail -n +2 | xargs docker rmi 
+    when: platform_results.stdout != 'Linux'

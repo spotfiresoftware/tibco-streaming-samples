@@ -32,7 +32,7 @@
 FROM centos:7 AS build
 
 ###Note: LABEL statement build by Ansible playbook
-LABEL build-image=233136
+LABEL build-image=000000
 
 #
 # Set environment
@@ -60,7 +60,7 @@ FROM centos:7
 LABEL description="StreamBase Base"
 
 ###Note: LABEL statement build by Ansible playbook
-LABEL build-image=233136
+LABEL build-image=000000
 
 #
 # Set environment
@@ -116,5 +116,4 @@ COPY --from=build ${PRODUCT_HOME} ${PRODUCT_HOME}
 # Change to guest user
 #
 USER ${USER_NAME}
-
 

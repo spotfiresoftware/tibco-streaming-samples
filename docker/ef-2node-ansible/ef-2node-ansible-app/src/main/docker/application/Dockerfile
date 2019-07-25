@@ -32,7 +32,7 @@ FROM sbrt-base:10.5.0-SNAPSHOT
 LABEL description="StreamBase Application"
 
 ###Note: LABEL statement build by Ansible playbook
-LABEL build-image=233136
+LABEL build-image=000000
 
 #
 # Install application archive & test configurations
