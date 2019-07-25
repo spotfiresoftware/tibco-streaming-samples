@@ -26,6 +26,7 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE.
 
+
 #
 ### Build temporary image in multi-stage docker image build process
 #

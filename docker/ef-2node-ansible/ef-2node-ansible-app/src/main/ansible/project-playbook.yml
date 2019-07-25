@@ -165,3 +165,4 @@
   - name: Remove Docker images 
     shell: docker images --filter label=build-image={{ num1 }}{{ num2 }} | awk '{print $3}' | tail -n +2 | xargs docker rmi 
     when: platform_results.stdout != 'Linux'
+
