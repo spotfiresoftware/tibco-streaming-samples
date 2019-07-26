@@ -277,22 +277,10 @@ COMMAND FINISHED
 
 ### Include application logs to the container logs
 
-To include the application logs to the container console logs, add the following file as **src/main/resources/logback.xml** in the application maven module :
+A **src/main/resources/logback.xml** file is included in the application maven module to share application logs
+to docker console.
 
-```xml
-<configuration>
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %10.10thread %-5level %20.20logger{5} : %msg%n</pattern>
-        </encoder>
-    </appender>
-    <root level="INFO">
-        <appender-ref ref="Console" />
-    </root>
-</configuration>
-```
-
-and add the **--tty** option when starting the container :
+To make use of this add the **--tty** option when starting the container :
 
 ```shell
 $ docker run --tty --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-app --network=example.com --env=NODENAME=A.ef-2node-app docker/ef-2node-app:1.0.0
