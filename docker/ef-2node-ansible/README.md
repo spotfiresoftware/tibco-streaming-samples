@@ -1,8 +1,65 @@
-# Docker : 2-node EventFlow
 
-How to deploy a 2-node EventFlow application in Docker
+[comment]: # (  Copyright \(C\) 2018-2019, TIBCO Software Inc.                               )
+
+[comment]: # (                                                                               )
+
+[comment]: # (  Redistribution and use in source and binary forms, with or without           )
+
+[comment]: # (  modification, are permitted provided that the following conditions are met:  )
+
+[comment]: # (                                                                               )
+
+[comment]: # (  1. Redistributions of source code must retain the above copyright notice,    )
+
+[comment]: # (     this list of conditions and the following disclaimer.                     )
+
+[comment]: # (                                                                               )
+
+[comment]: # (  2. Redistributions in binary form must reproduce the above copyright notice, )
+
+[comment]: # (     this list of conditions and the following disclaimer in the documentation )
+
+[comment]: # (     and/or other materials provided with the distribution.                    )
+
+[comment]: # (                                                                               )
+
+[comment]: # (  3. Neither the name of the copyright holder nor the names of its contributors)
+
+[comment]: # (     may be used to endorse or promote products derived from this software     )
+
+[comment]: # (     without specific prior written permission.                                )
+
+[comment]: # (                                                                               )
+
+[comment]: # (  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  )
+
+[comment]: # (  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    )
+
+[comment]: # (  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   )
+
+[comment]: # (  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE    )
+
+[comment]: # (  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR          )
+
+[comment]: # (  CONSEQUENTIAL DAMAGES \(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF        )
+
+[comment]: # (  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS     )
+
+[comment]: # (  INTERRUPTION\) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN     )
+
+[comment]: # (  CONTRACT, STRICT LIABILITY, OR TORT \(INCLUDING NEGLIGENCE OR OTHERWISE\)    )
+
+[comment]: # (  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   )
+
+[comment]: # (  POSSIBILITY OF SUCH DAMAGE.                                                  )
+
+# Ansible-Docker: 2-node EventFlow
+
+How to deploy a 2-node EventFlow application in Docker managed by Ansible
 
 This is a maven aggregator project consisting of the following maven modules :
 
-* [Docker : 2-node EventFlow - EventFlow Fragment](ef-2node-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.4.3/docker/ef-2node/ef-2node-ef/))
-* [Docker : 2-node EventFlow - Application](ef-2node-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.4.3/docker/ef-2node/ef-2node-app/))
+* [Ansbile-Docker: 2-node EventFlow - EventFlow Fragment](ef-2node-ansible-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/ef-2node-ansible/ef-2node-ansible-ef/))
+* [Ansible-Docker: 2-node EventFlow - Application](ef-2node-ansible-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/ef-2node-ansible/ef-2node-ansible-app/))
+
+:white_check_mark: Tibco approved sample
