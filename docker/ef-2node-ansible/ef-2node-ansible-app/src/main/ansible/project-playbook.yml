@@ -38,12 +38,13 @@
 
   - name: Building SB base image - sbrt-base
     docker_image:
-      path: ../docker/base
-      pull: no
+      build:
+        path: ../docker/base
+        pull: no
       push: no
       name: sbrt-base
       repository: sbrt-base
-      tag: "{{sbrt_ver }}"
+      tag: "{{ sbrt_ver }}"
       source: build
 
   - name: Clean up work directory for base image
@@ -77,8 +78,9 @@
     
   - name: Building StreamBase application image
     docker_image:
-      path: ../docker/application
-      pull: no
+      build:
+        path: ../docker/application
+        pull: no
       name: "docker/{{ projectId }}"
       repository: "docker/{{ projectId }}"
       tag: "{{ projectId_ver }}"
