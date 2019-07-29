@@ -72,24 +72,6 @@
             <id>uml</id>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>com.kryshchuk.maven.plugins</groupId>
-                        <artifactId>umlet-maven-plugin</artifactId>
-                        <version>1.2</version>
-                        <executions>
-                            <execution>
-                                <id>create svg</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>convert</goal>
-                                </goals>
-                                <configuration>
-                                    <format>svg</format>
-                                    <outputDirectory>src/site/markdown/images</outputDirectory>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -97,20 +79,6 @@
     
     <build>
         <plugins>
-
-            <!--  deploy site documentation to github pages -->
-            <!--  in CI use mvn site com.github.github:site-maven-plugin:site -->
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <server>github</server>
-                    <message>Updated site documentation from jenkins</message>
-                    <path>${project.parent.version}/docker/ef-2node-ansible/${project.artifactId}</path>
-                    <merge>true</merge>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>com.tibco.ep</groupId>
@@ -129,16 +97,16 @@
         	<artifactId>maven-dependency-plugin</artifactId>
         	<executions>
           	  <execution>
-            		<id>copy-dependencies</id>
-            		<phase>package</phase>
-            			<goals>
-              			  <goal>copy-dependencies</goal>
-            			</goals>
-            			<configuration>
-              			  <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
-          			  <includeArtifactIds>platform_linuxx86_64</includeArtifactIds>
-          			  <stripVersion>true</stripVersion>
-            			</configuration>
+            	      <id>copy-dependencies</id>
+            	      <phase>package</phase>
+            		<goals>
+              		    <goal>copy-dependencies</goal>
+            		</goals>
+            		<configuration>
+              		    <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+          		    <includeArtifactIds>platform_linuxx86_64</includeArtifactIds>
+          		    <stripVersion>true</stripVersion>
+            		</configuration>
           	  </execution>
         	</executions>
       	    </plugin>
@@ -150,9 +118,9 @@
 		   <execution>
 		       <id>ansible-playbook</id>
 		           <goals>
-		             <goal>playbook</goal>
+		               <goal>playbook</goal>
 		           </goals>
-		            <configuration>
+		           <configuration>
                                 <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook>
                                 <promoteDebugAsInfo>true</promoteDebugAsInfo>
                                 <failOnAnsibleError>true</failOnAnsibleError>
@@ -161,9 +129,11 @@
 <!--                        	   <variable>sbrt_ver={sbrt.version}</variable>   -->
                         	   <variable>sbrt_ver=10.5.0-SNAPSHOT</variable>
                         	   <variable>projectId=ef-2node-ansible-app</variable>
-                        	   <variable>projectId_ver=1.0.0</variable>
+<!--				   <variable>projectId=${project.artifactId</variable>    -->
+				   <variable>projectId_ver=${project.version}</variable>
+    				   <variable>project_basedir=${project.basedir}</variable>
                                 </extraVars>
-                            </configuration>
+                           </configuration>
 		     </execution>
 		  </executions>
             </plugin>

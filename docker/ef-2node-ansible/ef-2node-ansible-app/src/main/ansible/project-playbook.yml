@@ -9,18 +9,19 @@
 
   - name: Create work directory for base image
     file:
-      path: ../docker/base/maven
+      path: "{{ project_basedir }}/src/main/docker/base/maven"
       state: directory
 
   - name: Copy platform.zip file into work directory
     copy:
-      src: ../../../target/dependencies/{{ platform }}.zip
-      dest: ../docker/base/maven
+      src:  "{{ project_basedir }}/target/dependencies/{{ platform }}.zip"
+      dest: "{{ project_basedir }}/src/main/docker/base/maven/"
 
   - name: Copy start-node script to base image work directory
     copy:
-      src: ../docker/base/start-node
-      dest: ../docker/base/maven
+      src:  "{{ project_basedir }}/src/main/docker/base/start-node"
+      dest: "{{ project_basedir }}/src/main/docker/base/maven/"
+
 
   - name: Generate id for itermediate image - custom label
     set_fact:
@@ -29,7 +30,7 @@
 
   - name: Update dockerfile before building base image
     replace:
-      path: ../docker/base/Dockerfile
+      path: "{{ project_basedir }}/src/main/docker/base/Dockerfile"
       regexp: "{{ item.search }}"
       replace: "{{ item.replace }}"
     with_items:
@@ -39,7 +40,7 @@
   - name: Building SB base image - sbrt-base
     docker_image:
       build:
-        path: ../docker/base
+        path: "{{ project_basedir }}/src/main/docker/base/"
         pull: no
       push: no
       name: sbrt-base
@@ -49,7 +50,7 @@
 
   - name: Clean up work directory for base image
     file:
-      path: ../docker/base/maven
+      path: "{{ project_basedir }}/src/main/docker/base/maven/"
       state: absent
 
   - name: Remove itermediate image with LABEL build-image={{ num1 }}{{ num2 }}
@@ -57,17 +58,17 @@
 
   - name: Create source directory for app image
     file:
-      path: ../docker/application/maven
+      path: "{{ project_basedir }}/src/main/docker/application/maven/"
       state: directory
 
   - name: Create a copy of platform zip file into application docker image work directory
     copy:
-      src: ../../../target/{{ projectId }}-{{ projectId_ver }}-ep-application.zip
-      dest: ../docker/application/maven/{{ projectId }}-{{ projectId_ver }}.zip
+      src: "{{ project_basedir }}/target/{{ projectId }}-{{ projectId_ver }}-ep-application.zip"
+      dest: "{{ project_basedir }}/src/main/docker/application/maven/{{ projectId }}-{{ projectId_ver }}.zip"
 
   - name: Update dockerfile before building app image
     replace:
-      path: ../docker/application/Dockerfile
+      path: "{{ project_basedir }}/src/main/docker/application/Dockerfile"
       regexp: "{{ item.search }}"
       replace: "{{ item.replace }}"
     with_items:
@@ -79,7 +80,7 @@
   - name: Building StreamBase application image
     docker_image:
       build:
-        path: ../docker/application
+        path: "{{ project_basedir }}/src/main/docker/application/"
         pull: no
       name: "docker/{{ projectId }}"
       repository: "docker/{{ projectId }}"
@@ -88,7 +89,7 @@
 
   - name: Clean up work directory for application image
     file:
-      path: ../docker/application/maven
+      path: "{{ project_basedir }}/src/main/docker/application/maven/"
       state: absent
       
   - name: Create example.com network
