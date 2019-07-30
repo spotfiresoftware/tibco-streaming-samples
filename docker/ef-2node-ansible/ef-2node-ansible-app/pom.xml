@@ -45,7 +45,7 @@
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
-        <artifactId>ep-application-docker</artifactId>
+        <artifactId>ep-application-docker-samples</artifactId>
         <version>[10.5.0-SNAPSHOT,99.99.99)</version>
         <relativePath/>
     </parent>
@@ -66,20 +66,8 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <!-- use mvn -P uml install to re-generate svg from source ( then commit ) -->
-        <profile>
-            <id>uml</id>
-            <build>
-                <plugins>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-    
     <build>
         <plugins>
-
             <plugin>
                 <groupId>com.tibco.ep</groupId>
                 <artifactId>ep-maven-plugin</artifactId>
@@ -126,10 +114,8 @@
                                 <failOnAnsibleError>true</failOnAnsibleError>
                                 <extraVars>
                         	   <variable>platform=platform_linuxx86_64</variable>
-<!--                        	   <variable>sbrt_ver={sbrt.version}</variable>   -->
-                        	   <variable>sbrt_ver=10.5.0-SNAPSHOT</variable>
-                        	   <variable>projectId=ef-2node-ansible-app</variable>
-<!--				   <variable>projectId=${project.artifactId</variable>    -->
+                        	   <variable>sbrt_ver=${sbrt.version}</variable>   
+				   <variable>projectId=${project.artifactId}</variable> 
 				   <variable>projectId_ver=${project.version}</variable>
     				   <variable>project_basedir=${project.basedir}</variable>
                                 </extraVars>

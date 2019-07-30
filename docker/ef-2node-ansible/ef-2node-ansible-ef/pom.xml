@@ -50,9 +50,4 @@
         <relativePath/>
     </parent>
 
-    <build>
-        <plugins>
-        </plugins>
-    </build>
-
 </project>
