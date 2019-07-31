@@ -9,38 +9,32 @@
 
   - name: Create work directory for base image
     file:
-      path: "{{ project_basedir }}/src/main/docker/base/maven"
+      path: "{{ project_build_directory }}/docker/base/maven"
       state: directory
 
   - name: Copy platform.zip file into work directory
     copy:
       src:  "{{ project_basedir }}/target/dependencies/{{ platform }}.zip"
-      dest: "{{ project_basedir }}/src/main/docker/base/maven/"
+      dest: "{{ project_build_directory }}/docker/base/maven/"
 
   - name: Copy start-node script to base image work directory
     copy:
       src:  "{{ project_basedir }}/src/main/docker/base/start-node"
-      dest: "{{ project_basedir }}/src/main/docker/base/maven/"
-
-
-  - name: Generate id for itermediate image - custom label
-    set_fact:
-      num1: "{{ 1000 | random(1,2) }}"
-      num2: "{{ 1000 | random(2,2) }}"
+      dest: "{{ project_build_directory }}/docker/base/maven/"
 
   - name: Update dockerfile before building base image
     replace:
-      path: "{{ project_basedir }}/src/main/docker/base/Dockerfile"
+      path: "{{ project_build_directory }}/docker/base/Dockerfile"
       regexp: "{{ item.search }}"
       replace: "{{ item.replace }}"
     with_items:
-      - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ num1 }}{{ num2 }}" }
+      - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ projectId_ver }}" }
       - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }   
 
   - name: Building SB base image - sbrt-base
     docker_image:
       build:
-        path: "{{ project_basedir }}/src/main/docker/base/"
+        path: "{{ project_build_directory }}/docker/base/"
         pull: no
       push: no
       name: sbrt-base
@@ -50,37 +44,37 @@
 
   - name: Clean up work directory for base image
     file:
-      path: "{{ project_basedir }}/src/main/docker/base/maven/"
+      path: "{{ project_build_directory }}/docker/base/maven"
       state: absent
 
-  - name: Remove itermediate image with LABEL build-image={{ num1 }}{{ num2 }}
-    shell: docker image prune --filter label=build-image={{ num1 }}{{ num2 }} -f
+  - name: Remove itermediate image with LABEL build-image={{ projectId_ver }}
+    shell: docker image prune --filter label=build-image={{ projectId_ver }} -f
 
   - name: Create source directory for app image
     file:
-      path: "{{ project_basedir }}/src/main/docker/application/maven/"
+      path: "{{ project_build_directory }}/docker/application/maven/"
       state: directory
 
   - name: Create a copy of platform zip file into application docker image work directory
     copy:
-      src: "{{ project_basedir }}/target/{{ projectId }}-{{ projectId_ver }}-ep-application.zip"
-      dest: "{{ project_basedir }}/src/main/docker/application/maven/{{ projectId }}-{{ projectId_ver }}.zip"
+      src:  "{{ project_basedir }}/target/{{ projectId }}-{{ projectId_ver }}-ep-application.zip"
+      dest: "{{ project_build_directory }}/docker/application/maven/{{ projectId }}-{{ projectId_ver }}.zip"
 
   - name: Update dockerfile before building app image
     replace:
-      path: "{{ project_basedir }}/src/main/docker/application/Dockerfile"
+      path: "{{ project_build_directory }}/docker/application/Dockerfile"
       regexp: "{{ item.search }}"
       replace: "{{ item.replace }}"
     with_items:
       - { search: '(^FROM\s)(.*)$', replace: "FROM sbrt-base:{{ sbrt_ver }}" }
       - { search: '(^###Note:\s)(.*)$', replace: '###Note: FROM statement build by Ansible playbook' }
-      - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ num1 }}{{ num2 }}" }
+      - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ projectId_ver }}" }
       - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }   
     
   - name: Building StreamBase application image
     docker_image:
       build:
-        path: "{{ project_basedir }}/src/main/docker/application/"
+        path: "{{ project_build_directory }}/docker/application/"
         pull: no
       name: "docker/{{ projectId }}"
       repository: "docker/{{ projectId }}"
@@ -89,9 +83,11 @@
 
   - name: Clean up work directory for application image
     file:
-      path: "{{ project_basedir }}/src/main/docker/application/maven/"
+      path: "{{ project_build_directory }}/docker/application/maven/"
       state: absent
       
+#### Test tasks
+
   - name: Create example.com network
     docker_network:
       name: example.com
@@ -141,6 +137,8 @@
   - name:  Node B
     debug: var=NodeBresults.stdout_lines
 
+### Stop and remove comatiners tasks
+
   - name: Stop and remove container A
     docker_container:
       name: A.{{ projectId }}
@@ -156,16 +154,19 @@
       name: example.com
       state: absent
 
+
+### Removing docker images build in this playbook
+
   - name: Platform check
     shell: uname
     ignore_errors: yes
     register: platform_results
 
   - name: Remove Docker images [Linux]
-    shell: docker images --filter label=build-image={{ num1 }}{{ num2 }} | awk '{print $3}' | tail -n +2 | xargs -r --no-run-if-empty docker rmi 
+    shell: docker images --filter label=build-image={{ projectId_ver }} | awk '{print $3}' | tail -n +2 | xargs -r --no-run-if-empty docker rmi 
     when: platform_results.stdout == 'Linux'
 
   - name: Remove Docker images 
-    shell: docker images --filter label=build-image={{ num1 }}{{ num2 }} | awk '{print $3}' | tail -n +2 | xargs docker rmi 
+    shell: docker images --filter label=build-image={{ projectId_ver }} | awk '{print $3}' | tail -n +2 | xargs docker rmi 
     when: platform_results.stdout != 'Linux'
 
