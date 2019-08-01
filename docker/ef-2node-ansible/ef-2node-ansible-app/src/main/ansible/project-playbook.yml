@@ -26,6 +26,12 @@
       - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ projectId_ver }}" }
       - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }   
 
+  - name: Remove docker image if exist from previous build
+    docker_image:
+      state: absent
+      name: sbrt-base
+      tag: "{{ sbrt_ver }}"
+
   - name: Building SB base image - sbrt-base
     docker_image:
       build:
@@ -66,6 +72,12 @@
       - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ projectId_ver }}" }
       - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }   
     
+  - name: Remove docker image if exist from previous build
+    docker_image:
+      state: absent
+      name: "docker/{{ projectId }}"
+      tag: "{{ projectId_ver }}"
+
   - name: Building StreamBase application image
     docker_image:
       build:
