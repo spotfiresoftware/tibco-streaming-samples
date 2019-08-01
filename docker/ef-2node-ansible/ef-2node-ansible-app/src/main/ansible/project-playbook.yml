@@ -2,11 +2,6 @@
 - name: StreamBase create base and application docker image based on Centos7
   hosts: localhost
   tasks:
-  - name: pull Centos image
-    docker_image:
-      name: centos:7
-      source: pull
-
   - name: Create work directory for base image
     file:
       path: "{{ project_build_directory }}/docker/base/maven"
@@ -86,12 +81,13 @@
       path: "{{ project_build_directory }}/docker/application/maven/"
       state: absent
       
-#### Test tasks
+#### Test tasks - skipTests set to true
 
   - name: Create example.com network
     docker_network:
       name: example.com
       state: present
+    when: skipTests == 'false'
       
   - name: Start container A.{{ projectId }}
     docker_container:
@@ -105,9 +101,11 @@
       env:
         NODENAME: A.{{ projectId }}
       state: started
+    when: skipTests == 'false'
 
   - name: Waiting for Node A to start
     shell: until docker logs A.{{ projectId }} | grep -q "COMMAND FINISHED"; do sleep 1; done
+    when: skipTests == 'false'
 
   - name: Start container B.{{ projectId }}
     docker_container:
@@ -121,21 +119,27 @@
       env:
         NODENAME: B.{{ projectId }}
       state: started
+    when: skipTests == 'false'
 
   - name: Waiting for Node B to start
     shell: until docker logs B.{{ projectId }} | grep -q "COMMAND FINISHED"; do sleep 1; done
+    when: skipTests == 'false'
 
   - name: Run epadmin command on Node A
     shell: docker exec A.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
     register: NodeAresults
+    when: skipTests == 'false'
   - name: Node A
     debug: var=NodeAresults.stdout_lines
+    when: skipTests == 'false'
 
   - name: Run epadmin command on Node B
     shell: docker exec B.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
     register: NodeBresults
+    when: skipTests == 'false'
   - name:  Node B
     debug: var=NodeBresults.stdout_lines
+    when: skipTests == 'false'
 
 ### Stop and remove comatiners tasks
 
@@ -143,17 +147,19 @@
     docker_container:
       name: A.{{ projectId }}
       state: absent
+    when: skipTests == 'false'
 
   - name: Stop and remove container B
     docker_container:
       name: B.{{ projectId }}
       state: absent
+    when: skipTests == 'false'
 
   - name: Remove example.com network
     docker_network:
       name: example.com
       state: absent
-
+    when: skipTests == 'false'
 
 ### Removing docker images build in this playbook
 
@@ -164,9 +170,10 @@
 
   - name: Remove Docker images [Linux]
     shell: docker images --filter label=build-image={{ projectId_ver }} | awk '{print $3}' | tail -n +2 | xargs -r --no-run-if-empty docker rmi 
-    when: platform_results.stdout == 'Linux'
+    when: platform_results.stdout == 'Linux' and skipTests == 'false'
 
   - name: Remove Docker images 
     shell: docker images --filter label=build-image={{ projectId_ver }} | awk '{print $3}' | tail -n +2 | xargs docker rmi 
-    when: platform_results.stdout != 'Linux'
+    when: platform_results.stdout != 'Linux' and  skipTests == 'false'
+
 

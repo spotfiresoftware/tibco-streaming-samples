@@ -130,8 +130,8 @@
 		               <goal>playbook</goal>
 		           </goals>
 		           <configuration>
-                                <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook>
-                                <promoteDebugAsInfo>true</promoteDebugAsInfo>
+                                <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
+                                <promoteDebugAsInfo>true</promoteDebugAsInfo> 
                                 <failOnAnsibleError>true</failOnAnsibleError>
                                 <extraVars>
                         	   <variable>platform=platform_linuxx86_64</variable>
@@ -140,7 +140,7 @@
 				   <variable>projectId_ver=${project.version}</variable>
     				   <variable>project_basedir=${project.basedir}</variable>
     				   <variable>project_build_directory=${project.build.directory}</variable>
-    				   <variable>project_skipTests=${project.skipTests}</variable>
+    				   <variable>skipTests=${skipTests}</variable>
                                 </extraVars>
                            </configuration>
 		     </execution>
