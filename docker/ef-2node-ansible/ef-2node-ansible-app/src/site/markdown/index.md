@@ -178,13 +178,11 @@ installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect
 Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade; or Run As shortcut.  Tests can
 be skipped if required by ticking the **Skip tests**. It is important to add **PATH** variable under Environment tab with value: **/bin:/usr/bin:/usr/local/bin:/usr/sbin**. Also in this place **TIBCO_EP_HOME** path can be set pointing to the working directory for this build project.
 
-![maven](images/studio-build.gif)
+![maven](images/studio-conf-ansible.jpg)
 
-The [Docker tooling](https://marketplace.eclipse.org/content/eclipse-docker-tooling) eclipse plugin
-( requires [TM Terminal](https://marketplace.eclipse.org/content/tm-terminal) ) can be used to start and
-manage containers :
+Tasks from ansible playbook will show up on a console tab.
 
-![maven](images/studio-run.gif)
+![maven](images/studio-run-ansible.jpg)
 
 <a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
 
@@ -192,7 +190,141 @@ manage containers :
 
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system :
 
-![maven](images/maven.gif)
+```
+[INFO] PLAY [StreamBase create base and application docker image based on Centos7] ****
+[INFO] 
+[INFO] TASK [Gathering Facts] *********************************************************
+[INFO] ok: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Create work directory for base image] ************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Copy platform.zip file into work directory] ******************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Copy start-node script to base image work directory] *********************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Update dockerfile before building base image] ****************************
+[INFO] changed: [127.0.0.1] => (item={u'search': u'(^LABEL build-image=)(.*)$', u'replace': u'LABEL build-image=1.0.0'})
+[INFO] ok: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': u'###Note: LABEL statement build by Ansible playbook'})
+[INFO] 
+[INFO] TASK [Remove docker image if exist from previous build] ************************
+[INFO] ok: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Building SB base image - sbrt-base] **************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Clean up work directory for base image] **********************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Remove itermediate image with LABEL build-image=1.0.0] *******************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Create source directory for app image] ***********************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Create a copy of platform zip file into application docker image work directory] ***
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Update dockerfile before building app image] *****************************
+[INFO] ok: [127.0.0.1] => (item={u'search': u'(^FROM\\s)(.*)$', u'replace': u'FROM sbrt-base:10.5.0-SNAPSHOT'})
+[INFO] changed: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': u'###Note: FROM statement build by Ansible playbook'})
+[INFO] changed: [127.0.0.1] => (item={u'search': u'(^LABEL build-image=)(.*)$', u'replace': u'LABEL build-image=1.0.0'})
+[INFO] changed: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': u'###Note: LABEL statement build by Ansible playbook'})
+[INFO] 
+[INFO] TASK [Remove docker image if exist from previous build] ************************
+[INFO] ok: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Building StreamBase application image] ***********************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Clean up work directory for application image] ***************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Create example.com network] **********************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Start container A.ef-2node-ansible-app] **********************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Waiting for Node A to start] *********************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Start container B.ef-2node-ansible-app] **********************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Waiting for Node B to start] *********************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Run epadmin command on Node A] *******************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Node A] ******************************************************************
+[INFO] ok: [127.0.0.1] => 
+[INFO]   NodeAresults.stdout_lines:
+[INFO]   - '[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app'
+[INFO]   - '[A.ef-2node-ansible-app] Network Address = IPv4:B.example.com:5558,IPv4:B.example.com:5557'
+[INFO]   - '[A.ef-2node-ansible-app] Current State = Up'
+[INFO]   - '[A.ef-2node-ansible-app] Last State Change = 2019-08-02 14:38:37'
+[INFO]   - '[A.ef-2node-ansible-app] Number of Connections = 3'
+[INFO]   - '[A.ef-2node-ansible-app] Number of Queued PDUs = 0'
+[INFO]   - '[A.ef-2node-ansible-app] Discovered = Dynamic'
+[INFO]   - '[A.ef-2node-ansible-app] Location Code = 7382436235611343951'
+[INFO]   - '[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app'
+[INFO]   - '[B.ef-2node-ansible-app] Network Address = IPv4:A.example.com:5558,IPv4:A.example.com:5557'
+[INFO]   - '[B.ef-2node-ansible-app] Current State = Up'
+[INFO]   - '[B.ef-2node-ansible-app] Last State Change = 2019-08-02 14:38:37'
+[INFO]   - '[B.ef-2node-ansible-app] Number of Connections = 3'
+[INFO]   - '[B.ef-2node-ansible-app] Number of Queued PDUs = 0'
+[INFO]   - '[B.ef-2node-ansible-app] Discovered = Dynamic'
+[INFO]   - '[B.ef-2node-ansible-app] Location Code = 11636435185532938412'
+[INFO] 
+[INFO] TASK [Run epadmin command on Node B] *******************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Node B] ******************************************************************
+[INFO] ok: [127.0.0.1] => 
+[INFO]   NodeBresults.stdout_lines:
+[INFO]   - '[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app'
+[INFO]   - '[B.ef-2node-ansible-app] Network Address = IPv4:A.example.com:5558,IPv4:A.example.com:5557'
+[INFO]   - '[B.ef-2node-ansible-app] Current State = Up'
+[INFO]   - '[B.ef-2node-ansible-app] Last State Change = 2019-08-02 14:38:37'
+[INFO]   - '[B.ef-2node-ansible-app] Number of Connections = 3'
+[INFO]   - '[B.ef-2node-ansible-app] Number of Queued PDUs = 0'
+[INFO]   - '[B.ef-2node-ansible-app] Discovered = Dynamic'
+[INFO]   - '[B.ef-2node-ansible-app] Location Code = 11636435185532938412'
+[INFO]   - '[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app'
+[INFO]   - '[A.ef-2node-ansible-app] Network Address = IPv4:B.example.com:5558,IPv4:B.example.com:5557'
+[INFO]   - '[A.ef-2node-ansible-app] Current State = Up'
+[INFO]   - '[A.ef-2node-ansible-app] Last State Change = 2019-08-02 14:38:37'
+[INFO]   - '[A.ef-2node-ansible-app] Number of Connections = 3'
+[INFO]   - '[A.ef-2node-ansible-app] Number of Queued PDUs = 0'
+[INFO]   - '[A.ef-2node-ansible-app] Discovered = Dynamic'
+[INFO]   - '[A.ef-2node-ansible-app] Location Code = 7382436235611343951'
+[INFO] 
+[INFO] TASK [Stop and remove container A] *********************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Stop and remove container B] *********************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Remove example.com network] **********************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Platform check] **********************************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Remove Docker images [Linux]] ********************************************
+[INFO] skipping: [127.0.0.1]
+[INFO] 
+[INFO] TASK [Remove Docker images] ****************************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+[INFO] PLAY RECAP *********************************************************************
+[INFO] 127.0.0.1                  : ok=29   changed=24   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+```
 
 <a name="example-docker-commands"></a>
 
@@ -204,7 +336,15 @@ Use the [docker network](https://docs.docker.com/engine/reference/network/) comm
 
 ```
 $ docker network create example.com
-03961870a96df30e7e20cf54a3c339b6d7a1e0b344d0833f4c7f88dfaba76138
+cc384acf3f6298253df72c61b8afcb27c7278a85d57e7c3ca5c907265fc0a30f
+```
+
+Network created with ansible task :
+```
+- name: Create example.com network
+    docker_network:
+        name: example.com
+        state: present
 ```
 
 ### Start the containers
@@ -213,15 +353,66 @@ Use the [docker run](https://docs.docker.com/engine/reference/run/) command.  In
 
 * **--detach** - run in the background
 * **--hostname=A.example.com --network-alias=A.example.com --network=example.com** - set the container hostname and network name. This must match the docker network name and the [Trusted hosts HOCON configuration](../../main/configurations/security.conf)
-* **--name=A.ef-2node-app** - container name
-* **--env=NODENAME=A.ef-2node-app** - node name
-* **docker/ef-2node-app:1.0.0** - Docker image name
+* **--name=A.ef-2node-ansible-app** - container name
+* **--env=NODENAME=A.ef-2node-ansible-app** - node name
+* **docker/ef-2node-ansible-app:1.0.0** - Docker image name
 
 ```shell
-$ docker run --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-app --network=example.com --env=NODENAME=A.ef-2node-app docker/ef-2node-app:1.0.0
-d8d73429fa8097d313b95b64f96aaf5c09a8bae385429d84858c1aeaa2753e05
-$ docker run --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-app --network=example.com --env=NODENAME=B.ef-2node-app docker/ef-2node-app:1.0.0
-6f3053e69eeeda61ae48c98bbcd037aae60e7555570cf810e7de856d550d66bc
+$ docker run --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-ansible-app --network=example.com --env=NODENAME=A.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
+156a2b2233f3b0fe987bddb9678c8dc1abf08a4ac6eb6fb0cd5e61f6478d8e35
+$ docker run --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-ansible-app --network=example.com --env=NODENAME=B.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
+6a1bb0aed2b9e97483aa1e0a290562a534815c447b72c8bc8207667eb1f2e0c4
+```
+
+Ansible tasks starting docker container A with options :
+```
+- name: Start container A.{{ projectId }}
+    docker_container:
+        name: A.{{ projectId }}
+        image: docker/{{ projectId }}:{{ projectId_ver }}
+        hostname: A.example.com
+        networks: 
+          - name: example.com
+            aliases: 
+              - A.example.com
+        env:
+          NODENAME: A.{{ projectId }}
+        state: started
+    when: skipTests == 'false'
+``` 
+* variable and values passed by maven plugin to ansible playbook
+- {{ projectId }} == ef-2node-ansible-app 
+- {{ projectId_ver }} == 1.0.0
+
+Ansible plugin in pom.xml file
+```
+            <plugin>
+                 <groupId>co.escapeideas.maven</groupId>
+                 <artifactId>ansible-maven-plugin</artifactId>
+                 <version>1.3.0</version>
+                 <executions>
+                   <execution>
+                       <id>ansible-playbook</id>
+                           <goals>
+                               <goal>playbook</goal>
+                           </goals>
+                           <configuration>
+                                <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
+                                <promoteDebugAsInfo>true</promoteDebugAsInfo> 
+                                <failOnAnsibleError>true</failOnAnsibleError>
+                                <extraVars>
+                                   <variable>platform=platform_linuxx86_64</variable>
+                                   <variable>sbrt_ver=${sbrt.version}</variable>   
+                                   <variable>projectId=${project.artifactId}</variable> 
+                                   <variable>projectId_ver=${project.version}</variable>
+                                   <variable>project_basedir=${project.basedir}</variable>
+                                   <variable>project_build_directory=${project.build.directory}</variable>
+                                   <variable>skipTests=${skipTests}</variable>
+                                </extraVars>
+                           </configuration>
+                     </execution>
+                  </executions>
+            </plugin>
 ```
 
 ### View the running containers
@@ -230,9 +421,9 @@ Use the [docker ps](https://docs.docker.com/engine/reference/ps/) command :
 
 ```shell
 $ docker ps
-CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS              PORTS               NAMES
-6f3053e69eee        docker/ef-2node-app:1.0.0   "/bin/sh -c ${PRODUC…"   5 minutes ago       Up 4 minutes                            B.ef-2node-app
-d8d73429fa80        docker/ef-2node-app:1.0.0   "/bin/sh -c ${PRODUC…"   5 minutes ago       Up 5 minutes                            A.ef-2node-app
+CONTAINER ID        IMAGE                               COMMAND                  CREATED             STATUS              PORTS               NAMES
+6a1bb0aed2b9        docker/ef-2node-ansible-app:1.0.0   "/bin/sh -c ${PRODUC…"   22 seconds ago      Up 21 seconds                           B.ef-2node-ansible-app
+156a2b2233f3        docker/ef-2node-ansible-app:1.0.0   "/bin/sh -c ${PRODUC…"   48 seconds ago      Up 47 seconds                           A.ef-2node-ansible-app
 ```
 
 ### View the container console logs
@@ -240,67 +431,53 @@ d8d73429fa80        docker/ef-2node-app:1.0.0   "/bin/sh -c ${PRODUC…"   5 min
 Use the [docker logs](https://docs.docker.com/engine/reference/commandline/logs/) command :
 
 ```shell
-$ docker logs A.ef-2node-app
-[A.ef-2node-app] 	Installing node
-[A.ef-2node-app] 		PRODUCTION executables
-[A.ef-2node-app] 		Memory shared memory
-[A.ef-2node-app] 		4 concurrent allocation segments
-[A.ef-2node-app] 		Host name A.example.com
-[A.ef-2node-app] 		Container tibco/sb
-[A.ef-2node-app] 		Starting container services
-[A.ef-2node-app] 		Loading node configuration
-[A.ef-2node-app] 		Auditing node security
-[A.ef-2node-app] 		Deploying application
-[A.ef-2node-app] 			Engine default-engine-for-com.tibco.ep.samples.docker.ef-2node-ef
-[A.ef-2node-app] 		Application deployed
-[A.ef-2node-app] 		Administration port is 2000
-[A.ef-2node-app] 		Discovery Service running on port 54321
-[A.ef-2node-app] 		Service name is A.ef-2node-app
-[A.ef-2node-app] 	Node installed
-[A.ef-2node-app] 	Starting node
-[A.ef-2node-app] 		Engine application::default-engine-for-com.tibco.ep.samples.docker.ef-2node-ef started
-[A.ef-2node-app] 		Loading node configuration
-[A.ef-2node-app] 		Auditing node security
-[A.ef-2node-app] 		Host name A.example.com
-[A.ef-2node-app] 		Administration port is 2000
-[A.ef-2node-app] 		Discovery Service running on port 54321
-[A.ef-2node-app] 		Service name is A.ef-2node-app
-[A.ef-2node-app] 	Node started
+$ docker logs A.ef-2node-ansible-app
+[A.ef-2node-ansible-app] 	Installing node
+[A.ef-2node-ansible-app] 		PRODUCTION executables
+[A.ef-2node-ansible-app] 		Memory shared memory
+[A.ef-2node-ansible-app] 		4 concurrent allocation segments
+[A.ef-2node-ansible-app] 		Host name A.example.com
+[A.ef-2node-ansible-app] 		Container tibco/sb
+[A.ef-2node-ansible-app] 		Starting container services
+[A.ef-2node-ansible-app] 		Loading node configuration
+[A.ef-2node-ansible-app] 		Auditing node security
+[A.ef-2node-ansible-app] 		Deploying application
+[A.ef-2node-ansible-app] 			Engine default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-ef
+[A.ef-2node-ansible-app] 		Application deployed
+[A.ef-2node-ansible-app] 		Administration port is 2000
+[A.ef-2node-ansible-app] 		Discovery Service running on port 54321
+[A.ef-2node-ansible-app] 		Service name is A.ef-2node-ansible-app
+[A.ef-2node-ansible-app] 	Node installed
+[A.ef-2node-ansible-app] 	Starting node
+[A.ef-2node-ansible-app] 		Engine application::default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-ef started
+[A.ef-2node-ansible-app] 		Loading node configuration
+[A.ef-2node-ansible-app] 		Auditing node security
+[A.ef-2node-ansible-app] 		Host name A.example.com
+[A.ef-2node-ansible-app] 		Administration port is 2000
+[A.ef-2node-ansible-app] 		Discovery Service running on port 54321
+[A.ef-2node-ansible-app] 		Service name is A.ef-2node-ansible-app
+[A.ef-2node-ansible-app] 	Node started
 COMMAND FINISHED
 ```
 
-
 ### Include application logs to the container logs
 
-To include the application logs to the container console logs, add the following file as **src/main/resources/logback.xml** in the application maven module :
+A src/main/resources/logback.xml file is included in the application maven module to share application logs to docker console.
 
-```xml
-<configuration>
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %10.10thread %-5level %20.20logger{5} : %msg%n</pattern>
-        </encoder>
-    </appender>
-    <root level="INFO">
-        <appender-ref ref="Console" />
-    </root>
-</configuration>
-```
-
-and add the **--tty** option when starting the container :
+To make use of this add the --tty option when starting the container:
 
 ```shell
-$ docker run --tty --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-app --network=example.com --env=NODENAME=A.ef-2node-app docker/ef-2node-app:1.0.0
-d8d73429fa8097d313b95b64f96aaf5c09a8bae385429d84858c1aeaa2753e05
-$ docker run --tty --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-app --network=example.com --env=NODENAME=B.ef-2node-app docker/ef-2node-app:1.0.0
-6f3053e69eeeda61ae48c98bbcd037aae60e7555570cf810e7de856d550d66bc
+$ docker run --tty --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-ansible-app --network=example.com --env=NODENAME=A.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
+f884cd838acbdb4be46055d303121e1e09387fb79139324845f652cff51a7ec6
+$ docker run --tty --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-ansible-app --network=example.com --env=NODENAME=B.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
+eef872633e6f8bcd4b1b05525ef918cf0453b5fce8702f7ebdd3329b75d5f2ed
 ```
 
 ```shell
 $ docker logs A.ef-2node-app
 ...
-14:26:29.000        222 INFO  t.e.d.h.distribution : Node B.ef-2node-app has new interface: 'IPv4:B.example.com:38290,IPv4:B.example.com:38289, old interface: 'IPv4:B.example.com:38289'.
-14:26:33.188 adPool - 1 INFO  StreamBaseHTTPServer : sbd at A.example.com:10000; pid=165; version=10.4.0_e8c1cd91cb86ef9bc5f543e75582ef26f4ea36ca; Listening
+20:04:05.075 adPool - 1 INFO  StreamBaseHTTPServer : sbd at A.example.com:10000; pid=168; version=10.5.0-SNAPSHOT_a9fed4da866b2db57849c1d6d81c1aec1ba07352; Listening
+20:04:32.000        280 INFO  t.e.d.h.distribution : Node B.ef-2node-ansible-app has new interface: 'IPv4:B.example.com:5558,IPv4:B.example.com:5557, old interface: 'IPv4:B.example.com:5557'
 ```
 
 ### Run epadmin commands
@@ -308,23 +485,60 @@ $ docker logs A.ef-2node-app
 Use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command on one of the containers :
 
 ```shell
-$ docker exec A.ef-2node-app epadmin --servicename=ef-2node-app display cluster
-[A.ef-2node-app] Node Name = B.ef-2node-app
-[A.ef-2node-app] Network Address = IPv4:B.example.com:62155,IPv4:B.example.com:62154
-[A.ef-2node-app] Current State = Up
-[A.ef-2node-app] Last State Change = 2018-10-25 15:49:39
-[A.ef-2node-app] Number of Connections = 4
-[A.ef-2node-app] Number of Queued PDUs = 0
-[A.ef-2node-app] Discovered = Dynamic
-[A.ef-2node-app] Location Code = 14691765683598364398
-[B.ef-2node-app] Node Name = A.ef-2node-app
-[B.ef-2node-app] Network Address = IPv4:A.example.com:25580,IPv4:A.example.com:25579
-[B.ef-2node-app] Current State = Up
-[B.ef-2node-app] Last State Change = 2018-10-25 15:49:39
-[B.ef-2node-app] Number of Connections = 3
-[B.ef-2node-app] Number of Queued PDUs = 0
-[B.ef-2node-app] Discovered = Dynamic
-[B.ef-2node-app] Location Code = 7338854036213519437
+$ docker exec A.ef-2node-ansible-app epadmin --servicename=ef-2node-ansible-app display cluster
+[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app
+[A.ef-2node-ansible-app] Network Address = IPv4:B.example.com:5558,IPv4:B.example.com:5557
+[A.ef-2node-ansible-app] Current State = Up
+[A.ef-2node-ansible-app] Last State Change = 2019-08-05 20:04:32
+[A.ef-2node-ansible-app] Number of Connections = 2
+[A.ef-2node-ansible-app] Number of Queued PDUs = 0
+[A.ef-2node-ansible-app] Discovered = Dynamic
+[A.ef-2node-ansible-app] Location Code = 7382436235611343951
+[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app
+[B.ef-2node-ansible-app] Network Address = IPv4:A.example.com:5558,IPv4:A.example.com:5557
+[B.ef-2node-ansible-app] Current State = Up
+[B.ef-2node-ansible-app] Last State Change = 2019-08-05 20:04:34
+[B.ef-2node-ansible-app] Number of Connections = 2
+[B.ef-2node-ansible-app] Number of Queued PDUs = 0
+[B.ef-2node-ansible-app] Discovered = Dynamic
+[B.ef-2node-ansible-app] Location Code = 11636435185532938412
+```
+
+Ansible tasks represents the docker command listed above:
+- run docker command in shell
+- list the results stored in NodeAresults veriable
+```
+- name: Run epadmin command on Node A
+    shell: docker exec A.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
+    register: NodeAresults
+    
+- name: Node A
+    debug: var=NodeAresults.stdout_lines
+```
+```
+[INFO] TASK [Run epadmin command on Node A] *******************************************
+[INFO] changed: [127.0.0.1]
+[INFO] 
+
+[INFO] TASK [Node A] ******************************************************************
+[INFO] ok: [127.0.0.1] => 
+[INFO]   NodeAresults.stdout_lines:
+[INFO]   - '[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app'
+[INFO]   - '[A.ef-2node-ansible-app] Network Address = IPv4:B.example.com:5558,IPv4:B.example.com:5557'
+[INFO]   - '[A.ef-2node-ansible-app] Current State = Up'
+[INFO]   - '[A.ef-2node-ansible-app] Last State Change = 2019-08-02 14:38:37'
+[INFO]   - '[A.ef-2node-ansible-app] Number of Connections = 3'
+[INFO]   - '[A.ef-2node-ansible-app] Number of Queued PDUs = 0'
+[INFO]   - '[A.ef-2node-ansible-app] Discovered = Dynamic'
+[INFO]   - '[A.ef-2node-ansible-app] Location Code = 7382436235611343951'
+[INFO]   - '[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app'
+[INFO]   - '[B.ef-2node-ansible-app] Network Address = IPv4:A.example.com:5558,IPv4:A.example.com:5557'
+[INFO]   - '[B.ef-2node-ansible-app] Current State = Up'
+[INFO]   - '[B.ef-2node-ansible-app] Last State Change = 2019-08-02 14:38:37'
+[INFO]   - '[B.ef-2node-ansible-app] Number of Connections = 3'
+[INFO]   - '[B.ef-2node-ansible-app] Number of Queued PDUs = 0'
+[INFO]   - '[B.ef-2node-ansible-app] Discovered = Dynamic'
+[INFO]   - '[B.ef-2node-ansible-app] Location Code = 11636435185532938412'
 ```
 
 ### Log in to the container to check node logs
@@ -332,18 +546,19 @@ $ docker exec A.ef-2node-app epadmin --servicename=ef-2node-app display cluster
 Use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command to run bash :
 
 ```shell
-$ docker exec -it A.ef-2node-app bash
-[tibco@A /]$ cd /var/opt/tibco/streambase/node/A.ef-2node-app/logs/
+$ docker exec -it A.ef-2node-ansible-app bash
+[tibco@A /]$ cd /var/opt/tibco/streambase/node/A.ef-2node-ansible-app/logs/
 [tibco@A logs]$ ls
-System_administration.log  System_swcoordadmin.log  audit.log  bootstrap  deadlock.log  default-engine-for-com.tibco.ep.samples.docker.ef-2node-ef.log
+System_administration.log  System_swcoordadmin.log  audit.log  bootstrap  deadlock.log  default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-ef.log
 ```
 
 Alternatively, use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command to run tail :
 
 ```shell
-$ docker exec A.ef-2node-app tail -f /var/opt/tibco/streambase/node/A.ef-2node-app/logs/default-engine-for-com.tibco.ep.samples.docker.ef-2node-app.log
-2018-10-26 07:46:34.542000+0000 [171:main] INFO  com.tibco.ep.dtm.lifecycle: No user-defined Logback configuration, using product default configuration
+$ docker exec A.ef-2node-ansible-app tail -f /var/opt/tibco/streambase/node/A.ef-2node-ansible-app/logs/default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-app.log
+2019-08-02 14:38:37.542000+0000 [171:main] INFO  com.tibco.ep.dtm.lifecycle: No user-defined Logback configuration, using product default configuration
 ...
+
 ```
 
 ### Stop and remove the containers
@@ -351,8 +566,21 @@ $ docker exec A.ef-2node-app tail -f /var/opt/tibco/streambase/node/A.ef-2node-a
 Use the [docker stop](https://docs.docker.com/engine/reference/commandline/stop/) and [docker rm](https://docs.docker.com/engine/reference/commandline/rm/) commands :
 
 ```shell
-$ docker stop A.ef-2node-app
-$ docker rm A.ef-2node-app
-$ docker stop B.ef-2node-app
-$ docker rm B.ef-2node-app
+$ docker stop A.ef-2node-ansible-app
+$ docker rm A.ef-2node-ansible-app
+$ docker stop B.ef-2node-ansible-app
+$ docker rm B.ef-2node-ansible-app
+```
+
+Ansible tasks corresponds to docker stop and dcoker rm commands listed above
+```
+- name: Stop and remove container A
+    docker_container:
+      name: A.{{ projectId }}
+      state: absent
+    
+- name: Stop and remove container B
+    docker_container:
+      name: B.{{ projectId }}
+      state: absent
 ```
