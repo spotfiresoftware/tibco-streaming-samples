@@ -1,7 +1,8 @@
 # Ansible playbook tasks
 
 
-### Below we have selected ansible playbook tasks with brief description. Variables like {{ projectId }} and {{ projectId_ver }} and others are defined in pom.xml and passed to ansible plugin during maven execution. 
+### Below we have selected ansible playbook tasks with brief description. 
+### Variables like {{ projectId }} and {{ projectId_ver }} and others are defined in pom.xml and passed to ansible plugin during maven execution. 
 
 
 #### *** Task with module copy, you need to define source folder and destination folder
@@ -11,7 +12,7 @@
       src:  "{{ project_basedir }}/target/dependencies/{{ platform }}.zip"
       dest: "{{ project_build_directory }}/docker/base/maven/"
 ```
-##### *** Task with module replace and loop. This is ansible recommended method to customize config/settings/text files during the playbook execution. Removing a string from file in specific path is also available in this module.
+#### *** Task with module replace and loop. This is ansible recommended method to customize config/settings/text files during the playbook execution. Removing a string from file in specific path is also available in this module.
 Search is based on defined regular expressions in the list below which is executed in a loop.  
 ```
 - name: Update dockerfile before building base image
