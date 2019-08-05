@@ -112,7 +112,7 @@ In this sample we have one playbook with set of tasks.
 When executing entire playbook, tasks in first section will prepare work directory and build docker images. Followed by a test section where environment will be set up, docker containers power up with the application nodes, run testa and power off entire environment. The last part will remove docker images created during this playbook execution.
 If you prefer to skip the second and third part of this playbook please check skipTests bos under SB Studio or when in the project folder execute **mvn -DskipTests=true install** in command line.
 
-Please check [this link] (../../site/markdown/playbook-tasks.md) to see a selected Ansible tasks with brief description.
+Please check [this link](../../site/markdown/playbook-tasks.md) to see a selected Ansible tasks with brief description.
 
 
 <a name="containers-and-nodes"></a>
