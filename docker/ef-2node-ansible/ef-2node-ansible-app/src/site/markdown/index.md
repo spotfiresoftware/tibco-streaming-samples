@@ -58,7 +58,7 @@
 This sample describes how to deploy an application archive containing an EventFlow fragment to Docker.
 
 * [Prerequisites](#prerequisites)
-* [Creating an application archive project for Docker from TIBCO StreamBase Studio&trade;](#creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade)
+* [Creating an application archive project for Docker managed by Ansible from TIBCO StreamBase Studio&trade;](#creating-an-application-archive-project-for-docker-managed-by-Ansible-from-tibco-streambase-studio-trade)
 * [Containers and nodes](#containers-and-nodes)
 * [Changes to the default docker configurations](#changes-to-the-default-docker-configurations)
 * [Building and running from TIBCO StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
@@ -72,8 +72,10 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 ## Prerequisites
 
 Docker must first be downloaded and installed - see https://www.docker.com/ for further details.  Any 
-recent version of docker should suffice, but testing was initially with docker 2.0.0.0-mac78 on
-MacOS 10.14.1.
+recent version of docker should suffice, but testing was initially with docker 2.1.0.0 on
+MacOS 10.14 and with docker 18.09.6 on RHEL/Centos 7.6.
+
+Ansible managament binaries must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on both MacOS 10.14 and RHEL/Centos 7.6.
 
 On MacOS, the resources available to docker may need to be increased beyond the default - see
 CPUs and Memory settings on the Advanced tab of Docker preferences.
@@ -82,7 +84,7 @@ CPUs and Memory settings on the Advanced tab of Docker preferences.
 
 <a name="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
 
-## Creating an application archive project for Docker from TIBCO StreamBase Studio&trade;
+## Creating an application archive project for Docker managed by Ansible from TIBCO StreamBase Studio&trade;
 
 TIBCO StreamBase Studio&trade; can generate a project containing the necessary files to build and 
 test a Docker image by selecting **Enable Docker support** when creating an application archive project :
@@ -91,6 +93,7 @@ test a Docker image by selecting **Enable Docker support** when creating an appl
 
 Such a project includes :
 
+* An Ansible [playbook file] (../../main/ansible/project-playbook.yml) with set of tasks divided in three groups: build docker images, test docker images and application, clean (remove docker images build in this playbook).
 * A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO StreamBase runtime
 * A [start-node](../../main/docker/base/start-node) script to start a node
 * An [application Dockerfile](../../main/docker/application/Dockerfile) to build an application image containing the application archive - this is based on the base image
@@ -100,6 +103,17 @@ Such a project includes :
 * [Node deployment configuration](../../main/configurations/defaultnode.conf) that uses the above nodeType
 
 Note that whilst this project will create a simple Docker image, changes to the project may be required for additional behaviours. 
+
+<a name="ansible"></a>
+
+## Ansible
+
+In this sample we have one playbook with set of tasks.
+When executing entire playbook, tasks in first section will prepare work directory and build docker images. Followed by a test section where environment will be set up, docker containers power up with the application nodes, run testa and power off entire environment. The last part will remove docker images created during this playbook execution.
+If you prefer to skip the second and third part of this playbook please check skipTests bos under SB Studio or when in the project folder execute **mvn -DskipTests=true install** in command line.
+
+Please check [this link] (../../site/markdown/playbook-tasks.md) to see a selected Ansible tasks with brief description.
+
 
 <a name="containers-and-nodes"></a>
 
@@ -121,60 +135,41 @@ installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect
 ```xml
     <properties>
         <dockerDomain>example.com</dockerDomain>
-        <skipApplicationDocker>true</skipApplicationDocker>
-        <skipStreamBaseDockerBase>true</skipStreamBaseDockerBase>
-        <skipDockerTests>true</skipDockerTests>
+        <skipApplicationDocker>false</skipApplicationDocker>
+        <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+        <skipDockerTests>false</skipDockerTests>
+        <skipTests>false</skipTests>
     </properties>
     ...
-    <!-- if docker is available, build docker projects -->
-    <profile>
-        <id>Docker in local</id>
-        <activation>
-            <file>
-                <exists>/usr/local/bin/docker</exists>
-            </file>
-        </activation>
-        <properties>
-            <skipApplicationDocker>false</skipApplicationDocker>
-            <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
-            <skipDockerTests>${skipTests}</skipDockerTests>
-        </properties>
-    </profile>
-    <profile>
-        <id>Docker in bin</id>
-        <activation>
-            <file>
-                <exists>/usr/bin/docker</exists>
-            </file>
-        </activation>
-        <properties>
-            <skipApplicationDocker>false</skipApplicationDocker>
-            <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
-            <skipDockerTests>${skipTests}</skipDockerTests>
-        </properties>
-    </profile>
-    <profile>
-        <id>Docker in C:</id>
-        <activation>
-            <file>
-                <exists>C:\Program Files\Docker\Docker\resources\bin\docker.exe</exists>
-            </file>
-        </activation>
-        <properties>
-            <skipApplicationDocker>false</skipApplicationDocker>
-            <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
-            <skipDockerTests>${skipTests}</skipDockerTests>
-        </properties>
-    </profile>
+       <!-- if Ansible is available, run playbook and build docker images -->
+    <profiles>
+	<profile>
+	    <id>Ansible-OSX</id>
+	    <activation>
+		<file>
+		    <exists>/usr/local/bin/ansible-new</exists>
+		</file>
+	    </activation>
+	    <modules>
+    		<module>ef-2node-ansible-ef</module>
+    		<module>ef-2node-ansible-app</module>
+	    </modules>
+	</profile>
+
+	<profile>
+	    <id>Ansible-Linux</id>
+	    <activation>
+		<file>
+		    <exists>/usr/bin/ansible-new</exists>
+		</file>
+	    </activation>
+	    <modules>
+    		<module>ef-2node-ansible-ef</module>
+    		<module>ef-2node-ansible-app</module>
+	    </modules>
+	</profile>
+    </profiles>
 ``` 
-
-and include running **epadmin display cluster** when the nodes are started - this shows if the nodes are connected to each other :
-
-```xml
-    <exec>
-        <postStart>epadmin servicename=A.${project.artifactId} display cluster</postStart>
-    </exec>
-```
 
 <a name="building-and-running-from-tibco-streambase-studio-trade"></a>
 
