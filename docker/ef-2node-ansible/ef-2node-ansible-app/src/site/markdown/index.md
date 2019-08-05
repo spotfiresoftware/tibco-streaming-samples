@@ -384,7 +384,7 @@ Ansible tasks starting docker container A with options :
 - {{ projectId }} == ef-2node-ansible-app 
 - {{ projectId_ver }} == 1.0.0
 
-Ansible plugin in pom.xml file
+Ansible plugin in pom.xml file :
 ```xml
            <plugin>
                  <groupId>co.escapeideas.maven</groupId>
@@ -464,7 +464,7 @@ COMMAND FINISHED
 
 A src/main/resources/logback.xml file is included in the application maven module to share application logs to docker console.
 
-To make use of this add the --tty option when starting the container:
+To make use of this add the --tty option when starting the container :
 
 ```shell
 $ docker run --tty --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-ansible-app --network=example.com --env=NODENAME=A.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
@@ -504,7 +504,7 @@ $ docker exec A.ef-2node-ansible-app epadmin --servicename=ef-2node-ansible-app 
 [B.ef-2node-ansible-app] Location Code = 11636435185532938412
 ```
 
-Ansible tasks represents the docker command listed above:
+Ansible tasks represents the docker command listed above :
 - run docker command in shell
 - list the results stored in NodeAresults veriable
 ```
@@ -572,7 +572,7 @@ $ docker stop B.ef-2node-ansible-app
 $ docker rm B.ef-2node-ansible-app
 ```
 
-Ansible tasks corresponds to docker stop and dcoker rm commands listed above
+Ansible tasks corresponds to docker stop and dcoker rm commands listed above :
 ```
 - name: Stop and remove container A
     docker_container:
