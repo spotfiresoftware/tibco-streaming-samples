@@ -93,7 +93,7 @@ test a Docker image by selecting **Enable Docker support** when creating an appl
 
 Such a project includes :
 
-* An Ansible [playbook file] (../../main/ansible/project-playbook.yml) with set of tasks divided in three groups: build docker images, test docker images and application, clean (remove docker images build in this playbook).
+* An Ansible [playbook file](../../main/ansible/project-playbook.yml) with set of tasks divided in three groups: build docker images, test docker images and application, clean (remove docker images build in this playbook).
 * A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO StreamBase runtime
 * A [start-node](../../main/docker/base/start-node) script to start a node
 * An [application Dockerfile](../../main/docker/application/Dockerfile) to build an application image containing the application archive - this is based on the base image
@@ -147,7 +147,7 @@ installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect
 	    <id>Ansible-OSX</id>
 	    <activation>
 		<file>
-		    <exists>/usr/local/bin/ansible-new</exists>
+		    <exists>/usr/local/bin/ansiblew</exists>
 		</file>
 	    </activation>
 	    <modules>
@@ -160,7 +160,7 @@ installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect
 	    <id>Ansible-Linux</id>
 	    <activation>
 		<file>
-		    <exists>/usr/bin/ansible-new</exists>
+		    <exists>/usr/bin/ansible</exists>
 		</file>
 	    </activation>
 	    <modules>
