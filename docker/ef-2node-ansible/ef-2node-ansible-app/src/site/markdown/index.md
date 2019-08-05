@@ -73,9 +73,9 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 
 Docker must first be downloaded and installed - see https://www.docker.com/ for further details.  Any 
 recent version of docker should suffice, but testing was initially with docker 2.1.0.0 on
-MacOS 10.14 and with docker 18.09.6 on RHEL/Centos 7.6.
+MacOS 10.14.
 
-Ansible managament binaries must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on both MacOS 10.14 and RHEL/Centos 7.6.
+Ansible managament binaries must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS 10.14.
 
 On MacOS, the resources available to docker may need to be increased beyond the default - see
 CPUs and Memory settings on the Advanced tab of Docker preferences.
@@ -176,7 +176,7 @@ installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect
 ## Building and running from TIBCO StreamBase Studio&trade;
 
 Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade; or Run As shortcut.  Tests can
-be skipped if required by ticking the **Skip tests** :
+be skipped if required by ticking the **Skip tests**. It is important to add **PATH** variable under Environment tab with value: **/bin:/usr/bin:/usr/local/bin:/usr/sbin**. Also in this place **TIBCO_EP_HOME** path can be set pointing to the working directory for this build project.
 
 ![maven](images/studio-build.gif)
 
