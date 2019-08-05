@@ -53,7 +53,7 @@
 
 [comment]: # (  POSSIBILITY OF SUCH DAMAGE.                                                  )
 
-# Docker : 2-node EventFlow
+# Ansible-Docker : 2-node EventFlow
 
 This sample describes how to deploy an application archive containing an EventFlow fragment to Docker.
 
@@ -385,8 +385,8 @@ Ansible tasks starting docker container A with options :
 - {{ projectId_ver }} == 1.0.0
 
 Ansible plugin in pom.xml file
-```
-            <plugin>
+```xml
+           <plugin>
                  <groupId>co.escapeideas.maven</groupId>
                  <artifactId>ansible-maven-plugin</artifactId>
                  <version>1.3.0</version>
