@@ -386,33 +386,33 @@ Ansible tasks starting docker container A with options :
 
 Ansible plugin in pom.xml file :
 ```xml
-           <plugin>
-                 <groupId>co.escapeideas.maven</groupId>
-                 <artifactId>ansible-maven-plugin</artifactId>
-                 <version>1.3.0</version>
-                 <executions>
-                   <execution>
-                       <id>ansible-playbook</id>
-                           <goals>
-                               <goal>playbook</goal>
-                           </goals>
-                           <configuration>
-                                <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
-                                <promoteDebugAsInfo>true</promoteDebugAsInfo> 
-                                <failOnAnsibleError>true</failOnAnsibleError>
-                                <extraVars>
-                                   <variable>platform=platform_linuxx86_64</variable>
-                                   <variable>sbrt_ver=${sbrt.version}</variable>   
-                                   <variable>projectId=${project.artifactId}</variable> 
-                                   <variable>projectId_ver=${project.version}</variable>
-                                   <variable>project_basedir=${project.basedir}</variable>
-                                   <variable>project_build_directory=${project.build.directory}</variable>
-                                   <variable>skipTests=${skipTests}</variable>
-                                </extraVars>
-                           </configuration>
-                     </execution>
-                  </executions>
-            </plugin>
+   <plugin>
+        <groupId>co.escapeideas.maven</groupId>
+        <artifactId>ansible-maven-plugin</artifactId>
+        <version>1.3.0</version>
+        <executions>
+             <execution>
+               <id>ansible-playbook</id>
+                   <goals>
+                       <goal>playbook</goal>
+                   </goals>
+                   <configuration>
+                        <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
+                        <promoteDebugAsInfo>true</promoteDebugAsInfo> 
+                        <failOnAnsibleError>true</failOnAnsibleError>
+                        <extraVars>
+                           <variable>platform=platform_linuxx86_64</variable>
+                           <variable>sbrt_ver=${sbrt.version}</variable>   
+                           <variable>projectId=${project.artifactId}</variable> 
+                           <variable>projectId_ver=${project.version}</variable>
+                           <variable>project_basedir=${project.basedir}</variable>
+                           <variable>project_build_directory=${project.build.directory}</variable>
+                           <variable>skipTests=${skipTests}</variable>
+                        </extraVars>
+                   </configuration>
+             </execution>
+          </executions>
+    </plugin>
 ```
 
 ### View the running containers
@@ -474,7 +474,7 @@ eef872633e6f8bcd4b1b05525ef918cf0453b5fce8702f7ebdd3329b75d5f2ed
 ```
 
 ```shell
-$ docker logs A.ef-2node-app
+$ docker logs A.ef-2node-ansible-app
 ...
 20:04:05.075 adPool - 1 INFO  StreamBaseHTTPServer : sbd at A.example.com:10000; pid=168; version=10.5.0-SNAPSHOT_a9fed4da866b2db57849c1d6d81c1aec1ba07352; Listening
 20:04:32.000        280 INFO  t.e.d.h.distribution : Node B.ef-2node-ansible-app has new interface: 'IPv4:B.example.com:5558,IPv4:B.example.com:5557, old interface: 'IPv4:B.example.com:5557'
