@@ -75,7 +75,7 @@ Docker must first be downloaded and installed - see https://www.docker.com/ for 
 recent version of docker should suffice, but testing was initially with docker 2.1.0.0 on
 MacOS 10.14.
 
-Ansible managament binaries must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS 10.14.
+Ansible managament server must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS 10.14.
 
 On MacOS, the resources available to docker may need to be increased beyond the default - see
 CPUs and Memory settings on the Advanced tab of Docker preferences.
@@ -109,8 +109,8 @@ Note that whilst this project will create a simple Docker image, changes to the 
 ## Ansible
 
 In this sample we have one playbook with set of tasks.
-When executing entire playbook, tasks in first section will prepare work directory and build docker images. Followed by a test section where environment will be set up, docker containers power up with the application nodes, run testa and power off entire environment. The last part will remove docker images created during this playbook execution.
-If you prefer to skip the second and third part of this playbook please check skipTests bos under SB Studio or when in the project folder execute **mvn -DskipTests=true install** in command line.
+When executing entire playbook, tasks in first section will prepare work directory and build docker images. Followed by a test section where environment will be set up, docker containers power up with the application nodes, run tests and power off entire environment. The last part will remove docker images created during this playbook execution.
+If you prefer to skip the second and third part of this playbook please check skipTests box under SB Studio or when in the project folder execute **mvn -DskipTests=true install** in command line.
 
 Please check [this link](../../site/markdown/playbook-tasks.md) to see a selected Ansible tasks with brief description.
 
@@ -119,7 +119,7 @@ Please check [this link](../../site/markdown/playbook-tasks.md) to see a selecte
 
 ## Containers and nodes
 
-In this sample we name the docker container as **A.ef-2node-app**,  which hosts the StreamBase node **A.ef-2node-app**, and **B.ef-2node-app**, which hosts the StreamBase node **B.ef-2node-app**.  A Docker network **example.com** connects the nodes together :
+In this sample we name the docker container as **A.ef-2node-ansible-app**,  which hosts the StreamBase node **A.ef-2node-ansible-app**, and **B.ef-2node-ansible-app**, which hosts the StreamBase node **B.ef-2node-app**.  A Docker network **example.com** connects the nodes together :
 
 ![nodes](images/two-node-docker.svg)
 
@@ -129,8 +129,8 @@ The two containers have network access to each other, but not to the docker host
 
 ## Changes to the default docker configurations
 
-In this sample we still want to build the application archive if Docker is not
-installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect if docker is installed :
+In this sample we still want to build the application archive if Ansible is not
+installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect if ansible is installed :
 
 ```xml
     <properties>
@@ -180,7 +180,7 @@ be skipped if required by ticking the **Skip tests**. It is important to add **P
 
 ![maven](images/studio-conf-ansible.jpg)
 
-Tasks from ansible playbook will show up on a console tab.
+Tasks info from ansible playbook will show up on a console tab.
 
 ![maven](images/studio-run-ansible.jpg)
 
@@ -380,7 +380,7 @@ Ansible tasks starting docker container A with options :
         state: started
     when: skipTests == 'false'
 ``` 
-* variable and values passed by maven plugin to ansible playbook
+variable and values passed by maven plugin to ansible playbook
 - {{ projectId }} == ef-2node-ansible-app 
 - {{ projectId_ver }} == 1.0.0
 
@@ -555,7 +555,7 @@ System_administration.log  System_swcoordadmin.log  audit.log  bootstrap  deadlo
 Alternatively, use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command to run tail :
 
 ```shell
-$ docker exec A.ef-2node-ansible-app tail -f /var/opt/tibco/streambase/node/A.ef-2node-ansible-app/logs/default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-app.log
+$ docker exec A.ef-2node-ansible-app tail -f /var/opt/tibco/streambase/node/A.ef-2node-ansible-app/logs/default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-ef.log
 2019-08-02 14:38:37.542000+0000 [171:main] INFO  com.tibco.ep.dtm.lifecycle: No user-defined Logback configuration, using product default configuration
 ...
 
