@@ -1,14 +1,15 @@
 # Ansible-Docker : 2-node EventFlow
 
-This sample describes how to deploy an application archive containing an EventFlow fragment to Docker.
+This sample describes how to deploy an application archive containing an EventFlow fragment to Docker managed by Ansible.
 
 * [Prerequisites](#prerequisites)
 * [Creating an application archive project for Docker managed by Ansible from TIBCO StreamBase Studio&trade;](#creating-an-application-archive-project-for-docker-managed-by-Ansible-from-tibco-streambase-studio-trade)
+* [Ansible part of this project](#ansible-part-of-this-project)
 * [Containers and nodes](#containers-and-nodes)
-* [Changes to the default docker configurations](#changes-to-the-default-docker-configurations)
+* [Changes to the default pom.xml file - profiles](#changes-to-the-default-pom-file-profiles)
 * [Building and running from TIBCO StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
-* [Example docker commands](#example-docker-commands)
+* [Example docker commands and correspond Ansible tasks](#example-docker-commands-and-correspond-ansible-tasks)
 
 See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
 
@@ -25,6 +26,8 @@ Ansible managament server must be installed - see https://docs.ansible.com/ansib
 On MacOS, the resources available to docker may need to be increased beyond the default - see
 CPUs and Memory settings on the Advanced tab of Docker preferences.
 
+All Ansible playbooks are executed based on configuration file and inventory file. Both files are included in the project. Please see more detailed description in [Ansible part of this project paragraph](#ansible-part-of-this-project) below. 
+
 ![resources](images/resources.png)
 
 <a name="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
@@ -36,29 +39,49 @@ test a Docker image by selecting **Enable Docker support** when creating an appl
 
 ![create](images/create.png)
 
-Such a project includes :
+To be able to run this sample in TIBCO StreamBase Studio™ please go to smart import option under menu. For more information please refer to [Using Tibco Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md)
+Below you can find a list of crucial files for this project :
 
 * An Ansible [playbook file](../../main/ansible/project-playbook.yml) with set of tasks divided in three groups: build docker images, test docker images and application, clean (remove docker images build in this playbook).
 * A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO StreamBase runtime
 * A [start-node](../../main/docker/base/start-node) script to start a node
 * An [application Dockerfile](../../main/docker/application/Dockerfile) to build an application image containing the application archive - this is based on the base image
-* Steps in [pom.xml](../../../pom.xml) that uses [fabric8io/docker-maven-plugin](http://dmp.fabric8.io/) to build the Docker image and start Docker containers for basic testing
 * [Trusted hosts HOCON configuration](../../main/configurations/security.conf) so that each container can run epadmin commands on the cluster
 * [Application definition configuration](../../main/configurations/app.conf) that defines nodeType docker to use System V shared memory
 * [Node deployment configuration](../../main/configurations/defaultnode.conf) that uses the above nodeType
 
 Note that whilst this project will create a simple Docker image, changes to the project may be required for additional behaviours. 
 
-<a name="ansible"></a>
+<a name="ansible-part-of-this-project"></a>
 
-## Ansible
+## Ansible part of this project
 
 In this sample we have one playbook with set of tasks.
 When executing entire playbook, tasks in first section will prepare work directory and build docker images. Followed by a test section where environment will be set up, docker containers power up with the application nodes, run tests and power off entire environment. The last part will remove docker images created during this playbook execution.
 If you prefer to skip the second and third part of this playbook please check skipTests box under SB Studio or when in the project folder execute **mvn -DskipTests=true install** in command line.
 
-Please check [playbook tasksk](../../site/markdown/playbook-tasks.md) to see a selected Ansible tasks with brief description.
+In this project, all Ansible files are located in ../src/main/ansible folder.
+```shell
+.
+|── ansible
+│   ├── ansible.cfg
+│   ├── ansible-docker-test-playbook.yml
+│   ├── inventory
+│   └── project-playbook.yml
+```
+Files: 
+- [ansible.cfg](../../main/ansible/ansible.cfg) - contain basic ansible configuration for this project to run locally
+- [inventory](../../main/ansible/inventory) - contain only one - localhost - as a target for all the playbook tasks 
+- [project-playbook.yml](../../main/ansible/project-playbook.yml) - is the main playbook file with all the task
+- [ansible-docker-test-playbook.yml](../../main/ansible/ansible-docker-test-playbook.yml) - this is a one task playbook file. This task will pull centos 7 docker container to your host and can be used to test if your Ansible and docker installation is correct.
 
+The one task ansible playbook can be executed from the current directory via command listed below :
+```shell
+$ ansible-playbook ansible-docker-test-playbook.yml 
+```
+To complete the prerequisites steps, please copy ansible.cfg and inventory files to /etc/ansible/ folder on your host created during the ansible installation.
+
+Check [playbook tasks](../../site/markdown/playbook-tasks.md) to see a selected Ansible tasks with brief description.
 
 <a name="containers-and-nodes"></a>
 
@@ -70,9 +93,9 @@ In this sample we name the docker container as **A.ef-2node-ansible-app**,  whic
 
 The two containers have network access to each other, but not to the docker host.
 
-<a name="changes-to-the-default-docker-configurations"></a>
+<a name="changes-to-the-default-pom-file-profiles"></a>
 
-## Changes to the default docker configurations
+## Changes to the default pom.xml file - profiles
 
 In this sample we still want to build the application archive if Ansible is not
 installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect if ansible is installed :
@@ -136,6 +159,7 @@ Tasks info from ansible playbook will show up on a console tab.
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system :
 
 ```
+...
 [INFO] PLAY [StreamBase create base and application docker image based on Centos7] ****
 [INFO] 
 [INFO] TASK [Gathering Facts] *********************************************************
@@ -268,12 +292,12 @@ Use the [maven](https://maven.apache.org) as **mvn install** to build from the c
 [INFO] 
 [INFO] PLAY RECAP *********************************************************************
 [INFO] 127.0.0.1                  : ok=29   changed=24   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
-
+...
 ```
 
-<a name="example-docker-commands"></a>
+<a name="example-docker-commands-and-correspond-ansible-tasks"></a>
 
-## Example docker commands
+## Example docker commands and correspond Ansible tasks
 
 ### Create the docker network
 
