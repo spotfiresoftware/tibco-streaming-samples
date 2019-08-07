@@ -16,7 +16,7 @@ The samples can also be imported into TIBCO StreamBase Studio&trade; :
 
 ![smartimport](studioimport.gif)
 
-:warning: This does require the **Git integration for Eclipse - auto-import for Eclipse** to be installed - this can
+**Warning:** This does require the **Git integration for Eclipse - auto-import for Eclipse** to be installed - this can
 be installed by :
 
 1.  Help -> Install new software
