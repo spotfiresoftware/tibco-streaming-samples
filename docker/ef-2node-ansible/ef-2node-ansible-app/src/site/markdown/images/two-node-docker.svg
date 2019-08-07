@@ -51,8 +51,8 @@
     /></g
     ><g transform="translate(530,70)"
     ><rect fill="none" x="0.5" width="280" height="228.5" y="10.5" clip-path="url(#clipPath2)"
-      /><text x="50" font-size="14" y="27.8174" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >Container B.ef-2node-app</text
+      /><text x="21" font-size="14" y="27.8174" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Container B.ef-2node-ansible-app</text
       ><text x="51" font-size="14" y="43.6348" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >Hostname B.example.com</text
     ></g
@@ -79,16 +79,16 @@
     /></g
     ><g fill="blue" transform="translate(540,130)" stroke="blue"
     ><rect fill="none" x="0.5" width="258.5" height="58.5" y="0.5" clip-path="url(#clipPath4)"
-      /><text x="55" font-size="14" y="17.8174" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >Node B.ef-2node-app</text
+      /><text x="26" font-size="14" y="17.8174" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Node B.ef-2node-ansible-app</text
     ></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(210,130)" stroke-opacity="0" stroke="rgb(255,255,255)"
     ><rect x="0.5" width="258.5" height="58.5" y="0.5" clip-path="url(#clipPath4)" stroke="none"
     /></g
     ><g fill="blue" transform="translate(210,130)" stroke="blue"
     ><rect fill="none" x="0.5" width="258.5" height="58.5" y="0.5" clip-path="url(#clipPath4)"
-      /><text x="54" font-size="14" y="17.8174" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >Node A.ef-2node-app</text
+      /><text x="26" font-size="14" y="17.8174" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Node A.ef-2node-ansible-app</text
     ></g
     ><g fill="rgb(175,175,175)" fill-opacity="0.4902" transform="translate(200,70)" stroke-opacity="0.4902" stroke="rgb(175,175,175)"
     ><path d="M0.5 10.5 L10.5 0.5 L289 0.5 L289 230.5 L280.5 239 L280.5 10.5 L0.5 10.5" stroke="none" clip-path="url(#clipPath2)"
@@ -105,8 +105,8 @@
     /></g
     ><g transform="translate(200,70)"
     ><rect fill="none" x="0.5" width="280" height="228.5" y="10.5" clip-path="url(#clipPath2)"
-      /><text x="49" font-size="14" y="27.8174" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >Container A.ef-2node-app</text
+      /><text x="20" font-size="14" y="27.8174" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Container A.ef-2node-ansible-app</text
       ><text x="50" font-size="14" y="43.6348" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >Hostname A.example.com</text
     ></g

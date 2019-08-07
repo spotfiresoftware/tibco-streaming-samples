@@ -9,7 +9,7 @@
       <w>290</w>
       <h>240</h>
     </coordinates>
-    <panel_attributes>Container A.ef-2node-app
+    <panel_attributes>Container A.ef-2node-ansible-app
 Hostname A.example.com</panel_attributes>
     <additional_attributes/>
   </element>
@@ -21,7 +21,7 @@ Hostname A.example.com</panel_attributes>
       <w>260</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>Node A.ef-2node-app
+    <panel_attributes>Node A.ef-2node-ansible-app
 fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
@@ -84,7 +84,7 @@ lt=.</panel_attributes>
       <w>260</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>Node B.ef-2node-app
+    <panel_attributes>Node B.ef-2node-ansible-app
 fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
@@ -138,7 +138,7 @@ lt=.</panel_attributes>
       <w>290</w>
       <h>240</h>
     </coordinates>
-    <panel_attributes>Container B.ef-2node-app
+    <panel_attributes>Container B.ef-2node-ansible-app
 Hostname B.example.com</panel_attributes>
     <additional_attributes/>
   </element>
