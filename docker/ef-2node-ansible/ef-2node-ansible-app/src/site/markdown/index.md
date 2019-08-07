@@ -3,7 +3,7 @@
 This sample describes how to deploy an application archive containing an EventFlow fragment to Docker managed by Ansible.
 
 * [Prerequisites](#prerequisites)
-* [Creating an application archive project for Docker managed by Ansible from TIBCO StreamBase Studio&trade;](#creating-an-application-archive-project-for-docker-managed-by-Ansible-from-tibco-streambase-studio-trade)
+* [Run this sample in TIBCO StreamBase Studio&trade;](#run-this-sample-in-tibco-streambase-studio-trade)
 * [Ansible part of this project](#ansible-part-of-this-project)
 * [Containers and nodes](#containers-and-nodes)
 * [Changes to the default pom.xml file - profiles](#changes-to-the-default-pom-file-profiles)
@@ -30,14 +30,9 @@ All Ansible playbooks are executed based on configuration file and inventory fil
 
 ![resources](images/resources.png)
 
-<a name="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
+<a name="run-this-sample-in-tibco-streambase-studio-trade"></a>
 
-## Creating an application archive project for Docker managed by Ansible from TIBCO StreamBase Studio&trade;
-
-TIBCO StreamBase Studio&trade; can generate a project containing the necessary files to build and 
-test a Docker image by selecting **Enable Docker support** when creating an application archive project :
-
-![create](images/create.png)
+## Run this sample in TIBCO StreamBase Studio&trade;
 
 To be able to run this sample in TIBCO StreamBase Studio™ please go to smart import option under menu. For more information please refer to [Using Tibco Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md)
 Below you can find a list of crucial files for this project :
