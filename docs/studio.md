@@ -26,7 +26,13 @@ be installed by :
 
 ## Using TIBCO menu
 
-TBD
+* Use **File -> Load StreamBase Sample**
+* Choose github sample
+* Select **Import Now**
+
+![studiosample](studiosample.gif)
+
+The local github clone can be updated with **Pull from remote repositories now**.
 
 ## Working with multiple projects
 
