@@ -53,7 +53,7 @@ Note that whilst this project will create a simple Docker image, changes to the 
 ## Ansible part of this project
 
 In this sample we have one playbook with set of tasks.
-When executing entire playbook, tasks in first section will prepare work directory and build docker images. Followed by a test section where environment will be set up, docker containers power up with the application nodes, run tests and power off entire environment. The last part will remove docker images created during this playbook execution.
+When executing entire playbook, tasks in first section will build the work directory and build docker images. Followed by a test section where environment will be set up, start a container instance with the application nodes, run tests case and power off entire environment. The last part will remove docker images created during this playbook execution.
 If you prefer to skip the second and third part of this playbook please check skipTests box under SB Studio or when in the project folder execute **mvn -DskipTests=true install** in command line.
 
 In this project, all Ansible files are located in ../src/main/ansible folder.
@@ -343,7 +343,6 @@ Ansible tasks starting docker container A with options :
       env:
         NODENAME: A.{{ projectId }}
       state: started
-  when: skipTests == 'false'
 ``` 
 Variables and values from above task are passed by maven plugin to ansible playbook under the plugin configuration in pom.xml - see below.
 
