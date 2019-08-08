@@ -34,8 +34,9 @@ All Ansible playbooks are executed based on configuration file and inventory fil
 
 ## Run this sample in TIBCO StreamBase Studio&trade;
 
-To be able to run this sample in TIBCO StreamBase Studio™ please go to smart import option under menu. For more information please refer to [Using Tibco Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md)
-Below you can find a list of crucial files for this project :
+To be able to run this sample in TIBCO StreamBase Studio™ please go to smart import option under menu. For more information please refer to [Using Tibco Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md).
+
+Below you can find a list of files this project is based on:
 
 * An Ansible [playbook file](../../main/ansible/project-playbook.yml) with set of tasks divided in three groups: build docker images, test docker images and application, clean (remove docker images build in this playbook).
 * A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO StreamBase runtime
@@ -306,9 +307,9 @@ cc384acf3f6298253df72c61b8afcb27c7278a85d57e7c3ca5c907265fc0a30f
 Network created with ansible task :
 ```
 - name: Create example.com network
-    docker_network:
-        name: example.com
-        state: present
+  docker_network:
+      name: example.com
+      state: present
 ```
 
 ### Start the containers
@@ -331,24 +332,21 @@ $ docker run --detach --hostname=B.example.com --network-alias=B.example.com --n
 Ansible tasks starting docker container A with options :
 ```
 - name: Start container A.{{ projectId }}
-    docker_container:
-        name: A.{{ projectId }}
-        image: docker/{{ projectId }}:{{ projectId_ver }}
-        hostname: A.example.com
-        networks: 
-          - name: example.com
-            aliases: 
-              - A.example.com
-        env:
-          NODENAME: A.{{ projectId }}
-        state: started
-    when: skipTests == 'false'
+  docker_container:
+      name: A.{{ projectId }}
+      image: docker/{{ projectId }}:{{ projectId_ver }}
+      hostname: A.example.com
+      networks: 
+        - name: example.com
+          aliases: 
+            - A.example.com
+      env:
+        NODENAME: A.{{ projectId }}
+      state: started
+  when: skipTests == 'false'
 ``` 
-variable and values passed by maven plugin to ansible playbook
-- {{ projectId }} == ef-2node-ansible-app 
-- {{ projectId_ver }} == 1.0.0
+Variables and values from above task are passed by maven plugin to ansible playbook under the plugin configuration in pom.xml - see below.
 
-Ansible plugin in pom.xml file :
 ```xml
    <plugin>
         <groupId>co.escapeideas.maven</groupId>
@@ -473,11 +471,11 @@ Ansible tasks represents the docker command listed above :
 - list the results stored in NodeAresults veriable
 ```
 - name: Run epadmin command on Node A
-    shell: docker exec A.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
-    register: NodeAresults
+  shell: docker exec A.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
+  register: NodeAresults
     
 - name: Node A
-    debug: var=NodeAresults.stdout_lines
+  debug: var=NodeAresults.stdout_lines
 ```
 ```
 [INFO] TASK [Run epadmin command on Node A] *******************************************
@@ -539,14 +537,14 @@ $ docker rm B.ef-2node-ansible-app
 Ansible tasks corresponds to docker stop and dcoker rm commands listed above :
 ```
 - name: Stop and remove container A
-    docker_container:
-      name: A.{{ projectId }}
-      state: absent
+  docker_container:
+    name: A.{{ projectId }}
+    state: absent
     
 - name: Stop and remove container B
-    docker_container:
-      name: B.{{ projectId }}
-      state: absent
+  docker_container:
+    name: B.{{ projectId }}
+    state: absent
 ```
 
 ---
