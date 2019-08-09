@@ -357,7 +357,7 @@ Variables and values from above task are passed by maven plugin to ansible playb
 
 ## Additional Ansible playbooks.
 
-When you execute this project with skip test option you will have only a docker images build (base and application one). To play with those images, you can run ansible playbooks located in aditional-playbooks folder. List of files below.
+When you execute this project with skip test option you will have only docker images build (base and application). To play with those images, you can run ansible playbooks located in aditional-playbooks folder. List of files below.
 ```shell
 .
 |── ansible
@@ -371,7 +371,7 @@ When you execute this project with skip test option you will have only a docker 
 │   └── project-playbook.yml
 ```
 
-Those additional ansible playbooks divided in three groups and contain only a few tasks. For best results run them in order starting from #1.
+Those additional ansible playbooks are divided in three groups and contain only few tasks. For best results run them in order starting from #1.
 
 *** [Start cluster](../../main/ansible/additional-playbooks/1-start_cluster.yml) playbook.
 ```shell
