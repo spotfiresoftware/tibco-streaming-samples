@@ -9,7 +9,8 @@ This sample describes how to deploy an application archive containing an EventFl
 * [Changes to the default pom.xml file - profiles](#changes-to-the-default-pom-file-profiles)
 * [Building and running from TIBCO StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
-* [Example docker commands and correspond Ansible tasks](#example-docker-commands-and-correspond-ansible-tasks)
+* [Example of Ansible task and maven plugin configuration](#example-of-ansible-task-and-maven-plugin-configuration)
+* [Additional Ansible playbooks](#additional-ansible-playbooks)
 
 See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
 
@@ -59,17 +60,21 @@ If you prefer to skip the second and third part of this playbook please check sk
 In this project, all Ansible files are located in ../src/main/ansible folder.
 ```shell
 .
-|── ansible
-│   ├── ansible.cfg
-│   ├── ansible-docker-test-playbook.yml
-│   ├── inventory
-│   └── project-playbook.yml
+├── additional-playbooks
+│   ├── 1-start_cluster.yml
+│   ├── 2-validate_cluster.yml
+│   └── 3-stop_cluster.yml
+├── ansible.cfg
+├── ansible-docker-test-playbook.yml
+├── inventory
+└── project-playbook.yml
 ```
 Files: 
 - [ansible.cfg](../../main/ansible/ansible.cfg) - contain basic ansible configuration for this project to run locally
 - [inventory](../../main/ansible/inventory) - contain only one - localhost - as a target for all the playbook tasks 
 - [project-playbook.yml](../../main/ansible/project-playbook.yml) - is the main playbook file with all the task
 - [ansible-docker-test-playbook.yml](../../main/ansible/ansible-docker-test-playbook.yml) - this is a one task playbook file. This task will pull centos 7 docker container to your host and can be used to test if your Ansible and docker installation is correct.
+- additional-playbooks folder - contain short few tasks playbooks to execute from command line. Please see description below.
 
 The one task ansible playbook can be executed from the current directory via command listed below :
 ```shell
@@ -171,8 +176,10 @@ Use the [maven](https://maven.apache.org) as **mvn install** to build from the c
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Update dockerfile before building base image] ****************************
-[INFO] changed: [127.0.0.1] => (item={u'search': u'(^LABEL build-image=)(.*)$', u'replace': u'LABEL build-image=1.0.0'})
-[INFO] ok: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': u'###Note: LABEL statement build by Ansible playbook'})
+[INFO] changed: [127.0.0.1] => (item={u'search': u'(^LABEL build-image=)(.*)$', u'replace': 
+       u'LABEL build-image=1.0.0'})
+[INFO] ok: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': u'###Note: 
+       LABEL statement build by Ansible playbook'})
 [INFO] 
 [INFO] TASK [Remove docker image if exist from previous build] ************************
 [INFO] ok: [127.0.0.1]
@@ -193,10 +200,14 @@ Use the [maven](https://maven.apache.org) as **mvn install** to build from the c
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Update dockerfile before building app image] *****************************
-[INFO] ok: [127.0.0.1] => (item={u'search': u'(^FROM\\s)(.*)$', u'replace': u'FROM sbrt-base:10.5.0-SNAPSHOT'})
-[INFO] changed: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': u'###Note: FROM statement build by Ansible playbook'})
-[INFO] changed: [127.0.0.1] => (item={u'search': u'(^LABEL build-image=)(.*)$', u'replace': u'LABEL build-image=1.0.0'})
-[INFO] changed: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': u'###Note: LABEL statement build by Ansible playbook'})
+[INFO] ok: [127.0.0.1] => (item={u'search': u'(^FROM\\s)(.*)$', u'replace': 
+       u'FROM sbrt-base:10.5.0-SNAPSHOT'})
+[INFO] changed: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': 
+       u'###Note: FROM statement build by Ansible playbook'})
+[INFO] changed: [127.0.0.1] => (item={u'search': u'(^LABEL build-image=)(.*)$', u'replace': 
+       u'LABEL build-image=1.0.0'})
+[INFO] changed: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': 
+       u'###Note: LABEL statement build by Ansible playbook'})
 [INFO] 
 [INFO] TASK [Remove docker image if exist from previous build] ************************
 [INFO] ok: [127.0.0.1]
@@ -287,47 +298,13 @@ Use the [maven](https://maven.apache.org) as **mvn install** to build from the c
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] PLAY RECAP *********************************************************************
-[INFO] 127.0.0.1                  : ok=29   changed=24   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+[INFO] 127.0.0.1 : ok=29  changed=24  unreachable=0  failed=0  skipped=1  rescued=0  ignored=0
 ...
 ```
 
-<a name="example-docker-commands-and-correspond-ansible-tasks"></a>
+<a name="example-of-ansible-task-and-maven-plugin-configuration"></a>
 
-## Example docker commands and correspond Ansible tasks
-
-### Create the docker network
-
-Use the [docker network](https://docs.docker.com/engine/reference/network/) command :
-
-```
-$ docker network create example.com
-cc384acf3f6298253df72c61b8afcb27c7278a85d57e7c3ca5c907265fc0a30f
-```
-
-Network created with ansible task :
-```
-- name: Create example.com network
-  docker_network:
-      name: example.com
-      state: present
-```
-
-### Start the containers
-
-Use the [docker run](https://docs.docker.com/engine/reference/run/) command.  In this case the following options are used :
-
-* **--detach** - run in the background
-* **--hostname=A.example.com --network-alias=A.example.com --network=example.com** - set the container hostname and network name. This must match the docker network name and the [Trusted hosts HOCON configuration](../../main/configurations/security.conf)
-* **--name=A.ef-2node-ansible-app** - container name
-* **--env=NODENAME=A.ef-2node-ansible-app** - node name
-* **docker/ef-2node-ansible-app:1.0.0** - Docker image name
-
-```shell
-$ docker run --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-ansible-app --network=example.com --env=NODENAME=A.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
-156a2b2233f3b0fe987bddb9678c8dc1abf08a4ac6eb6fb0cd5e61f6478d8e35
-$ docker run --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-ansible-app --network=example.com --env=NODENAME=B.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
-6a1bb0aed2b9e97483aa1e0a290562a534815c447b72c8bc8207667eb1f2e0c4
-```
+## Example of Ansible task and maven plugin configuration.
 
 Ansible tasks starting docker container A with options :
 ```
@@ -376,175 +353,44 @@ Variables and values from above task are passed by maven plugin to ansible playb
     </plugin>
 ```
 
-### View the running containers
+<a name="additional-ansible-playbooks"></a>
 
-Use the [docker ps](https://docs.docker.com/engine/reference/ps/) command :
+## Additional Ansible playbooks.
 
+When you execute this project with skip test option you will have only a docker images build (base and application one). To play with those images, you can run ansible playbooks located in aditional-playbooks folder. List of file below.
 ```shell
-$ docker ps
-CONTAINER ID        IMAGE                               COMMAND                  CREATED             STATUS              PORTS               NAMES
-6a1bb0aed2b9        docker/ef-2node-ansible-app:1.0.0   "/bin/sh -c ${PRODUC…"   22 seconds ago      Up 21 seconds                           B.ef-2node-ansible-app
-156a2b2233f3        docker/ef-2node-ansible-app:1.0.0   "/bin/sh -c ${PRODUC…"   48 seconds ago      Up 47 seconds                           A.ef-2node-ansible-app
+.
+|── ansible
+│   ├── aditional-playbooks
+│   │   ├── 1-start_cluster.yml
+│   │   ├── 2-validate_cluster.yml
+│   │   └── 3-stop_cluster.yml
+│   ├── ansible.cfg
+│   ├── ansible-docker-test-playbook.yml
+│   ├── inventory
+│   └── project-playbook.yml
 ```
 
-### View the container console logs
+Those additional ansible playbooks divided in three groups and contain only a few tasks. For best results run them in order starting from #1.
 
-Use the [docker logs](https://docs.docker.com/engine/reference/commandline/logs/) command :
-
+*** [Start cluster](../../main/ansible/additional-playbooks/1-start_cluster.yml) playbook.
 ```shell
-$ docker logs A.ef-2node-ansible-app
-[A.ef-2node-ansible-app] 	Installing node
-[A.ef-2node-ansible-app] 		PRODUCTION executables
-[A.ef-2node-ansible-app] 		Memory shared memory
-[A.ef-2node-ansible-app] 		4 concurrent allocation segments
-[A.ef-2node-ansible-app] 		Host name A.example.com
-[A.ef-2node-ansible-app] 		Container tibco/sb
-[A.ef-2node-ansible-app] 		Starting container services
-[A.ef-2node-ansible-app] 		Loading node configuration
-[A.ef-2node-ansible-app] 		Auditing node security
-[A.ef-2node-ansible-app] 		Deploying application
-[A.ef-2node-ansible-app] 			Engine default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-ef
-[A.ef-2node-ansible-app] 		Application deployed
-[A.ef-2node-ansible-app] 		Administration port is 2000
-[A.ef-2node-ansible-app] 		Discovery Service running on port 54321
-[A.ef-2node-ansible-app] 		Service name is A.ef-2node-ansible-app
-[A.ef-2node-ansible-app] 	Node installed
-[A.ef-2node-ansible-app] 	Starting node
-[A.ef-2node-ansible-app] 		Engine application::default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-ef started
-[A.ef-2node-ansible-app] 		Loading node configuration
-[A.ef-2node-ansible-app] 		Auditing node security
-[A.ef-2node-ansible-app] 		Host name A.example.com
-[A.ef-2node-ansible-app] 		Administration port is 2000
-[A.ef-2node-ansible-app] 		Discovery Service running on port 54321
-[A.ef-2node-ansible-app] 		Service name is A.ef-2node-ansible-app
-[A.ef-2node-ansible-app] 	Node started
-COMMAND FINISHED
+	$ ansible-playbook 1-start_cluster.yml 
 ```
+This playbook has three main tasks: create a network example.com, start container with node named: A.ef-2nod-e-ansible-app and start container with node named: B.ef-2nod-e-ansible-app. 
 
-### Include application logs to the container logs
-
-A src/main/resources/logback.xml file is included in the application maven module to share application logs to docker console.
-
-To make use of this add the --tty option when starting the container :
-
+*** [Validate cluster](../../main/ansible/additional-playbooks/2-validate_cluster.yml) playbook.
 ```shell
-$ docker run --tty --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-ansible-app --network=example.com --env=NODENAME=A.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
-f884cd838acbdb4be46055d303121e1e09387fb79139324845f652cff51a7ec6
-$ docker run --tty --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-ansible-app --network=example.com --env=NODENAME=B.ef-2node-ansible-app docker/ef-2node-ansible-app:1.0.0
-eef872633e6f8bcd4b1b05525ef918cf0453b5fce8702f7ebdd3329b75d5f2ed
+	$ ansible-playbook 2-validate_cluster.yml
 ```
+This playbook has two main tasks: run epadmin command on both clusters.
 
+*** [Stop cluster](../../main/ansible/additional-playbooks/3-stop_cluster.yml) playbook.
 ```shell
-$ docker logs A.ef-2node-ansible-app
-...
-20:04:05.075 adPool - 1 INFO  StreamBaseHTTPServer : sbd at A.example.com:10000; pid=168; version=10.5.0-SNAPSHOT_a9fed4da866b2db57849c1d6d81c1aec1ba07352; Listening
-20:04:32.000        280 INFO  t.e.d.h.distribution : Node B.ef-2node-ansible-app has new interface: 'IPv4:B.example.com:5558,IPv4:B.example.com:5557, old interface: 'IPv4:B.example.com:5557'
+	$ ansible-playbook 3-stop_cluster.yml
 ```
+This playbook has two main tasks: stop and remove both containers.
 
-### Run epadmin commands
-
-Use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command on one of the containers :
-
-```shell
-$ docker exec A.ef-2node-ansible-app epadmin --servicename=ef-2node-ansible-app display cluster
-[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app
-[A.ef-2node-ansible-app] Network Address = IPv4:B.example.com:5558,IPv4:B.example.com:5557
-[A.ef-2node-ansible-app] Current State = Up
-[A.ef-2node-ansible-app] Last State Change = 2019-08-05 20:04:32
-[A.ef-2node-ansible-app] Number of Connections = 2
-[A.ef-2node-ansible-app] Number of Queued PDUs = 0
-[A.ef-2node-ansible-app] Discovered = Dynamic
-[A.ef-2node-ansible-app] Location Code = 7382436235611343951
-[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app
-[B.ef-2node-ansible-app] Network Address = IPv4:A.example.com:5558,IPv4:A.example.com:5557
-[B.ef-2node-ansible-app] Current State = Up
-[B.ef-2node-ansible-app] Last State Change = 2019-08-05 20:04:34
-[B.ef-2node-ansible-app] Number of Connections = 2
-[B.ef-2node-ansible-app] Number of Queued PDUs = 0
-[B.ef-2node-ansible-app] Discovered = Dynamic
-[B.ef-2node-ansible-app] Location Code = 11636435185532938412
-```
-
-Ansible tasks represents the docker command listed above :
-- run docker command in shell
-- list the results stored in NodeAresults veriable
-```
-- name: Run epadmin command on Node A
-  shell: docker exec A.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
-  register: NodeAresults
-    
-- name: Node A
-  debug: var=NodeAresults.stdout_lines
-```
-```
-[INFO] TASK [Run epadmin command on Node A] *******************************************
-[INFO] changed: [127.0.0.1]
-[INFO] 
-
-[INFO] TASK [Node A] ******************************************************************
-[INFO] ok: [127.0.0.1] => 
-[INFO]   NodeAresults.stdout_lines:
-[INFO]   - '[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app'
-[INFO]   - '[A.ef-2node-ansible-app] Network Address = IPv4:B.example.com:5558,IPv4:B.example.com:5557'
-[INFO]   - '[A.ef-2node-ansible-app] Current State = Up'
-[INFO]   - '[A.ef-2node-ansible-app] Last State Change = 2019-08-02 14:38:37'
-[INFO]   - '[A.ef-2node-ansible-app] Number of Connections = 3'
-[INFO]   - '[A.ef-2node-ansible-app] Number of Queued PDUs = 0'
-[INFO]   - '[A.ef-2node-ansible-app] Discovered = Dynamic'
-[INFO]   - '[A.ef-2node-ansible-app] Location Code = 7382436235611343951'
-[INFO]   - '[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app'
-[INFO]   - '[B.ef-2node-ansible-app] Network Address = IPv4:A.example.com:5558,IPv4:A.example.com:5557'
-[INFO]   - '[B.ef-2node-ansible-app] Current State = Up'
-[INFO]   - '[B.ef-2node-ansible-app] Last State Change = 2019-08-02 14:38:37'
-[INFO]   - '[B.ef-2node-ansible-app] Number of Connections = 3'
-[INFO]   - '[B.ef-2node-ansible-app] Number of Queued PDUs = 0'
-[INFO]   - '[B.ef-2node-ansible-app] Discovered = Dynamic'
-[INFO]   - '[B.ef-2node-ansible-app] Location Code = 11636435185532938412'
-```
-
-### Log in to the container to check node logs
-
-Use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command to run bash :
-
-```shell
-$ docker exec -it A.ef-2node-ansible-app bash
-[tibco@A /]$ cd /var/opt/tibco/streambase/node/A.ef-2node-ansible-app/logs/
-[tibco@A logs]$ ls
-System_administration.log  System_swcoordadmin.log  audit.log  bootstrap  deadlock.log  default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-ef.log
-```
-
-Alternatively, use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command to run tail :
-
-```shell
-$ docker exec A.ef-2node-ansible-app tail -f /var/opt/tibco/streambase/node/A.ef-2node-ansible-app/logs/default-engine-for-com.tibco.ep.samples.docker.ef-2node-ansible-ef.log
-2019-08-02 14:38:37.542000+0000 [171:main] INFO  com.tibco.ep.dtm.lifecycle: No user-defined Logback configuration, using product default configuration
-...
-
-```
-
-### Stop and remove the containers
-
-Use the [docker stop](https://docs.docker.com/engine/reference/commandline/stop/) and [docker rm](https://docs.docker.com/engine/reference/commandline/rm/) commands :
-
-```shell
-$ docker stop A.ef-2node-ansible-app
-$ docker rm A.ef-2node-ansible-app
-$ docker stop B.ef-2node-ansible-app
-$ docker rm B.ef-2node-ansible-app
-```
-
-Ansible tasks corresponds to docker stop and dcoker rm commands listed above :
-```
-- name: Stop and remove container A
-  docker_container:
-    name: A.{{ projectId }}
-    state: absent
-    
-- name: Stop and remove container B
-  docker_container:
-    name: B.{{ projectId }}
-    state: absent
-```
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
