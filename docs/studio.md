@@ -6,24 +6,6 @@ product release lifecycle.
 
 The samples can also be imported into TIBCO StreamBase Studio&trade; :
 
-## Using smart import
-
-* Use **Import -> Git -> Projects from Git ( with smart import )** menu option.  
-* Select **Clone URI -> Next**
-* Specify the github URL ( https://github.com/TIBCOSoftware/tibco-streaming-samples.git )
-* Select the branch that corresponds to the product version you are using
-* Choose what sample(s) to import :
-
-![smartimport](studioimport.gif)
-
-**Warning:** This does require the **Git integration for Eclipse - auto-import for Eclipse** to be installed - this can
-be installed by :
-
-1.  Help -> Install new software
-2.  In the Work with field enter **http://download.eclipse.org/egit/updates-5.2**
-3.  Find and select **Git integration for Eclipse - auto-import for Eclipse >= 4.6**
-4.  Select next and Finish
-
 ## Using TIBCO menu
 
 * Use **File -> Load StreamBase Sample**
@@ -33,6 +15,16 @@ be installed by :
 ![studiosample](studiosample.gif)
 
 The local github clone can be updated with **Pull from remote repositories now**.
+
+## Using smart import
+
+* Use **Import -> Git -> Projects from Git ( with smart import )** menu option.  
+* Select **Clone URI -> Next**
+* Specify the github URL ( https://github.com/TIBCOSoftware/tibco-streaming-samples.git )
+* Select the branch that corresponds to the product version you are using
+* Choose what sample(s) to import :
+
+![smartimport](studioimport.gif)
 
 ## Working with multiple projects
 
