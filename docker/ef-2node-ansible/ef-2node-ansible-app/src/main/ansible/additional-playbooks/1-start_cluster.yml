@@ -1,0 +1,37 @@
+---
+- name: Start Cluster
+  hosts: localhost
+  tasks:
+  - name: include global variables
+    include_vars: "../../../../target/classes/ansible-global.yml"
+
+  - name: Create network example.com
+    docker_network:
+        name: example.com
+        state: present
+
+  - name: Start container A.{{ projectId }}
+    docker_container:
+       name: A.{{ projectId }}
+       image: docker/{{ projectId }}:{{ projectId_ver }}
+       hostname: A.example.com
+       networks: 
+          - name: example.com
+            aliases: 
+               - A.example.com
+       env:
+         NODENAME: A.{{ projectId }}
+       state: started
+
+  - name: Start container B.{{ projectId }}
+    docker_container:
+       name: B.{{ projectId }}
+       image: docker/{{ projectId }}:{{ projectId_ver }}
+       hostname: B.example.com
+       networks: 
+          - name: example.com
+            aliases: 
+               - B.example.com
+       env:
+         NODENAME: B.{{ projectId }}
+       state: started

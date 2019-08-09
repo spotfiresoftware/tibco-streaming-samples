@@ -1,0 +1,20 @@
+---
+- name: Validate Cluster
+  hosts: localhost
+  tasks:
+  - name: include global variables
+    include_vars: "../../../../target/classes/ansible-global.yml"
+
+  - name: Run epadmin command on Node A
+    shell: docker exec A.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
+    register: NodeAresults
+    
+  - name: Node A
+    debug: var=NodeAresults.stdout_lines
+
+  - name: Run epadmin command on Node B
+    shell: docker exec B.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
+    register: NodeBresults
+    
+  - name: Node B
+    debug: var=NodeBresults.stdout_lines

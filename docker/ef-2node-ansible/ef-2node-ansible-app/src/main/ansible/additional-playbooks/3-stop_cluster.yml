@@ -1,0 +1,22 @@
+---
+- name: Stop Cluster
+  hosts: localhost
+  tasks:
+  - name: include global variables
+    include_vars: "../../../../target/classes/ansible-global.yml"
+
+  - name: Stop and remove container A
+    docker_container:
+      name: A.{{ projectId }}
+      state: absent
+
+  - name: Stop and remove container B
+    docker_container:
+      name: B.{{ projectId }}
+      state: absent
+
+  - name: Remove example.com network
+    docker_network:
+      name: example.com
+      state: absent
+

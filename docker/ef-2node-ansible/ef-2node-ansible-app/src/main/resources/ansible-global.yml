@@ -1,0 +1,8 @@
+---
+### Ansible gloab veriables and value list for playbooks - generated automaticly
+### File will be created in ../target/classes/ folder
+
+sbrt_ver: ${sbrt.version}   
+projectId: ${project.artifactId} 
+projectId_ver: ${project.version}
+
