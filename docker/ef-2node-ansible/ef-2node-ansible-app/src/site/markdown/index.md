@@ -74,7 +74,7 @@ Files:
 - [inventory](../../main/ansible/inventory) - contain only one - localhost - as a target for all the playbook tasks 
 - [project-playbook.yml](../../main/ansible/project-playbook.yml) - is the main playbook file with all the task
 - [ansible-docker-test-playbook.yml](../../main/ansible/ansible-docker-test-playbook.yml) - this is a one task playbook file. This task will pull centos 7 docker container to your host and can be used to test if your Ansible and docker installation is correct.
-- additional-playbooks folder - contain short few tasks playbooks to execute from command line. Please see description below.
+- [additional-playbooks](../../main/ansible/additional-playbooks/) folder - contain short few tasks playbooks to execute from command line. Please see description below.
 
 The one task ansible playbook can be executed from the current directory via command listed below :
 ```shell
@@ -357,7 +357,7 @@ Variables and values from above task are passed by maven plugin to ansible playb
 
 ## Additional Ansible playbooks.
 
-When you execute this project with skip test option you will have only a docker images build (base and application one). To play with those images, you can run ansible playbooks located in aditional-playbooks folder. List of file below.
+When you execute this project with skip test option you will have only a docker images build (base and application one). To play with those images, you can run ansible playbooks located in aditional-playbooks folder. List of files below.
 ```shell
 .
 |── ansible
