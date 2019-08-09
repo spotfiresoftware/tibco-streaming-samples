@@ -19,10 +19,10 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 ## Prerequisites
 
 Docker must first be downloaded and installed - see https://www.docker.com/ for further details.  Any 
-recent version of docker should suffice, but testing was initially with docker 2.1.0.0 on
-MacOS 10.14.
+recent version of docker should suffice, but testing was initially with docker 2.1 on
+MacOS and RHEL/CentOS.
 
-Ansible managament server must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS 10.14.
+Ansible managament server must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS and RHEL/CentOS.
 
 On MacOS, the resources available to docker may need to be increased beyond the default - see
 CPUs and Memory settings on the Advanced tab of Docker preferences.
