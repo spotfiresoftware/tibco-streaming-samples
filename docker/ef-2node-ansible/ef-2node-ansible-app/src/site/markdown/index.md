@@ -389,7 +389,7 @@ This playbook has two main tasks: run epadmin command on both clusters.
 ```shell
 	$ ansible-playbook 3-stop_cluster.yml
 ```
-This playbook has two main tasks: stop and remove both containers.
+This playbook has two main tasks: stop and remove both containers. Also this playbook will remove the example.com network.
 
 
 ---
