@@ -377,26 +377,26 @@ Those additional ansible playbooks are divided in three groups and contain only 
 ```shell
 	$ ansible-playbook 1-start_cluster.yml 
 ```
-```shell
-PLAY [Start Cluster] ****************************************************************************************
+```
+PLAY [Start Cluster] *************************************************************************
 
-TASK [Gathering Facts] *************************************************************************************************************
+TASK [Gathering Facts] ***********************************************************************
 ok: [127.0.0.1]
 
-TASK [Include global variables] *************************************************************************************************************
+TASK [Include global variables] **************************************************************
 ok: [127.0.0.1]
 
-TASK [Create network example.com] *************************************************************************************************************
+TASK [Create network example.com] ************************************************************
 changed: [127.0.0.1]
 
-TASK [Start container A.ef-2node-ansible-app] *************************************************************************************************************
+TASK [Start container A.ef-2node-ansible-app] ************************************************
 changed: [127.0.0.1]
 
-TASK [Start container B.ef-2node-ansible-app] *************************************************************************************************************
+TASK [Start container B.ef-2node-ansible-app] ************************************************
 changed: [127.0.0.1]
 
-PLAY RECAP **************************************************************************************************
-127.0.0.1             : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+PLAY RECAP ***********************************************************************************
+127.0.0.1    : ok=5   changed=3   unreachable=0   failed=0   skipped=0   rescued=0   ignored=0 
 ```
 This playbook has three main tasks: create a network example.com, start container with node named: A.ef-2nod-e-ansible-app and start container with node named: B.ef-2nod-e-ansible-app. 
 
@@ -404,19 +404,18 @@ This playbook has three main tasks: create a network example.com, start containe
 ```shell
 	$ ansible-playbook 2-validate_cluster.yml
 ```
-```shell
-PLAY [Validate Cluster] *************************************************************************************************************
+```
+PLAY [Validate Cluster] **********************************************************************
 
-TASK [Gathering Facts] *************************************************************************************************************
+TASK [Gathering Facts] ***********************************************************************
 ok: [127.0.0.1]
 
-TASK [include global variables] *************************************************************************************************************
+TASK [include global variables] **************************************************************
 ok: [127.0.0.1]
 
-TASK [Run epadmin command on Node A] *************************************************************************************************************
-changed: [127.0.0.1]
+TASK [Run epadmin command on Node A] *********************************************************
 
-TASK [Node A] ***********************************************************************************************
+TASK [Node A] ********************************************************************************
 ok: [127.0.0.1] => 
   NodeAresults.stdout_lines:
   - '[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app'
@@ -436,10 +435,10 @@ ok: [127.0.0.1] =>
   - '[B.ef-2node-ansible-app] Discovered = Dynamic'
   - '[B.ef-2node-ansible-app] Location Code = 11636435185532938412'
 
-TASK [Run epadmin command on Node B] *************************************************************************************************************
+TASK [Run epadmin command on Node B] **********************************************************************************************
 changed: [127.0.0.1]
 
-TASK [Node B] ***********************************************************************************************
+TASK [Node B] ********************************************************************************
 ok: [127.0.0.1] => 
   NodeBresults.stdout_lines:
   - '[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app'
@@ -459,8 +458,8 @@ ok: [127.0.0.1] =>
   - '[A.ef-2node-ansible-app] Discovered = Dynamic'
   - '[A.ef-2node-ansible-app] Location Code = 7382436235611343951'
 
-PLAY RECAP **************************************************************************************************
-127.0.0.1             : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY RECAP ***********************************************************************************
+127.0.0.1     : ok=6   changed=2   unreachable=0   failed=0   skipped=0   rescued=0  ignored=0
 ```
 This playbook has two main tasks: run epadmin command on both clusters.
 
@@ -469,25 +468,25 @@ This playbook has two main tasks: run epadmin command on both clusters.
 	$ ansible-playbook 3-stop_cluster.yml
 ```
 ```
-PLAY [Stop Cluster] *************************************************************************************************************
+PLAY [Stop Cluster] **************************************************************************
 
-TASK [Gathering Facts] *************************************************************************************************************
+TASK [Gathering Facts] ***********************************************************************
 ok: [127.0.0.1]
 
-TASK [include global variables] *************************************************************************************************************
+TASK [include global variables] **************************************************************
 ok: [127.0.0.1]
 
-TASK [Stop and remove container A] *************************************************************************************************************
+TASK [Stop and remove container A] ***********************************************************
 changed: [127.0.0.1]
 
-TASK [Stop and remove container B] *************************************************************************************************************
+TASK [Stop and remove container B] ***********************************************************
 changed: [127.0.0.1]
 
-TASK [Remove example.com network] *************************************************************************************************************
+TASK [Remove example.com network] ************************************************************
 changed: [127.0.0.1]
 
-PLAY RECAP **************************************************************************************************
-127.0.0.1             : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+PLAY RECAP ***********************************************************************************
+127.0.0.1     : ok=5   changed=3   unreachable=0   failed=0   skipped=0   rescued=0  ignored=0  
 ```
 This playbook has two main tasks: stop and remove both containers. Also it will remove the example.com network.
 
