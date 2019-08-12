@@ -357,7 +357,7 @@ Variables and values from above task are passed by maven plugin to ansible playb
 
 ## Additional Ansible playbooks.
 
-When you execute this project with skip test option you will have only docker images build (base and application). To play with those images, you can run ansible playbooks located in aditional-playbooks folder. List of files below.
+When you execute this project with skip test option you will have only docker images build (base and application). To test those images and start nodes, you can run ansible playbooks located in aditional-playbooks folder. See list of files below.
 ```shell
 .
 |── ansible
@@ -377,11 +377,90 @@ Those additional ansible playbooks are divided in three groups and contain only 
 ```shell
 	$ ansible-playbook 1-start_cluster.yml 
 ```
+```shell
+PLAY [Start Cluster] **************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************
+ok: [127.0.0.1]
+
+TASK [Include global variables] **************************************************************************************************************************
+ok: [127.0.0.1]
+
+TASK [Create network example.com] **************************************************************************************************************************
+changed: [127.0.0.1]
+
+TASK [Start container A.ef-2node-ansible-app] **************************************************************************************************************************
+changed: [127.0.0.1]
+
+TASK [Start container B.ef-2node-ansible-app] **************************************************************************************************************************
+changed: [127.0.0.1]
+
+PLAY RECAP **************************************************************************************************************************
+127.0.0.1                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+```
 This playbook has three main tasks: create a network example.com, start container with node named: A.ef-2nod-e-ansible-app and start container with node named: B.ef-2nod-e-ansible-app. 
 
 *** [Validate cluster](../../main/ansible/additional-playbooks/2-validate_cluster.yml) playbook.
 ```shell
 	$ ansible-playbook 2-validate_cluster.yml
+```
+```shell
+PLAY [Validate Cluster] **************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************
+ok: [127.0.0.1]
+
+TASK [include global variables] **************************************************************************************************************************
+ok: [127.0.0.1]
+
+TASK [Run epadmin command on Node A] **************************************************************************************************************************
+changed: [127.0.0.1]
+
+TASK [Node A] **************************************************************************************************************************
+ok: [127.0.0.1] => 
+  NodeAresults.stdout_lines:
+  - '[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app'
+  - '[A.ef-2node-ansible-app] Network Address = IPv4:B.example.com:5558,IPv4:B.example.com:5557'
+  - '[A.ef-2node-ansible-app] Current State = Up'
+  - '[A.ef-2node-ansible-app] Last State Change = 2019-08-12 14:07:21'
+  - '[A.ef-2node-ansible-app] Number of Connections = 5'
+  - '[A.ef-2node-ansible-app] Number of Queued PDUs = 0'
+  - '[A.ef-2node-ansible-app] Discovered = Dynamic'
+  - '[A.ef-2node-ansible-app] Location Code = 7382436235611343951'
+  - '[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app'
+  - '[B.ef-2node-ansible-app] Network Address = IPv4:A.example.com:5558,IPv4:A.example.com:5557'
+  - '[B.ef-2node-ansible-app] Current State = Up'
+  - '[B.ef-2node-ansible-app] Last State Change = 2019-08-12 14:07:21'
+  - '[B.ef-2node-ansible-app] Number of Connections = 4'
+  - '[B.ef-2node-ansible-app] Number of Queued PDUs = 0'
+  - '[B.ef-2node-ansible-app] Discovered = Dynamic'
+  - '[B.ef-2node-ansible-app] Location Code = 11636435185532938412'
+
+TASK [Run epadmin command on Node B] **************************************************************************************************************************
+changed: [127.0.0.1]
+
+TASK [Node B] **************************************************************************************************************************
+ok: [127.0.0.1] => 
+  NodeBresults.stdout_lines:
+  - '[B.ef-2node-ansible-app] Node Name = A.ef-2node-ansible-app'
+  - '[B.ef-2node-ansible-app] Network Address = IPv4:A.example.com:5558,IPv4:A.example.com:5557'
+  - '[B.ef-2node-ansible-app] Current State = Up'
+  - '[B.ef-2node-ansible-app] Last State Change = 2019-08-12 14:07:21'
+  - '[B.ef-2node-ansible-app] Number of Connections = 4'
+  - '[B.ef-2node-ansible-app] Number of Queued PDUs = 0'
+  - '[B.ef-2node-ansible-app] Discovered = Dynamic'
+  - '[B.ef-2node-ansible-app] Location Code = 11636435185532938412'
+  - '[A.ef-2node-ansible-app] Node Name = B.ef-2node-ansible-app'
+  - '[A.ef-2node-ansible-app] Network Address = IPv4:B.example.com:5558,IPv4:B.example.com:5557'
+  - '[A.ef-2node-ansible-app] Current State = Up'
+  - '[A.ef-2node-ansible-app] Last State Change = 2019-08-12 14:07:21'
+  - '[A.ef-2node-ansible-app] Number of Connections = 5'
+  - '[A.ef-2node-ansible-app] Number of Queued PDUs = 0'
+  - '[A.ef-2node-ansible-app] Discovered = Dynamic'
+  - '[A.ef-2node-ansible-app] Location Code = 7382436235611343951'
+
+PLAY RECAP **************************************************************************************************************************
+127.0.0.1                  : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 This playbook has two main tasks: run epadmin command on both clusters.
 
@@ -389,7 +468,28 @@ This playbook has two main tasks: run epadmin command on both clusters.
 ```shell
 	$ ansible-playbook 3-stop_cluster.yml
 ```
-This playbook has two main tasks: stop and remove both containers. Also this playbook will remove the example.com network.
+```shell
+PLAY [Stop Cluster] **************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************
+ok: [127.0.0.1]
+
+TASK [include global variables] **************************************************************************************************************************
+ok: [127.0.0.1]
+
+TASK [Stop and remove container A] **************************************************************************************************************************
+changed: [127.0.0.1]
+
+TASK [Stop and remove container B] **************************************************************************************************************************
+changed: [127.0.0.1]
+
+TASK [Remove example.com network] **************************************************************************************************************************
+changed: [127.0.0.1]
+
+PLAY RECAP **************************************************************************************************************************
+127.0.0.1                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+```
+This playbook has two main tasks: stop and remove both containers. Also it will remove the example.com network.
 
 
 ---
