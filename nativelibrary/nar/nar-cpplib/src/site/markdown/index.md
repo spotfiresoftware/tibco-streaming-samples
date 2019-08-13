@@ -66,6 +66,45 @@ The following maven build rule is used :
             </plugin>
 ```
 
+When using java versions beyond 1.8, javah is no-longer available.  The plugin recommends the following -
+
+```xml
+    <!-- see https://github.com/maven-nar/nar-maven-plugin/issues/313 -->
+    <profiles>
+        <profile>
+            <id>JDK 9+</id>
+            <activation>
+                <jdk>(1.8,)</jdk>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <configuration>
+                                <compilerArgs>
+                                    <arg>-h</arg>
+                                    <arg>${project.build.directory}/nar/javah-include</arg>
+                                </compilerArgs>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>com.github.maven-nar</groupId>
+                            <artifactId>nar-maven-plugin</artifactId>
+                            <executions> 
+                                <execution>
+                                    <id>default-nar-javah</id>
+                                    <phase>none</phase>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+```
+
 <a name="environmental-requirements"></a>
 
 ## Environmental requirements
