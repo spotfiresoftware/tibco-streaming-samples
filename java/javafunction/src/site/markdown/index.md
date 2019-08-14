@@ -10,7 +10,7 @@ In this sample the following simple EventFlow fragment is used :
 
 ## Declare the java function
 
-See [UtilFunctions.java](../../src/main/java/com/tibco/ep/samples/javafunction/UtilFunctions.java).
+See [UtilFunctions.java](../../main/java/com/tibco/ep/samples/javafunction/UtilFunctions.java).
 
 
 ## Provide a engine configuration for EventFlow use
