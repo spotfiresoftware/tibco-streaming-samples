@@ -155,7 +155,7 @@ Use the [maven](https://maven.apache.org) as **mvn install** to build from the c
 
 ### Create the docker network
 
-Use the [docker network](https://docs.docker.com/engine/reference/network/) command :
+Use the [docker network](https://docs.docker.com/engine/reference/commandline/network_create/) command :
 
 ```
 $ docker network create example.com
