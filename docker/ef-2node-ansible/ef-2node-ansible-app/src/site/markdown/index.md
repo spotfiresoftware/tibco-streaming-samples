@@ -25,7 +25,7 @@ MacOS and RHEL/CentOS.
 Ansible managament server must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS and RHEL/CentOS.
 
 Ansible cannot run on a Windows host natively. Please see more information under 
-[Ansile documentation website](#https://docs.ansible.com/ansible/latest/user_guide/windows_faq.html).
+[Ansile documentation website](https://docs.ansible.com/ansible/latest/user_guide/windows_faq.html).
 
 On MacOS, the resources available to docker may need to be increased beyond the default - see
 CPUs and Memory settings on the Advanced tab of Docker preferences.
