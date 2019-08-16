@@ -73,11 +73,11 @@ In this project, all Ansible files are located in ../src/main/ansible folder.
 └── project-playbook.yml
 ```
 Files: 
-- [ansible.cfg](../../main/ansible/ansible.cfg) - contain basic ansible configuration for this project to run locally
-- [inventory](../../main/ansible/inventory) - contain only one - localhost - as a target for all the playbook tasks 
-- [project-playbook.yml](../../main/ansible/project-playbook.yml) - is the main playbook file with all the task
-- [ansible-docker-test-playbook.yml](../../main/ansible/ansible-docker-test-playbook.yml) - this is a one task playbook file. This task will pull centos 7 docker container to your host and can be used to test if your Ansible and docker installation is correct.
-- [additional-playbooks](../../main/ansible/additional-playbooks/) folder - contain short few tasks playbooks to execute from command line. Please see description below.
+- [ansible.cfg](../../main/ansible/ansible.cfg) - contains basic ansible configuration for this project to run locally
+- [inventory](../../main/ansible/inventory) - contains only one - localhost - as a target for all playbook tasks 
+- [project-playbook.yml](../../main/ansible/project-playbook.yml) - is the main playbook file with all tasks
+- [ansible-docker-test-playbook.yml](../../main/ansible/ansible-docker-test-playbook.yml) - this is a one task playbook file. This task will pull CentOS 7 docker container to your host and can be used to test if your Ansible and docker installation is correct.
+- [additional-playbooks](../../main/ansible/additional-playbooks/) folder - contains few short playbooks to execute from command line. Please see description below.
 
 The one task ansible playbook can be executed from the current directory via command listed below :
 ```shell
