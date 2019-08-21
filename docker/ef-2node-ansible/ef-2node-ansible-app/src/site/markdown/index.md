@@ -18,7 +18,7 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 
 ## Prerequisites
 
-Docker needs to be running for this project. For more information on how to install and configure a docker please refer to [this sample](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node/ef-2node-app/src/site/markdown/index.md).
+Docker needs to be running for this project. For more information on how to install and configure a docker please refer to this [Docker: ef-2node](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node/ef-2node-app/src/site/markdown/index.md) sample.
 
 Ansible managament server must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS and RHEL/CentOS.
 
