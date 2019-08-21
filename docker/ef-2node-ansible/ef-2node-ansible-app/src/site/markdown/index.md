@@ -3,13 +3,13 @@
 This sample describes how to deploy an application archive containing an EventFlow fragment to Docker managed by Ansible.
 
 * [Prerequisites](#prerequisites)
-* [Run this sample in TIBCO StreamBase Studio&trade;](#run-this-sample-in-tibco-streambase-studio-trade)
+* [Loading this sample in TIBCO StreamBase Studio&trade;](#load-this-sample-in-tibco-streambase-studio-trade)
 * [Ansible part of this project](#ansible-part-of-this-project)
 * [Containers and nodes](#containers-and-nodes)
 * [Changes to the default pom.xml file - profiles](#changes-to-the-default-pom-file-profiles)
 * [Building and running from TIBCO StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
-* [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Example of Ansible task and maven plugin configuration](#example-of-ansible-task-and-maven-plugin-configuration)
+* [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Additional Ansible playbooks](#additional-ansible-playbooks)
 
 See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
@@ -18,27 +18,20 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 
 ## Prerequisites
 
-Docker must first be downloaded and installed - see https://www.docker.com/ for further details.  Any 
-recent version of docker should suffice, but testing was initially with docker 2.1 on
-MacOS and RHEL/CentOS.
+Docker needs to be running for this project. For more information on how to install and configure a docker please refer to [this sample](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node/ef-2node-app/src/site/markdown/index.md).
 
 Ansible managament server must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS and RHEL/CentOS.
 
 Ansible cannot run on a Windows host natively. Please see more information under 
 [Ansile documentation website](https://docs.ansible.com/ansible/latest/user_guide/windows_faq.html).
 
-On MacOS, the resources available to docker may need to be increased beyond the default - see
-CPUs and Memory settings on the Advanced tab of Docker preferences.
-
 All Ansible playbooks are executed based on configuration file and inventory file. Both files are included in the project. Please see more detailed description in [Ansible part of this project paragraph](#ansible-part-of-this-project) below. 
 
-![resources](images/resources.png)
+<a name="loading-this-sample-in-tibco-streambase-studio-trade"></a>
 
-<a name="run-this-sample-in-tibco-streambase-studio-trade"></a>
+## Loading this sample in TIBCO StreamBase Studio&trade;
 
-## Run this sample in TIBCO StreamBase Studio&trade;
-
-To be able to run this sample in TIBCO StreamBase Studio™ please go to smart import option under menu. For more information please refer to [Using Tibco Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md).
+To be able to run this sample in TIBCO StreamBase Studio™ please refer to [Using Tibco Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md).
 
 Below you can find a list of files this project is based on:
 
@@ -119,7 +112,7 @@ installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect
 	    <id>Ansible-OSX</id>
 	    <activation>
 		<file>
-		    <exists>/usr/local/bin/ansiblew</exists>
+		    <exists>/usr/local/bin/ansible</exists>
 		</file>
 	    </activation>
 	    <modules>
@@ -148,7 +141,7 @@ installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect
 ## Building and running from TIBCO StreamBase Studio&trade;
 
 Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade; or Run As shortcut.  Tests can
-be skipped if required by ticking the **Skip tests**. It is important to add **PATH** variable under Environment tab with value: **/bin:/usr/bin:/usr/local/bin:/usr/sbin**. Also in this place **TIBCO_EP_HOME** path can be set pointing to the working directory for this build project.
+be skipped if required by ticking the **Skip tests**. It is important to add **PATH** variable under Environment tab with value: **/bin:/usr/bin:/usr/local/bin:/usr/sbin**. 
 
 ![maven](images/studio-conf-ansible.jpg)
 
@@ -156,11 +149,65 @@ Tasks info from ansible playbook will show up on a console tab.
 
 ![maven](images/studio-run-ansible.jpg)
 
+<a name="example-of-ansible-task-and-maven-plugin-configuration"></a>
+
+## Example of Ansible task and maven plugin configuration.
+
+Ansible tasks starting docker container A with options :
+```
+- name: Start container A.{{ projectId }}
+  docker_container:
+      name: A.{{ projectId }}
+      image: docker/{{ projectId }}:{{ projectId_ver }}
+      hostname: A.example.com
+      networks: 
+        - name: example.com
+          aliases: 
+            - A.example.com
+      env:
+        NODENAME: A.{{ projectId }}
+      state: started
+``` 
+Variables and values from above task are passed by maven plugin to ansible playbook under the plugin configuration in pom.xml - see below.
+
+```xml
+   <plugin>
+        <groupId>co.escapeideas.maven</groupId>
+        <artifactId>ansible-maven-plugin</artifactId>
+        <version>1.3.0</version>
+        <executions>
+             <execution>
+               <id>ansible-playbook</id>
+                   <goals>
+                       <goal>playbook</goal>
+                   </goals>
+                   <configuration>
+                        <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
+                        <promoteDebugAsInfo>true</promoteDebugAsInfo> 
+                        <failOnAnsibleError>true</failOnAnsibleError>
+                        <extraVars>
+                           <variable>platform=platform_linuxx86_64</variable>
+                           <variable>sbrt_ver=${sbrt.version}</variable>   
+                           <variable>projectId=${project.artifactId}</variable> 
+                           <variable>projectId_ver=${project.version}</variable>
+                           <variable>project_basedir=${project.basedir}</variable>
+                           <variable>project_build_directory=${project.build.directory}</variable>
+                           <variable>skipTests=${skipTests}</variable>
+                        </extraVars>
+                   </configuration>
+             </execution>
+          </executions>
+    </plugin>
+```
+
 <a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
 
 ## Building this sample from the command line and running the integration test cases
 
-Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system :
+Use the [maven commands](https://maven.apache.org) to build from the command line or Continuous Integration system:
+
+- mvn clean  - it will clean the directories and files created by previous project
+- mvn install - it will run an ansible playbook, below is the example of the console output: Play and tasks
 
 ```
 ...
@@ -305,78 +352,15 @@ Use the [maven](https://maven.apache.org) as **mvn install** to build from the c
 ...
 ```
 
-<a name="example-of-ansible-task-and-maven-plugin-configuration"></a>
-
-## Example of Ansible task and maven plugin configuration.
-
-Ansible tasks starting docker container A with options :
-```
-- name: Start container A.{{ projectId }}
-  docker_container:
-      name: A.{{ projectId }}
-      image: docker/{{ projectId }}:{{ projectId_ver }}
-      hostname: A.example.com
-      networks: 
-        - name: example.com
-          aliases: 
-            - A.example.com
-      env:
-        NODENAME: A.{{ projectId }}
-      state: started
-``` 
-Variables and values from above task are passed by maven plugin to ansible playbook under the plugin configuration in pom.xml - see below.
-
-```xml
-   <plugin>
-        <groupId>co.escapeideas.maven</groupId>
-        <artifactId>ansible-maven-plugin</artifactId>
-        <version>1.3.0</version>
-        <executions>
-             <execution>
-               <id>ansible-playbook</id>
-                   <goals>
-                       <goal>playbook</goal>
-                   </goals>
-                   <configuration>
-                        <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
-                        <promoteDebugAsInfo>true</promoteDebugAsInfo> 
-                        <failOnAnsibleError>true</failOnAnsibleError>
-                        <extraVars>
-                           <variable>platform=platform_linuxx86_64</variable>
-                           <variable>sbrt_ver=${sbrt.version}</variable>   
-                           <variable>projectId=${project.artifactId}</variable> 
-                           <variable>projectId_ver=${project.version}</variable>
-                           <variable>project_basedir=${project.basedir}</variable>
-                           <variable>project_build_directory=${project.build.directory}</variable>
-                           <variable>skipTests=${skipTests}</variable>
-                        </extraVars>
-                   </configuration>
-             </execution>
-          </executions>
-    </plugin>
-```
-
 <a name="additional-ansible-playbooks"></a>
 
 ## Additional Ansible playbooks.
 
-When you execute this project with skip test option you will have only docker images build (base and application). To test those images and start nodes, you can run ansible playbooks located in aditional-playbooks folder. See list of files below.
-```shell
-.
-|── ansible
-│   ├── aditional-playbooks
-│   │   ├── 1-start_cluster.yml
-│   │   ├── 2-validate_cluster.yml
-│   │   └── 3-stop_cluster.yml
-│   ├── ansible.cfg
-│   ├── ansible-docker-test-playbook.yml
-│   ├── inventory
-│   └── project-playbook.yml
-```
+When you execute this project with skip test option you will have only docker images build (base and application). To test those images and start nodes, you can run ansible playbooks located in aditional-playbooks folder.
 
 Those additional ansible playbooks are divided in three groups and contain only few tasks. For best results run them in order starting from #1.
 
-*** [Start cluster](../../main/ansible/additional-playbooks/1-start_cluster.yml) playbook.
+* [Start cluster](../../main/ansible/additional-playbooks/1-start_cluster.yml) playbook.
 ```shell
 	$ ansible-playbook 1-start_cluster.yml 
 ```
@@ -403,7 +387,7 @@ PLAY RECAP *********************************************************************
 ```
 This playbook has three main tasks: create a network example.com, start container with node named: A.ef-2nod-e-ansible-app and start container with node named: B.ef-2nod-e-ansible-app. 
 
-*** [Validate cluster](../../main/ansible/additional-playbooks/2-validate_cluster.yml) playbook.
+* [Validate cluster](../../main/ansible/additional-playbooks/2-validate_cluster.yml) playbook.
 ```shell
 	$ ansible-playbook 2-validate_cluster.yml
 ```
@@ -466,7 +450,7 @@ PLAY RECAP *********************************************************************
 ```
 This playbook has two main tasks: run epadmin command on both clusters.
 
-*** [Stop cluster](../../main/ansible/additional-playbooks/3-stop_cluster.yml) playbook.
+* [Stop cluster](../../main/ansible/additional-playbooks/3-stop_cluster.yml) playbook.
 ```shell
 	$ ansible-playbook 3-stop_cluster.yml
 ```
