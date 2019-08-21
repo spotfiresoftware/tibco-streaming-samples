@@ -3,7 +3,7 @@
 This sample describes how to deploy an application archive containing an EventFlow fragment to Docker managed by Ansible.
 
 * [Prerequisites](#prerequisites)
-* [Loading this sample in TIBCO StreamBase Studio&trade;](#load-this-sample-in-tibco-streambase-studio-trade)
+* [Loading this sample in TIBCO StreamBase Studio&trade;](#loading-this-sample-in-tibco-streambase-studio-trade)
 * [Ansible part of this project](#ansible-part-of-this-project)
 * [Containers and nodes](#containers-and-nodes)
 * [Changes to the default pom.xml file - profiles](#changes-to-the-default-pom-file-profiles)
