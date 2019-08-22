@@ -7,6 +7,7 @@ Samples :
 * [How to deploy a 2-node EventFlow application in Docker](ef-2node)
 * [How to deploy a LiveView application in Docker](lv-1node)
 * [How to user Docker to test proxy discovery.](pd-test)
+* [How to deploy a 2-node EventFlow application in Docker managed by Ansible](ef-2node-ansible)
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
