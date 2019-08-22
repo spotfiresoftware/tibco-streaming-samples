@@ -45,6 +45,7 @@
         <module>ef-2node</module>
         <module>lv-1node</module>
         <module>pd-test</module>
+        <module>ef-2node-ansible</module>
     </modules>
 
 </project>

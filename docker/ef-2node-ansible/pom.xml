@@ -63,32 +63,33 @@
     </properties>
 
     <!-- if Ansible is available, run playbook and build docker images -->
+    <!-- note that we assume if ansible is installed so is docker -->
     <profiles>
-	<profile>
-	    <id>Ansible-OSX</id>
-	    <activation>
-		<file>
-		    <exists>/usr/local/bin/ansible-new</exists>
-		</file>
-	    </activation>
-	    <modules>
-    		<module>ef-2node-ansible-ef</module>
-    		<module>ef-2node-ansible-app</module>
-	    </modules>
-	</profile>
+        <profile>
+            <id>Ansible-OSX</id>
+            <activation>
+                <file>
+                    <exists>/usr/local/bin/ansible</exists>
+                </file>
+            </activation>
+            <modules>
+                <module>ef-2node-ansible-ef</module>
+                <module>ef-2node-ansible-app</module>
+            </modules>
+        </profile>
 
-	<profile>
-	    <id>Ansible-Linux</id>
-	    <activation>
-		<file>
-		    <exists>/usr/bin/ansible-new</exists>
-		</file>
-	    </activation>
-	    <modules>
-    		<module>ef-2node-ansible-ef</module>
-    		<module>ef-2node-ansible-app</module>
-	    </modules>
-	</profile>
+        <profile>
+            <id>Ansible-Linux</id>
+            <activation>
+                <file>
+                    <exists>/usr/bin/ansible</exists>
+                </file>
+            </activation>
+            <modules>
+                <module>ef-2node-ansible-ef</module>
+                <module>ef-2node-ansible-app</module>
+            </modules>
+        </profile>
     </profiles>
 
 </project>
