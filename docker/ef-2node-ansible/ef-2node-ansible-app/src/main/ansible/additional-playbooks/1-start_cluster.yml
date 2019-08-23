@@ -51,6 +51,9 @@
          NODENAME: A.{{ projectId }}
        state: started
 
+  - name: Waiting for Node A to start
+    shell: until docker logs A.{{ projectId }} | grep -q "COMMAND FINISHED"; do sleep 1; done
+
   - name: Start container B.{{ projectId }}
     docker_container:
        name: B.{{ projectId }}
@@ -63,3 +66,6 @@
        env:
          NODENAME: B.{{ projectId }}
        state: started
+
+  - name: Waiting for Node B to start
+    shell: until docker logs B.{{ projectId }} | grep -q "COMMAND FINISHED"; do sleep 1; done
