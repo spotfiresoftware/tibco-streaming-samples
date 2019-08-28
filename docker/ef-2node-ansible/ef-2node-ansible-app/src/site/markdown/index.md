@@ -356,7 +356,7 @@ Use the [maven commands](https://maven.apache.org) to build from the command lin
 
 ## Additional Ansible playbooks.
 
-When you execute this project with skip test option you will have only docker images build (base and application). To test those images and start nodes, you can run ansible playbooks located in aditional-playbooks folder.
+When you execute this project with _-DskipTest=true_ option you will have only docker images build (base and application). To test those images and start nodes, you can run ansible playbooks located in aditional-playbooks folder.
 
 Those additional ansible playbooks are divided in three groups and contain only few tasks. For best results run them in order starting from #1.
 
