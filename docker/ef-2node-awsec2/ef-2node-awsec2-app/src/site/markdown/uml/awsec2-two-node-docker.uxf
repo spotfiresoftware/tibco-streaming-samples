@@ -1,0 +1,56 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><help_text>Ansible
+Management
+console
+fig=blue
+
+</help_text><element><id>UMLDeployment</id><coordinates><x>560</x><y>460</y><w>290</w><h>240</h></coordinates><panel_attributes>Container A.ef-2node-awsec2-app
+Hostname A.example.com</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>570</x><y>520</y><w>260</w><h>60</h></coordinates><panel_attributes>Node A.ef-2node-awsec2-app
+fg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>730</y><w>370</w><h>40</h></coordinates><panel_attributes>lt=()-()
+example.com Docker network</panel_attributes><additional_attributes>10;20;350;20</additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>570</y><w>110</w><h>200</h></coordinates><panel_attributes>admin
+port
+2000
+lt=.</panel_attributes><additional_attributes>10;10;10;90;90;180</additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>730</y><w>110</w><h>40</h></coordinates><panel_attributes></panel_attributes><additional_attributes>90;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>570</y><w>170</w><h>200</h></coordinates><panel_attributes>discovery
+port
+54321
+lt=.</panel_attributes><additional_attributes>100;10;100;90;10;180</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>900</x><y>520</y><w>260</w><h>60</h></coordinates><panel_attributes>Node B.ef-2node-awsec2-app
+fg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1000</x><y>730</y><w>130</w><h>40</h></coordinates><panel_attributes></panel_attributes><additional_attributes>110;20;10;20</additional_attributes></element><element><id>UMLDeployment</id><coordinates><x>530</x><y>400</y><w>690</w><h>380</h></coordinates><panel_attributes>EC2 Instance (Docker host)
+fg=blue
+Play #4</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>570</y><w>90</w><h>200</h></coordinates><panel_attributes>distribution
+port
+3000
+
+
+
+
+
+lt=.</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>UMLDeployment</id><coordinates><x>890</x><y>460</y><w>290</w><h>240</h></coordinates><panel_attributes>Container B.ef-2node-awsec2-app
+Hostname B.example.com</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>910</x><y>570</y><w>120</w><h>200</h></coordinates><panel_attributes>admin
+port
+2000
+lt=.</panel_attributes><additional_attributes>10;10;10;90;100;180</additional_attributes></element><element><id>Relation</id><coordinates><x>1000</x><y>570</y><w>90</w><h>200</h></coordinates><panel_attributes>distribution
+port
+3000
+
+
+
+
+
+lt=.</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>1000</x><y>570</y><w>160</w><h>200</h></coordinates><panel_attributes>discovery
+port
+54321
+lt=.</panel_attributes><additional_attributes>90;10;90;90;10;180</additional_attributes></element><element><id>UMLDeployment</id><coordinates><x>750</x><y>60</y><w>220</w><h>70</h></coordinates><panel_attributes>
+DockerHub
+fg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLDeployment</id><coordinates><x>390</x><y>220</y><w>870</w><h>590</h></coordinates><panel_attributes>AWS
+fg=blue
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLDeployment</id><coordinates><x>460</x><y>300</y><w>780</w><h>500</h></coordinates><panel_attributes>VPC
+fg=blue
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>390</x><y>170</y><w>90</w><h>20</h></coordinates><panel_attributes>Play #2</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLDeployment</id><coordinates><x>460</x><y>10</y><w>110</w><h>140</h></coordinates><panel_attributes>
+Ansible 
+Management 
+Console
+
+Play #1
+fg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>90</y><w>210</w><h>30</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;10;190;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>610</x><y>70</y><w>90</w><h>20</h></coordinates><panel_attributes>Play #1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>140</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>140</y><w>30</w><h>200</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;10;10;177</additional_attributes></element><element><id>UMLState</id><coordinates><x>460</x><y>310</y><w>150</w><h>60</h></coordinates><panel_attributes>Internet Gateway
+fg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>520</x><y>250</y><w>90</w><h>20</h></coordinates><panel_attributes>Play #3</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>340</y><w>150</w><h>80</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;10;130;10;130;60</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>620</x><y>320</y><w>90</w><h>20</h></coordinates><panel_attributes>Play #3</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>960</x><y>110</y><w>180</w><h>310</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;10;160;10;160;290</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1000</x><y>90</y><w>90</w><h>20</h></coordinates><panel_attributes>Play #3</panel_attributes><additional_attributes></additional_attributes></element></diagram>

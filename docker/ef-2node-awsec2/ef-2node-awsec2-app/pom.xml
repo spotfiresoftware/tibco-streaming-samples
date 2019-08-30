@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2018-2019, TIBCO Software Inc.
+  
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+  
+  1. Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+  
+  2. Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+  
+  3. Neither the name of the copyright holder nor the names of its contributors
+     may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+  
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tibco.ep.samples.docker</groupId>
+    <artifactId>ef-2node-awsec2-app</artifactId>
+    <packaging>ep-application</packaging>
+    <version>1.0.0</version>
+    <name>AWS-EC2: 2-node EventFlow - Application</name>
+    <description>How to deploy a 2-node EventFlow application in Docker to AWS EC2 instance(s) managed by Ansible - Application</description>
+
+    <!-- common definitions for this version of StreamBase -->
+    <parent>
+        <groupId>com.tibco.ep.sb.parent</groupId>
+        <artifactId>ep-application-docker-samples</artifactId>
+        <version>[10.5.0-SNAPSHOT,99.99.99)</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <dockerDomain>example.com</dockerDomain>
+        <skipApplicationDocker>false</skipApplicationDocker>
+        <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+        <skipDockerTests>false</skipDockerTests>
+        <skipTests>false</skipTests>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.tibco.ep.samples.docker</groupId>
+            <artifactId>ef-2node-awsec2-ef</artifactId>
+            <version>${project.version}</version>
+            <type>ep-eventflow-fragment</type>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>com.tibco.ep</groupId>
+                <artifactId>ep-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <skipTests>${skipLocalTests}</skipTests>
+                    <nodes>
+                        <node>A</node>
+                        <node>B</node>
+                     </nodes>
+                 </configuration>
+            </plugin>
+            <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-dependency-plugin</artifactId>
+        	<executions>
+          	   <execution>
+            	      <id>copy-dependencies</id>
+            	      <phase>package</phase>
+            		<goals>
+              		    <goal>copy-dependencies</goal>
+            		</goals>
+            		<configuration>
+              		    <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+          		    <includeArtifactIds>platform_linuxx86_64</includeArtifactIds>
+          		    <stripVersion>true</stripVersion>
+            		</configuration>
+          	   </execution>
+        	</executions>
+      	    </plugin>
+      	    <plugin>
+	        <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                       <id>Copy Docker files</id>
+                       <phase>validate</phase>
+                       <goals>
+                          <goal>copy-resources</goal>
+                       </goals>
+                       <configuration>
+			  <outputDirectory>${project.build.directory}/docker/</outputDirectory>
+                          <resources>
+                              <resource>
+			          <directory>${project.basedir}/src/main/docker/</directory>
+			      </resource>
+		          </resources>
+		       </configuration>
+		    </execution>
+		</executions>
+	    </plugin>
+            <plugin>
+		 <groupId>co.escapeideas.maven</groupId>
+		 <artifactId>ansible-maven-plugin</artifactId>
+		 <version>1.3.0</version>
+		 <executions>
+		   <execution>
+		       <id>ansible-playbook</id>
+		           <goals>
+		               <goal>playbook</goal>
+		           </goals>
+		           <configuration>
+                                <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
+                                <promoteDebugAsInfo>true</promoteDebugAsInfo> 
+                                <failOnAnsibleError>true</failOnAnsibleError>
+                                <extraVars>
+                        	   <variable>platform=platform_linuxx86_64</variable>
+                        	   <variable>sbrt_ver=${sbrt.version}</variable>   
+				   <variable>projectId=${project.artifactId}</variable> 
+				   <variable>projectId_ver=${project.version}</variable>
+    				   <variable>project_basedir=${project.basedir}</variable>
+    				   <variable>project_build_directory=${project.build.directory}</variable>
+    				   <variable>skipTests=${skipTests}</variable>
+                                </extraVars>
+                           </configuration>
+		     </execution>
+		  </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,54 @@
+#  Copyright (C) 2018-2019, TIBCO Software Inc.
+#  
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions are met:
+#  
+#  1. Redistributions of source code must retain the above copyright notice,
+#     this list of conditions and the following disclaimer.
+#  
+#  2. Redistributions in binary form must reproduce the above copyright notice,
+#     this list of conditions and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  
+#  3. Neither the name of the copyright holder nor the names of its contributors
+#     may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#  
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+#  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+#  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+#  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+#  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+#  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+#  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#  POSSIBILITY OF SUCH DAMAGE.
+
+---
+### Condiguration file for Ansible playbook -  AWS account 
+
+### AWS with Security Token Service
+### For AWS direct access accout set sts variable to false.
+### For AWS account with STS (configured with assumed role) set sts variable to true.
+sts: true
+
+#AWS with Security Token Service (STS)			### Skip the STS part
+role_arn: "arn:aws:iam::12345:role/ansible-access" 	### Role ARN
+role_session_name: "Ansible"                       	### Name for the session
+
+#Region - All tasks will be executed base on this region
+region: us-east-1
+
+#Security group settings
+sg_name: "sg_ef-2node-awsec2"
+sg_description: "ef-2node-awsec2 project security group"
+cidr_ip: "1.2.3.4/32"
+rule_desc: "SSH from MyIP only"
+
+#EC2 instance details - CentOS 7x64 (with minimum 1vCPU and 2GB memory)
+instance_type: "t2.small"
+image_id: "ami-02eac2c0129f6376b"
+keypair: "key_ef-2node-awsec2"
+count: 1						### Number of instances you like to launch
