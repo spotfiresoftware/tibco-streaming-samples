@@ -84,7 +84,7 @@ Check [playbook tasks](../../site/markdown/playbook-tasks.md) to see a selected 
 
 ## Containers and nodes
 
-In this sample we name the docker container as **A.ef-2node-ansible-app**,  which hosts the StreamBase node **A.ef-2node-ansible-app**, and **B.ef-2node-ansible-app**, which hosts the StreamBase node **B.ef-2node-app**.  A Docker network **example.com** connects the nodes together :
+In this sample we name the docker container as **A.ef-2node-ansible-app**,  which hosts the StreamBase node **A.ef-2node-ansible-app**, and **B.ef-2node-ansible-app**, which hosts the StreamBase node **B.ef-2node-ansible-app**.  A Docker network **example.com** connects the nodes together :
 
 ![nodes](images/two-node-docker.svg)
 
@@ -209,7 +209,7 @@ Use the [maven commands](https://maven.apache.org) to build from the command lin
 - mvn clean  - it will clean the directories and files created by previous project
 - mvn install - it will run an ansible playbook, below is the example of the console output: Play and tasks
 
-```
+```ansible
 ...
 [INFO] PLAY [StreamBase create base and application docker image based on Centos7] ****
 [INFO] 
@@ -364,7 +364,7 @@ Those additional ansible playbooks are divided in three groups and contain only 
 ```shell
 	$ ansible-playbook 1-start_cluster.yml 
 ```
-```
+```ansible
 PLAY [Start Cluster] *************************************************************************
 
 TASK [Gathering Facts] ***********************************************************************
@@ -397,7 +397,7 @@ This playbook has three main tasks: create a network example.com, start containe
 ```shell
 	$ ansible-playbook 2-validate_cluster.yml
 ```
-```
+```ansible
 PLAY [Validate Cluster] **********************************************************************
 
 TASK [Gathering Facts] ***********************************************************************
@@ -460,7 +460,7 @@ This playbook has two main tasks: run epadmin command on both clusters.
 ```shell
 	$ ansible-playbook 3-stop_cluster.yml
 ```
-```
+```ansible
 PLAY [Stop Cluster] **************************************************************************
 
 TASK [Gathering Facts] ***********************************************************************
