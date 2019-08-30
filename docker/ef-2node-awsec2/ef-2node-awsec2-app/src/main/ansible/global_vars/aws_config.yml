@@ -35,7 +35,7 @@
 sts: true
 
 #AWS with Security Token Service (STS)			### Skip the STS part
-role_arn: "arn:aws:iam::12345:role/ansible-access" 	### Role ARN
+role_arn: "arn:aws:iam::12345:role/my-role" 	### Role ARN
 role_session_name: "Ansible"                       	### Name for the session
 
 #Region - All tasks will be executed base on this region
