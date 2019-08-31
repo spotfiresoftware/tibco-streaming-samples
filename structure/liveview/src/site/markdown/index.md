@@ -5,7 +5,7 @@ This sample describes how to structure a LiveView fragment.
 A LiveView fragment directory structure consists of :
 
 * **pom.xml** - Maven Project Object Module that controls the build, tests, installation and deployment of the project.
-* **src/main/liveview/lv-user-webapps/** - Directory containing LiveView web applications.
+* **src/main/liveview/lv-user-webapps/** - Directory containing LiveView web applications (such as lvweb.war).
 * **src/main/liveview/lv-web/plugins/** - Directory containing LiveView web plugins.
 * **src/main/liveview/lv-web/theme/** - Directory containing LiveView web theme.
 * **src/main/eventflow/[package]/** - Directory containing any EventFlow applications.
@@ -59,9 +59,6 @@ This sample's structure is shown below :
         │                   └── liveview
         └── resources
 ```
-
-Note that lvweb.war is treated as a maven dependency and is automatically copied into the maven build directory 
-(by default, target/classes) during the build process ready to be added to the fragment archive.
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
