@@ -30,7 +30,7 @@
 - name: Play 1 -- Create StreamBase base and application docker image based on Centos7
   hosts: localhost
   vars_files:
-    - global_vars/docker_hub.yml
+    - "{{ project_basedir }}/target/classes/global_vars//docker_hub.yml"
 
   tasks:
   - name: Create work directory for base image
@@ -260,7 +260,7 @@
   connection: local
   gather_facts: false
   vars_files:
-     - global_vars/aws_config.yml
+     - "{{ project_basedir }}/target/classes/global_vars//aws_config.yml"
 
   tasks:
   - name: Assume an existing role
@@ -330,7 +330,7 @@
   remote_user: centos
   become: yes
   vars_files:
-     - global_vars/docker_hub.yml
+     - "{{ project_basedir }}/target/classes/global_vars/docker_hub.yml"
 
   tasks:
   - name: Install Docker CE on CentOs7 -- geting docker-ce repo
@@ -397,7 +397,7 @@
   remote_user: centos
   become: yes
   vars_files:
-     - global_vars/docker_hub.yml
+     - "{{ project_basedir }}/target/classes/global_vars/docker_hub.yml"
 
   tasks:
   - name: Create example.com network
