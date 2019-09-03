@@ -287,11 +287,6 @@
           to_port: 22
           cidr_ip: "{{ cidr_ip }}"
           rule_desc: "{{ rule_desc }}"
-        - proto: tcp
-          from_port: 22
-          to_port: 22
-          cidr_ip: "50.233.43.62/32"
-          rule_desc: "SSH from Boston"
 
   - name: Create EC2 instance -- Centos7 -- {{ instance_type }}
     ec2:
