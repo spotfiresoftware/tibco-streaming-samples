@@ -19,7 +19,7 @@
       state: latest
 ```
 
-#### *** Task with module [copy](https://docs.ansible.com/ansible/latest/modules/copy_module.html) to copy a selected files (list of files in \[ ... ] ) to ec2 instance. Source and destination folder needs to be defined. Destination folder will be created if not exist.  
+#### *** Task with module [copy](https://docs.ansible.com/ansible/latest/modules/copy_module.html) to copy a selected files (list of files in \[ ... ] ) to ec2 instance. Source and destination folder needs to be defined. Destination folder will be created if not exist. Also you can specify new owner and group for the copied files as well as set new permisions. 
 ```
   - name: Copy files to EC2 instance (files in additional-scripts folder)
     copy:
