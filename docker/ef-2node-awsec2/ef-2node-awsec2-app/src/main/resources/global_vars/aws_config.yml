@@ -34,7 +34,7 @@
 ### For AWS account with STS (configured with assumed role) set sts variable to true.
 sts: true
 
-#AWS with Security Token Service (STS)			### Skip the STS part
+#AWS with Security Token Service (STS)			
 role_arn: "arn:aws:iam::12345:role/my-role" 		### Role ARN
 role_session_name: "Ansible"                       	### Name for the session
 
