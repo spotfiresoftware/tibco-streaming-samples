@@ -54,7 +54,7 @@ Search is based on defined regular expressions in the list below which is execut
     state: started
 ```
 
-#### *** Task with [shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html) module can execute shell commands on targets. In the task below we execute docker exec … command and register the result in NodeAresults variable. After this is completed successfully, the next task displays the results on screen based on module debug.
+#### *** Task with [shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html) module can execute shell commands on targets. In the task below we execute docker exec … command and register the result in NodeAresults variable. After this is completed successfully, the next task displays the results on screen based on module [debug](https://docs.ansible.com/ansible/latest/modules/debug_module.html).
 ```
 - name: Run epadmin command on Node A
   shell: docker exec A.{{ projectId }} epadmin --servicename={{ projectId }} display cluster
