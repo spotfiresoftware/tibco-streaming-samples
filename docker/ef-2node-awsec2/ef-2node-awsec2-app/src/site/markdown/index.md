@@ -241,11 +241,11 @@ Based on the security group created in Play #2 and its rules, only Ansible manag
 Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade; or Run As shortcut.  Tests can
 be skipped if required by ticking the **Skip tests**. It is important to add **PATH** variable under Environment tab with value: **/bin:/usr/bin:/usr/local/bin:/usr/sbin**. 
 
-![maven](images/studio-conf-ansible.jpg)
+![maven](images/studio-conf-awsec2.jpg)
 
 Plays and tasks info from ansible playbook will show up on a console tab.
 
-![maven](images/studio-run-ansible.jpg)
+![maven](images/studio-run-awsec2.jpg)
 
 <a name="building-and-running-from-tibco-streambase-studio-trade"></a>
 
