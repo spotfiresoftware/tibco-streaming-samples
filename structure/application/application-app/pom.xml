@@ -38,7 +38,7 @@
     <artifactId>application-app</artifactId>
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
-    <name>Structure : Application - Application</name>
+    <name>Structure: Application - Application</name>
     <description>How to structure a maven aggregate project with EventFlow fragment and application archive - Application</description>
 
     <!-- common definitions for this version of StreamBase -->

@@ -38,7 +38,7 @@
     <artifactId>pd-test-ef</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Docker : proxy discovery test - EventFlow fragment</name>
+    <name>Docker: proxy discovery test - EventFlow fragment</name>
     <description>How to user docker to test proxy discovery. - EventFlow fragment</description>
 
     <!-- common definitions for this version of StreamBase -->

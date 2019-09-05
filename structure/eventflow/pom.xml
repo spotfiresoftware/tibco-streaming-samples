@@ -38,7 +38,7 @@
     <artifactId>eventflow</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Structure : Eventflow</name>
+    <name>Structure: Eventflow</name>
     <description>How to structure an EventFlow fragment.</description>
 
     <properties>

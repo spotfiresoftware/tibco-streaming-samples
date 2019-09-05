@@ -38,7 +38,7 @@
     <artifactId>ca-polling-ef</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>HA : cluster aware polling - EventFlow Fragment</name>
+    <name>HA: cluster aware polling - EventFlow Fragment</name>
     <description>How to use cluster aware in TIBCO Streaming projects - EventFlow Fragment</description>
 
     <properties>

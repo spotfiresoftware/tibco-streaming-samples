@@ -38,7 +38,7 @@
     <artifactId>javafunction</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Java : Java Function</name>
+    <name>Java: Java Function</name>
     <description>How to invoke java code from EventFlow.</description>
 
     <properties>

@@ -38,7 +38,7 @@
     <artifactId>pd-test</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Docker : proxy discovery test</name>
+    <name>Docker: proxy discovery test</name>
     <description>How to user Docker to test proxy discovery.</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>

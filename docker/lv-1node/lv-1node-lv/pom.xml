@@ -38,7 +38,7 @@
     <artifactId>lv-1node-lv</artifactId>
     <packaging>ep-liveview-fragment</packaging>
     <version>1.0.0</version>
-    <name>Docker : LiveView Web - LiveView Fragment</name>
+    <name>Docker: LiveView Web - LiveView Fragment</name>
     <description>How to deploy a LiveView Web application in Docker - LiveView Fragment</description>
 
     <!-- common definitions for this version of StreamBase -->

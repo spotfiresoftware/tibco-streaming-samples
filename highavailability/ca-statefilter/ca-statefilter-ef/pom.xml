@@ -38,7 +38,7 @@
     <artifactId>ca-statefilter-ef</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>HA : cluster aware state filter - EventFlow Fragment</name>
+    <name>HA: cluster aware state filter - EventFlow Fragment</name>
     <description>How to build cluster aware TIBCO Streaming projects - EventFlow Fragment</description>
 
     <!-- common definitions for this version of StreamBase -->

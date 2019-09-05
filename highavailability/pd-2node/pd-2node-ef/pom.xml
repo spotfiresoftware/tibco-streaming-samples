@@ -38,7 +38,7 @@
     <artifactId>pd-2node-ef</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>HA : proxy discovery - EventFlow Fragment</name>
+    <name>HA: proxy discovery - EventFlow Fragment</name>
     <description>How to build a 2-node active active deployment + proxy discovery. - EventFlow Fragment</description>
 
     <!-- common definitions for this version of StreamBase -->

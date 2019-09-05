@@ -38,7 +38,7 @@
     <artifactId>liveview</artifactId>
     <packaging>ep-liveview-fragment</packaging>
     <version>1.0.0</version>
-    <name>Structure : LiveView</name>
+    <name>Structure: LiveView</name>
     <description>How to structure an LiveView fragment.</description>
 
     <properties>

@@ -38,7 +38,7 @@
     <artifactId>ef-2node-ef</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Docker : 2-node EventFlow - EventFlow Fragment</name>
+    <name>Docker: 2-node EventFlow - EventFlow Fragment</name>
     <description>How to deploy a 2-node EventFlow application in Docker - EventFlow Fragment</description>
 
     <!-- common definitions for this version of StreamBase -->

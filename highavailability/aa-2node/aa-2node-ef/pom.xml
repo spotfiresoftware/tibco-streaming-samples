@@ -38,7 +38,7 @@
     <artifactId>aa-2node-ef</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>HA : 2-node active active - EventFlow Fragment</name>
+    <name>HA: 2-node active active - EventFlow Fragment</name>
     <description>How to build a 2-node active active deployment. - EventFlow Fragment</description>
 
     <!-- common definitions for this version of StreamBase -->

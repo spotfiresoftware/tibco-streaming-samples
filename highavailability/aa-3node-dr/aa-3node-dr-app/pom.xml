@@ -38,7 +38,7 @@
     <artifactId>aa-3node-dr-app</artifactId>
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
-    <name>HA : 3-node active active + DR - Application</name>
+    <name>HA: 3-node active active + DR - Application</name>
     <description>How to build a 3-node active active deployment with disaster recovery. - Application</description>
 
     <!-- common definitions for this version of StreamBase -->

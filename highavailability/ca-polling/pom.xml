@@ -38,7 +38,7 @@
     <artifactId>ca-polling</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>HA : cluster aware polling</name>
+    <name>HA: cluster aware polling</name>
     <description>How to poll the filesystem with cluster aware operators</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
