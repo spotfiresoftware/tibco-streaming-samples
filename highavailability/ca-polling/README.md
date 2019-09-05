@@ -7,7 +7,7 @@ This is a maven aggregator project consisting of the following maven modules :
 * [HA : cluster aware polling - EventFlow Fragment](ca-polling-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/highavailability/ca-polling/ca-polling-ef/))
 * [HA : cluster aware polling - Application](ca-polling-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/highavailability/ca-polling/ca-polling-app/))
 
-_This is a Tibco approved sample_
+_This is a TIBCO approved sample._
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

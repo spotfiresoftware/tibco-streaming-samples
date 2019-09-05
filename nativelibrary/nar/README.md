@@ -7,7 +7,7 @@ This is a maven aggregator project consisting of the following maven modules :
 * [Native : NAR - C++ Library](nar-cpplib/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/nativelibrary/nar/nar-cpplib/))
 * [Native : NAR - EventFlow calling C++](nar-eventflow/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/nativelibrary/nar/nar-eventflow/))
 
-_This is a Tibco approved sample_
+_This is a TIBCO approved sample._
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

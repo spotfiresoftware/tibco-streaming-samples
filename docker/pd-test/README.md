@@ -7,7 +7,7 @@ This is a maven aggregator project consisting of the following maven modules :
 * [Docker : proxy discovery test - EventFlow fragment](pd-test-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/pd-test/pd-test-ef/))
 * [Docker : proxy discovery test - Application](pd-test-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/pd-test/pd-test-app/))
 
-_This is a Tibco approved sample_
+_This is a TIBCO approved sample._
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

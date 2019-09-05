@@ -4,7 +4,7 @@ How to invoke java code from EventFlow.
 
 * [javafunction](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/java/javafunction/))
 
-_This is a Tibco approved sample_
+_This is a TIBCO approved sample._
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

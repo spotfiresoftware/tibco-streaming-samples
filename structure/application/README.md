@@ -7,7 +7,7 @@ This is a maven aggregator project consisting of the following maven modules :
 * [Structure : Application - EventFlow Fragment](application-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/structure/application/application-ef/))
 * [Structure : Application - Application](application-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/structure/application/application-app/))
 
-_This is a Tibco approved sample_
+_This is a TIBCO approved sample._
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

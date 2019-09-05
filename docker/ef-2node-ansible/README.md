@@ -2,12 +2,8 @@
 
 How to deploy a 2-node EventFlow application in Docker managed by Ansible
 
-This is a maven aggregator project consisting of the following maven modules :
 
-* [Ansbile-Docker: 2-node EventFlow - EventFlow Fragment](ef-2node-ansible-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/ef-2node-ansible/ef-2node-ansible-ef/))
-* [Ansible-Docker: 2-node EventFlow - Application](ef-2node-ansible-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/ef-2node-ansible/ef-2node-ansible-app/))
-
-_This is a Tibco approved sample_
+_This is a TIBCO approved sample._
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
