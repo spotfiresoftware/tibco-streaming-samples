@@ -30,7 +30,7 @@
 ### Configuration file for Ansible playbook -  AWS account 
 
 ### AWS with Security Token Service
-### For AWS direct access accout set sts variable to false.
+### For AWS direct access account set sts variable to false.
 ### For AWS account with STS (configured with assumed role) set sts variable to true.
 sts: true
 
