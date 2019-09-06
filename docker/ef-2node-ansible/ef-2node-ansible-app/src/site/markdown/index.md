@@ -240,7 +240,7 @@ Use the [maven commands](https://maven.apache.org) to build from the command lin
 [INFO] TASK [Clean up work directory for base image] **********************************
 [INFO] changed: [127.0.0.1]
 [INFO] 
-[INFO] TASK [Remove itermediate image with LABEL build-image=1.0.0] *******************
+[INFO] TASK [Remove intermediate image with LABEL build-image=1.0.0] *******************
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Create source directory for app image] ***********************************
