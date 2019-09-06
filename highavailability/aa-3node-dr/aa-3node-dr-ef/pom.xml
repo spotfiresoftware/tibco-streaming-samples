@@ -38,7 +38,7 @@
     <artifactId>aa-3node-dr-ef</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>HA : 3-node active active + DR - EventFlow Fragment</name>
+    <name>HA: 3-node active active + DR - EventFlow Fragment</name>
     <description>How to build a 3-node active active deployment with disaster recovery. - EventFlow Fragment</description>
 
     <!-- common definitions for this version of StreamBase -->

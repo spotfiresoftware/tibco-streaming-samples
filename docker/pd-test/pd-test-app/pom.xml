@@ -38,7 +38,7 @@
     <artifactId>pd-test-app</artifactId>
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
-    <name>Docker : proxy discovery test - Application</name>
+    <name>Docker: proxy discovery test - Application</name>
     <description>How to user docker to test proxy discovery. - Application</description>
 
     <!-- common definitions for this version of StreamBase -->

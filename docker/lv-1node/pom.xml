@@ -38,7 +38,7 @@
     <artifactId>lv-1node</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Docker : LiveView</name>
+    <name>Docker: LiveView</name>
     <description>How to deploy a LiveView application in Docker</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>

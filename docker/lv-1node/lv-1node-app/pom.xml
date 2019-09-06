@@ -38,7 +38,7 @@
     <artifactId>lv-1node-app</artifactId>
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
-    <name>Docker : LiveView Web - Application</name>
+    <name>Docker: LiveView Web - Application</name>
     <description>How to deploy a LiveView Web application in Docker - Application</description>
 
     <!-- common definitions for this version of StreamBase -->

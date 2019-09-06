@@ -38,7 +38,7 @@
     <artifactId>java</artifactId>
     <packaging>ep-java-fragment</packaging>
     <version>1.0.0</version>
-    <name>Structure : Java</name>
+    <name>Structure: Java</name>
     <description>How to structure an Java fragment.</description>
 
     <properties>

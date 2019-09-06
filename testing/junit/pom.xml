@@ -38,7 +38,7 @@
     <artifactId>junit</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Testing : Junit</name>
+    <name>Testing: Junit</name>
     <description>How to write unit tests for EventFlow fragments.</description>
 
     <properties>

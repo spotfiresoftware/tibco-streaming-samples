@@ -38,7 +38,7 @@
     <artifactId>application</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Structure : Application</name>
+    <name>Structure: Application</name>
     <description>How to structure a maven aggregate project with EventFlow fragment and application archive.</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>

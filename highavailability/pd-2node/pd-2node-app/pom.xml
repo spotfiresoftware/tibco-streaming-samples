@@ -38,7 +38,7 @@
     <artifactId>pd-2node-app</artifactId>
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
-    <name>HA : proxy discovery - Application</name>
+    <name>HA: proxy discovery - Application</name>
     <description>How to build a 2-node active active deployment + proxy discovery. - Application</description>
 
     <!-- common definitions for this version of StreamBase -->

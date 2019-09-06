@@ -39,7 +39,7 @@
     <artifactId>ca-statefilter-app</artifactId>
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
-    <name>HA : cluster aware state filter - Application</name>
+    <name>HA: cluster aware state filter - Application</name>
     <description>How to build cluster aware TIBCO Streaming projects - Application</description>
 
     <!-- common definitions for this version of StreamBase -->

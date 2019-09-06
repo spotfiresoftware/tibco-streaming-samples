@@ -38,7 +38,7 @@
     <artifactId>aa-3node</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>HA : 3-node active active</name>
+    <name>HA: 3-node active active</name>
     <description>How to build a 3-node active active deployment with dynamic data distribution policy.</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>

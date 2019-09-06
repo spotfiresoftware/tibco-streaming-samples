@@ -38,7 +38,7 @@
     <artifactId>ca-statefilter</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>HA : cluster aware state filter</name>
+    <name>HA: cluster aware state filter</name>
     <description>How to use the cluster aware state filter</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
