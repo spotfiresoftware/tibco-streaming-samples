@@ -27,7 +27,7 @@
 #  POSSIBILITY OF SUCH DAMAGE.
 
 ---
-### Condiguration file for Ansible playbook -  AWS account 
+### Configuration file for Ansible playbook -  AWS account 
 
 ### AWS with Security Token Service
 ### For AWS direct access accout set sts variable to false.
