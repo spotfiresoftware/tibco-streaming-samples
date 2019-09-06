@@ -18,8 +18,8 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 
 ## Prerequisites - Part #1
 
-This project is based on [Ansible-Docker : 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md). Please folow the prerequisities listed there to make sure Docker and Ansible management server are working properly.
-Ansible playbok contains several plays and tasks, executed in a sequence and dependend on each other so it is important to complete all steps listed below.
+This project is based on [Ansible-Docker : 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md). Please follow the prerequisites listed there to make sure Docker and Ansible management server are working properly.
+Ansible playbook contains several plays and tasks, executed in a sequence and dependend on each other so it is important to complete all steps listed below.
 
 ### 1. At this point we assumed your Ansible management server is up and working properly with Docker. 
 To test this you can execute a test playbook located under _../src/main/ansible/additional-playbooks/_ folder:
@@ -27,11 +27,11 @@ To test this you can execute a test playbook located under _../src/main/ansible/
 $ ansible-playbook ansible-docker-test-playbook.yml
 ```
 
-### 2. You need an AWS account and, install and configure an [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
-Also for SSH access to newly launched instance, we need to create a new Key Pair or use existing one.
+### 2. An AWS account is required with [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) tools installed and configured.
+Key pair is required for ssh access to the newly launched instance.
 
-In This project we asumed you have one of two AWS type account configured and avialble to use.
-Please see examples below and update files based on your case.
+In this project, it is assumed that either personal or federated AWS account is configured and available to use.
+Please see examples below and update files as needed.
 
 #### Personal/Individual account - user with direct access
 
@@ -42,13 +42,13 @@ In this case please update file listed below with your information.
 aws_access_key_id = ABCDEFGH12345
 aws_secret_access_key = abcdefgh1234567890
 ```
-You can test acces to AWS account execute those basic command in CLI.
+Access to AWS account can be tested by executing this command in CLI.
 ```shell
 $ aws ec2 describe-instances
 ```
 
 #### "Federated" AWS account with Assumed Role configured (with STS - Security Token Service)
-Under your IAM create role and access key for Ansible module tto be able to connect. More information in this [tutorial](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html). 
+Create role and access key for Ansible module to be able to connect. More information in this [tutorial](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html). 
 
 In this case please update files listed as an examples below with your information. 
 - In this file, _~/.aws/credentials_ add both of your keys.
@@ -68,7 +68,7 @@ role_arn = arn:aws:iam::12345:role/my-role
 region = us-east-1
 source_profile = default
 ```
-You can test acces to AWS account execute those basic commands in CLI.
+Access to AWS account can be tested by executing those commands in CLI.
 ```shell
 $ aws ec2 describe-instances --profile my-role
 ```
@@ -104,7 +104,7 @@ bin_ansible_callbacks = True
 
 ### 4. Install boto and boto3 python libraries needed for Ansible EC2 modules.
 
-This instalation can be completed via [Python PIP](https://pip.pypa.io/en/stable/installing/)
+This installation can be completed via [Python PIP](https://pip.pypa.io/en/stable/installing/)
 
 ```shell
 $ pip install boto boto3
@@ -125,11 +125,11 @@ Below you can find a list of files this project is based on:
 * [Trusted hosts HOCON configuration](../../main/configurations/security.conf) so that each container can run epadmin commands on the cluster
 * [Application definition configuration](../../main/configurations/app.conf) that defines nodeType docker to use System V shared memory
 * [Node deployment configuration](../../main/configurations/defaultnode.conf) that uses the above nodeType
-* [AWS configuration file](../../main/resources/global_vars/aws_config.yml) with information nedded to access AWS account via assuming role and EC2 instance details
+* [AWS configuration file](../../main/resources/global_vars/aws_config.yml) with information needed to access AWS account via assuming role and EC2 instance details
 * [DockerHub config file](../../main/resources/global_vars/docker_hub.yml) with DockerHub credentials
 * AWS files: _credentials_ and _config_, located in ~/.aws folder are needed for AWS account access (access keys and profiles details) 
 
-Note that whilst this project will create a simple Docker image and lunch EC2 instance, changes to the project may be required for additional behaviours. 
+Note that whilst this project will create a simple Docker image and lunch EC2 instance, changes to the project may be required for additional behaviors. 
 
 <a name="prerequisites-part-#2"></a>
 
@@ -144,17 +144,17 @@ Please see examples below.
 
 ![studio](images/studio-aws_config.jpg)
 
-Base on your account type (Personal or Federated) you need to set _sts_ veriable properly.
+Base on your account type (Personal or Federated) you need to set _sts_ variable properly.
 
-For personal account, set _sts_ veriable to false and skip updating #AWS with Security Token Service section. 
+For personal account, set _sts_ variable to false and skip updating #AWS with Security Token Service section. 
 Continue to update #Region, #Security group settings and #EC2 instance details sections below.
-For federated account, set _sts_ veriable to true and continue to update all the reimaing sections.
+For federated account, set _sts_ variable to true and continue to update all the remaining sections.
 ```shell
 ---
-### Condiguration file for Ansible playbook -  AWS account 
+### Configuration file for Ansible playbook -  AWS account 
 
 ### AWS with Security Token Service
-### For AWS direct access accout set sts variable to false.
+### For AWS direct access account set sts variable to false.
 ### For AWS account with STS (configured with assumed role) set sts variable to true.
 sts: true
 
@@ -196,16 +196,16 @@ email_address: "me@mycompany.com"
 
 ## Ansible playbook, plays and tasks
 
-In this sample we have one [playbook](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-awsec2/ef-2node-awsec2-app/src/main/ansible/project-playbook.yml) devided into several plays with task. please see description below.
+In this sample we have one [playbook](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-awsec2/ef-2node-awsec2-app/src/main/ansible/project-playbook.yml) divided into several plays with task. please see description below.
 
 * Play #1: (see [selected tasks](play-1-tasks.md) with description)
   - Create StreamBase base and application docker image based on CentOs7
-  - Start, validate and stop nodes (unless executed via _mvn -DskipTests=true_ command or SkipTest checkbox in StreamBase Studio is seleced)
+  - Start, validate and stop nodes (unless executed via _mvn -DskipTests=true_ command or SkipTest checkbox in StreamBase Studio is selected)
   - Based on user information in ../src/main/resources/global_vars/docker_hub.yml file: 
     - tag application docker image
     - login to dockerhub, push image, logout from dockerhub
-    - untag docker image when sucesfull pushed to dockerhub
-  - Remove both docker images (unless executed via _mvn -DskipTests=true_ command or SkipTest checkbox in StreamBase Studio is seleced)
+    - untag docker image when successful pushed to dockerhub
+  - Remove both docker images (unless executed via _mvn -DskipTests=true_ command or SkipTest checkbox in StreamBase Studio is selected)
   
 * Play #2: (see [selected tasks](play-2-tasks.md) with description)
   - Create a security group and ec2 instance(s) based on information in ../src/main/resources/global_vars/aws_config.yml file
@@ -220,7 +220,7 @@ In this sample we have one [playbook](https://github.com/TIBCOSoftware/tibco-str
 * Play #4:
   - Start, validate and stop Nodes
 
-Plrease remember: Your EC2 instace(s) is power on at this time, contains StreamBase application docker image and additional scripts. Those bash scripts can be use to run more tests via cli over the ssh connection - more information below, under EC2 instance - Additional scripts section. 
+Please remember: EC2 instance(s) is power on at this time, contains StreamBase application docker image and additional scripts. Those bash scripts can be use to run more tests via cli over the ssh connection - more information below, under EC2 instance - Additional scripts section. 
 
 <a name="containers-and-nodes"></a>
 
@@ -231,7 +231,7 @@ In this sample we name the docker container as **A.ef-2node-awsec2-app**,  which
 ![nodes](images/awsec2-two-node-docker.svg)
 
 The two containers have network access to each other, but not to the docker host. 
-_epadmin_ command is executed from Dockerhost terminal (EC2 instance(s)) by Ansible module via ssh connection.
+_epadmin_ command is executed from Docker host terminal (EC2 instance(s)) by Ansible module via ssh connection.
 Based on the security group created in Play #2 and its rules, only Ansible management console has access to the EC2 instance(s).
 
 <a name="building-and-running-from-tibco-streambase-studio-trade"></a>
@@ -243,7 +243,7 @@ be skipped if required by ticking the **Skip tests**. It is important to add **P
 
 ![maven](images/studio-conf-awsec2.jpg)
 
-Plays and tasks info from ansible playbook will show up on a console tab.
+Plays and tasks info from Ansible playbook will show up on a console tab.
 
 ![maven](images/studio-run-awsec2.jpg)
 
@@ -254,7 +254,7 @@ Plays and tasks info from ansible playbook will show up on a console tab.
 Use the [maven commands](https://maven.apache.org) to build from the command line or Continuous Integration system:
 
 - mvn clean  - it will clean the directories and files created by previous project
-- mvn install - it will run an ansible playbook, below is the example of the console output: Plays and tasks
+- mvn install - it will run an Ansible playbook, below is the example of the console output: Plays and tasks
 
 Based on the listing below you can notice Play #1 and #2 are executed on Ansible management host (localhost / 127.0.0.1), Play #3 and #4 are executed on EC2 instance (vm with IP: 54.159.20.34).
 
@@ -301,7 +301,7 @@ Based on the listing below you can notice Play #1 and #2 are executed on Ansible
 [INFO] TASK [Clean up work directory for base image] **********************************
 [INFO] changed: [127.0.0.1]
 [INFO] 
-[INFO] TASK [Remove itermediate image with LABEL build-image=1.0.0] *******************
+[INFO] TASK [Remove intermediate image with LABEL build-image=1.0.0] ******************
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Create source directory for app image] ***********************************
@@ -411,7 +411,7 @@ Based on the listing below you can notice Play #1 and #2 are executed on Ansible
 [INFO] TASK [Logout from DockerHub] ***************************************************
 [INFO] ok: [127.0.0.1]
 [INFO] 
-[INFO] TASK [Untaged sucesfully pushed image] *****************************************
+[INFO] TASK [Untaged successfully pushed image] ***************************************
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Platform check] **********************************************************
@@ -423,7 +423,7 @@ Based on the listing below you can notice Play #1 and #2 are executed on Ansible
 [INFO] TASK [Remove Docker images] ****************************************************
 [INFO] skipping: [127.0.0.1]
 [INFO] 
-[INFO] PLAY [Play 2 -- Create secutiry group and ec2 instance(s)] *********************
+[INFO] PLAY [Play 2 -- Create security group and ec2 instance(s)] *********************
 [INFO] 
 [INFO] TASK [Assume an existing role] *************************************************
 [INFO] changed: [127.0.0.1]
@@ -572,8 +572,8 @@ Based on the listing below you can notice Play #1 and #2 are executed on Ansible
 
 ## Ansible - Additional playbooks.
 
-When you execute this project with _maven install -DskipTest=true_ option you will skip test on localhost and have docker images build (base and application) availabe. To test those images, start, validate and stop nodes on a loclahost (Ansible management host), you can run ansible playbooks located in aditional-playbooks folder (../src/main/ansible/additional-olaybooks). 
-Playbooks #1, #2 and #3 are described in [Ansible-Docker : 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md) sample. Also _ansible-docker-test-playbook.yml_ is mentioned above. 
+When executing this project with _maven install -DskipTest=true_ option you will skip test on localhost and have docker images build (base and application) available. To test those images, start, validate and stop nodes on a localhost (Ansible management host), you can run Ansible playbooks located in additional-playbooks folder (../src/main/ansible/additional-playbooks). 
+Playbooks #1, #2 and #3 are described in [Ansible-Docker: 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md) sample. Also _ansible-docker-test-playbook.yml_ is mentioned above. 
 ```shell
 .
 ├── 1-start_cluster.yml
@@ -582,9 +582,9 @@ Playbooks #1, #2 and #3 are described in [Ansible-Docker : 2-node EventFlow](htt
 ├── 4-terminate_EC2_instance.yml
 └── ansible-docker-test-playbook.yml
 ```
-Playbook #4 will terminate EC2 instance created in this project. This playbook is located under additional playbooks folder becouse its execution is optional. You can remove instance(s) manually when all tests are completed and your instance(s) is no loger needed. 
+Playbook #4 will terminate EC2 instance created in this project. This playbook is located under additional playbooks folder because its execution is optional. You can remove instance(s) manually when all tests are completed and your instance(s) is no longer needed. 
 This playbook also can be added at the end of main project-playbook file if needed as a last play to be executed.
-Please check next part about additional scripts generated and copyied to the instace user home folder.
+Please check next part about additional scripts generated and copied to the instance user home folder.
 
 * [Terminate EC2 Instance](../../main/ansible/additional-playbooks/4-terminate_EC2_instance.yml) playbook.
 ```shell
@@ -615,16 +615,16 @@ PLAY RECAP *********************************************************************
 127.0.0.1      : ok=5   changed=2   unreachable=0   failed=0   skipped=0   rescued=0   ignored=0   
 ```
 This playbook contains two main tasks: Gather EC2 facts and terminate the EC2 instance(s).
-Gather facts task use _ec2_instance_facts_ module to colect information based on filter - Tag/Key/Value - Tag/Name/ef-2node-awsec2-app. Results are colected under veriable _ec2_ and displayed via debug module.
-Next task with _ec2_ module, based on ID's in veriable _ec2.instances_ will set instance(s) state to absent (terminate it).
+Gather facts task use _ec2_instance_facts_ module to collect information based on filter - Tag/Key/Value - Tag/Name/ef-2node-awsec2-app. Results are collected under variable _ec2_ and displayed via debug module.
+Next task with _ec2_ module, based on ID's in variable _ec2.instances_ will set instance(s) state to absent (terminate it).
 
 
 <a name="EC2-instance-additional-scripts"></a>
 
 ## EC2 instance - Additional scripts.
 
-One of the plays in Ansible playbook will start, validate and stop nodes automaticly displaying tasks results on the console. The instance(s) will not be terminated and the docker image will remain in place on the instance(s).
-During the executuion of _mvn install_ command build proces based on filtering module will create a custom bash scripts from predefined templates. Below lines from application _pom.xml_ file.
+One of the plays in Ansible playbook will start, validate and stop nodes automatically displaying tasks results on the console. The instance(s) will not be terminated and the docker image will remain in place on the instance(s).
+During the execution of _mvn install_ command build process based on filtering module will create a custom bash scripts from predefined templates. Below lines from application _pom.xml_ file.
 ```xml
 ...
         <resources>
@@ -643,7 +643,7 @@ Those scripts will be copied over to instance(s) and placed into the /home/cento
 ├── 2-validate_cluster.sh
 └── 3-stop_cluster.sh
 ```
-Similar to the Ansible additional playbooks (executed on menagement host) with those scripts you can start, validate and stop nodes on EC2 instance(s) over the ssh connection.
+Similar to the Ansible additional playbooks (executed on management host) with those scripts you can start, validate and stop nodes on EC2 instance(s) over the ssh connection.
 
 * Start cluster script.
 ```shell
@@ -790,4 +790,3 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
