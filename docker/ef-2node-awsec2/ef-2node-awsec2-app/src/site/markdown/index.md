@@ -444,7 +444,7 @@ Based on the listing below you can notice Play #1 and #2 are executed on Ansible
 [INFO] 
 [INFO] PLAY [Play 3 -- Install Docker on ec2 instance(s) and pull docker image] *******
 [INFO] 
-[INFO] TASK [Install Docker CE on CentOs7 -- geting docker-ce repo] *******************
+[INFO] TASK [Install Docker CE on CentOs7 -- getting docker-ce repo] ******************
 [INFO] changed: [54.159.20.34]
 [INFO] 
 [INFO] TASK [Install Docker CE on CentOs7 -- install docker-ce] ***********************
