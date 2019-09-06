@@ -80,7 +80,7 @@
       path: "{{ project_build_directory }}/docker/base/maven"
       state: absent
 
-  - name: Remove itermediate image with LABEL build-image={{ projectId_ver }}
+  - name: Remove intermediate image with LABEL build-image={{ projectId_ver }}
     shell: docker image prune --filter label=build-image={{ projectId_ver }} -f
 
   - name: Create source directory for app image
@@ -193,7 +193,7 @@
     debug: var=NodeBresults.stdout_lines
     when: skipTests == 'false'
 
-### Stop and remove comatiners tasks
+### Stop and remove conatiners tasks
 
   - name: Stop and remove container A
     docker_container:
@@ -236,7 +236,7 @@
     docker_login:
       state: absent
 
-  - name: Untaged sucesfully pushed image
+  - name: Untaged successfully pushed image
     shell: docker rmi {{ dockerhub_username }}/{{ projectId }}:{{ projectId_ver }}
     when: push.changed
 
@@ -256,7 +256,7 @@
     when: platform_results.stdout != 'Linux' and  skipTests == 'false'
 
 
-- name: Play 2 -- Create secutiry group and ec2 instance(s)
+- name: Play 2 -- Create security group and ec2 instance(s)
   hosts: localhost
   connection: local
   gather_facts: false
