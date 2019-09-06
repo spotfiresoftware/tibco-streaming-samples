@@ -1,4 +1,4 @@
-# AWS EC2 : 2-node EventFlow
+# AWS EC2: 2-node EventFlow
 
 This sample describes how to deploy an application archive containing an EventFlow fragment based on Docker to AWS EC2 instance(s) managed by Ansible.
 
