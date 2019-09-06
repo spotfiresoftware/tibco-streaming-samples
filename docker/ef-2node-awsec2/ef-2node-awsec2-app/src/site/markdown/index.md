@@ -12,13 +12,13 @@ This sample describes how to deploy an application archive containing an EventFl
 * [Ansible - Additional playbooks](#ansible-additional-playbooks)
 * [EC2 instance - Additional scripts](#EC2-instance-additional-scripts)
 
-See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
+See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/latest/doc/html/admin/part-docker.html).
 
 <a name="prerequisites-part-#1"></a>
 
 ## Prerequisites - Part #1
 
-This project is based on [Ansible-Docker : 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md). Please follow the prerequisites listed there to make sure Docker and Ansible management server are working properly.
+This project is based on [Ansible-Docker: 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md). Please follow the prerequisites listed there to make sure Docker and Ansible management server are working properly.
 Ansible playbook contains several plays and tasks, executed in a sequence and dependend on each other so it is important to complete all steps listed below.
 
 ### 1. At this point we assumed your Ansible management server is up and working properly with Docker. 
