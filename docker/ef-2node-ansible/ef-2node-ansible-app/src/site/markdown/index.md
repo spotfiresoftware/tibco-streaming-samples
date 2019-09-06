@@ -1,4 +1,4 @@
-# Ansible-Docker : 2-node EventFlow
+# Ansible-Docker: 2-node EventFlow
 
 This sample describes how to deploy an application archive containing an EventFlow fragment to Docker managed by Ansible.
 
@@ -12,7 +12,7 @@ This sample describes how to deploy an application archive containing an EventFl
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Additional Ansible playbooks](#additional-ansible-playbooks)
 
-See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
+See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/latest/doc/html/admin/part-docker.html).
 
 <a name="prerequisites"></a>
 
