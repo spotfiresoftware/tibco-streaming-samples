@@ -76,7 +76,7 @@
       path: "{{ project_build_directory }}/docker/base/maven"
       state: absent
 
-  - name: Remove itermediate image with LABEL build-image={{ projectId_ver }}
+  - name: Remove intermediate image with LABEL build-image={{ projectId_ver }}
     shell: docker image prune --filter label=build-image={{ projectId_ver }} -f
 
   - name: Create source directory for app image
