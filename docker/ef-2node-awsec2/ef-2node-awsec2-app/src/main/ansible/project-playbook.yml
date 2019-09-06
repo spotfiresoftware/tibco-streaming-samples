@@ -334,7 +334,7 @@
      - "{{ project_basedir }}/target/classes/global_vars/docker_hub.yml"
 
   tasks:
-  - name: Install Docker CE on CentOs7 -- geting docker-ce repo
+  - name: Install Docker CE on CentOs7 -- getting docker-ce repo
     get_url:
       url: https://download.docker.com/linux/centos/docker-ce.repo
       dest: /etc/yum.repos.d/docker-ce.repo
