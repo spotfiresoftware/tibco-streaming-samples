@@ -129,7 +129,7 @@ Below you can find a list of files this project is based on:
 * [DockerHub config file](../../main/resources/global_vars/docker_hub.yml) with DockerHub credentials
 * AWS files: _credentials_ and _config_, located in ~/.aws folder are needed for AWS account access (access keys and profiles details) 
 
-Note that whilst this project will create a simple Docker image and lunch EC2 instance, changes to the project may be required for additional behaviors. 
+Note that whilst this project will create a simple Docker image and launch EC2 instance, changes to the project may be required for additional behaviors. 
 
 <a name="prerequisites-part-#2"></a>
 
