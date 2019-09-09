@@ -79,7 +79,8 @@ $ aws sts assume-role --role-arn arn:aws:iam::12345:role/my-role --role-session-
 
 #### Ansible configuration files.
 Both files are located in _../src/main/ansible_ folder and needs to be copied to */etc/ansible/*.
-- In this file, _../src/main/ansible/ansible.cfg_ add path to your key pair.
+- In this file, _../src/main/ansible/ansible.cfg_ add path to your key pair. File with the key should be protected from accessing it by other users. Good practice will be to set only read access for owner via _chmod_ command, 
+ex: _chmod 0400 key.pem_ ( - r-- --- --- 1 user group key.pem ). 
 ```shell
 [defaults]
 inventory=inventory
