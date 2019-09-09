@@ -258,7 +258,7 @@ Use the [maven commands](https://maven.apache.org) to build from the command lin
 - mvn install - it will run an Ansible playbook, below is the example of the console output: Plays and tasks
 
 Based on the screen shoot below you can notice Play #1 and #2 are executed on Ansible management host (localhost / 127.0.0.1), Play #3 and #4 are executed on EC2 instance. 
-( [Example commandline output can be found here](cli-output-ef-2node-awsec2.md) )
+( [Example of command line output can be found here](cli-output-ef-2node-awsec2.md) )
 
 ![cli](images/cli-ef-2node-awsec2.gif)
 
