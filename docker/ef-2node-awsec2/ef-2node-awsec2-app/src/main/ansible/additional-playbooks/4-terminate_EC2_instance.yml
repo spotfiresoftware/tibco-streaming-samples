@@ -33,7 +33,7 @@
 
   tasks:
     - name: include aws config
-      include_vars: "../global_vars/aws_config.yml"
+      include_vars: "../../../../target/classes/global_vars/aws_config.yml"
 
     - name: Assume an existing role
       sts_assume_role:
