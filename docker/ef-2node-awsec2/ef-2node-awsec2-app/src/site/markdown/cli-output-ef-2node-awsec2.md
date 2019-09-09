@@ -1,4 +1,6 @@
-### Based on the listing below you can notice Play #1 and #2 are executed on Ansible management host
+### Ansible Palybook - Plays # 1 .. 4 - example of command line output
+
+Based on the listing below you can notice Play #1 and #2 are executed on Ansible management host
 (localhost / 127.0.0.1), Play #3 and #4 are executed on EC2 instance (vm with IP: 54.159.20.34).
 
 ```ansible
