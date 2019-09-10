@@ -2,7 +2,7 @@
 
 
 #### *** Task with [sts_assume_role](https://docs.ansible.com/ansible/latest/modules/sts_assume_role_module.html) module, to assume a role using AWS Security TokenService and obtain temporary credentials.
-Project configuration files needs to be updated.
+Project configuration files need to be updated.
 ``` 
   - name: Assume an existing role
     sts_assume_role:
@@ -14,9 +14,9 @@ Project configuration files needs to be updated.
 
 ```
 
-#### *** Task with module [ec2_group](https://docs.ansible.com/ansible/latest/modules/ec2_group_module.html) to create a security group in the specified region, based on rules listed below.
+#### *** Task with [ec2_group](https://docs.ansible.com/ansible/latest/modules/ec2_group_module.html) module to create a security group in the specified region, based on rules listed below.
 ```
-  - name: Create a security group for SSH access access
+  - name: Create a security group for SSH access
     ec2_group:
       aws_access_key: "{{ assumed_role.sts_creds.access_key | default(omit) }}"
       aws_secret_key: "{{ assumed_role.sts_creds.secret_key | default(omit) }}"
@@ -35,7 +35,7 @@ Project configuration files needs to be updated.
 
 ```
 
-#### *** Task with module [ec2](https://docs.ansible.com/ansible/latest/modules/ec2_module.html) to lunch an ec2 instance based on detailes listed below. 
+#### *** Task with [ec2](https://docs.ansible.com/ansible/latest/modules/ec2_module.html) module to launch an ec2 instance based on details listed below. 
 ```
   - name: Create EC2 instance -- Centos7 -- {{ instance_type }}
     ec2:
@@ -56,7 +56,7 @@ Project configuration files needs to be updated.
     register: ec2
 ```
 
-#### *** Task with module [add_host](https://docs.ansible.com/ansible/latest/modules/add_host_module.html) to add host to the ansible-playbook in-memory inventory.  
+#### *** Task with [add_host](https://docs.ansible.com/ansible/latest/modules/add_host_module.html) module to add host to the ansible-playbook in-memory inventory.  
 ```
   - name: Update inventory list
     add_host:
