@@ -1,7 +1,7 @@
 ### Ansible Palybook - Plays # 1 .. 4 - example of command line output
 
-The Listing below shows, Play #1 and #2 are executed on Ansible management host 
-(localhost / 127.0.0.1), Play #3 and #4 are executed on EC2 instance (vm with IP: 54.159.20.34).
+The listing below shows Play #1 and #2 executed on Ansible management host (localhost / 127.0.0.1), 
+Play #3 and #4 executed on EC2 instance (vm with IP: 54.159.20.34).
 
 ```ansible
 [INFO] Scanning for projects...
@@ -37,7 +37,7 @@ The Listing below shows, Play #1 and #2 are executed on Ansible management host
 [INFO] ok: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': u'###Note: 
        LABEL statement build by Ansible playbook'})
 [INFO] 
-[INFO] TASK [Remove docker image if exist from previous build] ************************
+[INFO] TASK [Remove docker image if exists from previous build] ***********************
 [INFO] ok: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Building SB base image - sbrt-base] **************************************
@@ -65,7 +65,7 @@ The Listing below shows, Play #1 and #2 are executed on Ansible management host
 [INFO] changed: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': 
        u'###Note: LABEL statement build by Ansible playbook'})
 [INFO] 
-[INFO] TASK [Remove docker image if exist from previous build] ************************
+[INFO] TASK [Remove docker image if exists from previous build] ***********************
 [INFO] ok: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Building StreamBase application image] ***********************************
@@ -74,7 +74,7 @@ The Listing below shows, Play #1 and #2 are executed on Ansible management host
 [INFO] TASK [Clean up work directory for application image] ***************************
 [INFO] changed: [127.0.0.1]
 [INFO] 
-[INFO] TASK [Update bash file before copy to EC2 instance (files in additional-scripts folder)] ***
+[INFO] TASK [Update bash file before copying to EC2 instance (files in additional-scripts folder)] 
 [INFO] changed: [127.0.0.1] => (item={u'search': u'\\bdocker\\/\\b', u'replace': u'mbidus/'})
 [INFO] 
 [INFO] TASK [Create example.com network] **********************************************
@@ -156,7 +156,7 @@ The Listing below shows, Play #1 and #2 are executed on Ansible management host
 [INFO] TASK [Logout from DockerHub] ***************************************************
 [INFO] ok: [127.0.0.1]
 [INFO] 
-[INFO] TASK [Untaged successfully pushed image] ***************************************
+[INFO] TASK [Untagged successfully pushed image] **************************************
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Platform check] **********************************************************
