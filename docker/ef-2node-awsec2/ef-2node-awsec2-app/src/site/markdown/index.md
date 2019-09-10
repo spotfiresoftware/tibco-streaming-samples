@@ -19,7 +19,7 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 ## Prerequisites - Part #1
 
 This project is based on [Ansible-Docker: 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md). Please follow the prerequisites listed there to make sure Docker and Ansible management server are working properly.
-Ansible playbook contains several plays and tasks, executed in a sequence and dependend on each other, so it is important to complete all steps listed below.
+Ansible playbook contains several plays and tasks, executed in a sequence and dependent on each other, so it is important to complete all steps listed below.
 
 ### 1. At this point it is assumed Ansible management server is up and working properly with Docker. 
 A simple playbook located under _../src/main/ansible/additional-playbooks/_ folder can be run as a test.
@@ -47,7 +47,7 @@ $ aws ec2 describe-instances
 ```
 
 #### "Federated" AWS account with Assumed Role configured (with STS - Security Token Service)
-Assummed role and access keys need to be created for Ansible module to connect with AWS account. More information in this [tutorial](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html). 
+Assumed role and access keys need to be created for Ansible module to connect with AWS account. More information in this [tutorial](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html). 
 
 - Both keys need to be added to this file: _~/.aws/credentials_.
 ```shell
@@ -204,7 +204,7 @@ In this sample the [playbook](https://github.com/TIBCOSoftware/tibco-streaming-s
   - Based on user information in ../src/main/resources/global_vars/docker_hub.yml file: 
     - tag application docker image
     - login to dockerhub, push image, logout from dockerhub
-    - untag docker image when successful pushed to dockerhub
+    - untag docker image when successfully pushed to dockerhub
   - Remove both docker images (unless executed via _mvn -DskipTests=true_ command or SkipTest checkbox in StreamBase Studio is selected)
   
 * Play #2: (see [selected tasks](play-2-tasks.md) with description)
@@ -220,13 +220,13 @@ In this sample the [playbook](https://github.com/TIBCOSoftware/tibco-streaming-s
 * Play #4:
   - Start, validate and stop Nodes
 
-Please remember: EC2 instance(s) is power on at this time, contains StreamBase application docker image and additional scripts. Those bash scripts can be use to run more tests via cli over the ssh connection - more information below, under EC2 instance - Additional scripts section. 
+Please note: EC2 instance(s) is powered on at this time, contains StreamBase application docker image and additional scripts. Those bash scripts can be used to run more tests via cli over the ssh connection - more information below, under EC2 instance - Additional scripts section. 
 
 <a name="containers-and-nodes"></a>
 
 ## Containers and nodes
 
-In this sample we name the docker container as **A.ef-2node-awsec2-app**,  which hosts the StreamBase node **A.ef-2node-awsec2-app**, and **B.ef-2node-awsec2-app**, which hosts the StreamBase node **B.ef-2node-awsec2-app**.  A Docker network **example.com** connects the nodes together :
+In this sample we name the docker container as **A.ef-2node-awsec2-app**, which hosts the StreamBase node **A.ef-2node-awsec2-app**, and **B.ef-2node-awsec2-app**, which hosts the StreamBase node **B.ef-2node-awsec2-app**.  A Docker network **example.com** connects the nodes together :
 
 ![nodes](images/awsec2-two-node-docker.svg)
 
@@ -256,7 +256,7 @@ Use the [maven commands](https://maven.apache.org) to build from the command lin
 - mvn clean  - it will clean the directories and files created by previous project
 - mvn install - it will run an Ansible playbook, below is the example of the console output: Plays and tasks
 
-Based on the screen shoot below you can notice Play #1 and #2 are executed on Ansible management host (localhost / 127.0.0.1), Play #3 and #4 are executed on EC2 instance. 
+Screenshot below shows Play #1 and #2 executed on Ansible management host (localhost / 127.0.0.1), Play #3 and #4 executed on EC2 instance. 
 ( [Example of command line output can be found here](cli-output-ef-2node-awsec2.md) )
 
 ![cli](images/cli-ef-2node-awsec2.gif)
@@ -265,8 +265,8 @@ Based on the screen shoot below you can notice Play #1 and #2 are executed on An
 
 ## Ansible - Additional playbooks.
 
-When executing this project with _maven install -DskipTest=true_ option you will skip test on localhost and have docker images build (base and application) available. To test those images, start, validate and stop nodes on a localhost (Ansible management host), you can run Ansible playbooks located in additional-playbooks folder (../src/main/ansible/additional-playbooks). 
-Playbooks #1, #2 and #3 are described in [Ansible-Docker: 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md) sample. Also _ansible-docker-test-playbook.yml_ is mentioned above. 
+When executing this project with _maven install -DskipTest=true_ option, only docker images are built (base and application). To test those images - start, validate and stop nodes - on a localhost (Ansible management host), Ansible playbooks located in additional-playbooks folder (../src/main/ansible/additional-playbooks) can be executed. 
+
 ```shell
 .
 ├── 1-start_cluster.yml
@@ -275,9 +275,13 @@ Playbooks #1, #2 and #3 are described in [Ansible-Docker: 2-node EventFlow](http
 ├── 4-terminate_EC2_instance.yml
 └── ansible-docker-test-playbook.yml
 ```
-Playbook #4 will terminate EC2 instance created in this project. This playbook is located under additional playbooks folder because its execution is optional. You can remove instance(s) manually when all tests are completed and your instance(s) is no longer needed. 
-This playbook also can be added at the end of main project-playbook file if needed as a last play to be executed.
-Please check next part about additional scripts generated and copied to the instance user home folder.
+Playbooks #1, #2 and #3 are described in [Ansible-Docker: 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md) sample. Also _ansible-docker-test-playbook.yml_ is mentioned above.
+
+Playbook #4 will terminate EC2 instance(s) created in this project. This playbook is located under additional playbooks folder because its execution is optional. If needed, this playbook can be added at the end of main project playbook file,
+as the final play to be executed.
+
+Instance(s) can be removed manually when all tests are completed and no longer needed. 
+Please check next section about additional scripts generated and copied to the instance user home folder.
 
 * [Terminate EC2 Instance](../../main/ansible/additional-playbooks/4-terminate_EC2_instance.yml) playbook.
 ```shell
@@ -308,16 +312,17 @@ PLAY RECAP *********************************************************************
 127.0.0.1      : ok=5   changed=2   unreachable=0   failed=0   skipped=0   rescued=0   ignored=0   
 ```
 This playbook contains two main tasks: Gather EC2 facts and terminate the EC2 instance(s).
-Gather facts task use _ec2_instance_facts_ module to collect information based on filter - Tag/Key/Value - Tag/Name/ef-2node-awsec2-app. Results are collected under variable _ec2_ and displayed via debug module.
-Next task with _ec2_ module, based on ID's in variable _ec2.instances_ will set instance(s) state to absent (terminate it).
+Gather facts task uses _ec2_instance_facts_ module to collect information based on filter - Tag/Key/Value - Tag/Name/ef-2node-awsec2-app. Results are collected under variable _ec2_ and displayed via debug module.
+Next task with _ec2_ module, based on ID's in variable _ec2.instances_, will set instance(s) state to absent (terminate it).
 
 
 <a name="EC2-instance-additional-scripts"></a>
 
 ## EC2 instance - Additional scripts.
 
-One of the plays in Ansible playbook will start, validate and stop nodes automatically displaying tasks results on the console. The instance(s) will not be terminated and the docker image will remain in place on the instance(s).
-During the execution of _mvn install_ command build process based on filtering module will create a custom bash scripts from predefined templates. Below lines from application _pom.xml_ file.
+One of the plays in Ansible playbook will start, validate and stop nodes automatically, displaying task results on the console. The instance(s) will not be terminated and the docker image will remain in place.
+During the execution of _mvn install_ command build process, the filtering module will create custom bash scripts from predefined templates. 
+See fragment from application _pom.xml_ file below.
 ```xml
 ...
         <resources>
@@ -329,14 +334,14 @@ During the execution of _mvn install_ command build process based on filtering m
 ...
 ```
 
-Those scripts will be copied over to instance(s) and placed into the /home/centos/additional-scripts folder.
+The scripts will be copied over to instance(s) and placed into the /home/centos/additional-scripts folder.
 ```shell
 .
 ├── 1-start_cluster.sh
 ├── 2-validate_cluster.sh
 └── 3-stop_cluster.sh
 ```
-Similar to the Ansible additional playbooks (executed on management host) with those scripts you can start, validate and stop nodes on EC2 instance(s) over the ssh connection.
+Similar to the Ansible additional playbooks (executed on management host) those scripts can start, validate and stop nodes on EC2 instance(s) over the ssh connection.
 
 * Start cluster script.
 ```shell
@@ -428,7 +433,7 @@ Stop and remove Node A
 A.ef-2node-awsec2-app
 Node A stopped
 A.ef-2node-awsec2-app
-Nodee A removed
+Node A removed
 Stop and remove Node B
 B.ef-2node-awsec2-app
 Node B stopped
@@ -445,7 +450,7 @@ echo "Stop and remove Node A"
 docker stop A.ef-2node-awsec2-app
 echo "Node A stopped"
 docker rm A.ef-2node-awsec2-app
-echo "Nodee A removed"
+echo "Node A removed"
 
 echo "Stop and remove Node B"
 docker stop B.ef-2node-awsec2-app
