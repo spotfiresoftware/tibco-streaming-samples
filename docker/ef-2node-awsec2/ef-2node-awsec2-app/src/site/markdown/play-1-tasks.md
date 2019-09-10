@@ -1,7 +1,7 @@
 # Play #1 - Selected Ansible playbook tasks
 
 
-#### *** Task with module [copy](https://docs.ansible.com/ansible/latest/modules/copy_module.html), where source folder and destination folder need to be defined.
+#### *** Task with [copy](https://docs.ansible.com/ansible/latest/modules/copy_module.html) module, where source folder and destination folder need to be defined.
 ``` 
 - name: Copy start-node script to base image work directory
   copy:
@@ -9,7 +9,7 @@
     dest: "{{ project_build_directory }}/docker/base/maven/"
 ```
 
-#### *** Task with module [replace](https://docs.ansible.com/ansible/latest/modules/replace_module.html) and loop. This is ansible recommended method to customize config/settings/text files during the playbook execution. Removing a string from file in specific path is also available in this module.
+#### *** Task with [replace](https://docs.ansible.com/ansible/latest/modules/replace_module.html) module and loop. This is ansible recommended method to customize config/settings/text files during the playbook execution. Removing a string from file in specific path is also available in this module.
 Search is based on defined regular expressions in the list below which is executed in a loop.  
 ```
 - name: Update dockerfile before building base image
@@ -22,7 +22,7 @@ Search is based on defined regular expressions in the list below which is execut
     - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }
 ```
 
-#### *** Task with module [docker_image](https://docs.ansible.com/ansible/latest/modules/docker_image_module.html) to build an image. 
+#### *** Task with [docker_image](https://docs.ansible.com/ansible/latest/modules/docker_image_module.html) module to build an image. 
 ```
 - name: Building SB base image - sbrt-base
   docker_image:
