@@ -58,7 +58,7 @@
       - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ projectId_ver }}" }
       - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }   
 
-  - name: Remove docker image if exist from previous build
+  - name: Remove docker image if exists from previous build
     docker_image:
       state: absent
       name: sbrt-base
@@ -104,7 +104,7 @@
       - { search: '(^LABEL build-image=)(.*)$', replace: "LABEL build-image={{ projectId_ver }}" }
       - { search: '(^###Note:\s)(.*)$', replace: '###Note: LABEL statement build by Ansible playbook' }   
     
-  - name: Remove docker image if exist from previous build
+  - name: Remove docker image if exists from previous build
     docker_image:
       state: absent
       name: "docker/{{ projectId }}"
@@ -125,7 +125,7 @@
       path: "{{ project_build_directory }}/docker/application/maven/"
       state: absent
       
-  - name: Update bash file before copy to EC2 instance (files in additional-scripts folder)
+  - name: Update bash file before copying to EC2 instance (files in additional-scripts folder)
     replace:
       path: "{{ project_basedir }}/target/classes/1-start_cluster.sh"
       regexp: "{{ item.search }}"
@@ -236,7 +236,7 @@
     docker_login:
       state: absent
 
-  - name: Untaged successfully pushed image
+  - name: Untagged successfully pushed image
     shell: docker rmi {{ dockerhub_username }}/{{ projectId }}:{{ projectId_ver }}
     when: push.changed
 
