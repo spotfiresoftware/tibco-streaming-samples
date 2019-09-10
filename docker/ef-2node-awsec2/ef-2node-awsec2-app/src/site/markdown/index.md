@@ -19,10 +19,10 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 ## Prerequisites - Part #1
 
 This project is based on [Ansible-Docker: 2-node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-ansible/ef-2node-ansible-app/src/site/markdown/index.md). Please follow the prerequisites listed there to make sure Docker and Ansible management server are working properly.
-Ansible playbook contains several plays and tasks, executed in a sequence and dependend on each other so it is important to complete all steps listed below.
+Ansible playbook contains several plays and tasks, executed in a sequence and dependend on each other, so it is important to complete all steps listed below.
 
-### 1. At this point we assumed your Ansible management server is up and working properly with Docker. 
-To test this you can execute a test playbook located under _../src/main/ansible/additional-playbooks/_ folder:
+### 1. At this point it is assumed Ansible management server is up and working properly with Docker. 
+A simple playbook located under _../src/main/ansible/additional-playbooks/_ folder can be run as a test.
 ```shell
 $ ansible-playbook ansible-docker-test-playbook.yml
 ```
@@ -35,29 +35,27 @@ Please see examples below and update files as needed.
 
 #### Personal/Individual account - user with direct access
 
-In this case please update file listed below with your information.
-- In this file, _~/.aws/credentials_ add both of your keys.
+- Both keys need to be added to this file: _~/.aws/credentials_.
 ```shell
 [default]
 aws_access_key_id = ABCDEFGH12345
 aws_secret_access_key = abcdefgh1234567890
 ```
-Access to AWS account can be tested by executing this command in CLI.
+Access to AWS account can be tested by executing following command.
 ```shell
 $ aws ec2 describe-instances
 ```
 
 #### "Federated" AWS account with Assumed Role configured (with STS - Security Token Service)
-Create role and access key for Ansible module to be able to connect. More information in this [tutorial](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html). 
+Assummed role and access keys need to be created for Ansible module to connect with AWS account. More information in this [tutorial](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html). 
 
-In this case please update files listed as an examples below with your information. 
-- In this file, _~/.aws/credentials_ add both of your keys.
+- Both keys need to be added to this file: _~/.aws/credentials_.
 ```shell
 [default]
 aws_access_key_id = ABCDEFGH12345
 aws_secret_access_key = abcdefgh1234567890
 ```
-- In this file, _~/.aws/config_ add two profile with proper information.
+- Two profiles containing proper information need to be added to this file, _~/.aws/config_.
 ```shell
 [default]
 region = us-east-1
@@ -68,7 +66,7 @@ role_arn = arn:aws:iam::12345:role/my-role
 region = us-east-1
 source_profile = default
 ```
-Access to AWS account can be tested by executing those commands in CLI.
+Access to AWS account can be tested by executing following commands.
 ```shell
 $ aws ec2 describe-instances --profile my-role
 ```
@@ -78,9 +76,10 @@ $ aws sts assume-role --role-arn arn:aws:iam::12345:role/my-role --role-session-
 ```
 
 #### Ansible configuration files.
-Both files are located in _../src/main/ansible_ folder and needs to be copied to */etc/ansible/*.
-- In this file, _../src/main/ansible/ansible.cfg_ add path to your key pair. File with the key should be protected from accessing it by other users. Good practice will be to set only read access for owner via _chmod_ command, 
-ex: _chmod 0400 key.pem_ ( - r-- --- --- 1 user group key.pem ). 
+Both files are located in _../src/main/ansible_ folder and need to be copied to */etc/ansible/*.
+
+- Path to the key pair is needed in this file, _../src/main/ansible/ansible.cfg_. 
+File with the key should be protected from accessing it by other users. Good practice is to set read only access for owner via _chmod_ command, ex: _chmod 0400 key.pem_ ( - r-- --- --- 1 user group key.pem ).
 ```shell
 [defaults]
 inventory=inventory
@@ -95,15 +94,15 @@ stdout_callback = yaml
 # Use the stdout_callback when running ad-hoc commands.
 bin_ansible_callbacks = True
 ```
-- Copy the _../src/main/ansible/inventory_ file and keep it as is.
+- _../src/main/ansible/inventory_ file can be copied and saved as is.
 ```shell
 [localhost]
 127.0.0.1 ansible_connection=local
 ```
 
-### 3. Create account on [DockerHub](https://hub.docker.com/).
+### 3. A [DockerHub](https://hub.docker.com/) is required.
 
-### 4. Install boto and boto3 python libraries needed for Ansible EC2 modules.
+### 4. Installation of boto and boto3 python libraries is needed for Ansible EC2 modules to work correctly.
 
 This installation can be completed via [Python PIP](https://pip.pypa.io/en/stable/installing/)
 
@@ -117,18 +116,18 @@ $ pip install boto boto3
 
 To be able to run this sample in TIBCO StreamBase Studio™ please refer to [Using Tibco Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md).
 
-Below you can find a list of files this project is based on:
+List of files this project is based on can be found below:
 
-* An Ansible [playbook file](../../main/ansible/project-playbook.yml) with set of Plays and tasks.
+* An Ansible [playbook file](../../main/ansible/project-playbook.yml) with set of plays and tasks.
 * A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO StreamBase runtime
 * A [start-node](../../main/docker/base/start-node) script to start a node
 * An [application Dockerfile](../../main/docker/application/Dockerfile) to build an application image containing the application archive - this is based on the base image
 * [Trusted hosts HOCON configuration](../../main/configurations/security.conf) so that each container can run epadmin commands on the cluster
 * [Application definition configuration](../../main/configurations/app.conf) that defines nodeType docker to use System V shared memory
 * [Node deployment configuration](../../main/configurations/defaultnode.conf) that uses the above nodeType
-* [AWS configuration file](../../main/resources/global_vars/aws_config.yml) with information needed to access AWS account via assuming role and EC2 instance details
+* [AWS configuration file](../../main/resources/global_vars/aws_config.yml) with information required to access AWS account via assumed role and EC2 instance details
 * [DockerHub config file](../../main/resources/global_vars/docker_hub.yml) with DockerHub credentials
-* AWS files: _credentials_ and _config_, located in ~/.aws folder are needed for AWS account access (access keys and profiles details) 
+* AWS files: _credentials_ and _config_, located in ~/.aws folder are needed for AWS account access (access keys and profile details) 
 
 Note that whilst this project will create a simple Docker image and launch EC2 instance, changes to the project may be required for additional behaviors. 
 
@@ -136,8 +135,8 @@ Note that whilst this project will create a simple Docker image and launch EC2 i
 
 ## Prerequisites - Part #2
 
-To complete prerequisites process, you need to add your information to project configuration files. 
-The most convenient way to do so will be to edit and save those files in StreamBase Studio.
+To complete prerequisites process, project additional configuration files need to be updated. 
+The most convenient way to do so is to edit and save the files in StreamBase Studio.
 Please see examples below. 
 
 
@@ -145,11 +144,11 @@ Please see examples below.
 
 ![studio](images/studio-aws_config.jpg)
 
-Base on your account type (Personal or Federated) you need to set _sts_ variable properly.
+Based on the account type (Personal or Federated) _sts_ variable needs to be set properly.
 
 For personal account, set _sts_ variable to false and skip updating #AWS with Security Token Service section. 
 Continue to update #Region, #Security group settings and #EC2 instance details sections below.
-For federated account, set _sts_ variable to true and continue to update all the remaining sections.
+For federated account, set _sts_ variable to true and continue to update all sections in this file.
 ```shell
 ---
 ### Configuration file for Ansible playbook -  AWS account 
@@ -163,7 +162,7 @@ sts: true
 role_arn: "arn:aws:iam::12345:role/my-role"	 	### Role ARN
 role_session_name: "Ansible"                       	### Name for the session
 
-#Region - All tasks will be executed base on this region
+#Region - All tasks will be executed based on this region
 region: us-east-1
 
 #Security group settings
@@ -175,18 +174,18 @@ rule_desc: "SSH from MyIP only"
 #EC2 instance details - CentOS 7x64 (with minimum 1vCPU and 2GB memory)
 instance_type: "t2.small"
 image_id: "ami-02eac2c0129f6376b"
-keypair: "key_ef-2node-awsec2"				### ### Kay Pair file name
-count: 1						### Number of instances you like to launch
+keypair: "key_ef-2node-awsec2"				### ### Key Pair file name
+count: 1						### Number of instances to launch
 ```
 #### DockerHub - file located in ../src/main/resources/global_vars folder
 
 ![studio](images/studio-docker_hub.jpg)
 
-- Add your DockerHub credentials to this file: _docker_hub.yml_
+- Add DockerHub credentials to this file: _docker_hub.yml_
 ```shell
 ---
 ### DockerHub configuration
-#after successful log in, session details will be save into ~/.docker/config.json
+#after successful log in, session details will be saved into ~/.docker/config.json
 
 dockerhub_username: "USERNAME"
 dockerhub_password: "PASSWORD"
@@ -197,7 +196,7 @@ email_address: "me@mycompany.com"
 
 ## Ansible playbook, plays and tasks
 
-In this sample we have one [playbook](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-awsec2/ef-2node-awsec2-app/src/main/ansible/project-playbook.yml) divided into several plays with task. please see description below.
+In this sample the [playbook](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-awsec2/ef-2node-awsec2-app/src/main/ansible/project-playbook.yml) is divided into several plays with tasks. Please see description below.
 
 * Play #1: (see [selected tasks](play-1-tasks.md) with description)
   - Create StreamBase base and application docker image based on CentOs7
