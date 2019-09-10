@@ -38,7 +38,7 @@ sts: true
 role_arn: "arn:aws:iam::12345:role/my-role"
 role_session_name: "Ansible"
 
-#Region - All tasks will be executed base on this region
+#Region - All tasks will be executed based on this region
 region: us-east-1
 
 #Security group settings
