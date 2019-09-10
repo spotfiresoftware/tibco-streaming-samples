@@ -5,7 +5,7 @@ echo "Stop and remove Node A"
 docker stop A.${project.artifactId}
 echo "Node A stopped"
 docker rm A.${project.artifactId}
-echo "Nodee A removed"
+echo "Node A removed"
 
 echo "Stop and remove Node B"
 docker stop B.${project.artifactId}
