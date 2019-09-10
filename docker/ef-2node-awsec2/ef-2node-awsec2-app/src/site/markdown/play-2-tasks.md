@@ -1,9 +1,7 @@
 # Play #2 - Selected Ansible playbook tasks
 
 
-### Below you can find selected ansible playbook tasks with brief description. 
-
-#### *** Task with module [sts_assume_role](https://docs.ansible.com/ansible/latest/modules/sts_assume_role_module.html), to assume a role using AWS Security TokenService and obtain temporary credentials.
+#### *** Task with [sts_assume_role](https://docs.ansible.com/ansible/latest/modules/sts_assume_role_module.html) module, to assume a role using AWS Security TokenService and obtain temporary credentials.
 Project configuration files needs to be updated.
 ``` 
   - name: Assume an existing role
