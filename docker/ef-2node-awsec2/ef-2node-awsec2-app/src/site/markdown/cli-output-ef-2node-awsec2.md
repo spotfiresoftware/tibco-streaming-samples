@@ -75,7 +75,7 @@ Play #3 and #4 executed on EC2 instance (vm with IP: 54.159.20.34).
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Update bash file before copying to EC2 instance (files in additional-scripts folder)] 
-[INFO] changed: [127.0.0.1] => (item={u'search': u'\\bdocker\\/\\b', u'replace': u'mbidus/'})
+[INFO] changed: [127.0.0.1] => (item={u'search': u'\\bdocker\\/\\b', u'replace': u'<username>/'})
 [INFO] 
 [INFO] TASK [Create example.com network] **********************************************
 [INFO] changed: [127.0.0.1]
