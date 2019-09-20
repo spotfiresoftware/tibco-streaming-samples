@@ -82,7 +82,7 @@
 
         <plugins>
 
-	    <!-- StreamBase EP plugin. When set to true will skip running tests on nodes under maven.   -->
+	    <!-- StreamBase EP plugin. When set to true, will skip running tests on nodes under maven.   -->
             <plugin>
                 <groupId>com.tibco.ep</groupId>
                 <artifactId>ep-maven-plugin</artifactId>
@@ -144,7 +144,10 @@
 		</executions>
 	    </plugin>
 		
-            <!-- The Ansible Plugin simplifies the running of Ansible playbooks from within a Maven project. The project-playbook.yml file contains playbook, plays and tasks.  -->
+            <!-- 
+              The Ansible Plugin simplifies the running of Ansible playbooks from within a Maven project. 
+              The project-playbook.yml file contains playbook, plays and tasks.
+            -->
             <plugin>
 		 <groupId>co.escapeideas.maven</groupId>
 		 <artifactId>ansible-maven-plugin</artifactId>
