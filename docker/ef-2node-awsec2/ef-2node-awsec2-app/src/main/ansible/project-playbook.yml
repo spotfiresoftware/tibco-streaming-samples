@@ -272,7 +272,7 @@
     register: assumed_role
     when: sts
 
-  - name: Create a security group for SSH access access
+  - name: Create a security group for SSH access
     ec2_group:
       aws_access_key: "{{ assumed_role.sts_creds.access_key | default(omit) }}"
       aws_secret_key: "{{ assumed_role.sts_creds.secret_key | default(omit) }}"
