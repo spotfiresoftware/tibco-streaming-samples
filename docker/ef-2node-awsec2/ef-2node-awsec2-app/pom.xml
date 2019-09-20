@@ -81,6 +81,8 @@
         </resources>
 
         <plugins>
+
+	    <!-- StreamBase EP plugin. When set to true will skip running tests on nodes under maven.   -->
             <plugin>
                 <groupId>com.tibco.ep</groupId>
                 <artifactId>ep-maven-plugin</artifactId>
@@ -93,7 +95,12 @@
                      </nodes>
                  </configuration>
             </plugin>
-            <plugin>
+
+            <!--
+              The dependency plugin provides the capability to manipulate artifacts. It can copy and/or unpack artifacts from local or remote repositories to a specified location.
+              In this case the plugin will copy platform_linuxx86_64 artifact package to dependencies folder.
+            -->
+	    <plugin>
         	<groupId>org.apache.maven.plugins</groupId>
         	<artifactId>maven-dependency-plugin</artifactId>
         	<executions>
@@ -111,7 +118,12 @@
           	   </execution>
         	</executions>
       	    </plugin>
-      	    <plugin>
+
+	    <!--
+              The Resources Plugin handles the copying of project resources to the output directory. 
+              In this case both Dockerfiles (base and application) are copied over to docker folder under project build directory.
+            -->
+	    <plugin>
 	        <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
@@ -131,6 +143,8 @@
 		    </execution>
 		</executions>
 	    </plugin>
+		
+            <!-- The Ansible Plugin simplifies the running of Ansible playbooks from within a Maven project. The project-playbook.yml file contains playbook, plays and tasks.  -->
             <plugin>
 		 <groupId>co.escapeideas.maven</groupId>
 		 <artifactId>ansible-maven-plugin</artifactId>
@@ -160,6 +174,5 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
 
