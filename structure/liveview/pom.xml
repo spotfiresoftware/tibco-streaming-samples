@@ -49,7 +49,7 @@
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
         <artifactId>ep-liveview-fragment-samples</artifactId> <!-- replace with ep-liveview-fragment to avoid sample metadata -->
-        <version>10.5.0-SNAPSHOT</version>
+        <version>10.5.0</version>
         <relativePath/>
     </parent>
 

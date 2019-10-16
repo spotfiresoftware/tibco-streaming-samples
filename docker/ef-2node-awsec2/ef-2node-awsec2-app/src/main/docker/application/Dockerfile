@@ -28,7 +28,7 @@
 
 
 ###Note: LABEL statement build by Ansible playbook
-FROM sbrt-base:10.5.0-SNAPSHOT
+FROM sbrt-base:10.5.0
 
 LABEL description="StreamBase Application"
 

@@ -2,7 +2,7 @@
 
 How to user docker to test proxy discovery. - Application
 
-* [pd-test-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/pd-test/pd-test-app/))
+* [pd-test-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/docker/pd-test/pd-test-app/))
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

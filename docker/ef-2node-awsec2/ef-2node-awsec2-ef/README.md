@@ -2,7 +2,7 @@
 
 How to deploy a 2-node EventFlow application in Docker to AWS EC2 instance(s) managed by Ansible - EventFlow Fragment
 
-* [ef-2node-awsec2-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/ef-2node-ansible/ef-2node-ansible-ef/))
+* [ef-2node-awsec2-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/docker/ef-2node-ansible/ef-2node-ansible-ef/))
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

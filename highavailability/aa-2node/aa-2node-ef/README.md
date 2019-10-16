@@ -2,7 +2,7 @@
 
 How to build a 2-node active active deployment. - EventFlow Fragment
 
-* [aa-2node-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/highavailability/aa-2node/aa-2node-ef/))
+* [aa-2node-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/highavailability/aa-2node/aa-2node-ef/))
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

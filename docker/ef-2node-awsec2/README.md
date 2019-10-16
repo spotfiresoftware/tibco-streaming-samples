@@ -4,8 +4,8 @@ How to deploy a 2-node EventFlow application in Docker to AWS EC2 inatnce(s) man
 
 This is a maven aggregator project consisting of the following maven modules :
 
-* [AWS-EC2: 2-node EventFlow - EventFlow Fragment](ef-2node-awsec2-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/ef-2node-awsec2/ef-2node-awsec2-ef/))
-* [AWS-EC2: 2-node EventFlow - Application](ef-2node-awsec2-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/ef-2node-awsec2/ef-2node-awsec2-app/))
+* [AWS-EC2: 2-node EventFlow - EventFlow Fragment](ef-2node-awsec2-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/docker/ef-2node-awsec2/ef-2node-awsec2-ef/))
+* [AWS-EC2: 2-node EventFlow - Application](ef-2node-awsec2-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/docker/ef-2node-awsec2/ef-2node-awsec2-app/))
 
 _This is a Tibco approved sample_
 

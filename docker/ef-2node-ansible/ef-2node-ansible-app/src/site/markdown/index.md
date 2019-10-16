@@ -251,7 +251,7 @@ Use the [maven commands](https://maven.apache.org) to build from the command lin
 [INFO] 
 [INFO] TASK [Update dockerfile before building app image] *****************************
 [INFO] ok: [127.0.0.1] => (item={u'search': u'(^FROM\\s)(.*)$', u'replace': 
-       u'FROM sbrt-base:10.5.0-SNAPSHOT'})
+       u'FROM sbrt-base:10.5.0'})
 [INFO] changed: [127.0.0.1] => (item={u'search': u'(^###Note:\\s)(.*)$', u'replace': 
        u'###Note: FROM statement build by Ansible playbook'})
 [INFO] changed: [127.0.0.1] => (item={u'search': u'(^LABEL build-image=)(.*)$', u'replace': 
