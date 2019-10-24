@@ -16,12 +16,14 @@
         <param name="gui:y" value="-137"/>
     </component>
     <component name="makeList">
-        <param name="gui:x" value="-354"/>
+        <param name="gui:x" value="-357"/>
         <param name="gui:y" value="-185"/>
     </component>
     <component name="u">
         <param name="gui:x" value="-434"/>
         <param name="gui:y" value="-185"/>
+        <param name="gui:bends:1" value="-472,-202;-468,-165"/>
+        <param name="gui:bends:2" value="-463,-107;-455,-145"/>
     </component>
     <component name="out">
         <param name="gui:x" value="-191"/>
