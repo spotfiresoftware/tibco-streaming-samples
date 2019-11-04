@@ -2,7 +2,7 @@
 
 How to use a NAR dependency in an EventFlow fragment.
 
-* [nar-eventflow](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/nativelibrary/nar/nar-eventflow/))
+* [nar-eventflow](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/nativelibrary/nar/nar-eventflow/))
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

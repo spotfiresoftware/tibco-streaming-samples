@@ -2,7 +2,7 @@
 
 How to deploy a LiveView Web application in Docker - LiveView Fragment
 
-* [lv-1node-lv](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/docker/lv-1node/lv-1node-lv/))
+* [lv-1node-lv](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/lv-1node/lv-1node-lv/))
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

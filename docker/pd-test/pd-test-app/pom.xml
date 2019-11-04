@@ -45,7 +45,7 @@
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
         <artifactId>ep-application-docker-samples</artifactId> <!-- replace with ep-application-docker-samples avoid sample metadata -->
-        <version>10.5.0-SNAPSHOT</version>
+        <version>10.6.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
 

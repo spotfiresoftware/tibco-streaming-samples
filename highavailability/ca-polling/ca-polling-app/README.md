@@ -2,7 +2,7 @@
 
 How to use cluster aware in TIBCO&reg; Streaming master projects - Application
 
-* [ca-polling-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0-SNAPSHOT/highavailability/ca-polling/ca-polling-app/))
+* [ca-polling-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/highavailability/ca-polling/ca-polling-app/))
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
