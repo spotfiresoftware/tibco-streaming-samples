@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2018-2019, TIBCO Software Inc.
+  
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+  
+  1. Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+  
+  2. Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+  
+  3. Neither the name of the copyright holder nor the names of its contributors
+     may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+  
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tibco.ep.samples.docker</groupId>
+    <artifactId>ef-helm-app</artifactId>
+    <packaging>ep-application</packaging>
+    <version>1.0.0</version>
+    <name>Docker: Helm EventFlow - Application</name>
+    <description>How to deploy an EventFlow application in Docker with Kubernetes and Helm - Application</description>
+
+    <!-- common definitions for this version of StreamBase -->
+    <parent>
+        <groupId>com.tibco.ep.sb.parent</groupId>
+        <artifactId>ep-application-docker-samples</artifactId> <!-- replace with ep-application-docker to avoid sample metadata -->
+        <version>10.6.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <dockerDomain>example.com</dockerDomain>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.tibco.ep.samples.docker</groupId>
+            <artifactId>ef-helm-eventflow</artifactId>
+            <version>${project.version}</version>
+            <type>ep-eventflow-fragment</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.tibco.ep</groupId>
+                <artifactId>ep-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <skipTests>${skipLocalTests}</skipTests>
+                    <nodes>
+                        <node>A</node>
+                        <node>B</node>
+                     </nodes>
+                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <executions>
+
+                    <!-- cluster monitor image -->
+                    <execution>
+                        <id>build clustermonitor image</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <configuration>
+                            <images>
+                                <image>
+                                    <name>clustermonitor:%l</name>
+                                    <build>
+                                        <dockerFileDir>${project.basedir}/src/main/docker/clustermonitor</dockerFileDir>
+                                        <optimise>true</optimise>
+                                        <assembly>
+                                            <inline>
+                                                <files>
+                                                    <file>
+                                                        <source>${project.basedir}/src/main/docker/clustermonitor/start-cluster-monitor</source>
+                                                        <outputDirectory></outputDirectory>
+                                                        <lineEnding>unix</lineEnding>
+                                                    </file>
+                                                </files>
+                                            </inline>
+                                        </assembly>
+                                    </build>
+                                </image>
+                            </images>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>push clustermonitor image</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <configuration>
+                            <images>
+                                <image>
+                                    <name>clustermonitor:%l</name>
+                                    <build/>
+                                </image>
+                            </images>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>start nodes</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <configuration>
+                            <startParallel>true</startParallel>
+                            <skip>${skipDockerTests}</skip>
+                            <autoCreateCustomNetworks>true</autoCreateCustomNetworks>
+                            <images>
+                                <image>
+                                    <name>%a:%l</name>
+                                    <alias>A.${project.artifactId}</alias>
+                                    <run>
+                                        <network>
+                                            <name>${dockerDomain}</name>
+                                            <alias>A.${dockerDomain}</alias>
+                                        </network>
+                                        <hostname>A.${dockerDomain}</hostname>
+                                        <env>
+                                            <NODENAME>A.${project.artifactId}</NODENAME>
+                                        </env>
+                                        <log>
+                                            <enabled>true</enabled>
+                                        </log>
+                                        <wait>
+                                            <log>COMMAND FINISHED</log>
+                                            <time>100000</time>
+                                        </wait>
+                                        <namingStrategy>alias</namingStrategy>
+                                    </run>
+                                </image>
+                                <image>
+                                    <name>%a:%l</name>
+                                    <alias>B.${project.artifactId}</alias>
+                                    <run>
+                                        <network>
+                                            <name>${dockerDomain}</name>
+                                            <alias>B.${dockerDomain}</alias>
+                                        </network>
+                                        <hostname>B.${dockerDomain}</hostname>
+                                        <env>
+                                            <NODENAME>B.${project.artifactId}</NODENAME>
+                                        </env>
+                                        <log>
+                                            <enabled>true</enabled>
+                                        </log>
+                                        <wait>
+                                            <log>COMMAND FINISHED</log>
+                                            <time>100000</time>
+                                        </wait>
+                                        <namingStrategy>alias</namingStrategy>
+                                    </run>
+                                </image>
+                            </images>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop nodes</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipDockerTests}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Generate helm Chart.yaml and create a helm package -->
+            <!-- source is filtered by maven to apply maven variables -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/helm/${project.artifactId}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/helm/${project.artifactId}</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.kiwigrid</groupId>
+                <artifactId>helm-maven-plugin</artifactId>
+                <configuration>
+                    <chartDirectory>${project.build.directory}/helm/${project.artifactId}</chartDirectory>
+                    <chartVersion>${project.version}</chartVersion>
+                    <useLocalHelmBinary>true</useLocalHelmBinary>
+                    <uploadRepoStable>
+                        <name>helm.registry</name>
+                        <url>${helm.registry}</url>
+                        <type>${helm.registry.type}</type>
+                    </uploadRepoStable>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>initialize helm</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>init</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create helm package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>deploy helm package</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>upload</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

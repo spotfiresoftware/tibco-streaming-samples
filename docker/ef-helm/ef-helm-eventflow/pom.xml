@@ -34,20 +34,20 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tibco.ep.samples</groupId>
-    <artifactId>docker</artifactId>
-    <packaging>pom</packaging>
+    <groupId>com.tibco.ep.samples.docker</groupId>
+    <artifactId>ef-helm-eventflow</artifactId>
+    <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Docker</name>
-    <description>How to use Docker in TIBCO Streaming projects.</description>
+    <name>Docker: Helm EventFlow - EventFlow Fragment</name>
+    <description>How to deploy an EventFlow application in Docker with Kubernetes and Helm - EventFlow Fragment</description>
 
-    <modules>
-        <module>ef-2node</module>
-        <module>lv-1node</module>
-        <module>pd-test</module>
-        <module>ef-2node-ansible</module>
-        <module>ef-kubernetes</module>
-        <module>ef-helm</module>
-    </modules>
+    <!-- common definitions for this version of StreamBase -->
+    <parent>
+        <groupId>com.tibco.ep.sb.parent</groupId>
+        <artifactId>ep-eventflow-fragment-samples</artifactId> <!-- replace with ep-eventflow-fragment to avoid sample metadata -->
+        <version>10.6.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
 
 </project>

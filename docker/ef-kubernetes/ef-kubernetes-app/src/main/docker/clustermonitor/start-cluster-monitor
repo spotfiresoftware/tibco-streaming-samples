@@ -1,0 +1,69 @@
+#!/bin/sh
+#
+#  Copyright (C) 2018-2019, TIBCO Software Inc.
+#  
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions are met:
+#  
+#  1. Redistributions of source code must retain the above copyright notice,
+#     this list of conditions and the following disclaimer.
+#  
+#  2. Redistributions in binary form must reproduce the above copyright notice,
+#     this list of conditions and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  
+#  3. Neither the name of the copyright holder nor the names of its contributors
+#     may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#  
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+#  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+#  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+#  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+#  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+#  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+#  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#  POSSIBILITY OF SUCH DAMAGE.
+#
+# script to start node inside docker container
+#
+# Requires :
+#
+#   PRODUCT_HOME    the location of the StreamBase installation
+#   RUNTIME_HOME    the location of nodes, application and configuration
+#   NODENAME        the node name to use
+#
+# Optionally :
+#
+#   NODEDEPLOY      path of node deploy configuration file (default is to use application archive)
+#   SUBSTITUTIONS   substitution parameters (default is none)
+
+if [  "${NODENAME}" == "" ]
+then
+	NODENAME=$(hostname).clustermonitor
+fi
+
+#
+# clean up from any previous run
+#
+rm -rf ${RUNTIME_HOME}/node/${NODENAME}
+
+#
+# install and start nodes
+#
+epadmin --username=${USER_NAME} --password=${USER_NAME} install node \
+    --adminport=2000 \
+    --nodename=${NODENAME} \
+    --nodedirectory=${RUNTIME_HOME}/node \
+    --substitutions=NODE_NAME=${NODENAME} \
+    --application=${PRODUCT_HOME}/distrib/tibco/sb/applications/cluster-monitor.zip
+epadmin --servicename=${NODENAME} start node
+
+#
+# indicate that we've started and wait
+#
+echo "COMMAND FINISHED"
+sleep infinity

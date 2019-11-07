@@ -1,0 +1,198 @@
+#!/bin/sh
+#
+#  Copyright (C) 2018-2019, TIBCO Software Inc.
+#  
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions are met:
+#  
+#  1. Redistributions of source code must retain the above copyright notice,
+#     this list of conditions and the following disclaimer.
+#  
+#  2. Redistributions in binary form must reproduce the above copyright notice,
+#     this list of conditions and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  
+#  3. Neither the name of the copyright holder nor the names of its contributors
+#     may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#  
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+#  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+#  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+#  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+#  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+#  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+#  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#  POSSIBILITY OF SUCH DAMAGE.
+#
+# script to start node inside docker container
+#
+# Requires :
+#
+#   PRODUCT_HOME      the location of the StreamBase installation
+#   RUNTIME_HOME      the location of nodes, application and configuration
+#   NODENAME          the node name to use
+#
+# Optionally :
+#
+#   NODEDEPLOY        path of node deploy configuration file (default is to use application archive)
+#   SUBSTITUTIONS     substitution parameters (default is none)
+#   SUBSTITUTIONFILE  path of substitutions file
+#   ADMINPORT         administration port
+#   DEPLOYDIRECTORIES comma separated list of deployment directories
+#   KEYSTORE          path to the keystore file containing the master secret
+#   KEYSTOREPASSWORD  The password for the keystore file
+#
+# The variables can be set on the Docker commandline :
+#    
+#    docker run --env=NODENAME=A.X ...
+#
+# or set in Kubernetes Pod, Deployment or StatefulSet yaml configuration :
+#
+#    env:
+#    - name: NODENAME
+#      value: A.X
+#
+# The Kubernets yaml configurations can further be parameterised via Helm values :
+#
+#    env:
+#    - name: NODENAME
+#      value: {{ .Values.nodeName }}
+#
+# Variables used for files can reference files included in the Docker image.  Test
+# configurations from src/main/test/configurations are added to the Docker image 
+# at /var/opt/tibco/streambase/configuration/, and test resources from
+# src/main/test/resources are added to the Docker image at /var/opt/tibco/streambase/resources.
+#
+# Hence a Kubernets configuration for a node deployment file could be :
+#
+#    env:
+#    - name: NODEDEPLOY
+#      value: "/var/opt/tibco/streambase/configuration/node.conf"
+#
+# Files can be supplied external to the Docker image via Kubernetes ConfigMap :
+#
+#    apiVersion: v1
+#    kind: ConfigMap
+#    metadata:
+#      name: configuration
+#      namespace: default
+#    data:
+#      node.conf: |-
+#        name = "ef-kubernetes-app"
+#        version = "2.0.0"
+#        type = "com.tibco.ep.dtm.configuration.node"
+#        configuration = {
+#            NodeDeploy = {
+#                nodes = {
+#                    "${EP_NODE_NAME}" = {
+#                        nodeType = "docker"
+#                    }
+#                }
+#            }
+#        }
+#
+# and mounted as a volume :
+#
+#    spec:
+#      volumes:
+#        - name: configuration
+#          configMap:
+#            name: configuration
+#    containers:
+#      - name: ef-kubernetes-app
+#        volumeMounts:
+#        - name: configuration
+#          mountPath: /var/opt/tibco/streambase/configuration
+#     env:
+#     - name: NODEDEPLOY
+#       value: "/var/opt/tibco/streambase/configuration/node.conf"
+#
+# POD_NAMESPACE, POD_NAME and HOSTNAME are passed through from Kubernetes to support security.conf.
+#
+# See Docker, Kubernetes and Helm documentation for further details.
+#
+
+if [  "${NODENAME}" == "" ]
+then
+    echo "NODENAME is not set, use --env to set on the docker command line"
+    exit 1
+fi
+
+#
+# required for openshift - see https://docs.okd.io/latest/creating_images/guidelines.html#openshift-specific-guidelines
+#
+if ! whoami &> /dev/null; then
+  if [ -w /etc/passwd ]; then
+    echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd
+  fi
+fi
+
+#
+# create install node arguments
+#
+application="$(ls -1t ${RUNTIME_HOME}/application/*.zip | head -1)"
+echo "Installing application archive ${application}"
+echo
+args="--application=${application}"
+if [ "${NODEDEPLOY}" != "" ]
+then
+    args="${args} --nodedeploy=${NODEDEPLOY}"
+fi
+if [ "${SUBSTITUTIONS}" != "" ]
+then
+    if [ "${POD_NAMESPACE}" != "" ]
+    then
+        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},HOSTNAME=${HOSTNAME},${SUBSTITUTIONS}"
+    else
+        args="${args} --substitutions=${SUBSTITUTIONS}"
+    fi
+else
+    if [ "${POD_NAMESPACE}" != "" ]
+    then
+        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},HOSTNAME=${HOSTNAME}"
+    fi
+fi
+if [ "${SUBSTITUTIONFILE}" != "" ]
+then
+    args="${args} --substitutionfile=${SUBSTITUTIONFILE}"
+fi
+if [ "${ADMINPORT}" != "" ]
+then
+    args="${args} --adminport=${ADMINPORT}"
+fi
+if [ "${DEPLOYDIRECTORIES}" != "" ]
+then
+    args="${args} --deploydirectories=${DEPLOYDIRECTORIES}"
+fi
+if [ "${KEYSTORE}" != "" ]
+then
+    args="${args} --keystore=${KEYSTORE}"
+fi
+if [ "${KEYSTOREPASSWORD}" != "" ]
+then
+    args="${args} --keystorepassword=${KEYSTOREPASSWORD}"
+fi
+
+#
+# clean up from any previous run
+#
+rm -rf ${RUNTIME_HOME}/node/${NODENAME}
+
+#
+# install and start nodes
+#
+epadmin --username=${USER_NAME} --password=${USER_NAME} install node \
+    --nodename=${NODENAME} \
+    --nodedirectory=${RUNTIME_HOME}/node \
+    ${args}
+epadmin --servicename=${NODENAME} start node
+
+#
+# indicate that we've started and wait
+#
+echo "COMMAND FINISHED"
+sleep infinity

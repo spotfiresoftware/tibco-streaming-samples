@@ -1,0 +1,119 @@
+#  Copyright (C) 2018-2019, TIBCO Software Inc.
+#  
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions are met:
+#  
+#  1. Redistributions of source code must retain the above copyright notice,
+#     this list of conditions and the following disclaimer.
+#  
+#  2. Redistributions in binary form must reproduce the above copyright notice,
+#     this list of conditions and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  
+#  3. Neither the name of the copyright holder nor the names of its contributors
+#     may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#  
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+#  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+#  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+#  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+#  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+#  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+#  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#  POSSIBILITY OF SUCH DAMAGE.
+
+#
+# Service for the application cluster
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: ef-helm-app
+  labels:
+    app: ef-helm-app
+spec:
+  selector:
+    app: ef-helm-app
+  clusterIP: None
+---
+
+#
+# application cluster as a stateful set
+#
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ef-helm-app
+spec:
+  selector:
+    matchLabels:
+      app: ef-helm-app
+  serviceName: ef-helm-app
+  #
+  # initially 2 eventflow nodes in the cluster
+  # can be scaled up or down
+  #
+  replicas: {{ .Values.replicaCount }}
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        app: ef-helm-app
+    spec:
+      containers:
+        - name: ef-helm-app
+          #
+          # docker image to use
+          #
+{{- if .Values.dockerRegistry }}
+          image: {{ .Values.dockerRegistry }}/ef-helm-app:1.0.0
+{{- else}}
+          image: ef-helm-app:1.0.0
+{{- end }}
+          #
+          # Share application logs to docker console
+          #
+          tty: true
+          #
+          # set StreamBase node name
+          #
+          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name            
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: APPNAME
+            value: ef-helm-app
+          - name: NODENAME
+            value: "$(POD_NAME).$(POD_NAMESPACE).$(APPNAME)"
+          #
+          # Use the fully qualified hostname to avoid DNS issues
+          #
+          - name: HOSTNAME
+            value: "$(POD_NAME).$(APPNAME).$(POD_NAMESPACE).svc.cluster.local"
+          #
+          # use heathcheck API to test for liveness
+          # should 
+          #
+          livenessProbe:
+            httpGet:
+              path: /healthcheck/v1/status
+              port: 8008
+              #
+              # need to specify basic authentication
+              # this use the username and password that the eventflow
+              # node was started with
+              #
+              httpHeaders:
+              - name: Authorization
+                value: Basic dGliY286dGliY28=
+            initialDelaySeconds: 120
+            periodSeconds: 10
