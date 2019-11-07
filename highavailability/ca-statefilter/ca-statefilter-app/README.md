@@ -1,6 +1,6 @@
-# HA : cluster aware state filter - Application
+# HA: cluster aware state filter - Application
 
-How to build cluster aware TIBCO&reg; Streaming master projects - Application
+How to build cluster aware TIBCO&reg; Streaming 10.5.0 projects - Application
 
 * [ca-statefilter-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/highavailability/ca-statefilter/ca-statefilter-app/))
 

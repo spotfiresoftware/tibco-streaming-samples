@@ -1,4 +1,4 @@
-# Structure : Eventflow
+# Structure: Eventflow
 
 How to structure an EventFlow fragment.
 

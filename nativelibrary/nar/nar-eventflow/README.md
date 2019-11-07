@@ -1,4 +1,4 @@
-# Native : NAR - EventFlow calling C++
+# Native: NAR - EventFlow calling C++
 
 How to use a NAR dependency in an EventFlow fragment.
 

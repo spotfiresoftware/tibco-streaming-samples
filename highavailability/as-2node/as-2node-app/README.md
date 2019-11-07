@@ -1,4 +1,4 @@
-# HA : 2-node active standby - Application
+# HA: 2-node active standby - Application
 
 How to build a 2-node active standby deployment. - Application
 

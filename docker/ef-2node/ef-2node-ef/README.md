@@ -1,4 +1,4 @@
-# Docker : 2-node EventFlow - EventFlow Fragment
+# Docker: 2-node EventFlow - EventFlow Fragment
 
 How to deploy a 2-node EventFlow application in Docker - EventFlow Fragment
 

@@ -1,10 +1,10 @@
 # Testing
 
-How to test TIBCO&reg; Streaming master projects.
+How to test TIBCO&reg; Streaming 10.5.0 projects.
 
 Samples :
 
-* [Testing : Junit](junit/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/testing/junit/))
+* [Testing: Junit](junit/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/testing/junit/))
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

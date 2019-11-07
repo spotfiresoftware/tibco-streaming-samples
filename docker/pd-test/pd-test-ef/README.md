@@ -1,4 +1,4 @@
-# Docker : proxy discovery test - EventFlow fragment
+# Docker: proxy discovery test - EventFlow fragment
 
 How to user docker to test proxy discovery. - EventFlow fragment
 

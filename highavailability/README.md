@@ -1,6 +1,6 @@
 # HA
 
-How to build Highly Available TIBCO&reg; Streaming master projects.
+How to build Highly Available TIBCO&reg; Streaming 10.5.0 projects.
 
 Samples :
 

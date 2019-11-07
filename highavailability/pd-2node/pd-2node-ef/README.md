@@ -1,4 +1,4 @@
-# HA : proxy discovery - EventFlow Fragment
+# HA: proxy discovery - EventFlow Fragment
 
 How to build a 2-node active active deployment + proxy discovery. - EventFlow Fragment
 

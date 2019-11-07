@@ -1,4 +1,4 @@
-# HA : 2-node active active - Application
+# HA: 2-node active active - Application
 
 How to build a 2-node active active deployment. - Application
 

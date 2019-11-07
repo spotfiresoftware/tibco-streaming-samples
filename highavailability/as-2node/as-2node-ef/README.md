@@ -1,4 +1,4 @@
-# HA : 2-node active standby - EventFlow Fragment
+# HA: 2-node active standby - EventFlow Fragment
 
 How to build a 2-node active standby deployment. - EventFlow Fragment
 

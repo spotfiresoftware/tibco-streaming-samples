@@ -1,6 +1,6 @@
 # Docker
 
-How to use Docker in TIBCO&reg; Streaming master projects.
+How to use Docker in TIBCO&reg; Streaming 10.5.0 projects.
 
 Samples :
 
