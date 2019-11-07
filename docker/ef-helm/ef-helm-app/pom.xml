@@ -51,6 +51,9 @@
 
     <properties>
         <dockerDomain>example.com</dockerDomain>
+        <skipApplicationDocker>true</skipApplicationDocker>
+        <skipStreamBaseDockerBase>true</skipStreamBaseDockerBase>
+        <skipDockerTests>true</skipDockerTests>
     </properties>
     
     <dependencies>
