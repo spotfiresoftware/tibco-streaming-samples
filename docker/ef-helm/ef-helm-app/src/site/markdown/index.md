@@ -127,12 +127,24 @@ To learn more about the release, try:
   $ helm get eerie-pikey
 ```
 
+**Note:** In some cases ( such as **Kind** ) the *helm install* command will return
+**Error: no available release name found**.  Should that happen helm should be initialized
+with a service account :
+
+```
+$ kubectl delete deployment tiller-deploy -n kube-system
+$ helm init --service-account=tiller
+```
+
 If the Docker image has been pushed to a remote repository, the *dockerRegistry*
 value can be overridden :
 
 ```shell
 $ helm --set dockerRegistry=registry.com/ install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
 ```
+
+Overriding dockerRegistry can be especially important if the image is fetched from a docker
+registry running in Kubernetes itself ( such as **Kind** ).
 
 Values can be set via the *--set* argument :
 
