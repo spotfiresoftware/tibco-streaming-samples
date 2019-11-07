@@ -1,4 +1,4 @@
-# HA : 3-node active active - Application
+# HA: 3-node active active - Application
 
 How to build a 3-node active active deployment. - Application
 

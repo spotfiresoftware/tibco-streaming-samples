@@ -1,4 +1,4 @@
-# Structure : Java
+# Structure: Java
 
 How to structure an Java fragment.
 

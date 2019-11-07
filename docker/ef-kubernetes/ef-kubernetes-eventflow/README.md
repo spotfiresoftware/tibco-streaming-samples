@@ -1,8 +1,8 @@
-# HA: 2-node active active - EventFlow Fragment
+# Docker: Kubernetes EventFlow - EventFlow Fragment
 
-How to build a 2-node active active deployment. - EventFlow Fragment
+How to deploy an EventFlow application in Docker with Kubernetes - EventFlow Fragment
 
-* [aa-2node-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/highavailability/aa-2node/aa-2node-ef/))
+* [ef-kubernetes-eventflow](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-kubernetes/ef-kubernetes-eventflow/))
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

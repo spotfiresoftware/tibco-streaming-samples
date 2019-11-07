@@ -1,6 +1,6 @@
 # TIBCO&reg; Streaming master Samples
 
-This github repository contains a number of TIBCO&reg; Streaming master samples that can be cloned to your local workspace.
+This GitHub repository contains a number of TIBCO&reg; Streaming master samples that can be cloned to your local workspace.
 
 Overview:
 

@@ -1,4 +1,4 @@
-# Docker : LiveView Web - Application
+# Docker: LiveView Web - Application
 
 How to deploy a LiveView Web application in Docker - Application
 

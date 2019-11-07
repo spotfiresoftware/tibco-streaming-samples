@@ -1,4 +1,4 @@
-# Testing : Junit
+# Testing: Junit
 
 How to write unit tests for EventFlow fragments.
 

@@ -1,4 +1,4 @@
-# Docker : 2-node EventFlow - Application
+# Docker: 2-node EventFlow - Application
 
 How to deploy a 2-node EventFlow application in Docker - Application
 

@@ -1,4 +1,4 @@
-# Docker : proxy discovery test - Application
+# Docker: proxy discovery test - Application
 
 How to user docker to test proxy discovery. - Application
 

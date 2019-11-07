@@ -1,4 +1,4 @@
-# HA : cluster aware polling - Application
+# HA: cluster aware polling - Application
 
 How to use cluster aware in TIBCO&reg; Streaming master projects - Application
 

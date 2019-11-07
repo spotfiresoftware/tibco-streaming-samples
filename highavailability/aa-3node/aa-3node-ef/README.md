@@ -1,4 +1,4 @@
-# HA : 3-node active active - EventFlow Fragment
+# HA: 3-node active active - EventFlow Fragment
 
 How to build a 3-node active active deployment. - EventFlow Fragment
 

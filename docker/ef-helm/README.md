@@ -1,8 +1,13 @@
-# HA: 2-node active active - EventFlow Fragment
+# Docker: Helm EventFlow
 
-How to build a 2-node active active deployment. - EventFlow Fragment
+How to deploy an EventFlow application in Docker with Kubernetes and Helm
 
-* [aa-2node-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/highavailability/aa-2node/aa-2node-ef/))
+This is a maven aggregator project consisting of the following maven modules :
+
+* [Docker: Helm EventFlow - EventFlow Fragment](ef-helm-eventflow/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-helm/ef-helm-eventflow/))
+* [Docker: Helm EventFlow - Application](ef-helm-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-helm/ef-helm-app/))
+
+_This is a TIBCO approved sample._
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

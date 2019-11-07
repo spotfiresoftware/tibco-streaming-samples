@@ -1,4 +1,4 @@
-# Native : NAR - C++ Library
+# Native: NAR - C++ Library
 
 How to compile C++ source to a NAR.
 

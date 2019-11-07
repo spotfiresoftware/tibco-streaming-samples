@@ -1,4 +1,4 @@
-# HA : cluster aware polling - EventFlow Fragment
+# HA: cluster aware polling - EventFlow Fragment
 
 How to use cluster aware in TIBCO&reg; Streaming master projects - EventFlow Fragment
 

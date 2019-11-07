@@ -1,4 +1,4 @@
-# Java : Java Function
+# Java: Java Function
 
 How to invoke java code from EventFlow.
 

@@ -1,4 +1,4 @@
-# HA : cluster aware state filter - Application
+# HA: cluster aware state filter - Application
 
 How to build cluster aware TIBCO&reg; Streaming master projects - Application
 

@@ -1,4 +1,4 @@
-# Structure : LiveView
+# Structure: LiveView
 
 How to structure an LiveView fragment.
 
