@@ -1189,15 +1189,6 @@ $ minikube dashboard
 🎉  Opening http://127.0.0.1:57841/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
 ```
 
-### CodeReady Containers
-
-Starting the dashboard in a **CodeReady Containers** context is via the *crc console* command :
-
-```shell
-$ crc console
-Opening the OpenShift Web Console in the default browser...
-```
-
 ### Minishift
 
 Starting the dashboard in a **minishift** context is via the *minishift console* command :

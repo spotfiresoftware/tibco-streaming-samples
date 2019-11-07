@@ -62,6 +62,49 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <!-- if docker is available, build docker projects -->
+        <profile>
+            <id>Docker in local</id>
+            <activation>
+                <file>
+                    <exists>/usr/local/bin/docker</exists>
+                </file>
+            </activation>
+            <properties>
+                <skipApplicationDocker>false</skipApplicationDocker>
+                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+                <skipDockerTests>${skipTests}</skipDockerTests>
+            </properties>
+        </profile>
+        <profile>
+            <id>Docker in bin</id>
+            <activation>
+                <file>
+                    <exists>/usr/bin/docker</exists>
+                </file>
+            </activation>
+            <properties>
+                <skipApplicationDocker>false</skipApplicationDocker>
+                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+                <skipDockerTests>${skipTests}</skipDockerTests>
+            </properties>
+        </profile>
+        <profile>
+            <id>Docker in C:</id>
+            <activation>
+                <file>
+                    <exists>C:\Program Files\Docker\Docker\resources\bin\docker.exe</exists>
+                </file>
+            </activation>
+            <properties>
+                <skipApplicationDocker>false</skipApplicationDocker>
+                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+                <skipDockerTests>${skipTests}</skipDockerTests>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -89,6 +132,7 @@
                             <goal>build</goal>
                         </goals>
                         <configuration>
+                            <skip>${skipDockerTests}</skip>
                             <images>
                                 <image>
                                     <name>clustermonitor:%l</name>
@@ -118,6 +162,7 @@
                             <goal>push</goal>
                         </goals>
                         <configuration>
+                            <skip>${skipDockerTests}</skip>
                             <images>
                                 <image>
                                     <name>clustermonitor:%l</name>
