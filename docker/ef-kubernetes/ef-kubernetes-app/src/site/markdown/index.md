@@ -4,9 +4,6 @@ This sample describes how to deploy an application archive containing a StreamBa
 Kubernetes.  The primary focus is desktop development, ie testing of application images in a desktop Kubernetes 
 node.
 
-The sample is generated from the maven **eventflow-application-kubernetes-archetype** archetype with support for
-clustermonitor added.
-
 * [Terminology](#terminology)
 * [Prerequisites](#prerequisites)
 * [Development lifecycle](#development-lifecycle)
@@ -16,7 +13,7 @@ clustermonitor added.
 * [Building and running from TIBCO StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Deployment](#deployment)
-* [Runtime time settings](#runtime-time-settings)
+* [Runtime settings](#runtime-settings)
 * [Further Kubernetes commands](#further-kubernetes-commands)
 
 <a name="terminology"></a>
@@ -26,19 +23,19 @@ clustermonitor added.
 In this sample we are using various technologies with terminology that overlap at times. Here are some key terms for clarification:
 
 * **Kubernetes**
-    * **Kubernetes Node** -  A worker machine
-    * **Kubernetes Cluster** - A set of machines, called nodes, that run containerized applications managed by Kubernetes. A cluster has at least one worker node and at least one master node.
-    * **K8s** - Abbreviation of Kubernetes
-    * **CNI** - Kubernetes Container Network Interface
-    * **POD** - Smallest deployable unit of computing that can be created and managed in Kubernetes.
-    * **StatefulSets** - Manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.
+    * **[Kubernetes Node](https://kubernetes.io/docs/concepts/architecture/nodes/)** -  A worker machine
+    * **[Kubernetes Cluster](https://kubernetes.io/docs/concepts/)** - A set of machines, called nodes, that run containerized applications managed by Kubernetes. A cluster has at least one worker node and at least one master node.
+    * **[K8s](https://kubernetes.io/)** - Abbreviation of Kubernetes
+    * **[CNI](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)** - Kubernetes Container Network Interface
+    * **[POD](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)** - Smallest deployable unit of computing that can be created and managed in Kubernetes.
+    * **[StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)** - Manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.
 * **Tibco**
-    * **StreamBase Machine** - An execution context for a node
-    * **StreamBase Application** - Business specific functionality
-    * **StreamBase Fragment** - An executable part of an application
-    * **StreamBase Cluster** - A logical grouping of StreamBase nodes that communicate to support an application
-    * **StreamBase Node** - A StreamBase container for engines
-    * **StreamBase Engine** - Executable context for a fragment
+    * **[StreamBase Machine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - An execution context for a node
+    * **[StreamBase Application](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - Business specific functionality
+    * **[StreamBase Fragment](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - An executable part of an application
+    * **[StreamBase Cluster](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - A logical grouping of StreamBase nodes that communicate to support an application
+    * **[StreamBase Node](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - A StreamBase container for engines
+    * **[StreamBase Engine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - Executable context for a fragment
 
 <a name="prerequisites"></a>
 
@@ -123,7 +120,8 @@ $ export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
 
 Kind supports multiple Kubernetes Nodes.
 
-**Note:** **Kind** doesn't support UDP broadcasts so StreamBase Nodes won't discover each other.  See https://github.com/kubernetes-sigs/kind/issues/1063 .
+**FIX THIS:** **Kind** doesn't support UDP broadcasts so StreamBase Nodes won't discover each other.  See https://github.com/kubernetes-sigs/kind/issues/1063.
+Pending specific support for Kubernetes Discovery.  Work-around is to add **weave-net** :
 
 The default CNI, kind-net, can be disabled by using the following yaml :
 
@@ -183,7 +181,7 @@ $ eval $(minishift oc-env)
 ...
 ```
 
-You may want to grant more resources to Minikube, for example :
+You may want to grant more resources to **Minishift**, for example :
 
 ```shell
 $ minishift start --cpus=4 --memory=8GB
@@ -239,7 +237,8 @@ $ oc patch config.imageregistry.operator.openshift.io/cluster --patch '{"spec":{
 config.imageregistry.operator.openshift.io/cluster patched (no change)
 ```
 
-**FIX THIS:** So far I've been unable to get UDP broadcasts working between pod's on **CodeReady Containers**
+**FIX THIS:** **CodeReady Containers** doesn't support UDP broadcasts so StreamBase Nodes won't discover each other.
+Pending specific support for Kubernetes Discovery.
 
 <a name="development_lifecycle"></a>
 
@@ -268,9 +267,11 @@ Maven lifecycle mapping is :
 * **mvn package** - build StreamBase Fragment archive or StreamBase Application archive
 * **mvn pre-integration-phase** - build Docker image
 * **mvn pre-integration-phase** - start Docker container(s)
-* **mvn integration-phase** - any system test cases
-* **mvn pre-integration-phase** - stop Docker container(s)
+* **mvn integration-phase** - run any system test cases
+* **mvn post-integration-phase** - stop Docker container(s)
 * **mvn deploy** - push Docker images to registry
+
+The [TIBCO Streaming maven plugin](https://github.com/TIBCOSoftware/tibco-streaming-maven-plugin) provides the lifecycle.
 
 <a name="creating-an-application-archive-project-for-kubernetes-from-tibco-streambase-studio-trade"></a>
 
@@ -301,39 +302,10 @@ The Kubernetes configurations include -
 
 **Note:** - current version of Kitematic doesn't display container logs.  I've been using the older 0.17.6 from https://github.com/docker/kitematic/releases/download/v0.17.6/Kitematic-0.17.6-Mac.zip
 
-<a name="creating-an-application-archive-project-for-kubernetes-from-maven"></a>
-
-## Creating an application archive project for Kubernetes from maven
-
-The following Docker related archetypes are available :
-
-archetypeGroupId | archetypeArtifactId                        | Fragment  | Docker | Kubernetes | Helm
----------------- |--------------------------------------------|-----------|--------|------------|-------
-com.tibco.ep     | application-docker-archetype               | None      | Yes    | No         | No
-com.tibco.ep     | application-kubernetes-archetype           | None      | Yes    | Yes        | No
-com.tibco.ep     | application-helm-archetype                 | None      | Yes    | Yes        | Yes
-com.tibco.ep     | eventflow-application-docker-archetype     | EventFlow | Yes    | No         | No
-com.tibco.ep     | java-application-docker-archetype          | Java      | Yes    | No         | No
-com.tibco.ep     | liveview-application-docker-archetype      | LiveView  | Yes    | No         | No
-com.tibco.ep     | eventflow-application-kubernetes-archetype | EventFlow | Yes    | Yes        | No
-com.tibco.ep     | eventflow-application-helm-archetype       | EventFlow | Yes    | Yes        | Yes
-
-A maven project contain an eventflow fragment and application archive support Kubernetes can be created using the
-archetype **eventflow-application-kubernetes-archetype** :
-
-```shell
-mvn archetype:generate -B \
-        -DarchetypeGroupId=com.tibco.ep -DarchetypeArtifactId=eventflow-application-kubernetes-archetype -DarchetypeVersion=10.6.0-SNAPSHOT \
-        -DgroupId=com.tibco.ep.samples.docker -DartifactId=ef-kubernetes -Dpackage=com.tibco.ep.samples.docker -Dversion=1.0.0 -Dtestnodes=A,B,C \
-        -Dname="Docker: Kubernetes EventFlow" -Ddescription="How to deploy an EventFlow application in Docker with Kubernetes"
-```
-
-<a name="cluster-monitor"></a>
-
 ## Cluster monitor
 
-In this sample the generated project is enhanced by adding a cluster monitor docker image.  To support this an
-additional maven execution step is needed in pom.xml :
+In this sample the generated project is enhanced by adding a [Cluster Monitor](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/clustermonitor.html)
+docker image.  To support this an additional maven execution step is needed in pom.xml :
 
 ```xml
                     <!-- cluster monitor image -->
@@ -403,10 +375,10 @@ Along with additional files :
 
 ## Containers and nodes
 
-StreamBase nodes require a hostname, nodename and DNS working together.  Tests have shown that the Kubernetes 
+StreamBase nodes require the hostname, nodename and DNS working together.  Tests have shown that the Kubernetes 
 *statefulset* option supports StreamBase nodes easiest.
 
-The goal of this sample is to construct a deployment shown below :
+The goal of this sample is to construct the deployment shown below :
 
 ![resources](images/kubernetes-docker.svg)
 
@@ -608,9 +580,9 @@ is being used or plain http ) then it may be possible to still use the registry 
 
 ![resources](images/insecure-registry.png)
 
-<a name="runtime-time-settings"></a>
+<a name="runtime-settings"></a>
 
-## Runtime time settings
+## Runtime settings
 
 The application docker image will usually contain all configurations and files to support the application.  However
 it is possible to inject configurations and files at runtime.
@@ -807,7 +779,7 @@ spec:
         - name: ef-kubernetes-app
           env:
           - name: STREAMING_ADMINPORT
-            value: "2000"
+            value: "0"
 ...
 ```
 
@@ -834,7 +806,7 @@ spec:
 ...
 ```
 
-The file referenced can be included in the application docker image (from src/test/resources), 
+Any files to be included in a deploy directory can be included in the application docker image (from src/test/resources), 
 or supplied via a Kubernetes ConfigMap :
 
 ```yaml
@@ -1056,7 +1028,7 @@ ef-kubernetes-app-2   1/1     Running   0          45m
 
 ### Healthcheck
 
-Should a pod fail, the healthcheck should cause a re-start :
+Should a pod fail, the healthcheck will cause a re-start :
 
 ```shell
 $ kubectl get pods 

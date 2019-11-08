@@ -3,7 +3,6 @@
 This sample builds on the [main Kubernetes sample](../../../../../ef-kubernetes/ef-kubernetes-app/src/site/markdown/index.md) and adds  Helm packaging.
 
 * [Prerequisites](#prerequisites)
-* [Creating an application archive project for Helm from maven](#creating-an-application-archive-project-for-helm-from-maven)
 * [Packaging with Helm](#packaging-with-helm)
 * [Deployment](#deployment)
 
@@ -14,21 +13,21 @@ This sample builds on the [main Kubernetes sample](../../../../../ef-kubernetes/
 In addition to Docker and Kubernetes ( see [main Kubernetes sample](../../../../../ef-kubernetes/ef-kubernetes-app/src/site/markdown/index.md) ), 
 Helm is also required to be installed and configured - see https://helm.sh/docs/using_helm/ .
 
-To use helm, tiller must be started in Kubernetes :
+To use helm, tiller must be started in Kubernetes (which must be started) :
 
 ```shell
 $ helm init
-Creating /Users/plord/.helm 
-Creating /Users/plord/.helm/repository 
-Creating /Users/plord/.helm/repository/cache 
-Creating /Users/plord/.helm/repository/local 
-Creating /Users/plord/.helm/plugins 
-Creating /Users/plord/.helm/starters 
-Creating /Users/plord/.helm/cache/archive 
-Creating /Users/plord/.helm/repository/repositories.yaml 
+Creating /Users/guest/.helm 
+Creating /Users/guest/.helm/repository 
+Creating /Users/guest/.helm/repository/cache 
+Creating /Users/guest/.helm/repository/local 
+Creating /Users/guest/.helm/plugins 
+Creating /Users/guest/.helm/starters 
+Creating /Users/guest/.helm/cache/archive 
+Creating /Users/guest/.helm/repository/repositories.yaml 
 Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
 Adding local repo with URL: http://127.0.0.1:8879/charts 
-$HELM_HOME has been configured at /Users/plord/.helm.
+$HELM_HOME has been configured at /Users/guest/.helm.
 
 Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
 
@@ -36,35 +35,6 @@ Please note: by default, Tiller is deployed with an insecure 'allow unauthentica
 To prevent this, run `helm init` with the --tiller-tls-verify flag.
 For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
 ```
-
-<a name="creating-an-application-archive-project-for-kubernetes-from-maven"></a>
-
-## Creating an application archive project for Helm from maven
-
-The following Docker related archetypes are available :
-
-archetypeGroupId | archetypeArtifactId                        | Fragment  | Docker | Kubernetes | Helm
----------------- |--------------------------------------------|-----------|--------|------------|-------
-com.tibco.ep     | application-docker-archetype               | None      | Yes    | No         | No
-com.tibco.ep     | application-kubernetes-archetype           | None      | Yes    | Yes        | No
-com.tibco.ep     | application-helm-archetype                 | None      | Yes    | Yes        | Yes
-com.tibco.ep     | eventflow-application-docker-archetype     | EventFlow | Yes    | No         | No
-com.tibco.ep     | java-application-docker-archetype          | Java      | Yes    | No         | No
-com.tibco.ep     | liveview-application-docker-archetype      | LiveView  | Yes    | No         | No
-com.tibco.ep     | eventflow-application-kubernetes-archetype | EventFlow | Yes    | Yes        | No
-com.tibco.ep     | eventflow-application-helm-archetype       | EventFlow | Yes    | Yes        | Yes
-
-A maven project contain an eventflow fragment and application archive support Kubernetes and Helm can be created using the
-archetype **eventflow-application-helm-archetype** :
-
-```shell
-mvn archetype:generate -B \
-        -DarchetypeGroupId=com.tibco.ep -DarchetypeArtifactId=eventflow-application-helm-archetype -DarchetypeVersion=10.6.0-SNAPSHOT \
-        -DgroupId=com.tibco.ep.samples.docker -DartifactId=ef-helm -Dpackage=com.tibco.ep.samples.docker -Dversion=1.0.0 -Dtestnodes=A,B,C \
-        -Dname="Docker: Helm EventFlow" -Ddescription="How to deploy an EventFlow application in Docker with Kubernetes and Helm"
-```
-
-<a name="packaging-with-helm"></a>
 
 ## Packaging with Helm
 
@@ -74,9 +44,9 @@ The the project is built with *mvn install* a Helm chart is created :
 $ mvn install
 ...
 [INFO] --- helm-maven-plugin:4.12:package (create helm package) @ ef-helm-app ---
-[INFO] Packaging chart /Users/plord/workspace/tibco-streaming-samples-plord/docker/ef-helm/ef-helm-app/src/main/helm/ef-helm-app...
+[INFO] Packaging chart /Users/guest/workspace/tibco-streaming-samples-guest/docker/ef-helm/ef-helm-app/src/main/helm/ef-helm-app...
 [INFO] Setting chart version to 1.0.0
-[INFO] Successfully packaged chart and saved it to: /Users/plord/workspace/tibco-streaming-samples-plord/docker/ef-helm/ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
+[INFO] Successfully packaged chart and saved it to: /Users/guest/workspace/tibco-streaming-samples-guest/docker/ef-helm/ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
 ```
 
 The Helm chart can be installed with the *helm install* command - this will start the application up in Kubernetes :
@@ -182,7 +152,7 @@ $ mvn -Dmaven.deploy.skip=true deploy
 [INFO] --- helm-maven-plugin:4.12:upload (deploy helm package) @ ef-helm-app ---
 [INFO] Uploading to http://server.example.com/artifactory/helm/
 
-[INFO] Uploading /Users/plord/workspace/tibco-streaming-samples-plord/docker/ef-helm/ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz...
+[INFO] Uploading /Users/guest/workspace/tibco-streaming-samples-guest/docker/ef-helm/ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz...
 [INFO] 201 - {
   "repo" : "helm",
   "path" : "/ef-helm-app-1.0.0.tgz",
