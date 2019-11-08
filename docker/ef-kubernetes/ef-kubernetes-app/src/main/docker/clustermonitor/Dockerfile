@@ -28,17 +28,17 @@
 
 FROM sbrt-base:${docker_base_version}
 
-LABEL description="StreamBase Cluster Monitor"
+LABEL description="Streaming Cluster Monitor"
 
 #
 # Install start script
 #
-COPY maven ${RUNTIME_HOME}
+COPY maven ${STREAMING_RUNTIME_HOME}
 USER root
-RUN chmod a+x ${RUNTIME_HOME}/start-cluster-monitor
+RUN chmod a+x ${STREAMING_RUNTIME_HOME}/start-cluster-monitor
 USER ${USER_NAME}
 
 #
 # entry point to start node
 #
-ENTRYPOINT ${RUNTIME_HOME}/start-cluster-monitor
+ENTRYPOINT ${STREAMING_RUNTIME_HOME}/start-cluster-monitor

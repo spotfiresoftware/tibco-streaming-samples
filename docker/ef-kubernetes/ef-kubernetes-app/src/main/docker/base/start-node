@@ -32,34 +32,34 @@
 #
 # Requires :
 #
-#   PRODUCT_HOME      the location of the StreamBase installation
-#   RUNTIME_HOME      the location of nodes, application and configuration
-#   NODENAME          the node name to use
+#   STREAMING_PRODUCT_HOME      the location of the Streaming installation
+#   STREAMING_RUNTIME_HOME      the location of nodes, application and configuration
+#   STREAMING_NODENAME          the node name to use
 #
 # Optionally :
 #
-#   NODEDEPLOY        path of node deploy configuration file (default is to use application archive)
-#   SUBSTITUTIONS     substitution parameters (default is none)
-#   SUBSTITUTIONFILE  path of substitutions file
-#   ADMINPORT         administration port
-#   DEPLOYDIRECTORIES comma separated list of deployment directories
-#   KEYSTORE          path to the keystore file containing the master secret
-#   KEYSTOREPASSWORD  The password for the keystore file
+#   STREAMING_NODEDEPLOY        path of node deploy configuration file (default is to use application archive)
+#   STREAMING_SUBSTITUTIONS     substitution parameters (default is none)
+#   STREAMING_SUBSTITUTIONFILE  path of substitutions file
+#   STREAMING_ADMINPORT         administration port
+#   STREAMING_DEPLOYDIRECTORIES comma separated list of deployment directories
+#   STREAMING_KEYSTORE          path to the keystore file containing the master secret
+#   STREAMING_KEYSTOREPASSWORD  The password for the keystore file
 #
 # The variables can be set on the Docker commandline :
 #    
-#    docker run --env=NODENAME=A.X ...
+#    docker run --env=STREAMING_NODENAME=A.X ...
 #
 # or set in Kubernetes Pod, Deployment or StatefulSet yaml configuration :
 #
 #    env:
-#    - name: NODENAME
+#    - name: STREAMING_NODENAME
 #      value: A.X
 #
 # The Kubernets yaml configurations can further be parameterised via Helm values :
 #
 #    env:
-#    - name: NODENAME
+#    - name: STREAMING_NODENAME
 #      value: {{ .Values.nodeName }}
 #
 # Variables used for files can reference files included in the Docker image.  Test
@@ -70,7 +70,7 @@
 # Hence a Kubernets configuration for a node deployment file could be :
 #
 #    env:
-#    - name: NODEDEPLOY
+#    - name: STREAMING_NODEDEPLOY
 #      value: "/var/opt/tibco/streambase/configuration/node.conf"
 #
 # Files can be supplied external to the Docker image via Kubernetes ConfigMap :
@@ -108,7 +108,7 @@
 #        - name: configuration
 #          mountPath: /var/opt/tibco/streambase/configuration
 #     env:
-#     - name: NODEDEPLOY
+#     - name: STREAMING_NODEDEPLOY
 #       value: "/var/opt/tibco/streambase/configuration/node.conf"
 #
 # POD_NAMESPACE, POD_NAME and HOSTNAME are passed through from Kubernetes to support security.conf.
@@ -116,9 +116,17 @@
 # See Docker, Kubernetes and Helm documentation for further details.
 #
 
-if [  "${NODENAME}" == "" ]
+#
+# backwards compatibility
+#
+if [ "${NODENAME}" != "" ]
 then
-    echo "NODENAME is not set, use --env to set on the docker command line"
+	STREAMING_NODENAME=${NODENAME}
+fi
+
+if [  "${STREAMING_NODENAME}" == "" ]
+then
+    echo "STREAMING_NODENAME is not set, use --env to set on the docker command line"
     exit 1
 fi
 
@@ -134,21 +142,21 @@ fi
 #
 # create install node arguments
 #
-application="$(ls -1t ${RUNTIME_HOME}/application/*.zip | head -1)"
+application="$(ls -1t ${STREAMING_RUNTIME_HOME}/application/*.zip | head -1)"
 echo "Installing application archive ${application}"
 echo
 args="--application=${application}"
-if [ "${NODEDEPLOY}" != "" ]
+if [ "${STREAMING_NODEDEPLOY}" != "" ]
 then
-    args="${args} --nodedeploy=${NODEDEPLOY}"
+    args="${args} --nodedeploy=${STREAMING_NODEDEPLOY}"
 fi
-if [ "${SUBSTITUTIONS}" != "" ]
+if [ "${STREAMING_SUBSTITUTIONS}" != "" ]
 then
     if [ "${POD_NAMESPACE}" != "" ]
     then
-        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},HOSTNAME=${HOSTNAME},${SUBSTITUTIONS}"
+        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},HOSTNAME=${HOSTNAME},${STREAMING_SUBSTITUTIONS}"
     else
-        args="${args} --substitutions=${SUBSTITUTIONS}"
+        args="${args} --substitutions=${STREAMING_SUBSTITUTIONS}"
     fi
 else
     if [ "${POD_NAMESPACE}" != "" ]
@@ -156,40 +164,36 @@ else
         args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},HOSTNAME=${HOSTNAME}"
     fi
 fi
-if [ "${SUBSTITUTIONFILE}" != "" ]
+if [ "${STREAMING_ADMINPORT}" != "" ]
 then
-    args="${args} --substitutionfile=${SUBSTITUTIONFILE}"
+    args="${args} --adminport=${STREAMING_ADMINPORT}"
 fi
-if [ "${ADMINPORT}" != "" ]
+if [ "${STREAMING_DEPLOYDIRECTORIES}" != "" ]
 then
-    args="${args} --adminport=${ADMINPORT}"
+    args="${args} --deploydirectories=${STREAMING_DEPLOYDIRECTORIES}"
 fi
-if [ "${DEPLOYDIRECTORIES}" != "" ]
+if [ "${STREAMING_KEYSTORE}" != "" ]
 then
-    args="${args} --deploydirectories=${DEPLOYDIRECTORIES}"
+    args="${args} --keystore=${STREAMING_KEYSTORE}"
 fi
-if [ "${KEYSTORE}" != "" ]
+if [ "${STREAMING_KEYSTOREPASSWORD}" != "" ]
 then
-    args="${args} --keystore=${KEYSTORE}"
-fi
-if [ "${KEYSTOREPASSWORD}" != "" ]
-then
-    args="${args} --keystorepassword=${KEYSTOREPASSWORD}"
+    args="${args} --keystorepassword=${STREAMING_KEYSTOREPASSWORD}"
 fi
 
 #
 # clean up from any previous run
 #
-rm -rf ${RUNTIME_HOME}/node/${NODENAME}
+rm -rf ${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME}
 
 #
 # install and start nodes
 #
 epadmin --username=${USER_NAME} --password=${USER_NAME} install node \
-    --nodename=${NODENAME} \
-    --nodedirectory=${RUNTIME_HOME}/node \
+    --nodename=${STREAMING_NODENAME} \
+    --nodedirectory=${STREAMING_RUNTIME_HOME}/node \
     ${args}
-epadmin --servicename=${NODENAME} start node
+epadmin --servicename=${STREAMING_NODENAME} start node
 
 #
 # indicate that we've started and wait

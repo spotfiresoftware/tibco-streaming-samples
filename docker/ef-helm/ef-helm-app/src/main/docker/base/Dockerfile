@@ -27,9 +27,9 @@
 #  POSSIBILITY OF SUCH DAMAGE.
 
 #
-# Dockerfile for StreamBase generic base image
+# Dockerfile for Streaming generic base image
 #
-FROM centos:7
+FROM centos:8
 
 LABEL description="TIBCO Streaming base image"
 LABEL PRODUCT_VERSION=${docker_base_version}
@@ -37,10 +37,10 @@ LABEL PRODUCT_VERSION=${docker_base_version}
 #
 # Set environment
 #
-ENV PRODUCT_HOME     /opt/tibco/streambase
-ENV RUNTIME_HOME     /var/opt/tibco/streambase
+ENV STREAMING_PRODUCT_HOME     /opt/tibco/streambase
+ENV STREAMING_RUNTIME_HOME     /var/opt/tibco/streambase
 ENV JAVA_HOME        /etc/alternatives/jre
-ENV PATH             /bin:/usr/sbin:${PRODUCT_HOME}/distrib/tibco/bin
+ENV PATH             /bin:/usr/sbin:${STREAMING_PRODUCT_HOME}/distrib/tibco/bin
 ENV USER_NAME        tibco
 
 #
@@ -51,15 +51,21 @@ ENV USER_NAME        tibco
 # java      required for applications
 # zip       required for snapshots
 # unzip     required to unpack runtime on windows
+# libnsl    required by epadmin
 # less      to aid log file reading
 #
-RUN yum --assumeyes install \
+# FIX THIS:
+#	java installed separately due to https://access.redhat.com/solutions/1277233
+#	java pending update to 11
+#
+RUN yum --assumeyes --exclude=gcc --exclude=binutils install \
     sysstat \
     gdb \
-    java-1.8.0-openjdk-headless \
     zip \
     unzip \
+    libnsl \
     less \
+    && yum --assumeyes install java-1.8.0-openjdk-headless \
     && yum clean all
 
 #
@@ -76,9 +82,9 @@ RUN /usr/sbin/useradd \
 #
 # Install runtime
 #
-RUN mkdir -p ${PRODUCT_HOME}
-COPY maven ${PRODUCT_HOME}
-RUN chmod a+x ${PRODUCT_HOME}/start-node
+RUN mkdir -p ${STREAMING_PRODUCT_HOME}
+COPY maven ${STREAMING_PRODUCT_HOME}
+RUN chmod a+x ${STREAMING_PRODUCT_HOME}/start-node
 RUN ${docker.run.unpack}
 
 #
@@ -86,7 +92,7 @@ RUN ${docker.run.unpack}
 #
 # required for openshift permissions - see https://docs.okd.io/latest/creating_images/guidelines.html#openshift-specific-guidelines
 #
-RUN mkdir -p ${RUNTIME_HOME} && chown ${USER_NAME}:${USER_NAME} ${RUNTIME_HOME} && chmod -R g=u /etc/passwd && chgrp -R 0 ${RUNTIME_HOME} && chmod -R g=u ${RUNTIME_HOME}
+RUN mkdir -p ${STREAMING_RUNTIME_HOME} && chown ${USER_NAME}:${USER_NAME} ${STREAMING_RUNTIME_HOME} && chmod -R g=u /etc/passwd && chgrp -R 0 ${STREAMING_RUNTIME_HOME} && chmod -R g=u ${STREAMING_RUNTIME_HOME}
 
 #
 # Change to guest user

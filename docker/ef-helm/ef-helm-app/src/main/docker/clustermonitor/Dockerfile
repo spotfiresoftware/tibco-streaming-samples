@@ -28,7 +28,7 @@
 
 FROM sbrt-base:${docker_base_version}
 
-LABEL description="StreamBase Cluster Monitor"
+LABEL description="Streaming Cluster Monitor"
 
 #
 # Install start script

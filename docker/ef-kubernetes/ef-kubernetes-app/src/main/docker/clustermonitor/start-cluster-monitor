@@ -32,34 +32,34 @@
 #
 # Requires :
 #
-#   PRODUCT_HOME    the location of the StreamBase installation
-#   RUNTIME_HOME    the location of nodes, application and configuration
-#   NODENAME        the node name to use
+#   STREAMING_PRODUCT_HOME    the location of the StreamBase installation
+#   STREAMING_RUNTIME_HOME    the location of nodes, application and configuration
+#   STREAMING_NODENAME        the node name to use
 #
 # Optionally :
 #
-#   NODEDEPLOY      path of node deploy configuration file (default is to use application archive)
-#   SUBSTITUTIONS   substitution parameters (default is none)
+#   STREAMING_NODEDEPLOY      path of node deploy configuration file (default is to use application archive)
+#   STREAMING_SUBSTITUTIONS   substitution parameters (default is none)
 
-if [  "${NODENAME}" == "" ]
+if [  "${STREAMING_NODENAME}" == "" ]
 then
-	NODENAME=$(hostname).clustermonitor
+	STREAMING_NODENAME=$(hostname).clustermonitor
 fi
 
 #
 # clean up from any previous run
 #
-rm -rf ${RUNTIME_HOME}/node/${NODENAME}
+rm -rf ${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME}
 
 #
 # install and start nodes
 #
 epadmin --username=${USER_NAME} --password=${USER_NAME} install node \
-    --nodename=${NODENAME} \
-    --nodedirectory=${RUNTIME_HOME}/node \
-    --substitutions=NODE_NAME=${NODENAME} \
-    --application=${PRODUCT_HOME}/distrib/tibco/sb/applications/cluster-monitor.zip
-epadmin --servicename=${NODENAME} start node
+    --nodename=${STREAMING_NODENAME} \
+    --nodedirectory=${STREAMING_RUNTIME_HOME}/node \
+    --substitutions=NODE_NAME=${STREAMING_NODENAME} \
+    --application=${STREAMING_PRODUCT_HOME}/distrib/tibco/sb/applications/cluster-monitor.zip
+epadmin --servicename=${STREAMING_NODENAME} start node
 
 #
 # indicate that we've started and wait

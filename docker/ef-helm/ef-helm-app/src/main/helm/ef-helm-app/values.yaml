@@ -27,9 +27,13 @@
 #  POSSIBILITY OF SUCH DAMAGE.
 
 #
+# Default values for the chart
+#
+
+#
 # Docker registry used to fetch docker images - default is set from maven
 #
-dockerRegistry: ${docker.push.registry}
+dockerRegistry: ${docker.registry}
 
 #
 # Number of replicas in the application cluster

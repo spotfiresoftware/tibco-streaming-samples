@@ -488,7 +488,7 @@ Pod Template:
     Environment:
       POD_NAME:        (v1:metadata.name)
       POD_NAMESPACE:   (v1:metadata.namespace)
-      NODENAME:       $(POD_NAME).$(POD_NAMESPACE).ef-kubernetes-app
+      STREAMING_NODENAME:       $(POD_NAME).$(POD_NAMESPACE).ef-kubernetes-app
     Mounts:           <none>
   Volumes:            <none>
 Volume Claims:        <none>
@@ -617,7 +617,7 @@ it is possible to inject configurations and files at runtime.
 
 ### StreamBase node name
 
-The environment variable **NODENAME** can be set in the yaml StatefulSet - this is passed to the
+The environment variable **STREAMING_NODENAME** can be set in the yaml StatefulSet - this is passed to the
 **nodename** parameter of *epadmin install node*.  The generated default is **pod name.namespace.application name** :
 
 ```yaml
@@ -630,13 +630,13 @@ The environment variable **NODENAME** can be set in the yaml StatefulSet - this 
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
-          - name: NODENAME
+          - name: STREAMING_NODENAME
             value: "$(POD_NAME).$(POD_NAMESPACE).ef-kubernetes-app"
 ```
 
 ### Node deployment file
 
-The environment variable **NODEDEPLOY** can be set to the path of a node deployment file - this is passed to the
+The environment variable **STREAMING_NODEDEPLOY** can be set to the path of a node deployment file - this is passed to the
 **nodedeploy** parameter of *epadmin install node*.
 
 ```yaml
@@ -650,7 +650,7 @@ spec:
       containers:
         - name: ef-kubernetes-app
           env:
-          - name: NODEDEPLOY
+          - name: STREAMING_NODEDEPLOY
             value: "/var/opt/tibco/streambase/configuration/node.conf"
 ...
 ```
@@ -702,14 +702,14 @@ spec:
           - name: configuration
             mountPath: /var/opt/tibco/streambase/configuration
           env:
-          - name: NODEDEPLOY
+          - name: STREAMING_NODEDEPLOY
             value: "/var/opt/tibco/streambase/configuration/node.conf"
 ...
 ```
 
 ### Substitution variables
 
-The environment variable **SUBSTITUTIONS** can be set in the yaml StatefulSet - this is passed to the
+The environment variable **STREAMING_SUBSTITUTIONS** can be set in the yaml StatefulSet - this is passed to the
 **substitutions** parameter of *epadmin install node* :
 
 ```yaml
@@ -723,14 +723,14 @@ spec:
       containers:
         - name: ef-kubernetes-app
           env:
-          - name: SUBSTITUTIONS
+          - name: STREAMING_SUBSTITUTIONS
             value: "param1=value1,param2=value2"
 ...
 ```
 
 ### Substitution file
 
-The environment variable **SUBSTITUTIONFILE** can be set to the path of a substitution file - this is passed to the
+The environment variable **STREAMING_SUBSTITUTIONFILE** can be set to the path of a substitution file - this is passed to the
 **substitutionfile** parameter of *epadmin install node*.
 
 ```yaml
@@ -744,7 +744,7 @@ spec:
       containers:
         - name: ef-kubernetes-app
           env:
-          - name: SUBSTITUTIONFILE
+          - name: STREAMING_SUBSTITUTIONFILE
             value: "/var/opt/tibco/streambase/configuration/substitutions.txt"
 ...
 ```
@@ -785,14 +785,14 @@ spec:
           - name: configuration
             mountPath: /var/opt/tibco/streambase/configuration
           env:
-          - name: SUBSTITUTIONFILE
+          - name: STREAMING_SUBSTITUTIONFILE
             value: "/var/opt/tibco/streambase/configuration/substitutions.txt"
 ...
 ```
 
 ### Administration port
 
-The environment variable **ADMINPORT** can be set in the yaml StatefulSet - this is passed to the
+The environment variable **STREAMING_ADMINPORT** can be set in the yaml StatefulSet - this is passed to the
 **adminport** parameter of *epadmin install node* :
 
 ```yaml
@@ -806,7 +806,7 @@ spec:
       containers:
         - name: ef-kubernetes-app
           env:
-          - name: ADMINPORT
+          - name: STREAMING_ADMINPORT
             value: "2000"
 ...
 ```
@@ -815,7 +815,7 @@ This may be required in some cases where there is a port controlled firewall bet
 
 ### Logback and other deploy directory files
 
-The environment variable **DEPLOYDIRECTORIES** can be set to the path of a deployment directory - this is passed to the
+The environment variable **STREAMING_DEPLOYDIRECTORIES** can be set to the path of a deployment directory - this is passed to the
 **deploydirectories** parameter of *epadmin install node*.
 
 ```yaml
@@ -829,7 +829,7 @@ spec:
       containers:
         - name: ef-kubernetes-app
           env:
-          - name: DEPLOYDIRECTORIES
+          - name: STREAMING_DEPLOYDIRECTORIES
             value: "/var/opt/tibco/streambase/resources"
 ...
 ```
@@ -878,15 +878,15 @@ spec:
           - name: resources
             mountPath: /var/opt/tibco/streambase/resources
           env:
-          - name: DEPLOYDIRECTORIES
+          - name: STREAMING_DEPLOYDIRECTORIES
             value: "/var/opt/tibco/streambase/resources"
 ...
 ```
 
 ### Key store and passwords 
 
-The environment variable **KEYSTORE** can be set to the path of a key store file - this is passed to the
-**keystore** parameter of *epadmin install node*.  Also, the environment variable **KEYSTOREPASSWORD**
+The environment variable **STREAMING_KEYSTORE** can be set to the path of a key store file - this is passed to the
+**keystore** parameter of *epadmin install node*.  Also, the environment variable **STREAMING_KEYSTOREPASSWORD**
 can be set to the key store password - this is passed to the **keystorepassword** parameter of *epadmin install node*.
 
 Plain text password can be used, but secret ConfigMap is preferred.
@@ -902,9 +902,9 @@ spec:
       containers:
         - name: ef-kubernetes-app
           env:
-          - name: KEYSTORE
+          - name: STREAMING_KEYSTORE
             value: "/var/opt/tibco/streambase/configuration/mastersecret.ks"
-          - name: KEYSTOREPASSWORD
+          - name: STREAMING_KEYSTOREPASSWORD
             valueFrom:
               secretKeyRef:
                 name: secret
@@ -958,9 +958,9 @@ spec:
           - name: configuration
             mountPath: /var/opt/tibco/streambase/configuration
           env:
-          - name: KEYSTORE
+          - name: STREAMING_KEYSTORE
             value: "/var/opt/tibco/streambase/configuration/mastersecret.ks"
-          - name: KEYSTOREPASSWORD
+          - name: STREAMING_KEYSTOREPASSWORD
             valueFrom:
               secretKeyRef:
                 name: secret

@@ -75,7 +75,7 @@ spec:
           #
           tty: true
           #
-          # set StreamBase node name
+          # set Streaming node name
           #
           env:
           - name: POD_NAME
@@ -88,7 +88,7 @@ spec:
                 fieldPath: metadata.namespace
           - name: APPNAME
             value: ef-kubernetes-app
-          - name: NODENAME
+          - name: STREAMING_NODENAME
             value: "$(POD_NAME).$(POD_NAMESPACE).$(APPNAME)"
           #
           # Use the fully qualified hostname to avoid DNS issues
@@ -104,7 +104,7 @@ spec:
               path: /healthcheck/v1/status
               port: 8008
               #
-              # need to specify basic authentication
+              # FIX THIS: SB-47864 need to specify basic authentication
               # this use the username and password that the eventflow
               # node was started with
               #

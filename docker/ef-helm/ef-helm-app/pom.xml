@@ -41,10 +41,12 @@
     <name>Docker: Helm EventFlow - Application</name>
     <description>How to deploy an EventFlow application in Docker with Kubernetes and Helm - Application</description>
 
-    <!-- common definitions for this version of StreamBase -->
+    <!-- common definitions for this version of Streaming -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
-        <artifactId>ep-application-docker-samples</artifactId> <!-- replace with ep-application-docker to avoid sample metadata -->
+        <!-- Sample specific parent that includes sample licence metadata. -->
+        <!-- To avoid sample metadata, replace with ep-application-docker. -->
+        <artifactId>ep-application-docker-samples</artifactId> 
         <version>10.6.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
@@ -52,8 +54,9 @@
     <properties>
         <dockerDomain>example.com</dockerDomain>
         <skipApplicationDocker>true</skipApplicationDocker>
-        <skipStreamBaseDockerBase>true</skipStreamBaseDockerBase>
+        <skipStreamingDockerBase>true</skipStreamingDockerBase>
         <skipDockerTests>true</skipDockerTests>
+        <skipDockerBuild>true</skipDockerBuild>
     </properties>
     
     <dependencies>
@@ -76,8 +79,9 @@
             </activation>
             <properties>
                 <skipApplicationDocker>false</skipApplicationDocker>
-                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+                <skipStreamingDockerBase>false</skipStreamingDockerBase>
                 <skipDockerTests>${skipTests}</skipDockerTests>
+                <skipDockerBuild>false</skipDockerBuild>
             </properties>
         </profile>
         <profile>
@@ -89,8 +93,9 @@
             </activation>
             <properties>
                 <skipApplicationDocker>false</skipApplicationDocker>
-                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+                <skipStreamingDockerBase>false</skipStreamingDockerBase>
                 <skipDockerTests>${skipTests}</skipDockerTests>
+                <skipDockerBuild>false</skipDockerBuild>
             </properties>
         </profile>
         <profile>
@@ -102,8 +107,9 @@
             </activation>
             <properties>
                 <skipApplicationDocker>false</skipApplicationDocker>
-                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
+                <skipStreamingDockerBase>false</skipStreamingDockerBase>
                 <skipDockerTests>${skipTests}</skipDockerTests>
+                <skipDockerBuild>false</skipDockerBuild>
             </properties>
         </profile>
     </profiles>
@@ -135,7 +141,7 @@
                             <goal>build</goal>
                         </goals>
                         <configuration>
-                            <skip>${skipDockerTests}</skip>
+                            <skip>${skipDockerBuild}</skip>
                             <images>
                                 <image>
                                     <name>clustermonitor:%l</name>
@@ -165,7 +171,7 @@
                             <goal>push</goal>
                         </goals>
                         <configuration>
-                            <skip>${skipDockerTests}</skip>
+                            <skip>${skipDockerBuild}</skip>
                             <images>
                                 <image>
                                     <name>clustermonitor:%l</name>
@@ -196,7 +202,7 @@
                                         </network>
                                         <hostname>A.${dockerDomain}</hostname>
                                         <env>
-                                            <NODENAME>A.${project.artifactId}</NODENAME>
+                                            <STREAMING_NODENAME>A.${project.artifactId}</STREAMING_NODENAME>
                                         </env>
                                         <log>
                                             <enabled>true</enabled>
@@ -218,7 +224,7 @@
                                         </network>
                                         <hostname>B.${dockerDomain}</hostname>
                                         <env>
-                                            <NODENAME>B.${project.artifactId}</NODENAME>
+                                            <STREAMING_NODENAME>B.${project.artifactId}</STREAMING_NODENAME>
                                         </env>
                                         <log>
                                             <enabled>true</enabled>
