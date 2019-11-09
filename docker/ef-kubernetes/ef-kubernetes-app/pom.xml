@@ -54,7 +54,7 @@
     <properties>
         <dockerDomain>example.com</dockerDomain>
         <skipApplicationDocker>true</skipApplicationDocker>
-        <skipStreamingDockerBase>true</skipStreamingDockerBase>
+        <skipStreamBaseDockerBase>true</skipStreamBaseDockerBase>
         <skipDockerTests>true</skipDockerTests>
         <skipDockerBuild>true</skipDockerBuild>
     </properties>
@@ -79,7 +79,7 @@
             </activation>
             <properties>
                 <skipApplicationDocker>false</skipApplicationDocker>
-                <skipStreamingDockerBase>false</skipStreamingDockerBase>
+                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
                 <skipDockerTests>${skipTests}</skipDockerTests>
                 <skipDockerBuild>false</skipDockerBuild>
             </properties>
@@ -93,7 +93,7 @@
             </activation>
             <properties>
                 <skipApplicationDocker>false</skipApplicationDocker>
-                <skipStreamingDockerBase>false</skipStreamingDockerBase>
+                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
                 <skipDockerTests>${skipTests}</skipDockerTests>
                 <skipDockerBuild>false</skipDockerBuild>
             </properties>
@@ -107,7 +107,7 @@
             </activation>
             <properties>
                 <skipApplicationDocker>false</skipApplicationDocker>
-                <skipStreamingDockerBase>false</skipStreamingDockerBase>
+                <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
                 <skipDockerTests>${skipTests}</skipDockerTests>
                 <skipDockerBuild>false</skipDockerBuild>
             </properties>
