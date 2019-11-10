@@ -57,6 +57,7 @@
         <skipStreamBaseDockerBase>true</skipStreamBaseDockerBase>
         <skipDockerTests>true</skipDockerTests>
         <skipDockerBuild>true</skipDockerBuild>
+        <skipHelmBuild>true</skipHelmBuild>
     </properties>
     
     <dependencies>
@@ -110,6 +111,30 @@
                 <skipStreamBaseDockerBase>false</skipStreamBaseDockerBase>
                 <skipDockerTests>${skipTests}</skipDockerTests>
                 <skipDockerBuild>false</skipDockerBuild>
+            </properties>
+        </profile>
+
+        <!-- if helm is available, build helm projects -->
+        <profile>
+            <id>Helm in local</id>
+            <activation>
+                <file>
+                    <exists>/usr/local/bin/helm</exists>
+                </file>
+            </activation>
+            <properties>
+                <skipHelmBuild>false</skipHelmBuild>
+            </properties>
+        </profile>
+        <profile>
+            <id>Helm in bin</id>
+            <activation>
+                <file>
+                    <exists>/usr/bin/helm</exists>
+                </file>
+            </activation>
+            <properties>
+                <skipHelmBuild>false</skipHelmBuild>
             </properties>
         </profile>
     </profiles>
@@ -287,7 +312,7 @@
                         <url>${helm.registry}</url>
                         <type>${helm.registry.type}</type>
                     </uploadRepoStable>
-                    <skip>${skipDockerTests}</skip>
+                    <skip>${skipHelmBuild}</skip>
                 </configuration>
                 <executions>
                     <execution>
