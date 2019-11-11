@@ -9,10 +9,10 @@
       ><path d="M0 0 L2147483647 0 L2147483647 2147483647 L0 2147483647 L0 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath2"
-      ><path d="M0 0 L0 60 L180 60 L180 0 Z"
+      ><path d="M0 0 L0 60 L190 60 L190 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath3"
-      ><path d="M0 0 L0 60 L190 60 L190 0 Z"
+      ><path d="M0 0 L0 60 L180 60 L180 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath4"
       ><path d="M0 0 L0 250 L180 250 L180 0 Z"
@@ -27,7 +27,7 @@
       ><path d="M0 0 L0 250 L350 250 L350 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath8"
-      ><path d="M0 0 L0 50 L150 50 L150 0 Z"
+      ><path d="M0 0 L0 30 L150 30 L150 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath9"
       ><path d="M0 0 L0 180 L310 180 L310 0 Z"
@@ -45,10 +45,10 @@
       ><path d="M0 0 L0 820 L1110 820 L1110 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath14"
-      ><path d="M0 0 L0 150 L90 150 L90 0 Z"
+      ><path d="M0 0 L0 60 L30 60 L30 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath15"
-      ><path d="M0 0 L0 60 L30 60 L30 0 Z"
+      ><path d="M0 0 L0 150 L90 150 L90 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath16"
       ><path d="M0 0 L0 40 L260 40 L260 0 Z"
@@ -75,50 +75,60 @@
       ><path d="M0 0 L0 150 L80 150 L80 0 Z"
       /></clipPath
     ></defs
-    ><g fill="rgb(175,175,175)" fill-opacity="0.4902" transform="translate(430,210)" stroke-opacity="0.4902" stroke="rgb(175,175,175)"
-    ><path d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59 L170.5 10.5 L0.5 10.5" stroke="none" clip-path="url(#clipPath2)"
+    ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(270,20)" stroke-opacity="0" stroke="rgb(255,255,255)"
+    ><rect x="0.5" width="188.5" height="58.5" y="0.5" clip-path="url(#clipPath2)" stroke="none"
     /></g
-    ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(430,210)" stroke-opacity="0" stroke="rgb(255,255,255)"
-    ><path fill="none" d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59 L170.5 10.5 L0.5 10.5" clip-path="url(#clipPath2)"
-    /></g
-    ><g transform="translate(430,210)"
-    ><path fill="none" d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59" clip-path="url(#clipPath2)"
-      /><path fill="none" d="M170.5 10.5 L179 0.5" clip-path="url(#clipPath2)"
-    /></g
-    ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(430,210)" stroke-opacity="0" stroke="rgb(255,255,255)"
-    ><rect x="0.5" width="170" height="48.5" y="10.5" clip-path="url(#clipPath2)" stroke="none"
-    /></g
-    ><g transform="translate(430,210)"
-    ><rect fill="none" x="0.5" width="170" height="48.5" y="10.5" clip-path="url(#clipPath2)"
-      /><text x="66" font-size="14" y="27.8174" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >Proxy</text
+    ><g fill="blue" transform="translate(270,20)" stroke="blue"
+    ><rect fill="none" x="0.5" width="188.5" height="58.5" y="0.5" clip-path="url(#clipPath2)"
+      /><text x="56" font-size="14" y="17.8174" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Kubernetes</text
+      ><text x="58" font-size="14" y="33.6348" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Dashboard</text
     ></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(760,20)" stroke-opacity="0" stroke="rgb(255,255,255)"
-    ><rect x="0.5" width="188.5" height="58.5" y="0.5" clip-path="url(#clipPath3)" stroke="none"
+    ><rect x="0.5" width="188.5" height="58.5" y="0.5" clip-path="url(#clipPath2)" stroke="none"
     /></g
     ><g fill="blue" transform="translate(760,20)" stroke="blue"
-    ><rect fill="none" x="0.5" width="188.5" height="58.5" y="0.5" clip-path="url(#clipPath3)"
-      /><text x="42" font-size="14" y="17.8174" clip-path="url(#clipPath3)" font-family="sans-serif" stroke="none" xml:space="preserve"
+    ><rect fill="none" x="0.5" width="188.5" height="58.5" y="0.5" clip-path="url(#clipPath2)"
+      /><text x="42" font-size="14" y="17.8174" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >Cluster Monitor</text
-      ><text x="67" font-size="14" y="33.6348" clip-path="url(#clipPath3)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      ><text x="67" font-size="14" y="33.6348" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >Console</text
     ></g
+    ><g fill="rgb(175,175,175)" fill-opacity="0.4902" transform="translate(430,210)" stroke-opacity="0.4902" stroke="rgb(175,175,175)"
+    ><path d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59 L170.5 10.5 L0.5 10.5" stroke="none" clip-path="url(#clipPath3)"
+    /></g
+    ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(430,210)" stroke-opacity="0" stroke="rgb(255,255,255)"
+    ><path fill="none" d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59 L170.5 10.5 L0.5 10.5" clip-path="url(#clipPath3)"
+    /></g
+    ><g transform="translate(430,210)"
+    ><path fill="none" d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59" clip-path="url(#clipPath3)"
+      /><path fill="none" d="M170.5 10.5 L179 0.5" clip-path="url(#clipPath3)"
+    /></g
+    ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(430,210)" stroke-opacity="0" stroke="rgb(255,255,255)"
+    ><rect x="0.5" width="170" height="48.5" y="10.5" clip-path="url(#clipPath3)" stroke="none"
+    /></g
+    ><g transform="translate(430,210)"
+    ><rect fill="none" x="0.5" width="170" height="48.5" y="10.5" clip-path="url(#clipPath3)"
+      /><text x="66" font-size="14" y="27.8174" clip-path="url(#clipPath3)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Proxy</text
+    ></g
     ><g fill="rgb(175,175,175)" fill-opacity="0.4902" transform="translate(630,210)" stroke-opacity="0.4902" stroke="rgb(175,175,175)"
-    ><path d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59 L170.5 10.5 L0.5 10.5" stroke="none" clip-path="url(#clipPath2)"
+    ><path d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59 L170.5 10.5 L0.5 10.5" stroke="none" clip-path="url(#clipPath3)"
     /></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(630,210)" stroke-opacity="0" stroke="rgb(255,255,255)"
-    ><path fill="none" d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59 L170.5 10.5 L0.5 10.5" clip-path="url(#clipPath2)"
+    ><path fill="none" d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59 L170.5 10.5 L0.5 10.5" clip-path="url(#clipPath3)"
     /></g
     ><g transform="translate(630,210)"
-    ><path fill="none" d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59" clip-path="url(#clipPath2)"
-      /><path fill="none" d="M170.5 10.5 L179 0.5" clip-path="url(#clipPath2)"
+    ><path fill="none" d="M0.5 10.5 L10.5 0.5 L179 0.5 L179 50.5 L170.5 59" clip-path="url(#clipPath3)"
+      /><path fill="none" d="M170.5 10.5 L179 0.5" clip-path="url(#clipPath3)"
     /></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(630,210)" stroke-opacity="0" stroke="rgb(255,255,255)"
-    ><rect x="0.5" width="170" height="48.5" y="10.5" clip-path="url(#clipPath2)" stroke="none"
+    ><rect x="0.5" width="170" height="48.5" y="10.5" clip-path="url(#clipPath3)" stroke="none"
     /></g
     ><g transform="translate(630,210)"
-    ><rect fill="none" x="0.5" width="170" height="48.5" y="10.5" clip-path="url(#clipPath2)"
-      /><text x="53" font-size="14" y="27.8174" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
+    ><rect fill="none" x="0.5" width="170" height="48.5" y="10.5" clip-path="url(#clipPath3)"
+      /><text x="53" font-size="14" y="27.8174" clip-path="url(#clipPath3)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >NodePort</text
     ></g
     ><g fill="rgb(175,175,175)" fill-opacity="0.4902" transform="translate(630,280)" stroke-opacity="0.4902" stroke="rgb(175,175,175)"
@@ -137,8 +147,10 @@
     ><g transform="translate(630,280)"
     ><rect fill="none" x="0.5" width="170" height="238.5" y="10.5" clip-path="url(#clipPath4)"
       /><text x="61" font-size="14" y="27.8174" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >Service </text
-      ><text x="35" font-size="14" y="43.6348" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Service</text
+      ><text x="32" font-size="14" y="43.6348" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >NodePort lvweb</text
+      ><text x="35" font-size="14" y="59.4521" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >clustermonitor</text
     ></g
     ><g fill="rgb(175,175,175)" fill-opacity="0.4902" transform="translate(820,360)" stroke-opacity="0.4902" stroke="rgb(175,175,175)"
@@ -190,42 +202,36 @@
       >clustermonitor</text
     ></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(170,490)" stroke-opacity="0" stroke="rgb(255,255,255)"
-    ><rect x="0.5" width="148.5" height="48.5" y="0.5" clip-path="url(#clipPath8)" stroke="none"
+    ><rect x="0.5" width="148.5" height="28.5" y="0.5" clip-path="url(#clipPath8)" stroke="none"
     /></g
     ><g fill="red" transform="translate(170,490)" stroke="red"
-    ><rect fill="none" x="0.5" width="148.5" height="48.5" y="0.5" clip-path="url(#clipPath8)"
-      /><text x="10" font-size="14" y="17.8174" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >liveness/readyness </text
-      ><text x="55" font-size="14" y="33.6348" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >probe</text
+    ><rect fill="none" x="0.5" width="148.5" height="28.5" y="0.5" clip-path="url(#clipPath8)"
+      /><text x="25" font-size="14" y="17.8174" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >liveness probe</text
     ></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(170,680)" stroke-opacity="0" stroke="rgb(255,255,255)"
-    ><rect x="0.5" width="148.5" height="48.5" y="0.5" clip-path="url(#clipPath8)" stroke="none"
+    ><rect x="0.5" width="148.5" height="28.5" y="0.5" clip-path="url(#clipPath8)" stroke="none"
     /></g
     ><g fill="red" transform="translate(170,680)" stroke="red"
-    ><rect fill="none" x="0.5" width="148.5" height="48.5" y="0.5" clip-path="url(#clipPath8)"
-      /><text x="10" font-size="14" y="17.8174" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >liveness/readyness </text
-      ><text x="55" font-size="14" y="33.6348" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >probe</text
+    ><rect fill="none" x="0.5" width="148.5" height="28.5" y="0.5" clip-path="url(#clipPath8)"
+      /><text x="25" font-size="14" y="17.8174" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >liveness probe</text
     ></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(170,870)" stroke-opacity="0" stroke="rgb(255,255,255)"
-    ><rect x="0.5" width="148.5" height="48.5" y="0.5" clip-path="url(#clipPath8)" stroke="none"
+    ><rect x="0.5" width="148.5" height="28.5" y="0.5" clip-path="url(#clipPath8)" stroke="none"
     /></g
     ><g fill="red" transform="translate(170,870)" stroke="red"
-    ><rect fill="none" x="0.5" width="148.5" height="48.5" y="0.5" clip-path="url(#clipPath8)"
-      /><text x="10" font-size="14" y="17.8174" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >liveness/readyness </text
-      ><text x="55" font-size="14" y="33.6348" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >probe</text
+    ><rect fill="none" x="0.5" width="148.5" height="28.5" y="0.5" clip-path="url(#clipPath8)"
+      /><text x="25" font-size="14" y="17.8174" clip-path="url(#clipPath8)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >liveness probe</text
     ></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(110,790)" stroke-opacity="0" stroke="rgb(255,255,255)"
     ><rect x="0.5" width="268.5" height="58.5" y="0.5" clip-path="url(#clipPath6)" stroke="none"
     /></g
     ><g fill="blue" transform="translate(110,790)" stroke="blue"
     ><rect fill="none" x="0.5" width="268.5" height="58.5" y="0.5" clip-path="url(#clipPath6)"
-      /><text x="1" font-size="14" y="17.8174" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >StreamBase node ef-kubernetes-app-2</text
+      /><text x="5" font-size="14" y="17.8174" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Streaming node ef-kubernetes-app-2</text
       ><text x="26" font-size="14" y="33.6348" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >image ef-kubernetes-app:1.0.0</text
     ></g
@@ -252,8 +258,8 @@
     /></g
     ><g fill="blue" transform="translate(110,600)" stroke="blue"
     ><rect fill="none" x="0.5" width="268.5" height="58.5" y="0.5" clip-path="url(#clipPath6)"
-      /><text x="1" font-size="14" y="17.8174" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >StreamBase node ef-kubernetes-app-1</text
+      /><text x="5" font-size="14" y="17.8174" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Streaming node ef-kubernetes-app-1</text
       ><text x="26" font-size="14" y="33.6348" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >image ef-kubernetes-app:1.0.0</text
     ></g
@@ -292,7 +298,9 @@
     ><rect fill="none" x="0.5" width="170" height="648.5" y="10.5" clip-path="url(#clipPath10)"
       /><text x="61" font-size="14" y="27.8174" clip-path="url(#clipPath10)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >Service </text
-      ><text x="19" font-size="14" y="43.6348" clip-path="url(#clipPath10)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      ><text x="35" font-size="14" y="43.6348" clip-path="url(#clipPath10)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >ClusterIP None</text
+      ><text x="19" font-size="14" y="59.4521" clip-path="url(#clipPath10)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >ef-kubernetes-app</text
     ></g
     ><g fill="rgb(175,175,175)" fill-opacity="0.4902" transform="translate(90,280)" stroke-opacity="0.4902" stroke="rgb(175,175,175)"
@@ -320,8 +328,8 @@
     /></g
     ><g fill="blue" transform="translate(120,410)" stroke="blue"
     ><rect fill="none" x="0.5" width="268.5" height="58.5" y="0.5" clip-path="url(#clipPath6)"
-      /><text x="1" font-size="14" y="17.8174" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >StreamBase node ef-kubernetes-app-0</text
+      /><text x="5" font-size="14" y="17.8174" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >Streaming node ef-kubernetes-app-0</text
       ><text x="26" font-size="14" y="33.6348" clip-path="url(#clipPath6)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >image ef-kubernetes-app:1.0.0</text
     ></g
@@ -361,15 +369,19 @@
       /><text x="435" font-size="14" y="27.8174" clip-path="url(#clipPath13)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >Kubernetes node docker-desktop</text
     ></g
-    ><g transform="translate(360,110)"
-    ><path fill="none" d="M10.5 10.5 L10.5 130.5" clip-path="url(#clipPath14)"
-      /><path fill="none" d="M10.5 130.5 L70.5 130.5" clip-path="url(#clipPath14)"
-      /><circle fill="white" r="10" clip-path="url(#clipPath14)" cx="10.5" cy="10.5" stroke="none"
-      /><circle fill="none" r="10" clip-path="url(#clipPath14)" cx="10.5" cy="10.5"
+    ><g transform="translate(360,70)"
+    ><path fill="none" d="M10.5 40.5 L10.5 10.5" clip-path="url(#clipPath14)"
+      /><path fill="none" d="M17 29.2417 L10.5 40.5 L4 29.2417" clip-path="url(#clipPath14)"
     /></g
     ><g transform="translate(850,70)"
-    ><path fill="none" d="M10.5 40.5 L10.5 10.5" clip-path="url(#clipPath15)"
-      /><path fill="none" d="M17 29.2417 L10.5 40.5 L4 29.2417" clip-path="url(#clipPath15)"
+    ><path fill="none" d="M10.5 40.5 L10.5 10.5" clip-path="url(#clipPath14)"
+      /><path fill="none" d="M17 29.2417 L10.5 40.5 L4 29.2417" clip-path="url(#clipPath14)"
+    /></g
+    ><g transform="translate(360,110)"
+    ><path fill="none" d="M10.5 10.5 L10.5 130.5" clip-path="url(#clipPath15)"
+      /><path fill="none" d="M10.5 130.5 L70.5 130.5" clip-path="url(#clipPath15)"
+      /><circle fill="white" r="10" clip-path="url(#clipPath15)" cx="10.5" cy="10.5" stroke="none"
+      /><circle fill="none" r="10" clip-path="url(#clipPath15)" cx="10.5" cy="10.5"
     /></g
     ><g transform="translate(490,440)"
     ><path fill="none" d="M10.5 20.5 L240.5 20.5" clip-path="url(#clipPath16)"

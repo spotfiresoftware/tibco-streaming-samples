@@ -66,7 +66,7 @@ fg=blue</panel_attributes>
       <w>270</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>StreamBase node ef-kubernetes-app-0
+    <panel_attributes>Streaming node ef-kubernetes-app-0
 image ef-kubernetes-app:1.0.0
 fg=blue</panel_attributes>
     <additional_attributes/>
@@ -92,6 +92,7 @@ ef-kubernetes-app</panel_attributes>
       <h>660</h>
     </coordinates>
     <panel_attributes>Service 
+ClusterIP None
 ef-kubernetes-app</panel_attributes>
     <additional_attributes/>
   </element>
@@ -114,7 +115,7 @@ ef-kubernetes-app</panel_attributes>
       <w>270</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>StreamBase node ef-kubernetes-app-1
+    <panel_attributes>Streaming node ef-kubernetes-app-1
 image ef-kubernetes-app:1.0.0
 fg=blue</panel_attributes>
     <additional_attributes/>
@@ -138,7 +139,7 @@ fg=blue</panel_attributes>
       <w>270</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>StreamBase node ef-kubernetes-app-2
+    <panel_attributes>Streaming node ef-kubernetes-app-2
 image ef-kubernetes-app:1.0.0
 fg=blue</panel_attributes>
     <additional_attributes/>
@@ -182,10 +183,9 @@ fg=blue</panel_attributes>
       <x>170</x>
       <y>870</y>
       <w>150</w>
-      <h>50</h>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>liveness/readyness 
-probe
+    <panel_attributes>liveness probe
 fg=red</panel_attributes>
     <additional_attributes/>
   </element>
@@ -208,10 +208,9 @@ HealthCheck
       <x>170</x>
       <y>680</y>
       <w>150</w>
-      <h>50</h>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>liveness/readyness 
-probe
+    <panel_attributes>liveness probe
 fg=red</panel_attributes>
     <additional_attributes/>
   </element>
@@ -234,10 +233,9 @@ HealthCheck
       <x>170</x>
       <y>490</y>
       <w>150</w>
-      <h>50</h>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>liveness/readyness 
-probe
+    <panel_attributes>liveness probe
 fg=red</panel_attributes>
     <additional_attributes/>
   </element>
@@ -298,7 +296,8 @@ fg=blue</panel_attributes>
       <w>180</w>
       <h>250</h>
     </coordinates>
-    <panel_attributes>Service 
+    <panel_attributes>Service
+NodePort lvweb
 clustermonitor</panel_attributes>
     <additional_attributes/>
   </element>
@@ -347,30 +346,6 @@ clustermonitor</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>760</x>
-      <y>20</y>
-      <w>190</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Cluster Monitor
-Console
-fg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>850</x>
-      <y>70</y>
-      <w>30</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLDeployment</id>
     <coordinates>
       <x>430</x>
@@ -392,5 +367,53 @@ fg=blue</panel_attributes>
     <panel_attributes>lt=()-
 </panel_attributes>
     <additional_attributes>10.0;10.0;10.0;130.0;70.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>850</x>
+      <y>70</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>760</x>
+      <y>20</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Cluster Monitor
+Console
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>70</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>270</x>
+      <y>20</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Kubernetes
+Dashboard
+fg=blue</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

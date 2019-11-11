@@ -1,20 +1,22 @@
 # Docker : Kubernetes EventFlow
 
-This sample describes how to deploy an application archive containing a StreamBase fragment to Docker using 
+This sample describes how to deploy an application archive containing a Streaming fragment to Docker using 
 Kubernetes.  The primary focus is desktop development, ie testing of application images in a desktop Kubernetes 
 node.
 
 * [Terminology](#terminology)
+* [Quick runthrough](#quick-runthrough)
 * [Prerequisites](#prerequisites)
 * [Development lifecycle](#development-lifecycle)
-* [Creating an application archive project for Kubernetes from TIBCO StreamBase Studio&trade;](#creating-an-application-archive-project-for-kubernetes-from-tibco-streambase-studio-trade)
+* [Creating an application archive project for Kubernetes from TIBCO Streaming Studio&trade;](#creating-an-application-archive-project-for-kubernetes-from-tibco-streaming-studio-trade)
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
-* [Building and running from TIBCO StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
+* [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Deployment](#deployment)
 * [Runtime settings](#runtime-settings)
 * [Further Kubernetes commands](#further-kubernetes-commands)
+* [Alternative Kubernetes Implementations](#alternative-kubernetes-implementations)
 
 <a name="terminology"></a>
 
@@ -29,22 +31,64 @@ In this sample we are using various technologies with terminology that overlap a
     * **[CNI](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)** - Kubernetes Container Network Interface
     * **[POD](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)** - Smallest deployable unit of computing that can be created and managed in Kubernetes.
     * **[StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)** - Manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.
+    * **[Service](https://kubernetes.io/docs/concepts/services-networking/service/)** - An abstract way to expose an application running on a set of Pods as a network service
+    * **[Proxy](https://kubernetes.io/docs/concepts/cluster-administration/proxies/)** - Exposes REST API
 * **Tibco**
-    * **[StreamBase Machine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - An execution context for a node
-    * **[StreamBase Application](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - Business specific functionality
-    * **[StreamBase Fragment](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - An executable part of an application
-    * **[StreamBase Cluster](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - A logical grouping of StreamBase nodes that communicate to support an application
-    * **[StreamBase Node](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - A StreamBase container for engines
-    * **[StreamBase Engine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - Executable context for a fragment
+    * **[Streaming Machine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - An execution context for a node
+    * **[Streaming Application](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - Business specific functionality
+    * **[Streaming Fragment](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - An executable part of an application
+    * **[Streaming Cluster](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - A logical grouping of Streaming nodes that communicate to support an application
+    * **[Streaming Node](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - A Streaming container for engines
+    * **[Streaming Engine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - Executable context for a fragment
 
+<a name="quick_runthrough"></a>
+
+## Quick runthrough
+
+1. Install Docker and Kubernetes.  
+  See [Prerequisites](#prerequisites).
+2. Build this project to create Docker images.  
+  See [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade) and 
+  [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
+3. Use *kubectl apply* to start the Streaming Nodes in the Kubernetes cluster
+4. Use *kubectl get pod* to see what PODs were started
+5. Use *kubectl logs* to view the Streaming Node logs
+6. Use *kubectl delete* to stop the Streaming Nodes and remove the PODs
+
+```
+$ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
+service/ef-kubernetes-app created
+configmap/configuration created
+configmap/resources created
+statefulset.apps/ef-kubernetes-app created
+
+$ kubectl get pod
+NAME                  READY   STATUS    RESTARTS   AGE
+ef-kubernetes-app-0   1/1     Running   0          3m1s
+ef-kubernetes-app-1   1/1     Running   0          3m1s
+
+$ kubectl logs ef-kubernetes-app-0
+...
+[ef-kubernetes-app-0.default.ef-kubernetes-app]     Node started
+COMMAND FINISHED
+08:50:26.000 [334] WARN  c.t.e.d.runtime - (osdisp.cpp:146) findEvent: object reference = 2111918189:1720523304:40121159345600:45
+08:50:26.627 [Thread- ThreadPool - 1] INFO  c.s.s.s.n.StreamBaseHTTPServer - sbd at ef-kubernetes-app-0.ef-kubernetes-app.default.svc.cluster.local:10000; pid=216; version=10.6.0-SNAPSHOT_2af0df501f80b68677b966f66006f5aa3a61c17b; Listening
+
+$ kubectl delete -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
+service "ef-kubernetes-app" deleted
+configmap "configuration" deleted
+configmap "resources" deleted
+statefulset.apps "ef-kubernetes-app" deleted
+
+```
+  
 <a name="prerequisites"></a>
 
 ## Prerequisites
 
 In addition to Docker (see [main Docker sample](../../../../../ef-2node/ef-2node-app/src/site/markdown/index.md) ), 
-Kubernetes is also required to be installed and configured.  There are several options.
-
-### Docker for desktop
+Kubernetes is also required to be installed and configured.  In this sample we use **docker-for-desktop**, but
+see [Alternative Kubernetes Implementations](#alternative-kubernetes-implementations) for others.
 
 When using Docker desktop, this can most easily be achieved by enabling Kubernetes :
 
@@ -58,187 +102,6 @@ docker-for-desktop
 ```
 
 Docker for desktop only supports a single Kubernetes Node.
-
-### Minikube
-
-An alternative is **Minikube** - see https://kubernetes.io/docs/setup/learning-environment/minikube/ 
-for installation instructions.  Minikube runs Kubernetes and Docker in VirtualBox.  See also 
-https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon
-to allow Minikube to access locally built docker images.  
-
-```shell
-$ minikube start
-😄  minikube v1.5.2 on Darwin 10.15
-💡  Tip: Use 'minikube start -p <name>' to create a new cluster, or 'minikube delete' to delete this one.
-🔄  Starting existing hyperkit VM for "minikube" ...
-⌛  Waiting for the host to be provisioned ...
-🐳  Preparing Kubernetes v1.16.2 on Docker '18.09.9' ...
-🔄  Relaunching Kubernetes using kubeadm ... 
-⌛  Waiting for: apiserver
-🏄  Done! kubectl is now configured to use "minikube"
-
-$ eval $(minikube docker-env)
-...
-```
-
-You may want to grant more resources to Minikube, for example :
-
-```shell
-$ minikube start --cpus=4 --memory=8g
-```
-
-Validate that **minikube** is the current context :
-
-```shell
-$ kubectl config current-context
-minikube
-```
-
-Minikube only supports a single Kubernetes Node.
-
-### Kind
-
-An alternative is **Kind** - see https://kind.sigs.k8s.io/docs/user/quick-start/ for installation instructions. 
-This is a Docker-in-Docker approach, so its usage is slightly different.
-
-```shell
-$ kind create cluster
-Creating cluster "kind" ...
- ✓ Ensuring node image (kindest/node:v1.15.3) 🖼 
- ✓ Preparing nodes 📦 
- ✓ Creating kubeadm config 📜 
- ✓ Starting control-plane 🕹️ 
- ✓ Installing CNI 🔌 
- ✓ Installing StorageClass 💾 
-Cluster creation complete. You can now use the cluster with:
-
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-kubectl cluster-info
-
-$ export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-```
-
-Kind supports multiple Kubernetes Nodes.
-
-**FIX THIS:** **Kind** doesn't support UDP broadcasts so StreamBase Nodes won't discover each other.  See https://github.com/kubernetes-sigs/kind/issues/1063.
-Pending specific support for Kubernetes Discovery.  Work-around is to add **weave-net** :
-
-The default CNI, kind-net, can be disabled by using the following yaml :
-
-```yaml
-kind: Cluster
-apiVersion: kind.sigs.k8s.io/v1alpha3
-networking:
-  disableDefaultCNI: true
-```
-
-and used when the cluster is created :
-
-```shell
-$ kind create cluster --config cluster.yaml
-```
-
-Once the default CNI is disabled, an alternative CNI can be loaded such as **weave-net** that does support UDP broadcasts :
-
-```shell
-$ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&disable-npc=true"
-serviceaccount/weave-net created
-clusterrole.rbac.authorization.k8s.io/weave-net created
-clusterrolebinding.rbac.authorization.k8s.io/weave-net created
-role.rbac.authorization.k8s.io/weave-net created
-rolebinding.rbac.authorization.k8s.io/weave-net created
-daemonset.apps/weave-net created
-```
-
-### Minishift
-
-An alternative is **Minishift** - see https://docs.okd.io/latest/minishift/getting-started/installing.html
-for installation instructions.
-
-**Minishift** contains OpenShift 3.
-
-```shell
-$ minishift start
--- Starting profile 'minishift'
--- Check if deprecated options are used ... OK
--- Checking if https://github.com is reachable ... OK
-...
-OpenShift server started.
-
-The server is accessible via web console at:
-    https://192.168.99.112:8443/console
-
-You are logged in as:
-    User:     developer
-    Password: <any value>
-
-To login as administrator:
-    oc login -u system:admin
-
-$ eval $(minishift docker-env)
-
-$ eval $(minishift oc-env)
-...
-```
-
-You may want to grant more resources to **Minishift**, for example :
-
-```shell
-$ minishift start --cpus=4 --memory=8GB
-```
-
-Default namespace is **myproject**.
-
-**FIX THIS:** DNS is failing for me - see https://github.com/minishift/minishift/issues/3368
-
-### CodeReady Containers
-
-An alternative is **CodeReady Containers** - see https://cloud.redhat.com/openshift/install/crc/installer-provisioned
-for installation instructions ( requires RedHat account and secret ).
-
-**CodeReady Containers** contains OpenShift 4.
-
-```shell
-$ crc start
-INFO Checking if running as non-root              
-INFO Checking if oc binary is cached              
-INFO Checking if HyperKit is installed            
-INFO Checking if crc-driver-hyperkit is installed 
-INFO Checking file permissions for /etc/resolver/testing 
-INFO Checking file permissions for /etc/hosts     
-INFO Starting CodeReady Containers VM for OpenShift 4.2.2... 
-INFO Verifying validity of the cluster certificates ... 
-INFO Network restart not needed                   
-INFO Check internal and public DNS query ...      
-INFO Starting OpenShift cluster ... [waiting 3m]  
-INFO                                              
-INFO To access the cluster, first set up your environment by following 'crc oc-env' instructions 
-INFO Then you can access it by running 'oc login -u developer -p developer https://api.crc.testing:6443' 
-INFO To login as an admin, username is 'kubeadmin' and password is e4FEb-9dxdF-9N2wH-Dj7B8 
-INFO                                              
-INFO You can now run 'crc console' and use these credentials to access the OpenShift web console 
-Started the OpenShift cluster
-WARN The cluster might report a degraded or error state. This is expected since several operators have been disabled to lower the resource usage. For more information, please consult the documentation 
-
-$ eval $(crc oc-env)
-
-$ oc login -u kubeadmin -p e4FEb-9dxdF-9N2wH-Dj7B8
-Login successful.
-
-You have access to 51 projects, the list has been suppressed. You can list all projects with 'oc projects'
-
-Using project "default".
-```
-
-To enable pushing images into **CodeReady Containers** ensure a default route is enabled :
-
-```
-$ oc patch config.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
-config.imageregistry.operator.openshift.io/cluster patched (no change)
-```
-
-**FIX THIS:** **CodeReady Containers** doesn't support UDP broadcasts so StreamBase Nodes won't discover each other.
-Pending specific support for Kubernetes Discovery.
 
 <a name="development_lifecycle"></a>
 
@@ -262,10 +125,9 @@ hard-coding addresses in git.
 
 Maven lifecycle mapping is :
 
-* **mvn compile** - compile any java source in a StreamBase Fragment to classes
-* **mvn test** - run any junit test cases on the StreamBase Fragment
-* **mvn package** - build StreamBase Fragment archive or StreamBase Application archive
-* **mvn pre-integration-phase** - build Docker image
+* **mvn compile** - compile any java source in a Streaming Fragment to classes
+* **mvn test** - run any junit test cases on the Streaming Fragment
+* **mvn package** - build Streaming Fragment archive, Streaming Application archive or docker images
 * **mvn pre-integration-phase** - start Docker container(s)
 * **mvn integration-phase** - run any system test cases
 * **mvn post-integration-phase** - stop Docker container(s)
@@ -273,11 +135,11 @@ Maven lifecycle mapping is :
 
 The [TIBCO Streaming maven plugin](https://github.com/TIBCOSoftware/tibco-streaming-maven-plugin) provides the lifecycle.
 
-<a name="creating-an-application-archive-project-for-kubernetes-from-tibco-streambase-studio-trade"></a>
+<a name="creating-an-application-archive-project-for-kubernetes-from-tibco-streaming-studio-trade"></a>
 
-## Creating an application archive project for Kubernetes from TIBCO StreamBase Studio&trade;
+## Creating an application archive project for Kubernetes from TIBCO Streaming Studio&trade;
 
-Create a new StreamBase Project and enable both Docker and Kubernetes :
+Create a new Streaming Project and enable both Docker and Kubernetes :
 
 **FIX THIS:** We need to update studio menu to something like :
 
@@ -298,7 +160,7 @@ The Kubernetes configurations include -
 
 * [ef-kubernetes-app.yaml](../../../src/main/kubernetes/ef-kubernetes-app.yaml) - Kubernetes Service and StatefulSet definition for a scaling cluster
 * [security.conf](../../../src/main/configurations/security.conf) - Trusted hosts names need to match Kubernetes DNS names
-* [start-node](../../../src/main/docker/base/start-node) - Script to start the StreamBase node
+* [start-node](../../../src/main/docker/base/start-node) - Script to start the Streaming node
 
 **Note:** - current version of Kitematic doesn't display container logs.  I've been using the older 0.17.6 from https://github.com/docker/kitematic/releases/download/v0.17.6/Kitematic-0.17.6-Mac.zip
 
@@ -311,7 +173,7 @@ docker image.  To support this an additional maven execution step is needed in p
                     <!-- cluster monitor image -->
                     <execution>
                         <id>build clustermonitor image</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
@@ -375,16 +237,21 @@ Along with additional files :
 
 ## Containers and nodes
 
-StreamBase nodes require the hostname, nodename and DNS working together.  Tests have shown that the Kubernetes 
-*statefulset* option supports StreamBase nodes easiest.
+Streaming nodes require the hostname, nodename and DNS working together.  Tests have shown that the Kubernetes 
+*statefulset* option supports Streaming nodes easiest.
 
 The goal of this sample is to construct the deployment shown below :
 
 ![resources](images/kubernetes-docker.svg)
 
-<a name="building-and-running-from-tibco-streambase-studio-trade"></a>
+<a name="building-and-running-from-tibco-Streaming-studio-trade"></a>
 
-## Building and running from TIBCO StreamBase Studio&trade;
+1. One POD contains one Streaming node and liveness probe
+2. A StatefulSet controls the set of PODs that forms the application cluster
+3. The Cluster Monitor is controlled by a second StatefuleSet and the lvweb console exposed via a NodePort
+4. The Kubernetes Dashboard is exposed via a proxy service
+
+## Building and running from TIBCO Streaming Studio&trade;
 
 Useful plugins include :
 
@@ -400,9 +267,9 @@ Useful plugins include :
 
 Running *mvn install* will :
 
-* Build the StreamBase Fragment
-* Run StreamBase Fragment unit test cases
-* Build the application archive that contains the StreamBase Fragment
+* Build the Streaming Fragment
+* Run Streaming Fragment unit test cases
+* Build the application archive that contains the Streaming Fragment
 * If Docker is installed :
     * Build a base image containing just the product
     * Build a application Docker image containing the application archive
@@ -415,15 +282,6 @@ Running *mvn install* will :
 
 Some Kubernetes environments ( notably **Kind** and **CodeReady Containers** ) require the image to be pushed to the internal registry 
 before running *kubectl apply*. See [Deployment](#deployment) below.
-
-**Note:** **CodeReady Containers* seem to require a internal repository reference, so the yaml file should be updated with :
-
-```
-          #
-          # docker image to use
-          #
-          image: image-registry.openshift-image-registry.svc:5000/default/ef-kubernetes-app:1.0.0
-```
 
 To start the cluster use the *kubectl apply* command :
 
@@ -587,55 +445,24 @@ is being used or plain http ) then it may be possible to still use the registry 
 The application docker image will usually contain all configurations and files to support the application.  However
 it is possible to inject configurations and files at runtime.
 
-### StreamBase node name
+| Configuration          | How to set                                                                                      |
+|------------------------|-------------------------------------------------------------------------------------------------|
+| Streaming node name    | environment variable **STREAMING_NODENAME**                                                     |
+| Node deployment file   | add file to configuration ConfigMap and set environment variable **STREAMING_NODEDEPLOY**       |
+| Substitution variables | environment variable **STREAMING_SUBSTITUTIONS**, or from ConfigMap                             |
+| Substitution file      | add file to configuration ConfigMap and set environment variable **STREAMING_SUBSTITUTIONFILE** |
+| Administration port    | environment variable **STREAMING_ADMINPORT**                                                    |
+| Logback file           | add file logback-test.xml to resource ConfigMap                                                 |
+| Key store              | add file to configuration ConfigMap and set environment variable **STREAMING_KEYSTORE**         |
+| Key password           | create a Secret and set environment variable **STREAMING_KEYSTOREPASSWORD** set from the secret |
 
-The environment variable **STREAMING_NODENAME** can be set in the yaml StatefulSet - this is passed to the
-**nodename** parameter of *epadmin install node*.  The generated default is **pod name.namespace.application name** :
-
-```yaml
-          env:
-          - name: POD_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.name
-          - name: POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-          - name: STREAMING_NODENAME
-            value: "$(POD_NAME).$(POD_NAMESPACE).ef-kubernetes-app"
-```
-
-### Node deployment file
-
-The environment variable **STREAMING_NODEDEPLOY** can be set to the path of a node deployment file - this is passed to the
-**nodedeploy** parameter of *epadmin install node*.
-
-```yaml
-...
-spec:
-  ...
-  template:
-    ...
-    spec:
-      ...
-      containers:
-        - name: ef-kubernetes-app
-          env:
-          - name: STREAMING_NODEDEPLOY
-            value: "/var/opt/tibco/streambase/configuration/node.conf"
-...
-```
-
-The file referenced can be included in the application docker image (from src/test/configurations/node.conf), 
-or supplied via a Kubernetes ConfigMap :
+An example of adding a configuration file to a ConfigMap is shown below :
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: configuration
-  namespace: default
 apiVersion: v1
 data:
   node.conf: |-
@@ -652,169 +479,20 @@ data:
             }
         }
     }
-```
-
-The ConfgMap has to be mounted via a volume :
-
-```yaml
-...
-spec:
-...
-  template:
-  ...
-    spec:
-      volumes:
-        - name: configuration
-          configMap:
-            name: configuration
-      ...
-      containers:
-        - name: ef-kubernetes-app
-          volumeMounts:
-          - name: configuration
-            mountPath: /var/opt/tibco/streambase/configuration
-          env:
-          - name: STREAMING_NODEDEPLOY
-            value: "/var/opt/tibco/streambase/configuration/node.conf"
-...
-```
-
-### Substitution variables
-
-The environment variable **STREAMING_SUBSTITUTIONS** can be set in the yaml StatefulSet - this is passed to the
-**substitutions** parameter of *epadmin install node* :
-
-```yaml
-...
-spec:
-...
-  template:
-  ...
-    spec:
-    ...
-      containers:
-        - name: ef-kubernetes-app
-          env:
-          - name: STREAMING_SUBSTITUTIONS
-            value: "param1=value1,param2=value2"
-...
-```
-
-### Substitution file
-
-The environment variable **STREAMING_SUBSTITUTIONFILE** can be set to the path of a substitution file - this is passed to the
-**substitutionfile** parameter of *epadmin install node*.
-
-```yaml
-...
-spec:
-  ...
-  template:
-    ...
-    spec:
-      ...
-      containers:
-        - name: ef-kubernetes-app
-          env:
-          - name: STREAMING_SUBSTITUTIONFILE
-            value: "/var/opt/tibco/streambase/configuration/substitutions.txt"
-...
-```
-
-The file referenced can be included in the application docker image (from src/test/configurations/substitutions.txt),
-or supplied via a Kubernetes ConfigMap :
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: configuration
-  namespace: default
-apiVersion: v1
-data:
-  substitutions.txt: |-
+  substitutions: param1=value1,param2=value2
+  substitutionfile.txt: |-
     name1=value1
     name2=value2
+  mastersecret.ks: 1$+b3hxBKCxDOIFCyxBaeztZaKiYANEKBPAjLlPZ9XwCw=$OUd5KZraLPRSAWvxquMtmrSdAmBC99G9oNLoBUk+aDc4x13DqFoQuN2b500=
 ```
 
-The ConfgMap has to be mounted via a volume :
-
-```yaml
-...
-spec:
-...
-  template:
-  ...
-    spec:
-      volumes:
-        - name: configuration
-          configMap:
-            name: configuration
-      ...
-      containers:
-        - name: ef-kubernetes-app
-          volumeMounts:
-          - name: configuration
-            mountPath: /var/opt/tibco/streambase/configuration
-          env:
-          - name: STREAMING_SUBSTITUTIONFILE
-            value: "/var/opt/tibco/streambase/configuration/substitutions.txt"
-...
-```
-
-### Administration port
-
-The environment variable **STREAMING_ADMINPORT** can be set in the yaml StatefulSet - this is passed to the
-**adminport** parameter of *epadmin install node* :
-
-```yaml
-...
-spec:
-...
-  template:
-  ...
-    spec:
-    ...
-      containers:
-        - name: ef-kubernetes-app
-          env:
-          - name: STREAMING_ADMINPORT
-            value: "0"
-...
-```
-
-This may be required in some cases where there is a port controlled firewall between StreamBase nodes.
-
-### Logback and other deploy directory files
-
-The environment variable **STREAMING_DEPLOYDIRECTORIES** can be set to the path of a deployment directory - this is passed to the
-**deploydirectories** parameter of *epadmin install node*.
-
-```yaml
-...
-spec:
-  ...
-  template:
-    ...
-    spec:
-      ...
-      containers:
-        - name: ef-kubernetes-app
-          env:
-          - name: STREAMING_DEPLOYDIRECTORIES
-            value: "/var/opt/tibco/streambase/resources"
-...
-```
-
-Any files to be included in a deploy directory can be included in the application docker image (from src/test/resources), 
-or supplied via a Kubernetes ConfigMap :
+An example of adding a resource file to a ConfigMap is shown below :
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: resources
-  namespace: default
 data:
   logback-test.xml: |-
     <?xml version="1.0" encoding="UTF-8"?>
@@ -830,75 +508,7 @@ data:
     </configuration>
 ```
 
-The ConfgMap has to be mounted via a volume :
-
-```yaml
-...
-spec:
-...
-  template:
-  ...
-    spec:
-      volumes:
-        - name: resources
-          configMap:
-            name: resources
-      ...
-      containers:
-        - name: ef-kubernetes-app
-          volumeMounts:
-          - name: resources
-            mountPath: /var/opt/tibco/streambase/resources
-          env:
-          - name: STREAMING_DEPLOYDIRECTORIES
-            value: "/var/opt/tibco/streambase/resources"
-...
-```
-
-### Key store and passwords 
-
-The environment variable **STREAMING_KEYSTORE** can be set to the path of a key store file - this is passed to the
-**keystore** parameter of *epadmin install node*.  Also, the environment variable **STREAMING_KEYSTOREPASSWORD**
-can be set to the key store password - this is passed to the **keystorepassword** parameter of *epadmin install node*.
-
-Plain text password can be used, but secret ConfigMap is preferred.
-
-```yaml
-...
-spec:
-  ...
-  template:
-    ...
-    spec:
-      ...
-      containers:
-        - name: ef-kubernetes-app
-          env:
-          - name: STREAMING_KEYSTORE
-            value: "/var/opt/tibco/streambase/configuration/mastersecret.ks"
-          - name: STREAMING_KEYSTOREPASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: secret
-                key: keystorepassword
-...
-```
-
-The file referenced can be included in the application docker image (via src/test/configurations/mastersecret.ks), 
-or supplied via a Kubernetes ConfigMap :
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: configuration
-  namespace: default
-apiVersion: v1
-data:
-  mastersecret.ks: 1$+b3hxBKCxDOIFCyxBaeztZaKiYANEKBPAjLlPZ9XwCw=$OUd5KZraLPRSAWvxquMtmrSdAmBC99G9oNLoBUk+aDc4x13DqFoQuN2b500=
-```
-
-The encoded password can be specified via a Secret :
+An example of adding a secret to a ConfigMap is shown below :
 
 ```yaml
 apiVersion: v1
@@ -910,26 +520,44 @@ data:
   keystorepassword: c2VjcmV0c2VjcmV0
 ```
 
-The ConfgMap has to be mounted via a volume :
+Example environment variables are shown below :
+
 
 ```yaml
 ...
 spec:
-...
-  template:
   ...
+  template:
+    ...
     spec:
-      volumes:
-        - name: configuration
-          configMap:
-            name: configuration
       ...
       containers:
         - name: ef-kubernetes-app
-          volumeMounts:
-          - name: configuration
-            mountPath: /var/opt/tibco/streambase/configuration
-          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: APPNAME
+            value: ef-kubernetes-app
+          - name: STREAMING_NODENAME
+            value: "$(POD_NAME).$(POD_NAMESPACE).$(APPNAME)"
+          - name: STREAMING_NODEDEPLOY
+            value: "/var/opt/tibco/streambase/configuration/node.conf"
+          - name: STREAMING_SUBSTITUTIONS
+            valueFrom:
+              configMapKeyRef:
+                name: configuration
+                key: substitutions
+          - name: STREAMING_SUBSTITUTIONFILE
+            value: "/var/opt/tibco/streambase/configuration/substitutionfile.txt"
+          - name: STREAMING_ADMINPORT
+            value: "0"
+          - name: STREAMING_DEPLOYDIRECTORIES
+            value: "/var/opt/tibco/streambase/resources"
           - name: STREAMING_KEYSTORE
             value: "/var/opt/tibco/streambase/configuration/mastersecret.ks"
           - name: STREAMING_KEYSTOREPASSWORD
@@ -940,12 +568,8 @@ spec:
 ...
 ```
 
-### Files referenced via HOCON configurations
-
-In the case of a HOCON configuration file referencing a file, this can be included in the docker image or via
-a ConfigMap in the same was as above.
- 
-### Upgrades
+A few Streaming configuration files reference files (for example trust store).  These can be included in 
+the docker image or via a ConfigMap in the same was as above.
 
 Kubernetes ConfigMaps are global, so when upgrading with different configurations in ConfgMaps, it is recommended to
 include a version with the map name :
@@ -955,11 +579,21 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: configuration-1.0.1
-  namespace: default
 apiVersion: v1
 data:
 ...
 ```
+
+The rolling upgrade process depends on the appliction details, but would be something like :
+
+1. Create first application version (Docker image myapp:1.0.0 and ConfigMap configuration-1.0.0)
+2. Apply ConfigMap configuration-1.0.0
+3. Apply StatefulSet that references configuration-1.0.0 and Docker image myapp:1.0.0
+4. Direct traffic application 1.0.0
+5. Create updated application version (Docker image myapp:1.0.1 and ConfigMap configuration-1.0.1)
+6. Apply ConfigMap configuration-1.0.1
+7. Apply StatefulSet that references configuration-1.0.1 and Docker image myapp:1.0.1
+8. Direct traffic application 1.0.0
 
 <a name="further-kubernetes-commands"></a>
 
@@ -1096,8 +730,6 @@ In this case the URL http://localhost:31044 can be used to access the cluster mo
 
 ### Web UI Dashboard
 
-### Docker for desktop
-
 To start the Kubernetes dashboard in a **docker-for-desktop** context see https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard :
 
 ```shell
@@ -1148,7 +780,46 @@ with token credentials as exported above :
 
 ![resources](images/web-ui.png)
 
+<a name="alternative-kubernetes-implementations"></a>
+
+## Alternative Kubernetes Implementations
+
+Alternatives to **docker-for-desktop** include :
+
 ### Minikube
+
+An alternative is **Minikube** - see https://kubernetes.io/docs/setup/learning-environment/minikube/ 
+for installation instructions.  Minikube runs Kubernetes and Docker in VirtualBox.  See also 
+https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon
+to allow Minikube to access locally built docker images.  
+
+```shell
+$ minikube start
+😄  minikube v1.5.2 on Darwin 10.15
+💡  Tip: Use 'minikube start -p <name>' to create a new cluster, or 'minikube delete' to delete this one.
+🔄  Starting existing hyperkit VM for "minikube" ...
+⌛  Waiting for the host to be provisioned ...
+🐳  Preparing Kubernetes v1.16.2 on Docker '18.09.9' ...
+🔄  Relaunching Kubernetes using kubeadm ... 
+⌛  Waiting for: apiserver
+🏄  Done! kubectl is now configured to use "minikube"
+
+$ eval $(minikube docker-env)
+...
+```
+
+You may want to grant more resources to Minikube, for example :
+
+```shell
+$ minikube start --cpus=4 --memory=8g
+```
+
+Validate that **minikube** is the current context :
+
+```shell
+$ kubectl config current-context
+minikube
+```
 
 Starting the dashboard in a **minikube** context is via the *minikube dashboard* command :
 
@@ -1161,7 +832,100 @@ $ minikube dashboard
 🎉  Opening http://127.0.0.1:57841/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
 ```
 
+Minikube only supports a single Kubernetes Node.
+
+### Kind
+
+An alternative is **Kind** - see https://kind.sigs.k8s.io/docs/user/quick-start/ for installation instructions. 
+This is a Docker-in-Docker approach, so its usage is slightly different.
+
+```shell
+$ kind create cluster
+Creating cluster "kind" ...
+ ✓ Ensuring node image (kindest/node:v1.15.3) 🖼 
+ ✓ Preparing nodes 📦 
+ ✓ Creating kubeadm config 📜 
+ ✓ Starting control-plane 🕹️ 
+ ✓ Installing CNI 🔌 
+ ✓ Installing StorageClass 💾 
+Cluster creation complete. You can now use the cluster with:
+
+export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+kubectl cluster-info
+
+$ export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+```
+
+Kind supports multiple Kubernetes Nodes.
+
+**FIX THIS:** **Kind** doesn't support UDP broadcasts so Streaming Nodes won't discover each other.  See https://github.com/kubernetes-sigs/kind/issues/1063.
+Pending specific support for Kubernetes Discovery.  Work-around is to add **weave-net** :
+
+The default CNI, kind-net, can be disabled by using the following yaml :
+
+```yaml
+kind: Cluster
+apiVersion: kind.sigs.k8s.io/v1alpha3
+networking:
+  disableDefaultCNI: true
+```
+
+and used when the cluster is created :
+
+```shell
+$ kind create cluster --config cluster.yaml
+```
+
+Once the default CNI is disabled, an alternative CNI can be loaded such as **weave-net** that does support UDP broadcasts :
+
+```shell
+$ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&disable-npc=true"
+serviceaccount/weave-net created
+clusterrole.rbac.authorization.k8s.io/weave-net created
+clusterrolebinding.rbac.authorization.k8s.io/weave-net created
+role.rbac.authorization.k8s.io/weave-net created
+rolebinding.rbac.authorization.k8s.io/weave-net created
+daemonset.apps/weave-net created
+```
+
 ### Minishift
+
+An alternative is **Minishift** - see https://docs.okd.io/latest/minishift/getting-started/installing.html
+for installation instructions.
+
+**Minishift** contains OpenShift 3.
+
+```shell
+$ minishift start
+-- Starting profile 'minishift'
+-- Check if deprecated options are used ... OK
+-- Checking if https://github.com is reachable ... OK
+...
+OpenShift server started.
+
+The server is accessible via web console at:
+    https://192.168.99.112:8443/console
+
+You are logged in as:
+    User:     developer
+    Password: <any value>
+
+To login as administrator:
+    oc login -u system:admin
+
+$ eval $(minishift docker-env)
+
+$ eval $(minishift oc-env)
+...
+```
+
+You may want to grant more resources to **Minishift**, for example :
+
+```shell
+$ minishift start --cpus=4 --memory=8GB
+```
+
+Default namespace is **myproject**.
 
 Starting the dashboard in a **minishift** context is via the *minishift console* command :
 
@@ -1170,7 +934,62 @@ $ minishift console
 Opening the OpenShift Web console in the default browser...
 ```
 
+**FIX THIS:** DNS is failing for me - see https://github.com/minishift/minishift/issues/3368
+
 ### CodeReady Containers
+
+An alternative is **CodeReady Containers** - see https://cloud.redhat.com/openshift/install/crc/installer-provisioned
+for installation instructions ( requires RedHat account and secret ).
+
+**CodeReady Containers** contains OpenShift 4.
+
+```shell
+$ crc start
+INFO Checking if running as non-root              
+INFO Checking if oc binary is cached              
+INFO Checking if HyperKit is installed            
+INFO Checking if crc-driver-hyperkit is installed 
+INFO Checking file permissions for /etc/resolver/testing 
+INFO Checking file permissions for /etc/hosts     
+INFO Starting CodeReady Containers VM for OpenShift 4.2.2... 
+INFO Verifying validity of the cluster certificates ... 
+INFO Network restart not needed                   
+INFO Check internal and public DNS query ...      
+INFO Starting OpenShift cluster ... [waiting 3m]  
+INFO                                              
+INFO To access the cluster, first set up your environment by following 'crc oc-env' instructions 
+INFO Then you can access it by running 'oc login -u developer -p developer https://api.crc.testing:6443' 
+INFO To login as an admin, username is 'kubeadmin' and password is e4FEb-9dxdF-9N2wH-Dj7B8 
+INFO                                              
+INFO You can now run 'crc console' and use these credentials to access the OpenShift web console 
+Started the OpenShift cluster
+WARN The cluster might report a degraded or error state. This is expected since several operators have been disabled to lower the resource usage. For more information, please consult the documentation 
+
+$ eval $(crc oc-env)
+
+$ oc login -u kubeadmin -p e4FEb-9dxdF-9N2wH-Dj7B8
+Login successful.
+
+You have access to 51 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
+```
+
+To enable pushing images into **CodeReady Containers** ensure a default route is enabled :
+
+```
+$ oc patch config.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
+config.imageregistry.operator.openshift.io/cluster patched (no change)
+```
+
+and update the yaml file to reference the internal registry :
+
+```
+          #
+          # docker image to use
+          #
+          image: image-registry.openshift-image-registry.svc:5000/default/ef-kubernetes-app:1.0.0
+```
 
 Starting the dashboard in a **CodeReady Containers** context is via the *crc console* command :
 
@@ -1184,3 +1003,8 @@ Opening the OpenShift Web Console in the default browser...
 ```
 
 ![resources](images/crc-ui.png)
+
+**FIX THIS:** **CodeReady Containers** doesn't support UDP broadcasts so Streaming Nodes won't discover each other.
+Pending specific support for Kubernetes Discovery.
+
+
