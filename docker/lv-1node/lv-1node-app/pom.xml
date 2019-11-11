@@ -137,7 +137,7 @@
                             <autoCreateCustomNetworks>true</autoCreateCustomNetworks>
                             <images>
                                 <image>
-                                    <name>%g/%a:%l</name>
+                                    <name>%a:%l</name>
                                     <alias>A.${project.artifactId}</alias>
                                     <run>
                                         <network>
