@@ -3,6 +3,7 @@
 This sample builds on the [main Kubernetes sample](../../../../../ef-kubernetes/ef-kubernetes-app/src/site/markdown/index.md) and adds  Helm packaging.
 
 * [Prerequisites](#prerequisites)
+* [Quick runthrough](#quick-runthrough)
 * [Packaging with Helm](#packaging-with-helm)
 * [Deployment](#deployment)
 
@@ -36,6 +37,35 @@ To prevent this, run `helm init` with the --tiller-tls-verify flag.
 For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
 ```
 
+## Quick runthrough
+
+On **docker-desktop** :
+
+1. Install Docker, Kubernetes and Helm
+  See [Prerequisites](#prerequisites)
+2. Build this project to create Docker images and Helm chart
+  See [Packaging with Helm](#packaging-with-helm)
+3. Use *helm --set dockerRegistry= install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz* to start the Streaming Nodes in the Kubernetes cluster
+4. Locate the cluster monitor assigned NodePort  with *kubectl describe service clustermonitor*
+5. Access the cluster monitor GUI at http://localhost:NodePort
+
+```
+$ helm --set dockerRegistry= install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
+NAME:   fuzzy-lambkin
+LAST DEPLOYED: Mon Nov 11 11:05:38 2019
+NAMESPACE: default
+STATUS: DEPLOYED
+....
+
+$ kubectl describe service clustermonitor
+...
+NodePort:                 lvweb  31243/TCP
+...
+
+$ open http://localhost:31243
+
+```
+
 ## Packaging with Helm
 
 The the project is built with *mvn install* a Helm chart is created :
@@ -53,12 +83,17 @@ The Helm chart can be installed with the *helm install* command - this will star
 
 ```shell
 $ helm install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
-NAME:   eerie-pike
-LAST DEPLOYED: Thu Oct 31 11:24:22 2019
+NAME:   wanton-crab
+LAST DEPLOYED: Mon Nov 11 11:02:53 2019
 NAMESPACE: default
 STATUS: DEPLOYED
 
 RESOURCES:
+==> v1/ConfigMap
+NAME           DATA  AGE
+configuration  0     0s
+resources      0     0s
+
 ==> v1/Pod(related)
 NAME              READY  STATUS             RESTARTS  AGE
 clustermonitor-0  0/1    ContainerCreating  0         0s
@@ -67,21 +102,13 @@ ef-helm-app-1     0/1    ContainerCreating  0         0s
 
 ==> v1/Service
 NAME            TYPE       CLUSTER-IP     EXTERNAL-IP  PORT(S)          AGE
-clustermonitor  NodePort   10.105.244.11  <none>       11080:30228/TCP  0s
+clustermonitor  NodePort   10.103.198.69  <none>       11080:32298/TCP  0s
 ef-helm-app     ClusterIP  None           <none>       <none>           0s
 
 ==> v1/StatefulSet
 NAME            READY  AGE
 clustermonitor  0/1    0s
 ef-helm-app     0/2    0s
-```
-
-```shell
-$ kubectl get pod
-NAME               READY   STATUS    RESTARTS   AGE
-clustermonitor-0   1/1     Running   0          8m49s
-ef-helm-app-0      1/1     Running   0          8m18s
-ef-helm-app-1      1/1     Running   0          8m18s
 
 
 NOTES:
@@ -89,12 +116,12 @@ Thank you for installing ef-helm-app - Docker: Helm EventFlow
 
 How to deploy an EventFlow application in Docker with Kubernetes and Helm
 
-Your release is named eerie-pike.
+Your release is named wanton-crab.
 
 To learn more about the release, try:
 
-  $ helm status eerie-pike
-  $ helm get eerie-pikey
+  $ helm status wanton-crab
+  $ helm get wanton-crab
 ```
 
 **Note:** In some cases ( such as **Kind** ) the *helm install* command will return
@@ -143,7 +170,7 @@ release "old-parrot" deleted
 
 ## Deployment
 
-The Helm chart can be deployed using the *mvn deploy* command.  Standard parameter *-Dmaven.deploy.skip=true* 
+The Helm chart can be deployed to a repository using the *mvn deploy* command.  Standard parameter *-Dmaven.deploy.skip=true* 
 is useful to skip deploying the maven artifacts.
 
 ```shell

@@ -161,7 +161,7 @@
                     <!-- cluster monitor image -->
                     <execution>
                         <id>build clustermonitor image</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>

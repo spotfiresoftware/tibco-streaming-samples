@@ -445,16 +445,17 @@ is being used or plain http ) then it may be possible to still use the registry 
 The application docker image will usually contain all configurations and files to support the application.  However
 it is possible to inject configurations and files at runtime.
 
-| Configuration          | How to set                                                                                      |
-|------------------------|-------------------------------------------------------------------------------------------------|
-| Streaming node name    | environment variable **STREAMING_NODENAME**                                                     |
-| Node deployment file   | add file to configuration ConfigMap and set environment variable **STREAMING_NODEDEPLOY**       |
-| Substitution variables | environment variable **STREAMING_SUBSTITUTIONS**, or from ConfigMap                             |
-| Substitution file      | add file to configuration ConfigMap and set environment variable **STREAMING_SUBSTITUTIONFILE** |
-| Administration port    | environment variable **STREAMING_ADMINPORT**                                                    |
-| Logback file           | add file logback-test.xml to resource ConfigMap                                                 |
-| Key store              | add file to configuration ConfigMap and set environment variable **STREAMING_KEYSTORE**         |
-| Key password           | create a Secret and set environment variable **STREAMING_KEYSTOREPASSWORD** set from the secret |
+| Configuration             | ConfigMap                                 | Set Environment Variable                           |
+|---------------------------|-------------------------------------------|----------------------------------------------------|
+| Streaming node name       |                                           | **STREAMING_NODENAME**                             |
+| Node deployment file      | add file to **configuration**             | **STREAMING_NODEDEPLOY** to filename               |
+| Substitution variables or |                                           | **STREAMING_SUBSTITUTIONS**                        |
+| Substitution variables    | add substitutions to **configuration**    | **STREAMING_SUBSTITUTIONS** from ConfigMap         |
+| Substitution file         | add file to **configuration**             | **STREAMING_SUBSTITUTIONFILE** to filename         |
+| Administration port       |                                           | **STREAMING_ADMINPORT**                            |
+| Logback file              | add file logback-test.xml to **resource** |                                                    |
+| Key store                 | add file to **configuration**             | **STREAMING_KEYSTORE** to filename                 |
+| Key password              | create a Secret                           | set **STREAMING_KEYSTOREPASSWORD** from the secret |
 
 An example of adding a configuration file to a ConfigMap is shown below :
 
@@ -475,6 +476,14 @@ data:
             nodes = {
                 "${EP_NODE_NAME}" = {
                     nodeType = "docker"
+                    communication = {
+                        administration = {
+                            address = "${HOSTNAME:-localhost}"
+                        }
+                        distributionListenerInterfaces = [ {
+                            address = "${HOSTNAME:-localhost}"
+                        } ]
+                    }
                 }
             }
         }
@@ -570,30 +579,6 @@ spec:
 
 A few Streaming configuration files reference files (for example trust store).  These can be included in 
 the docker image or via a ConfigMap in the same was as above.
-
-Kubernetes ConfigMaps are global, so when upgrading with different configurations in ConfgMaps, it is recommended to
-include a version with the map name :
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: configuration-1.0.1
-apiVersion: v1
-data:
-...
-```
-
-The rolling upgrade process depends on the appliction details, but would be something like :
-
-1. Create first application version (Docker image myapp:1.0.0 and ConfigMap configuration-1.0.0)
-2. Apply ConfigMap configuration-1.0.0
-3. Apply StatefulSet that references configuration-1.0.0 and Docker image myapp:1.0.0
-4. Direct traffic application 1.0.0
-5. Create updated application version (Docker image myapp:1.0.1 and ConfigMap configuration-1.0.1)
-6. Apply ConfigMap configuration-1.0.1
-7. Apply StatefulSet that references configuration-1.0.1 and Docker image myapp:1.0.1
-8. Direct traffic application 1.0.0
 
 <a name="further-kubernetes-commands"></a>
 
@@ -691,6 +676,29 @@ service "ef-kubernetes-app" deleted
 $ kubectl delete statefulset ef-kubernetes-app
 statefulset.apps "ef-kubernetes-app" deleted
 ```
+
+### Rolling upgrades
+
+To enable StatfulSet rolling upgrades set the update strategy :
+
+```yaml
+...
+spec:
+  ...
+  updateStrategy:
+    type: RollingUpdate
+  ...
+```
+
+On configuration change, Kubernetes will update each POD in turn with the new configuration.  For example :
+
+1. Build Docker image 1.0.0
+2. Apply the StatefulSet that references image 1.0.0 with *kubectl apply -f  ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml*
+3. Build Docker image 1.0.1
+4. Edit the StatefulSet with *kubectl edit statefulset ef-kubernetes-app* and change the image version to 1.0.0 to 1.0.1
+
+See also https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#updating-statefulsets .
+
 
 ### Cluster monitor
 

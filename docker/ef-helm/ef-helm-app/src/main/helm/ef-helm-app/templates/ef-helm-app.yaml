@@ -42,6 +42,29 @@ spec:
 ---
 
 #
+# ConfigMap for configuration
+#
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configuration
+  namespace: default
+apiVersion: v1
+data:
+---
+
+#
+# ConfigMap for resources
+#
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resources
+  namespace: default
+data:
+---
+
+#
 # application cluster as a stateful set
 #
 apiVersion: apps/v1
@@ -64,6 +87,13 @@ spec:
       labels:
         app: ef-helm-app
     spec:
+      volumes:
+        - name: configuration
+          configMap:
+            name: configuration
+        - name: resources
+          configMap:
+            name: resources
       containers:
         - name: ef-helm-app
           #
@@ -74,6 +104,14 @@ spec:
 {{- else}}
           image: ef-helm-app:1.0.0
 {{- end }}
+          #
+          # mount the configuration and resources volumes
+          #
+          volumeMounts:
+          - name: configuration
+            mountPath: /var/opt/tibco/streambase/configuration
+          - name: resources
+            mountPath: /var/opt/tibco/streambase/resources
           #
           # Share application logs to docker console
           #
