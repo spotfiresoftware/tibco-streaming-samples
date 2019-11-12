@@ -38,4 +38,4 @@ dockerRegistry: ${docker.registry}
 #
 # Number of replicas in the application cluster
 #
-replicaCount: 2
+replicaCount: 3

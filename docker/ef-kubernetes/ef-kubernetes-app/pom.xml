@@ -236,6 +236,28 @@
                                         <namingStrategy>alias</namingStrategy>
                                     </run>
                                 </image>
+                                <image>
+                                    <name>%a:%l</name>
+                                    <alias>C.${project.artifactId}</alias>
+                                    <run>
+                                        <network>
+                                            <name>${dockerDomain}</name>
+                                            <alias>C.${dockerDomain}</alias>
+                                        </network>
+                                        <hostname>C.${dockerDomain}</hostname>
+                                        <env>
+                                            <STREAMING_NODENAME>C.${project.artifactId}</STREAMING_NODENAME>
+                                        </env>
+                                        <log>
+                                            <enabled>true</enabled>
+                                        </log>
+                                        <wait>
+                                            <log>COMMAND FINISHED</log>
+                                            <time>100000</time>
+                                        </wait>
+                                        <namingStrategy>alias</namingStrategy>
+                                    </run>
+                                </image>
                             </images>
                         </configuration>
                     </execution>

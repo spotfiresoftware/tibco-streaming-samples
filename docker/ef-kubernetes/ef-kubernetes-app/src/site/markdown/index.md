@@ -64,8 +64,9 @@ statefulset.apps/ef-kubernetes-app created
 
 $ kubectl get pod
 NAME                  READY   STATUS    RESTARTS   AGE
-ef-kubernetes-app-0   1/1     Running   0          3m1s
-ef-kubernetes-app-1   1/1     Running   0          3m1s
+ef-kubernetes-app-0   0/1     Running   0          11s
+ef-kubernetes-app-1   0/1     Running   0          11s
+ef-kubernetes-app-2   0/1     Running   0          11s
 
 $ kubectl logs ef-kubernetes-app-0
 ...
@@ -79,7 +80,6 @@ service "ef-kubernetes-app" deleted
 configmap "configuration" deleted
 configmap "resources" deleted
 statefulset.apps "ef-kubernetes-app" deleted
-
 ```
   
 <a name="prerequisites"></a>
@@ -286,8 +286,10 @@ before running *kubectl apply*. See [Deployment](#deployment) below.
 To start the cluster use the *kubectl apply* command :
 
 ```shell
-$ kubectl apply -f ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml 
+$ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
 service/ef-kubernetes-app created
+configmap/configuration created
+configmap/resources created
 statefulset.apps/ef-kubernetes-app created
 ```
 
@@ -297,15 +299,14 @@ The *kubectl describe* command gives further details :
 $ kubectl describe statefulset ef-kubernetes-app
 Name:               ef-kubernetes-app
 Namespace:          default
-CreationTimestamp:  Wed, 30 Oct 2019 11:06:09 +0000
+CreationTimestamp:  Tue, 12 Nov 2019 15:50:27 +0000
 Selector:           app=ef-kubernetes-app
 Labels:             <none>
 Annotations:        kubectl.kubernetes.io/last-applied-configuration:
                       {"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"name":"ef-kubernetes-app","namespace":"default"},"spec":{"podMa...
-Replicas:           2 desired | 2 total
+Replicas:           3 desired | 3 total
 Update Strategy:    RollingUpdate
-  Partition:        824633996040
-Pods Status:        2 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pods Status:        3 Running / 0 Waiting / 0 Succeeded / 0 Failed
 Pod Template:
   Labels:  app=ef-kubernetes-app
   Containers:
@@ -313,23 +314,36 @@ Pod Template:
     Image:      ef-kubernetes-app:1.0.0
     Port:       <none>
     Host Port:  <none>
-    Liveness:   http-get http://:8008/healthcheck/v1/status delay=120s timeout=1s period=10s #success=1 #failure=3
-    Readiness:  http-get http://:8008/healthcheck/v1/status delay=120s timeout=1s period=10s #success=1 #failure=3
+    Liveness:   http-get http://:8008/healthcheck/v1/status delay=240s timeout=1s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:8008/healthcheck/v1/status delay=60s timeout=1s period=10s #success=1 #failure=3
     Environment:
-      POD_NAME:        (v1:metadata.name)
-      POD_NAMESPACE:   (v1:metadata.namespace)
-      STREAMING_NODENAME:       $(POD_NAME).$(POD_NAMESPACE).ef-kubernetes-app
-    Mounts:           <none>
-  Volumes:            <none>
-Volume Claims:        <none>
+      POD_NAME:             (v1:metadata.name)
+      POD_NAMESPACE:        (v1:metadata.namespace)
+      APPNAME:             ef-kubernetes-app
+      STREAMING_NODENAME:  $(POD_NAME).$(POD_NAMESPACE).$(APPNAME)
+      HOSTNAME:            $(POD_NAME).$(APPNAME).$(POD_NAMESPACE).svc.cluster.local
+    Mounts:
+      /var/opt/tibco/streambase/configuration from configuration (rw)
+      /var/opt/tibco/streambase/resources from resources (rw)
+  Volumes:
+   configuration:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      configuration
+    Optional:  false
+   resources:
+    Type:       ConfigMap (a volume populated by a ConfigMap)
+    Name:       resources
+    Optional:   false
+Volume Claims:  <none>
 Events:
   Type    Reason            Age   From                    Message
   ----    ------            ----  ----                    -------
-  Normal  SuccessfulCreate  3m4s  statefulset-controller  create Pod ef-kubernetes-app-0 in StatefulSet ef-kubernetes-app successful
-  Normal  SuccessfulCreate  3m4s  statefulset-controller  create Pod ef-kubernetes-app-1 in StatefulSet ef-kubernetes-app successful
+  Normal  SuccessfulCreate  75s   statefulset-controller  create Pod ef-kubernetes-app-0 in StatefulSet ef-kubernetes-app successful
+  Normal  SuccessfulCreate  75s   statefulset-controller  create Pod ef-kubernetes-app-1 in StatefulSet ef-kubernetes-app successful
+  Normal  SuccessfulCreate  75s   statefulset-controller  create Pod ef-kubernetes-app-2 in StatefulSet ef-kubernetes-app successful
 ```
 
-The configuration file defines 2 replicas and so 2 POD's were created ( ef-kubernetes-app-0 and ef-kubernetes-app-1 ).
+The configuration file defines 3 replicas and so 3 POD's were created ( ef-kubernetes-app-0, ef-kubernetes-app-1 and ef-kubernetes-app-2 ).
 
 To view the logs use *kubectl logs* :
 
@@ -386,29 +400,7 @@ a51f3f96403a: Layer already exists
 ...
 ```
 
-In the case of **MiniShift**, the password token can be obtained from *oc whoami -t* :
-
-```shell
-$ mvn -Dmaven.deploy.skip=true -Ddocker.push.registry=$(minishift openshift registry)/myproject -Ddocker.push.username=$(oc whoami) -Ddocker.push.password=$(oc whoami -t) deploy
-```
-
-In the case of **CodeReady Containers**, the registry is **default-route-openshift-image-registry.apps-crc.testing/PROJECT** :
-
-```shell
-$ mvn -Dmaven.deploy.skip=true -Ddocker.push.registry=default-route-openshift-image-registry.apps-crc.testing/default -Ddocker.push.username=kubeadmin -Ddocker.push.password=$(oc whoami -t) deploy
-```
-
-In the case of **Kind**, a specific tool *kind load docker-image* is used instead :
-
-
-```shell
-$ kind load docker-image ef-kubernetes-app:1.0.0
-
-```
-
-Yaml file can then be applied.
-
-These parameters are typically set in continuous integration builds in maven's settings.xml :
+Registry parameters are typically set in continuous integration builds in maven's settings.xml :
 
 ```xml
 <settings>
@@ -741,7 +733,7 @@ In this case the URL http://localhost:31044 can be used to access the cluster mo
 To start the Kubernetes dashboard in a **docker-for-desktop** context see https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard :
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
 namespace/kubernetes-dashboard created
 serviceaccount/kubernetes-dashboard created
 service/kubernetes-dashboard created
@@ -787,6 +779,13 @@ The dashboard can be found at http://localhost:8001/api/v1/namespaces/kubernetes
 with token credentials as exported above :
 
 ![resources](images/web-ui.png)
+
+For **demo** purposes, a skip button can be added to the login screen by running :
+
+```shell
+$ kubectl -n kubernetes-dashboard patch deploy kubernetes-dashboard --type='json' -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--enable-skip-login"}]'
+deployment.extensions/kubernetes-dashboard patched
+```
 
 ### Copying node snapshots
 
@@ -907,6 +906,16 @@ rolebinding.rbac.authorization.k8s.io/weave-net created
 daemonset.apps/weave-net created
 ```
 
+When pushing images into the **Kind** registry, a specific tool *kind load docker-image* is used instead :
+
+```shell
+$ kind load docker-image ef-kubernetes-app:1.0.0
+
+```
+
+Yaml file can then be applied.
+
+
 ### Minishift
 
 An alternative is **Minishift** - see https://docs.okd.io/latest/minishift/getting-started/installing.html
@@ -957,6 +966,12 @@ Starting the dashboard in a **minishift** context is via the *minishift console*
 ```shell
 $ minishift console
 Opening the OpenShift Web console in the default browser...
+```
+
+When pushing images into the **MiniShift** registry, the password token can be obtained from *oc whoami -t* :
+
+```shell
+$ mvn -Dmaven.deploy.skip=true -Ddocker.push.registry=$(minishift openshift registry)/myproject -Ddocker.push.username=$(oc whoami) -Ddocker.push.password=$(oc whoami -t) deploy
 ```
 
 **FIX THIS:** DNS is failing for me - see https://github.com/minishift/minishift/issues/3368
@@ -1028,6 +1043,13 @@ Opening the OpenShift Web Console in the default browser...
 ```
 
 ![resources](images/crc-ui.png)
+
+When pushing images into the **CodeReady Containers** registry, the address is **default-route-openshift-image-registry.apps-crc.testing/PROJECT** :
+
+```shell
+$ mvn -Dmaven.deploy.skip=true -Ddocker.push.registry=default-route-openshift-image-registry.apps-crc.testing/default -Ddocker.push.username=kubeadmin -Ddocker.push.password=$(oc whoami -t) deploy
+```
+
 
 **FIX THIS:** **CodeReady Containers** doesn't support UDP broadcasts so Streaming Nodes won't discover each other.
 Pending specific support for Kubernetes Discovery.

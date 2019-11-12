@@ -80,10 +80,10 @@ spec:
       app: ef-kubernetes-app
   serviceName: ef-kubernetes-app
   #
-  # initially 2 eventflow nodes in the cluster
+  # initially 3 eventflow nodes in the cluster
   # can be scaled up or down
   #
-  replicas: 2
+  replicas: 3
   #
   # start all pods at the same time
   #

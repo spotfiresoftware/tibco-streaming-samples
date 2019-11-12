@@ -80,7 +80,7 @@ spec:
       app: ef-helm-app
   serviceName: ef-helm-app
   #
-  # initially 2 eventflow nodes in the cluster
+  # initially 3 eventflow nodes in the cluster
   # can be scaled up or down
   #
   replicas: {{ .Values.replicaCount }}

@@ -83,9 +83,9 @@ $ mvn install
 The Helm chart can be installed with the *helm install* command - this will start the application up in Kubernetes :
 
 ```shell
-$ helm install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
-NAME:   wanton-crab
-LAST DEPLOYED: Mon Nov 11 11:02:53 2019
+$ helm --set dockerRegistry= install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
+NAME:   vocal-crocodile
+LAST DEPLOYED: Tue Nov 12 16:13:18 2019
 NAMESPACE: default
 STATUS: DEPLOYED
 
@@ -100,16 +100,17 @@ NAME              READY  STATUS             RESTARTS  AGE
 clustermonitor-0  0/1    ContainerCreating  0         0s
 ef-helm-app-0     0/1    ContainerCreating  0         0s
 ef-helm-app-1     0/1    ContainerCreating  0         0s
+ef-helm-app-2     0/1    Pending            0         0s
 
 ==> v1/Service
-NAME            TYPE       CLUSTER-IP     EXTERNAL-IP  PORT(S)          AGE
-clustermonitor  NodePort   10.103.198.69  <none>       11080:32298/TCP  0s
-ef-helm-app     ClusterIP  None           <none>       <none>           0s
+NAME            TYPE       CLUSTER-IP      EXTERNAL-IP  PORT(S)          AGE
+clustermonitor  NodePort   10.106.170.139  <none>       11080:31940/TCP  0s
+ef-helm-app     ClusterIP  None            <none>       <none>           0s
 
 ==> v1/StatefulSet
 NAME            READY  AGE
 clustermonitor  0/1    0s
-ef-helm-app     0/2    0s
+ef-helm-app     0/3    0s
 
 
 NOTES:
@@ -117,12 +118,12 @@ Thank you for installing ef-helm-app - Docker: Helm EventFlow
 
 How to deploy an EventFlow application in Docker with Kubernetes and Helm
 
-Your release is named wanton-crab.
+Your release is named vocal-crocodile.
 
 To learn more about the release, try:
 
-  $ helm status wanton-crab
-  $ helm get wanton-crab
+  $ helm status vocal-crocodile
+  $ helm get vocal-crocodile
 ```
 
 If the Docker image has been pushed to a remote repository, the *dockerRegistry*
@@ -226,27 +227,46 @@ Once deployed, the application can be installed on any Kubernetes node :
 
 ```shell
 $ helm install http://server.example.com/artifactory/helm/ef-helm-app-1.0.0.tgz
-NAME:   gangly-lemur
-LAST DEPLOYED: Thu Oct 31 15:23:12 2019
+NAME:   vocal-crocodile
+LAST DEPLOYED: Tue Nov 12 16:13:18 2019
 NAMESPACE: default
 STATUS: DEPLOYED
 
 RESOURCES:
+==> v1/ConfigMap
+NAME           DATA  AGE
+configuration  0     0s
+resources      0     0s
+
 ==> v1/Pod(related)
 NAME              READY  STATUS             RESTARTS  AGE
 clustermonitor-0  0/1    ContainerCreating  0         0s
 ef-helm-app-0     0/1    ContainerCreating  0         0s
 ef-helm-app-1     0/1    ContainerCreating  0         0s
+ef-helm-app-2     0/1    Pending            0         0s
 
 ==> v1/Service
-NAME            TYPE       CLUSTER-IP    EXTERNAL-IP  PORT(S)          AGE
-clustermonitor  NodePort   10.97.10.162  <none>       11080:30384/TCP  0s
-ef-helm-app     ClusterIP  None          <none>       <none>           0s
+NAME            TYPE       CLUSTER-IP      EXTERNAL-IP  PORT(S)          AGE
+clustermonitor  NodePort   10.106.170.139  <none>       11080:31940/TCP  0s
+ef-helm-app     ClusterIP  None            <none>       <none>           0s
 
 ==> v1/StatefulSet
 NAME            READY  AGE
 clustermonitor  0/1    0s
-ef-helm-app     0/2    0s
+ef-helm-app     0/3    0s
+
+
+NOTES:
+Thank you for installing ef-helm-app - Docker: Helm EventFlow
+
+How to deploy an EventFlow application in Docker with Kubernetes and Helm
+
+Your release is named vocal-crocodile.
+
+To learn more about the release, try:
+
+  $ helm status vocal-crocodile
+  $ helm get vocal-crocodile
 
 ```
 
