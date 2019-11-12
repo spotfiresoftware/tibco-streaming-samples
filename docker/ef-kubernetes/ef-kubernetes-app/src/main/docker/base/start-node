@@ -164,6 +164,10 @@ else
         args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},HOSTNAME=${HOSTNAME}"
     fi
 fi
+if [ "${STREAMING_SUBSTITUTIONFILE}" != "" ]
+then
+    args="${args} --substitutionfile=${STREAMING_SUBSTITUTIONFILE}"
+fi
 if [ "${STREAMING_ADMINPORT}" != "" ]
 then
     args="${args} --adminport=${STREAMING_ADMINPORT}"

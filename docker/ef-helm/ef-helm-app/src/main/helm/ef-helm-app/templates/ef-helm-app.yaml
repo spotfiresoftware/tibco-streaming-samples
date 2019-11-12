@@ -39,6 +39,10 @@ spec:
   selector:
     app: ef-helm-app
   clusterIP: None
+  #
+  # Publish DNS record early so startup works
+  #
+  publishNotReadyAddresses: true
 ---
 
 #
@@ -49,7 +53,6 @@ kind: ConfigMap
 metadata:
   name: configuration
   namespace: default
-apiVersion: v1
 data:
 ---
 
@@ -81,7 +84,15 @@ spec:
   # can be scaled up or down
   #
   replicas: {{ .Values.replicaCount }}
+  #
+  # start all pods at the same time
+  #
   podManagementPolicy: Parallel
+  #
+  # Enable rolling updates
+  #
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -138,8 +149,24 @@ spec:
           - name: HOSTNAME
             value: "$(POD_NAME).$(APPNAME).$(POD_NAMESPACE).svc.cluster.local"
           #
-          # use heathcheck API to test for liveness
-          # should 
+          # use healthcheck API for an initial wait until the application is ready
+          #
+          readinessProbe:
+            httpGet:
+              path: /healthcheck/v1/status
+              port: 8008
+              #
+              # FIX THIS: SB-47864 need to specify basic authentication
+              # this use the username and password that the eventflow
+              # node was started with
+              #
+              httpHeaders:
+              - name: Authorization
+                value: Basic dGliY286dGliY28=
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          #
+          # use healthcheck API for on-going health
           #
           livenessProbe:
             httpGet:
@@ -153,5 +180,5 @@ spec:
               httpHeaders:
               - name: Authorization
                 value: Basic dGliY286dGliY28=
-            initialDelaySeconds: 120
+            initialDelaySeconds: 240
             periodSeconds: 10

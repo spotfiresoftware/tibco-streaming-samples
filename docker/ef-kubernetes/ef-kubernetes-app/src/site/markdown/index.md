@@ -679,7 +679,7 @@ statefulset.apps "ef-kubernetes-app" deleted
 
 ### Rolling upgrades
 
-To enable StatfulSet rolling upgrades set the update strategy :
+Rolling upgrades is enabled via the updateStrategy :
 
 ```yaml
 ...
@@ -787,6 +787,17 @@ The dashboard can be found at http://localhost:8001/api/v1/namespaces/kubernetes
 with token credentials as exported above :
 
 ![resources](images/web-ui.png)
+
+### Copying node snapshots
+
+Use the *epadmin create snapshot* with a install path then *kubectl cp* :
+
+```shell
+$ kubectl exec rolling-app-0 epadmin create snapshot installpath=/var/opt/tibco/streambase/node/rolling-app-0.default.rolling-app
+    Created snapshot archive /var/opt/tibco/streambase/node/rolling-app-0.default.rolling-app/../snapshots/rolling-app-0.default.rolling-app/rolling-app-0.default.rolling-app.2019-11-12-11-51-35.zip
+
+$ kubectl cp rolling-app-0:/var/opt/tibco/streambase/node/snapshots/rolling-app-0.default.rolling-app/. .
+```
 
 <a name="alternative-kubernetes-implementations"></a>
 
@@ -927,6 +938,12 @@ $ eval $(minishift oc-env)
 ...
 ```
 
+You may need to specify the driver to use (only needed on first use) if the default fails :
+
+```shell
+$ minishift start --vm-driver virtualbox
+```
+
 You may want to grant more resources to **Minishift**, for example :
 
 ```shell
@@ -947,7 +964,7 @@ Opening the OpenShift Web console in the default browser...
 ### CodeReady Containers
 
 An alternative is **CodeReady Containers** - see https://cloud.redhat.com/openshift/install/crc/installer-provisioned
-for installation instructions ( requires RedHat account and secret ).
+for installation instructions ( requires RedHat account and pull secret ).
 
 **CodeReady Containers** contains OpenShift 4.
 
