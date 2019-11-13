@@ -79,7 +79,6 @@
 #    kind: ConfigMap
 #    metadata:
 #      name: configuration
-#      namespace: default
 #    data:
 #      node.conf: |-
 #        name = "ef-kubernetes-app"
