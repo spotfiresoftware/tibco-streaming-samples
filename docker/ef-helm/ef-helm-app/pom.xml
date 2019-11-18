@@ -338,13 +338,6 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>initialize helm</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>init</goal>
-                        </goals>
-                    </execution>
-                    <execution>
                         <id>create helm package</id>
                         <phase>package</phase>
                         <goals>

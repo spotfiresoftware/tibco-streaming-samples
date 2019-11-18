@@ -13,30 +13,7 @@ This sample builds on the [main Kubernetes sample](../../../../../ef-kubernetes/
 ## Prerequisites
 
 In addition to Docker and Kubernetes ( see [main Kubernetes sample](../../../../../ef-kubernetes/ef-kubernetes-app/src/site/markdown/index.md) ), 
-Helm is also required to be installed and configured - see https://helm.sh/docs/using_helm/ .
-
-To use helm, tiller must be started in Kubernetes (which must be started) :
-
-```shell
-$ helm init
-Creating /Users/guest/.helm 
-Creating /Users/guest/.helm/repository 
-Creating /Users/guest/.helm/repository/cache 
-Creating /Users/guest/.helm/repository/local 
-Creating /Users/guest/.helm/plugins 
-Creating /Users/guest/.helm/starters 
-Creating /Users/guest/.helm/cache/archive 
-Creating /Users/guest/.helm/repository/repositories.yaml 
-Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
-Adding local repo with URL: http://127.0.0.1:8879/charts 
-$HELM_HOME has been configured at /Users/guest/.helm.
-
-Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
-
-Please note: by default, Tiller is deployed with an insecure 'allow unauthenticated users' policy.
-To prevent this, run `helm init` with the --tiller-tls-verify flag.
-For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
-```
+Helm 3 is also required to be installed and configured - see https://helm.sh/docs/using_helm/ .
 
 ## Quick runthrough
 
@@ -46,17 +23,29 @@ On **docker-desktop** :
   See [Prerequisites](#prerequisites)
 2. Build this project to create Docker images and Helm chart
   See [Packaging with Helm](#packaging-with-helm)
-3. Use *helm --set dockerRegistry= install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz* to start the Streaming Nodes in the Kubernetes cluster
+3. Use *helm --set dockerRegistry= install ef-helm-app ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz* to start the Streaming Nodes in the Kubernetes cluster
 4. Locate the cluster monitor assigned NodePort  with *kubectl describe service clustermonitor*
 5. Access the cluster monitor GUI at http://localhost:NodePort
 
 ```
-$ helm --set dockerRegistry= install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
-NAME:   fuzzy-lambkin
-LAST DEPLOYED: Mon Nov 11 11:05:38 2019
+$ helm --set dockerRegistry= install ef-helm-app ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
+NAME: ef-helm-app
+LAST DEPLOYED: Mon Nov 18 11:01:44 2019
 NAMESPACE: default
-STATUS: DEPLOYED
-....
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Thank you for installing ef-helm-app - Docker: Helm EventFlow
+
+How to deploy an EventFlow application in Docker with Kubernetes and Helm
+
+Your release is named ef-helm-app.
+
+To learn more about the release, try:
+
+  $ helm status ef-helm-app
+  $ helm get ef-helm-app
 
 $ kubectl describe service clustermonitor
 ...
@@ -83,54 +72,31 @@ $ mvn install
 The Helm chart can be installed with the *helm install* command - this will start the application up in Kubernetes :
 
 ```shell
-$ helm --set dockerRegistry= install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
-NAME:   vocal-crocodile
-LAST DEPLOYED: Tue Nov 12 16:13:18 2019
+$ helm --set dockerRegistry= install ef-helm-app ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
+NAME: ef-helm-app
+LAST DEPLOYED: Mon Nov 18 11:01:44 2019
 NAMESPACE: default
-STATUS: DEPLOYED
-
-RESOURCES:
-==> v1/ConfigMap
-NAME           DATA  AGE
-configuration  0     0s
-resources      0     0s
-
-==> v1/Pod(related)
-NAME              READY  STATUS             RESTARTS  AGE
-clustermonitor-0  0/1    ContainerCreating  0         0s
-ef-helm-app-0     0/1    ContainerCreating  0         0s
-ef-helm-app-1     0/1    ContainerCreating  0         0s
-ef-helm-app-2     0/1    Pending            0         0s
-
-==> v1/Service
-NAME            TYPE       CLUSTER-IP      EXTERNAL-IP  PORT(S)          AGE
-clustermonitor  NodePort   10.106.170.139  <none>       11080:31940/TCP  0s
-ef-helm-app     ClusterIP  None            <none>       <none>           0s
-
-==> v1/StatefulSet
-NAME            READY  AGE
-clustermonitor  0/1    0s
-ef-helm-app     0/3    0s
-
-
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
 NOTES:
 Thank you for installing ef-helm-app - Docker: Helm EventFlow
 
 How to deploy an EventFlow application in Docker with Kubernetes and Helm
 
-Your release is named vocal-crocodile.
+Your release is named ef-helm-app.
 
 To learn more about the release, try:
 
-  $ helm status vocal-crocodile
-  $ helm get vocal-crocodile
+  $ helm status ef-helm-app
+  $ helm get ef-helm-app
 ```
 
 If the Docker image has been pushed to a remote repository, the *dockerRegistry*
 value can be overridden :
 
 ```shell
-$ helm --set dockerRegistry=registry.com/ install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
+$ helm --set dockerRegistry=registry.com/ install ef-helm-app ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
 ```
 
 Overriding dockerRegistry can be especially important if the image is fetched from a docker
@@ -139,7 +105,7 @@ registry running in Kubernetes itself ( such as **Kind** ).
 Values can be set via the *--set* argument :
 
 ```shell
-$ helm --set replicaCount=3 install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
+$ helm --set replicaCount=3 install ef-helm-app ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
 ```
 
 Substitution parameters can be passed into the start-node script in the same way :
@@ -148,15 +114,11 @@ Substitution parameters can be passed into the start-node script in the same way
 $ helm --set substitutions="a=b\,c=d" install ef-helm-app/target/helm/repo/ef-helm-app-1.0.0.tgz
 ```
 
-The *helm delete* command will stop the application and delete the chart :
+The *helm uninstall* command will stop the application and delete the chart :
 
 ```shell
-$ helm list
-NAME        REVISION    UPDATED                     STATUS      CHART               APP VERSION NAMESPACE
-old-parrot  1           Thu Oct 31 11:34:14 2019    DEPLOYED    ef-helm-app-1.0.0               default  
-
-$ helm delete old-parrot
-release "old-parrot" deleted
+$ helm uninstall ef-helm-app
+release "ef-helm-app" uninstalled
 ```
 
 <a name="deployment"></a>
@@ -226,47 +188,24 @@ The repository details can be specified in the pom.xml, or more typically set in
 Once deployed, the application can be installed on any Kubernetes node :
 
 ```shell
-$ helm install http://server.example.com/artifactory/helm/ef-helm-app-1.0.0.tgz
-NAME:   vocal-crocodile
-LAST DEPLOYED: Tue Nov 12 16:13:18 2019
+$ helm install ef-helm-app http://server.example.com/artifactory/helm/ef-helm-app-1.0.0.tgz
+NAME: ef-helm-app
+LAST DEPLOYED: Mon Nov 18 11:01:44 2019
 NAMESPACE: default
-STATUS: DEPLOYED
-
-RESOURCES:
-==> v1/ConfigMap
-NAME           DATA  AGE
-configuration  0     0s
-resources      0     0s
-
-==> v1/Pod(related)
-NAME              READY  STATUS             RESTARTS  AGE
-clustermonitor-0  0/1    ContainerCreating  0         0s
-ef-helm-app-0     0/1    ContainerCreating  0         0s
-ef-helm-app-1     0/1    ContainerCreating  0         0s
-ef-helm-app-2     0/1    Pending            0         0s
-
-==> v1/Service
-NAME            TYPE       CLUSTER-IP      EXTERNAL-IP  PORT(S)          AGE
-clustermonitor  NodePort   10.106.170.139  <none>       11080:31940/TCP  0s
-ef-helm-app     ClusterIP  None            <none>       <none>           0s
-
-==> v1/StatefulSet
-NAME            READY  AGE
-clustermonitor  0/1    0s
-ef-helm-app     0/3    0s
-
-
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
 NOTES:
 Thank you for installing ef-helm-app - Docker: Helm EventFlow
 
 How to deploy an EventFlow application in Docker with Kubernetes and Helm
 
-Your release is named vocal-crocodile.
+Your release is named ef-helm-app.
 
 To learn more about the release, try:
 
-  $ helm status vocal-crocodile
-  $ helm get vocal-crocodile
+  $ helm status ef-helm-app
+  $ helm get ef-helm-app
 
 ```
 
@@ -279,15 +218,6 @@ docker images.
 
 Some alternatives to **docker-for-desktop** have slightly different ways to run helm :
 
-### Kind
-
-
-Helm should be initialized with a service account :
-
-```shell
-$ kubectl delete deployment tiller-deploy -n kube-system
-$ helm init --service-account=tiller
-```
 
 ### Minishift
 

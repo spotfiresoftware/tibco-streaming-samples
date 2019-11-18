@@ -32,3 +32,4 @@
 apiVersion: v1
 name: ef-helm-app
 description: How to deploy an EventFlow application in Docker with Kubernetes and Helm
+version: ${project.version}
