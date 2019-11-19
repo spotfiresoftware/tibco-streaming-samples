@@ -61,7 +61,7 @@
     <dependencies>
         <dependency>
             <groupId>com.tibco.ep.samples.docker</groupId>
-            <artifactId>pd-test-ef</artifactId>
+            <artifactId>pd-test-eventflow</artifactId>
             <version>${project.version}</version>
             <type>ep-eventflow-fragment</type>
         </dependency>
