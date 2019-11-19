@@ -2,9 +2,9 @@
 
 How to deploy a 2-node EventFlow application in Docker
 
-This is a maven aggregator project consisting of the following maven modules :
+Samples :
 
-* [Docker: 2-node EventFlow - EventFlow Fragment](ef-2node-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-2node/ef-2node-ef/))
+* [How to deploy a 2-node EventFlow application in Docker - EventFlow Fragment](ef-2node-eventflow)
 * [Docker: 2-node EventFlow - Application](ef-2node-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-2node/ef-2node-app/))
 
 _This is a TIBCO approved sample._

@@ -1,15 +1,7 @@
-# Docker
+# Docker: proxy discovery test - EventFlow Fragment
 
-How to use Docker in TIBCO&reg; Streaming master projects.
+How to user Docker to test proxy discovery - EventFlow Fragment
 
-Samples :
-
-* [How to deploy a 2-node EventFlow application in Docker](ef-2node)
-* [How to deploy a LiveView application in Docker](lv-1node)
-* [How to user Docker to test proxy discovery](pd-test)
-* [How to deploy a 2-node EventFlow application in Docker managed by Ansible](ef-2node-ansible)
-* [How to deploy an EventFlow application in Docker with Kubernetes](ef-kubernetes)
-* [How to deploy an EventFlow application in Docker with Kubernetes and Helm](ef-helm)
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
