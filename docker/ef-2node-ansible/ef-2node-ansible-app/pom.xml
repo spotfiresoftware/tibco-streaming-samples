@@ -42,9 +42,11 @@
     <name>Ansible-Docker: 2-node EventFlow - Application</name>
     <description>How to deploy a 2-node EventFlow application in Docker managed by Ansible - Application</description>
 
-    <!-- common definitions for this version of StreamBase -->
+    <!-- common definitions for this version of Streaming -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
+        <!-- Sample specific parent that includes sample licence metadata. -->
+        <!-- To avoid sample metadata, replace with ep-application-docker. -->
         <artifactId>ep-application-docker-samples</artifactId>
         <version>10.6.0-SNAPSHOT</version>
         <relativePath/>
@@ -61,7 +63,7 @@
     <dependencies>
         <dependency>
             <groupId>com.tibco.ep.samples.docker</groupId>
-            <artifactId>ef-2node-ansible-ef</artifactId>
+            <artifactId>ef-2node-ansible-eventflow</artifactId>
             <version>${project.version}</version>
             <type>ep-eventflow-fragment</type>
         </dependency>
@@ -90,73 +92,73 @@
                     <nodes>
                         <node>A</node>
                         <node>B</node>
-                     </nodes>
-                 </configuration>
+                    </nodes>
+                </configuration>
             </plugin>
             <plugin>
-        	<groupId>org.apache.maven.plugins</groupId>
-        	<artifactId>maven-dependency-plugin</artifactId>
-        	<executions>
-          	   <execution>
-            	      <id>copy-dependencies</id>
-            	      <phase>package</phase>
-            		<goals>
-              		    <goal>copy-dependencies</goal>
-            		</goals>
-            		<configuration>
-              		    <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
-          		    <includeArtifactIds>platform_linuxx86_64</includeArtifactIds>
-          		    <stripVersion>true</stripVersion>
-            		</configuration>
-          	   </execution>
-        	</executions>
-      	    </plugin>
-      	    <plugin>
-	        <artifactId>maven-resources-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                       <id>Copy Docker files</id>
-                       <phase>validate</phase>
-                       <goals>
-                          <goal>copy-resources</goal>
-                       </goals>
-                       <configuration>
-			  <outputDirectory>${project.build.directory}/docker/</outputDirectory>
-                          <resources>
-                              <resource>
-			          <directory>${project.basedir}/src/main/docker/</directory>
-			      </resource>
-		          </resources>
-		       </configuration>
-		    </execution>
-		</executions>
-	    </plugin>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+                            <includeArtifactIds>platform_linuxx86_64</includeArtifactIds>
+                            <stripVersion>true</stripVersion>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
-		 <groupId>co.escapeideas.maven</groupId>
-		 <artifactId>ansible-maven-plugin</artifactId>
-		 <version>1.3.0</version>
-		 <executions>
-		   <execution>
-		       <id>ansible-playbook</id>
-		           <goals>
-		               <goal>playbook</goal>
-		           </goals>
-		           <configuration>
-                                <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
-                                <promoteDebugAsInfo>true</promoteDebugAsInfo> 
-                                <failOnAnsibleError>true</failOnAnsibleError>
-                                <extraVars>
-                        	   <variable>platform=platform_linuxx86_64</variable>
-                        	   <variable>sbrt_ver=${sbrt.version}</variable>   
-				   <variable>projectId=${project.artifactId}</variable> 
-				   <variable>projectId_ver=${project.version}</variable>
-    				   <variable>project_basedir=${project.basedir}</variable>
-    				   <variable>project_build_directory=${project.build.directory}</variable>
-    				   <variable>skipTests=${skipTests}</variable>
-                                </extraVars>
-                           </configuration>
-		     </execution>
-		  </executions>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>Copy Docker files</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/docker/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/docker/</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>co.escapeideas.maven</groupId>
+                <artifactId>ansible-maven-plugin</artifactId>
+                <version>1.3.0</version>
+                <executions>
+                    <execution>
+                        <id>ansible-playbook</id>
+                        <goals>
+                            <goal>playbook</goal>
+                        </goals>
+                        <configuration>
+                            <playbook>${project.basedir}/src/main/ansible/project-playbook.yml</playbook> 
+                            <promoteDebugAsInfo>true</promoteDebugAsInfo> 
+                            <failOnAnsibleError>true</failOnAnsibleError>
+                            <extraVars>
+                                <variable>platform=platform_linuxx86_64</variable>
+                                <variable>sbrt_ver=${sbrt.version}</variable>   
+                                <variable>projectId=${project.artifactId}</variable> 
+                                <variable>projectId_ver=${project.version}</variable>
+                                <variable>project_basedir=${project.basedir}</variable>
+                                <variable>project_build_directory=${project.build.directory}</variable>
+                                <variable>skipTests=${skipTests}</variable>
+                            </extraVars>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

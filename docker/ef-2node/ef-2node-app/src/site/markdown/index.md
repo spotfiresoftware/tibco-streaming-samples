@@ -164,14 +164,14 @@ Use the [docker run](https://docs.docker.com/engine/reference/run/) command.  In
 * **--detach** - run in the background
 * **--hostname=A.example.com --network-alias=A.example.com --network=example.com** - set the container hostname and network name. This must match the docker network name and the [Trusted hosts HOCON configuration](../../main/configurations/security.conf)
 * **--name=A.ef-2node-app** - container name
-* **--env=NODENAME=A.ef-2node-app** - node name
+* **--env=STREAMING_NODENAME=A.ef-2node-app** - node name
 * **docker/ef-2node-app:1.0.0** - Docker image name
 
 ```shell
-$ docker run --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-app --network=example.com --env=NODENAME=A.ef-2node-app docker/ef-2node-app:1.0.0
-d8d73429fa8097d313b95b64f96aaf5c09a8bae385429d84858c1aeaa2753e05
-$ docker run --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-app --network=example.com --env=NODENAME=B.ef-2node-app docker/ef-2node-app:1.0.0
-6f3053e69eeeda61ae48c98bbcd037aae60e7555570cf810e7de856d550d66bc
+$ docker run --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-app --network=example.com --env=STREAMING_NODENAME=A.ef-2node-app ef-2node-app:1.0.0
+fa532128178cfa4a4ca2de13180ca78adf94b31bcdcb598fccd7b98b76d9b783
+$ docker run --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-app --network=example.com --env=STREAMING_NODENAME=B.ef-2node-app ef-2node-app:1.0.0
+5bc07b39755578c0564566d90bc7a18aff7701228ccc1d78d157b059c90c9e1d
 ```
 
 ### View the running containers
@@ -180,9 +180,9 @@ Use the [docker ps](https://docs.docker.com/engine/reference/commandline/ps/) co
 
 ```shell
 $ docker ps
-CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS              PORTS               NAMES
-6f3053e69eee        docker/ef-2node-app:1.0.0   "/bin/sh -c ${PRODUC…"   5 minutes ago       Up 4 minutes                            B.ef-2node-app
-d8d73429fa80        docker/ef-2node-app:1.0.0   "/bin/sh -c ${PRODUC…"   5 minutes ago       Up 5 minutes                            A.ef-2node-app
+CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                    NAMES
+5bc07b397555        ef-2node-app:1.0.0   "/bin/sh -c ${STREAM…"   5 seconds ago       Up 4 seconds                                 B.ef-2node-app
+fa532128178c        ef-2node-app:1.0.0   "/bin/sh -c ${STREAM…"   12 seconds ago      Up 12 seconds                                A.ef-2node-app
 ```
 
 ### View the container console logs
@@ -191,31 +191,33 @@ Use the [docker logs](https://docs.docker.com/engine/reference/commandline/logs/
 
 ```shell
 $ docker logs A.ef-2node-app
-[A.ef-2node-app] 	Installing node
-[A.ef-2node-app] 		PRODUCTION executables
-[A.ef-2node-app] 		Memory shared memory
-[A.ef-2node-app] 		4 concurrent allocation segments
-[A.ef-2node-app] 		Host name A.example.com
-[A.ef-2node-app] 		Container tibco/sb
-[A.ef-2node-app] 		Starting container services
-[A.ef-2node-app] 		Loading node configuration
-[A.ef-2node-app] 		Auditing node security
-[A.ef-2node-app] 		Deploying application
-[A.ef-2node-app] 			Engine default-engine-for-com.tibco.ep.samples.docker.ef-2node-ef
-[A.ef-2node-app] 		Application deployed
-[A.ef-2node-app] 		Administration port is 2000
-[A.ef-2node-app] 		Discovery Service running on port 54321
-[A.ef-2node-app] 		Service name is A.ef-2node-app
-[A.ef-2node-app] 	Node installed
-[A.ef-2node-app] 	Starting node
-[A.ef-2node-app] 		Engine application::default-engine-for-com.tibco.ep.samples.docker.ef-2node-ef started
-[A.ef-2node-app] 		Loading node configuration
-[A.ef-2node-app] 		Auditing node security
-[A.ef-2node-app] 		Host name A.example.com
-[A.ef-2node-app] 		Administration port is 2000
-[A.ef-2node-app] 		Discovery Service running on port 54321
-[A.ef-2node-app] 		Service name is A.ef-2node-app
-[A.ef-2node-app] 	Node started
+Installing application archive /var/opt/tibco/streambase/application/ef-2node-app-1.0.0.zip
+
+[A.ef-2node-app]    Installing node
+[A.ef-2node-app]        PRODUCTION executables
+[A.ef-2node-app]        Memory shared memory
+[A.ef-2node-app]        6 concurrent allocation segments
+[A.ef-2node-app]        Host name A.example.com
+[A.ef-2node-app]        Container tibco/sb
+[A.ef-2node-app]        Starting container services
+[A.ef-2node-app]        Loading node configuration
+[A.ef-2node-app]        Auditing node security
+[A.ef-2node-app]        Deploying application
+[A.ef-2node-app]            Engine default-engine-for-com.tibco.ep.samples.docker.ef-2node-eventflow
+[A.ef-2node-app]        Application deployed
+[A.ef-2node-app]        Administration port is 42916
+[A.ef-2node-app]        Discovery Service running on port 54321
+[A.ef-2node-app]        Service name is A.ef-2node-app
+[A.ef-2node-app]    Node installed
+[A.ef-2node-app]    Starting node
+[A.ef-2node-app]        Engine application::default-engine-for-com.tibco.ep.samples.docker.ef-2node-eventflow started
+[A.ef-2node-app]        Loading node configuration
+[A.ef-2node-app]        Auditing node security
+[A.ef-2node-app]        Host name A.example.com
+[A.ef-2node-app]        Administration port is 42916
+[A.ef-2node-app]        Discovery Service running on port 54321
+[A.ef-2node-app]        Service name is A.ef-2node-app
+[A.ef-2node-app]    Node started
 COMMAND FINISHED
 ```
 
@@ -228,9 +230,9 @@ to docker console.
 To make use of this add the **--tty** option when starting the container :
 
 ```shell
-$ docker run --tty --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-app --network=example.com --env=NODENAME=A.ef-2node-app docker/ef-2node-app:1.0.0
+$ docker run --tty --detach --hostname=A.example.com --network-alias=A.example.com --name=A.ef-2node-app --network=example.com --env=STREAMING_NODENAME=A.ef-2node-app ef-2node-app:1.0.0
 d8d73429fa8097d313b95b64f96aaf5c09a8bae385429d84858c1aeaa2753e05
-$ docker run --tty --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-app --network=example.com --env=NODENAME=B.ef-2node-app docker/ef-2node-app:1.0.0
+$ docker run --tty --detach --hostname=B.example.com --network-alias=B.example.com --name=B.ef-2node-app --network=example.com --env=STREAMING_NODENAME=B.ef-2node-app ef-2node-app:1.0.0
 6f3053e69eeeda61ae48c98bbcd037aae60e7555570cf810e7de856d550d66bc
 ```
 
@@ -273,13 +275,13 @@ Use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/
 $ docker exec -it A.ef-2node-app bash
 [tibco@A /]$ cd /var/opt/tibco/streambase/node/A.ef-2node-app/logs/
 [tibco@A logs]$ ls
-System_administration.log  System_swcoordadmin.log  audit.log  bootstrap  deadlock.log  default-engine-for-com.tibco.ep.samples.docker.ef-2node-ef.log
+System_administration.log  System_swcoordadmin.log  audit.log  bootstrap  deadlock.log  default-engine-for-com.tibco.ep.samples.docker.ef-2node-eventflow.log
 ```
 
 Alternatively, use the [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) command to run tail :
 
 ```shell
-$ docker exec A.ef-2node-app tail -f /var/opt/tibco/streambase/node/A.ef-2node-app/logs/default-engine-for-com.tibco.ep.samples.docker.ef-2node-app.log
+$ docker exec A.ef-2node-app tail -f /var/opt/tibco/streambase/node/A.ef-2node-app/logs/default-engine-for-com.tibco.ep.samples.docker.ef-2node-eventflow.log
 2018-10-26 07:46:34.542000+0000 [171:main] INFO  com.tibco.ep.dtm.lifecycle: No user-defined Logback configuration, using product default configuration
 ...
 ```

@@ -1,3 +1,4 @@
+#
 #  Copyright (C) 2018-2019, TIBCO Software Inc.
 #  
 #  Redistribution and use in source and binary forms, with or without
@@ -25,18 +26,21 @@
 #  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE.
+#
+# Dockerfile for Streaming generic base image
+#
+FROM centos:8
 
-FROM centos:7
-
-LABEL description="StreamBase Base"
+LABEL description="TIBCO Streaming base image"
+LABEL PRODUCT_VERSION=${docker_base_version}
 
 #
 # Set environment
 #
-ENV PRODUCT_HOME     /opt/tibco/streambase
-ENV RUNTIME_HOME     /var/opt/tibco/streambase
+ENV STREAMING_PRODUCT_HOME     /opt/tibco/streambase
+ENV STREAMING_RUNTIME_HOME     /var/opt/tibco/streambase
 ENV JAVA_HOME        /etc/alternatives/jre
-ENV PATH             /bin:/usr/sbin:${PRODUCT_HOME}/distrib/tibco/bin
+ENV PATH             /bin:/usr/sbin:${STREAMING_PRODUCT_HOME}/distrib/tibco/bin
 ENV USER_NAME        tibco
 
 #
@@ -47,26 +51,28 @@ ENV USER_NAME        tibco
 # java      required for applications
 # zip       required for snapshots
 # unzip     required to unpack runtime on windows
-# net-tools useful to diagnose network issues
-# iptables  useful to simulate network issues
-# tc        useful to simulate network issues
+# libnsl    required by epadmin
+# less      to aid log file reading
 #
-RUN yum --assumeyes install \
+# FIX THIS:
+#	java installed separately due to https://access.redhat.com/solutions/1277233
+#	java pending update to 11
+#
+RUN yum --assumeyes --exclude=gcc --exclude=binutils install \
     sysstat \
     gdb \
-    java-1.8.0-openjdk \
     zip \
     unzip \
-    net-tools \
-    iptables \
-    tc \
+    libnsl \
+    less \
+    && yum --assumeyes install java-1.8.0-openjdk-headless \
     && yum clean all
 
 #
 # Create a user to run nodes
 #
 RUN /usr/sbin/useradd \
-    --comment "TIBCO StreamBase Guest User" \
+    --comment "TIBCO Streaming User" \
     --create-home \
     --user-group \
     --password ${USER_NAME} \
@@ -76,16 +82,16 @@ RUN /usr/sbin/useradd \
 #
 # Install runtime
 #
-RUN mkdir -p ${PRODUCT_HOME}
-COPY maven ${PRODUCT_HOME}
-RUN chmod a+x ${PRODUCT_HOME}/start-node
+RUN mkdir -p ${STREAMING_PRODUCT_HOME}
+COPY maven ${STREAMING_PRODUCT_HOME}
+RUN chmod a+x ${STREAMING_PRODUCT_HOME}/start-node
 RUN ${docker.run.unpack}
 
 #
 # Allow user access to nodes and applications
 #
-RUN mkdir -p ${RUNTIME_HOME}
-RUN chown ${USER_NAME}:${USER_NAME} ${RUNTIME_HOME}
+RUN mkdir -p ${STREAMING_RUNTIME_HOME}
+RUN chown ${USER_NAME}:${USER_NAME} ${STREAMING_RUNTIME_HOME}
 
 #
 # Change to guest user

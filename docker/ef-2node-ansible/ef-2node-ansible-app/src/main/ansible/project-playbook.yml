@@ -139,7 +139,7 @@
           aliases: 
             - A.example.com
       env:
-        NODENAME: A.{{ projectId }}
+        STREAMING_NODENAME: A.{{ projectId }}
       state: started
     when: skipTests == 'false'
 
@@ -157,7 +157,7 @@
           aliases:
             - B.example.com
       env:
-        NODENAME: B.{{ projectId }}
+        STREAMING_NODENAME: B.{{ projectId }}
       state: started
     when: skipTests == 'false'
 

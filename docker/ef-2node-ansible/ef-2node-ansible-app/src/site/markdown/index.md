@@ -165,7 +165,7 @@ Ansible tasks starting docker container A with options :
           aliases: 
             - A.example.com
       env:
-        NODENAME: A.{{ projectId }}
+        STREAMING_NODENAME: A.{{ projectId }}
       state: started
 ``` 
 Variables and values from above task are passed by maven plugin to ansible playbook under the plugin configuration in pom.xml - see below.

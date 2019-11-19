@@ -73,7 +73,7 @@
                 </file>
             </activation>
             <modules>
-                <module>ef-2node-awsec2-ef</module>
+                <module>ef-2node-awsec2-eventflow</module>
                 <module>ef-2node-awsec2-app</module>
             </modules>
         </profile>
@@ -86,11 +86,25 @@
                 </file>
             </activation>
             <modules>
-                <module>ef-2node-awsec2-ef</module>
+                <module>ef-2node-awsec2-eventflow</module>
                 <module>ef-2node-awsec2-app</module>
             </modules>
         </profile>
     </profiles>
 
-</project>
+    <!-- skip site docs in this aggregator -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+                <configuration>
+                    <skipDeploy>true</skipDeploy>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
+</project>

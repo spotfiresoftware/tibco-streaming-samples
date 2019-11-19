@@ -51,7 +51,7 @@ Search is based on defined regular expressions in the list below which is execut
         aliases:
           - A.example.com
     env:
-      NODENAME: A.{{ projectId }}
+      STREAMING_NODENAME: A.{{ projectId }}
     state: started
 ```
 

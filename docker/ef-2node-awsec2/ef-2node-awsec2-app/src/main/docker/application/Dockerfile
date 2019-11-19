@@ -30,7 +30,7 @@
 ###Note: LABEL statement build by Ansible playbook
 FROM sbrt-base:10.6.0-SNAPSHOT
 
-LABEL description="StreamBase Application"
+LABEL description="Streaming Application"
 
 ###Note: LABEL statement build by Ansible playbook
 LABEL build-image=0.0.0
@@ -39,10 +39,10 @@ LABEL build-image=0.0.0
 # Install application archive & test configurations
 #
 
-COPY maven/*.zip ${RUNTIME_HOME}/application/
+COPY maven/*.zip ${STREAMING_RUNTIME_HOME}/application/
 
 #
 # entry point to start node
 #
 
-ENTRYPOINT ${PRODUCT_HOME}/start-node
+ENTRYPOINT ${STREAMING_PRODUCT_HOME}/start-node

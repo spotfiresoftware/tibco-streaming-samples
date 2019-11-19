@@ -1,3 +1,4 @@
+#
 #  Copyright (C) 2018-2019, TIBCO Software Inc.
 #  
 #  Redistribution and use in source and binary forms, with or without
@@ -25,18 +26,17 @@
 #  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE.
-
-ARG docker_base_version
+#
 FROM sbrt-base:${docker_base_version}
 
-LABEL description="StreamBase Application"
+LABEL description="Streaming Application"
 
 #
 # Install application archive & test configurations
 #
-COPY maven ${RUNTIME_HOME}
+COPY maven ${STREAMING_RUNTIME_HOME}
 
 #
 # entry point to start node
 #
-ENTRYPOINT ${PRODUCT_HOME}/start-node
+ENTRYPOINT ${STREAMING_PRODUCT_HOME}/start-node

@@ -30,7 +30,7 @@
 #
 ### Build temporary image in multi-stage docker image build process
 #
-FROM centos:7 AS build
+FROM centos:8 AS build
 
 ###Note: LABEL statement build by Ansible playbook
 LABEL build-image=0.0.0
@@ -56,9 +56,10 @@ RUN chmod a+x ${PRODUCT_HOME}/start-node
 ### Build base image
 #
 
-FROM centos:7
+FROM centos:8
 
-LABEL description="StreamBase Base"
+LABEL description="TIBCO Streaming base image"
+LABEL PRODUCT_VERSION=${docker_base_version}
 
 ###Note: LABEL statement build by Ansible playbook
 LABEL build-image=0.0.0
@@ -66,33 +67,42 @@ LABEL build-image=0.0.0
 #
 # Set environment
 #
-ENV PRODUCT_HOME     /opt/tibco/streambase
-ENV RUNTIME_HOME     /var/opt/tibco/streambase
+ENV STREAMING_PRODUCT_HOME     /opt/tibco/streambase
+ENV STREAMING_RUNTIME_HOME     /var/opt/tibco/streambase
 ENV JAVA_HOME        /etc/alternatives/jre
-ENV PATH             /bin:/usr/sbin:${PRODUCT_HOME}/distrib/tibco/bin
+ENV PATH             /bin:/usr/sbin:${STREAMING_PRODUCT_HOME}/distrib/tibco/bin
 ENV USER_NAME        tibco
 
 #
 # Add required additional packages
 #
 # systat    required for runtime statistcs
+# gdb       required for crash dumps
 # java      required for applications
 # zip       required for snapshots
 # unzip     required to unpack runtime
+# libnsl    required by epadmin
+# less      to aid log file reading
 #
-RUN yum --assumeyes install \
+# FIX THIS:
+#	java installed separately due to https://access.redhat.com/solutions/1277233
+#	java pending update to 11
+#
+RUN yum --assumeyes --exclude=gcc --exclude=binutils install \
     sysstat \
-    java-1.8.0-openjdk-headless \
+    gdb \
     zip \
     unzip \
-    && yum clean all \
-    && rm -rf /var/cache/yum \
-    && rm -rf /var/tmp/yum-*     
+    libnsl \
+    less \
+    && yum --assumeyes install java-1.8.0-openjdk-headless \
+    && yum clean all
+
 #
 # Create a user to run nodes
 #
 RUN /usr/sbin/useradd \
-    --comment "TIBCO StreamBase Guest User" \
+    --comment "TIBCO Streaming User" \
     --create-home \
     --user-group \
     --password ${USER_NAME} \
@@ -102,16 +112,16 @@ RUN /usr/sbin/useradd \
 #
 # Allow user access to nodes and applications
 #
-RUN mkdir -p ${RUNTIME_HOME} \
-    && mkdir -p ${RUNTIME_HOME}\application \
-    &&  mkdir -p ${RUNTIME_HOME}\configuration
+RUN mkdir -p ${STREAMING_RUNTIME_HOME} \
+    && mkdir -p ${STREAMING_RUNTIME_HOME}\application \
+    &&  mkdir -p ${STREAMING_RUNTIME_HOME}\configuration
 
-RUN chown ${USER_NAME}:${USER_NAME} ${RUNTIME_HOME}
+RUN chown ${USER_NAME}:${USER_NAME} ${STREAMING_RUNTIME_HOME}
 
 #
-#### copy ${PRODUCT_HOME) dir from build image
+#### copy ${STREAMING_PRODUCT_HOME) dir from build image
 #
-COPY --from=build ${PRODUCT_HOME} ${PRODUCT_HOME}
+COPY --from=build ${STREAMING_PRODUCT_HOME} ${STREAMING_PRODUCT_HOME}
 
 #
 # Change to guest user

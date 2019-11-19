@@ -39,12 +39,14 @@
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
     <name>Docker: proxy discovery test - Application</name>
-    <description>How to user docker to test proxy discovery. - Application</description>
+    <description>How to user Docker to test proxy discovery - Application</description>
 
-    <!-- common definitions for this version of StreamBase -->
+    <!-- common definitions for this version of Streaming -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
-        <artifactId>ep-application-docker-samples</artifactId> <!-- replace with ep-application-docker-samples avoid sample metadata -->
+        <!-- Sample specific parent that includes sample licence metadata. -->
+        <!-- To avoid sample metadata, replace with ep-application-docker. -->
+        <artifactId>ep-application-docker-samples</artifactId>
         <version>10.6.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
@@ -149,7 +151,7 @@
                                         <capAdd>NET_ADMIN</capAdd>
                                         <hostname>A.${dockerDomain}</hostname>
                                         <env>
-                                            <NODENAME>A.${project.artifactId}</NODENAME>
+                                            <STREAMING_NODENAME>A.${project.artifactId}</STREAMING_NODENAME>
                                         </env>
                                         <log>
                                             <enabled>true</enabled>
@@ -175,7 +177,7 @@
                                         <capAdd>NET_ADMIN</capAdd>
                                         <hostname>B.${dockerDomain}</hostname>
                                         <env>
-                                            <NODENAME>B.${project.artifactId}</NODENAME>
+                                            <STREAMING_NODENAME>B.${project.artifactId}</STREAMING_NODENAME>
                                         </env>
                                         <log>
                                             <enabled>true</enabled>

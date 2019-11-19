@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (C) 2018, TIBCO Software Inc.
+  Copyright (C) 2018-2019, TIBCO Software Inc.
   
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -39,17 +39,17 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <name>Docker: proxy discovery test</name>
-    <description>How to user Docker to test proxy discovery.</description>
+    <description>How to user Docker to test proxy discovery</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
-
+ 
     <inceptionYear>2018</inceptionYear>
-
+ 
     <organization>
         <name>TIBCO Software Inc.</name>
         <url>http://www.tibco.com</url>
     </organization>
-
+ 
     <licenses>
         <license>
             <name>BSD 3-Clause License</name>
@@ -61,11 +61,26 @@
     <properties>
         <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
     </properties>
-    
+
     <!-- Aggregator pom -->
     <modules>
-        <module>pd-test-ef</module>
+        <module>pd-test-eventflow</module>
         <module>pd-test-app</module>
     </modules>
+
+    <!-- skip site docs in this aggregator -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+                <configuration>
+                    <skipDeploy>true</skipDeploy>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
