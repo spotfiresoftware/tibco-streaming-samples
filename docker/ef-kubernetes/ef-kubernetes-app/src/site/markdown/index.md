@@ -81,7 +81,7 @@ configmap "configuration" deleted
 configmap "resources" deleted
 statefulset.apps "ef-kubernetes-app" deleted
 ```
-  
+
 <a name="prerequisites"></a>
 
 ## Prerequisites
@@ -278,7 +278,7 @@ Running *mvn install* will :
 * If Docker is not installed -
     * Run basic system test cases natively
 
-**FIX THIS:** - add animated gif
+![resources](images/maven.gif)
 
 Some Kubernetes environments ( notably **Kind** and **CodeReady Containers** ) require the image to be pushed to the internal registry 
 before running *kubectl apply*. See [Deployment](#deployment) below.
