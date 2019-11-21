@@ -1007,7 +1007,7 @@ WARN The cluster might report a degraded or error state. This is expected since 
 
 $ eval $(crc oc-env)
 
-$ oc login -u kubeadmin -p e4FEb-9dxdF-9N2wH-Dj7B8
+$ oc login -u kubeadmin -p e4FEb-9dxdF-9N2wH-Dj7B8 https://api.crc.testing:6443
 Login successful.
 
 You have access to 51 projects, the list has been suppressed. You can list all projects with 'oc projects'
