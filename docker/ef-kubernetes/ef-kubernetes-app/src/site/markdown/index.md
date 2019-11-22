@@ -430,6 +430,16 @@ is being used or plain http ) then it may be possible to still use the registry 
 
 ![resources](images/insecure-registry.png)
 
+Or via json :
+
+```
+{
+  "insecure-registries": [ "my.insecure.registry" ]
+}
+```
+
+See also https://docs.docker.com/registry/insecure/.
+
 <a name="runtime-settings"></a>
 
 ## Runtime settings
@@ -1015,12 +1025,26 @@ You have access to 51 projects, the list has been suppressed. You can list all p
 Using project "default".
 ```
 
+Although **CodeReady Containers** is designed to perform builds internally, it is possible to build
+expernally and push the images into **CodeReady Containers**.
+
 To enable pushing images into **CodeReady Containers** ensure a default route is enabled :
 
 ```
+$ oc login -u kubeadmin -p $(crc console --credentials | grep admin | cut -f4 -d\') https://api.crc.testing:6443
 $ oc patch config.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
 config.imageregistry.operator.openshift.io/cluster patched (no change)
 ```
+
+The exposed registry address can be found with *oc get route* :
+
+```
+$ oc login -u kubeadmin -p $(crc console --credentials | grep admin | cut -f4 -d\') https://api.crc.testing:6443
+$ oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}'
+default-route-openshift-image-registry.apps-crc.testing
+```
+
+This address should be added to the list of insecure registries - see [Deployment](#deployment).
 
 and update the yaml file to reference the internal registry :
 
@@ -1028,7 +1052,7 @@ and update the yaml file to reference the internal registry :
           #
           # docker image to use
           #
-          image: image-registry.openshift-image-registry.svc:5000/default/ef-kubernetes-app:1.0.0
+          image: image-registry.openshift-image-registry.svc:5000/ef-kubernetes/ef-kubernetes-app:1.0.0
 ```
 
 Starting the dashboard in a **CodeReady Containers** context is via the *crc console* command :
@@ -1044,10 +1068,11 @@ Opening the OpenShift Web Console in the default browser...
 
 ![resources](images/crc-ui.png)
 
-When pushing images into the **CodeReady Containers** registry, the address is **default-route-openshift-image-registry.apps-crc.testing/PROJECT** :
+When pushing images into the **CodeReady Containers** registry, use the exposed address found above and add the project name :
 
 ```shell
-$ mvn -Dmaven.deploy.skip=true -Ddocker.push.registry=default-route-openshift-image-registry.apps-crc.testing/default -Ddocker.push.username=kubeadmin -Ddocker.push.password=$(oc whoami -t) deploy
+$ oc login -u developer -p developer  https://api.crc.testing:6443
+$ mvn -Dmaven.deploy.skip=true -Ddocker.push.registry=default-route-openshift-image-registry.apps-crc.testing/ef-kubernetes -Ddocker.push.username=$(oc whoami) -Ddocker.push.password=$(oc whoami -t) deploy
 ```
 
 

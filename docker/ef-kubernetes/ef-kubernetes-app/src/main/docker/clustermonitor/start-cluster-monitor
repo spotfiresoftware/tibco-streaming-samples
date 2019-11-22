@@ -47,6 +47,15 @@ then
 fi
 
 #
+# required for openshift - see https://docs.okd.io/latest/creating_images/guidelines.html#openshift-specific-guidelines
+#
+if ! whoami &> /dev/null; then
+  if [ -w /etc/passwd ]; then
+    echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd
+  fi
+fi
+
+#
 # clean up from any previous run
 #
 rm -rf ${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME}
