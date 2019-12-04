@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.6.0-SNAPSHOT_dd8d9170f0af2b14080c881407e4cba408e64c9f">
+    <add>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.web.adminwebservice.eventflow.EventFlow"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <named-schemas>
+            <schema name="SymbolPriceSchema">
+                <field name="symbol" type="string"/>
+                <field name="price" type="double"/>
+            </schema>
+        </named-schemas>
+        <dynamic-variables/>
+        <table-schemas>
+            <table-schema name="SymbolPriceTableSchema" schema="SymbolPriceSchema">
+                <primary-index type="btree">
+                    <field name="symbol"/>
+                </primary-index>
+            </table-schema>
+        </table-schemas>
+        <stream name="InputPrice" schema="SymbolPriceSchema"/>
+        <box name="ChangPrice" type="map">
+            <input port="1" stream="InputPrice"/>
+            <output port="1" stream="OutputPrice"/>
+            <target-list>
+                <item name="input" selection="all">
+                    <replace field="price">price + 1</replace>
+                </item>
+            </target-list>
+        </box>
+        <output-stream name="OutputPrice"/>
+    </add>
+</modify>
