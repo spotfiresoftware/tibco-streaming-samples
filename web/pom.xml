@@ -44,9 +44,6 @@
     <description>How to deploy web application in TIBCO Streaming projects.</description>
 
     <modules>
-        <module>springboot</module>
-        <module>openapi</module>
-        <module>websocket</module>
         <module>adminwebservice</module>
     </modules>
 

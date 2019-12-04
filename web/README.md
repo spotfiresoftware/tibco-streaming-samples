@@ -5,9 +5,6 @@ How to use Administration web service and how to create and use WAR archive
 Samples :
 
 * [Web : adminwebservice](adminwebservice/README.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/adminwebservice))
-* [Web : openapi](openapi/README.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/openapi))
-* [Web : springboot](springboot/README.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/springboot))
-* [Web : websocket](websocket/README.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/websocket))
 
 ---
 Copyright (c) 2019, TIBCO Software Inc.
