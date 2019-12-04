@@ -5,9 +5,6 @@ This sample describes how to use administration web service
 * [Start an EventFlow Fragment](#start-eventflow-fragment)
 * [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
-* [Find embedded web server Url](#find-web-service-base-url)
-* [Use help UI to discover targets](#discover-targets)
-* [Execute command from help UI](#execute-command)
 
 <a name="start-eventflow-fragment"></a>
 
@@ -15,6 +12,7 @@ This sample describes how to use administration web service
 
 In this sample, we have a very simple sbapp, after Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;,
 the **Administration web service** is automatically deployed on embedded web server.
+![RunFromStudio](images/studio.gif)
 
 <a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
 
@@ -22,7 +20,7 @@ the **Administration web service** is automatically deployed on embedded web ser
 
 Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from TIBCO StreamBase Studio&trade; :
 
-![RunFromStudio](images/studiounit.gif)
+![RunTestFromStudio](images/studiounit.gif)
 
 Results are displayed in the console and junit windows.
 
@@ -30,29 +28,9 @@ Results are displayed in the console and junit windows.
 
 ## Building this sample from the command line and running the unit test cases
 
-Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system :
+Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
-![Terminal](images/maven.gif)
-
-
-<a name="find-web-service-base-url"></a>
-
-## Find administration web service base url
-
-After the fragment get run, use **epadmin display web type=webservice name=admin** to get base url
-
-<a name="discover-targets"></a>
-
-## Discover all supported targets
-Use **GET /targets** endpoint to discover all supported targets.
-
-<a name="execute-command"></a>
-
-## Execute a command 
-
-Use **POST /targets/{targets}** endpoint to execute an administration command.
-
-
+![Maven](images/maven.gif)
 
 
 Copyright (c) 2019, TIBCO Software Inc.

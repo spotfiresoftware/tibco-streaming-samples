@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<modify version="10.6.0-SNAPSHOT_a87f01e0b72334c2c90701d3328c4b4745c2bac5">
+<modify version="10.6.0-SNAPSHOT_dd8d9170f0af2b14080c881407e4cba408e64c9f">
     <add>
         <type-metadata>
             <param name="type" value="module"/>

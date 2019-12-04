@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><application-layout>
     <component name="InputPrice">
-        <param name="gui:x" value="-92"/>
-        <param name="gui:y" value="0"/>
+        <param name="gui:x" value="-87"/>
+        <param name="gui:y" value="-2"/>
     </component>
     <component name="ChangPrice">
-        <param name="gui:x" value="-11"/>
-        <param name="gui:y" value="0"/>
+        <param name="gui:x" value="-10"/>
+        <param name="gui:y" value="-2"/>
     </component>
     <component name="OutputPrice">
-        <param name="gui:x" value="76"/>
-        <param name="gui:y" value="0"/>
+        <param name="gui:x" value="72"/>
+        <param name="gui:y" value="-2"/>
     </component>
 </application-layout>
