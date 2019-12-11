@@ -59,7 +59,30 @@
         <skipDockerTests>false</skipDockerTests>
         <skipTests>false</skipTests>
     </properties>
-    
+  
+    <profiles>
+        <profile>
+            <id>docker base settings for linux</id>
+            <activation>
+                <os><name>linux</name></os>
+            </activation>
+        </profile>
+        <profile>
+            <id>docker base settings for macos</id>
+            <activation>
+                <os><name>mac os x</name></os>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.tibco.ep.sb.rt</groupId>
+                    <artifactId>platform_linuxx86_64</artifactId>
+                    <type>zip</type>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+  
     <dependencies>
         <dependency>
             <groupId>com.tibco.ep.samples.docker</groupId>
