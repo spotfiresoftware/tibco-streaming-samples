@@ -64,6 +64,8 @@
 
     <!-- if Ansible is available, run playbook, build docker images and deploy to AWS EC2 instance-->
     <!-- note that we assume if ansible is installed so is docker -->
+    <!-- if all information about AWS and Docker Hub account are available on your host, -->
+    <!-- change ../ansible-new to ../ansible in profiles below to execute the playbook --> 
     <profiles>
         <profile>
             <id>Ansible-OSX</id>
