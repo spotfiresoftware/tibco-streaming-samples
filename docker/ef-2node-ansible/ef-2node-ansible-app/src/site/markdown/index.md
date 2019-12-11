@@ -211,7 +211,7 @@ Use the [maven commands](https://maven.apache.org) to build from the command lin
 
 ```ansible
 ...
-[INFO] PLAY [StreamBase create base and application docker image based on Centos7] ****
+[INFO] PLAY [StreamBase create base and application docker image based on CentOs] ****
 [INFO] 
 [INFO] TASK [Gathering Facts] *********************************************************
 [INFO] ok: [127.0.0.1]
