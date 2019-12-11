@@ -47,7 +47,7 @@
         <groupId>com.tibco.ep.sb.parent</groupId>
         <!-- Sample specific parent that includes sample licence metadata. -->
         <!-- To avoid sample metadata, replace with ep-application-docker. -->
-        <artifactId>ep-application-docker-samples</artifactId>
+        <artifactId>ep-application-samples</artifactId>
         <version>10.6.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
@@ -90,11 +90,7 @@
                 <artifactId>ep-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <skipTests>${skipLocalTests}</skipTests>
-                    <nodes>
-                        <node>A</node>
-                        <node>B</node>
-                    </nodes>
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
 
@@ -180,4 +176,3 @@
         </plugins>
     </build>
 </project>
-
