@@ -27,7 +27,7 @@
 #  POSSIBILITY OF SUCH DAMAGE.
 
 ---
-- name: StreamBase create base and application docker image based on Centos7
+- name: StreamBase create base and application docker image based on CentOs
   hosts: localhost
   tasks:
   - name: Create work directory for base image
