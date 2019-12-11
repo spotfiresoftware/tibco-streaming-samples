@@ -28,7 +28,7 @@
 
 
 ---
-- name: Play 1 -- Create StreamBase base and application docker image based on Centos7
+- name: Play 1 -- Create StreamBase base and application docker image based on CentOs
   hosts: localhost
   vars_files:
     - "{{ project_basedir }}/target/classes/global_vars/docker_hub.yml"
