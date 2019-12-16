@@ -1,6 +1,10 @@
 # Web : Administration Web Service
 
-This sample describes how to use administration web service
+This sample describes how to use administration web service. Administration web service provides a GET 
+endpoint for discovering all supported administration targets and commands. And it also provides a POST
+endpoint for executing all supported administration commands. This web service is integrated with the 
+authentication services provided by the node web server, which means a valid username:password pair 
+must to be provided for requesting the endpoints.
 
 * [Start an EventFlow Fragment](#start-eventflow-fragment)
 * [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
@@ -10,8 +14,12 @@ This sample describes how to use administration web service
 
 ## Start the EventFlow fragment sample
 
-In this sample, we have a very simple sbapp, after Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;,
-the **Administration web service** is automatically deployed on embedded web server.
+In this sample, since the aim is demostrating how to use administration web servicewe, we have a blank sbapp, 
+which is not related with our demo. After Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;, 
+the **Administration web service** is automatically deployed on the node web server.
+As we mentioned before, administration web service is integrated with the authentication services provide by the 
+node service, a authentication realm is defined in [secure.conf](../../test/resources/secure.conf) which has a 
+valid username:password pair as **admin:admin**
 ![RunFromStudio](images/studio.gif)
 
 <a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>

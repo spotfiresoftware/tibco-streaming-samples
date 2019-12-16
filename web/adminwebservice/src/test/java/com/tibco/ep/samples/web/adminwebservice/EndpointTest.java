@@ -30,6 +30,7 @@
  */
 package com.tibco.ep.samples.web.adminwebservice;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.kabira.platform.property.Status;
@@ -79,7 +80,8 @@ public class EndpointTest extends UnitTest {
 
     private final static String SERVICE_NAME = System.getProperty(Status.NODE_NAME);
     private final static String ADDRESS = "localhost";
-    private final static int PORT = 8080;
+    //node web server default port number
+    private final static int PORT = 8008;
     private final static String TARGETS = "targets";
     private final static String ADMIN = "admin";
     private final static String VERSION_NAME = "v1";
@@ -90,8 +92,8 @@ public class EndpointTest extends UnitTest {
     private final static String RESPONSE_KEY_COLUMN_HEADERS = "columnHeaders";
 
     //the username and password pair gets from secure.conf
-    private final static String PASSWORD = "password";
-    private final static String USERNAME = "username";
+    private final static String PASSWORD = "admin";
+    private final static String USERNAME = "admin";
 
     private final static HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, PASSWORD);
 
@@ -114,7 +116,6 @@ public class EndpointTest extends UnitTest {
         Configuration.forFile("secure.conf", subs).load().activate();
 
         subs.clear();
-        subs.put("PORT", "" + PORT);
         subs.put("ADDRESS", ADDRESS);
         subs.put("NODE_NAME", "\"" + SERVICE_NAME + "\"");
         Configuration.forFile("node.conf", subs).load().activate();
@@ -122,21 +123,27 @@ public class EndpointTest extends UnitTest {
         // create a StreamBase server and load modules once for all tests in this class
         server = ServerManagerFactory.getEmbeddedServer();
         server.startServer();
-        server.loadApp("com.tibco.ep.samples.web.adminwebservice.eventflow.EventFlow");
+        server.loadApp("com.tibco.ep.samples.web.adminwebservice.eventflow.Demo");
 
         Client client = ClientBuilder.newClient();
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
         webTarget = client.target(new JerseyUriBuilder().scheme("http").host(ADDRESS).port(PORT).path(ADMIN).path(VERSION_NAME).path(TARGETS).build());
+        boolean isStarted = false;
 
         for (int i = 0; i < 60; i++) {
             response = webTarget.request().get();
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                isStarted = true;
                 break;
             }
-            LOGGER.info("WAR is not ready, wait for 1 sec. Then re-try");
+            LOGGER.info("Admin web service is not ready, wait for 1 sec. Then re-try");
             Thread.sleep(1000);
+        }
+
+        if (!isStarted) {
+            Assert.fail("Starting Admin web service is failed.");
         }
     }
 
@@ -164,27 +171,27 @@ public class EndpointTest extends UnitTest {
      */
     @Before
     public void startContainers() throws StreamBaseException {
+        // Setup test framework before running tests
+        this.initialize();
+
         // before each test, startup fresh container instances
         server.startContainers();
 
-        // Setup test framework before running tests
-        this.initialize();
     }
 
     /**
      * administration command discovery test case
+     * @throws IOException error when parse response to JSON
      */
     @Test
-    public void administrationCommandDiscoveryTest() {
-        LOGGER.info("find all administration targets, equals to 'epadmin help targets'");
-
+    public void administrationCommandDiscoveryTest() throws IOException {
         Client client = ClientBuilder.newClient();
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
         String responseEntity;
 
-        LOGGER.info("epadmin help, offline help response in tabular format, not supported by reflect API");
+        LOGGER.info("find all administration targets, equals to 'epadmin help targets'");
         webTarget = client.target(new JerseyUriBuilder().scheme("http").host(ADDRESS).port(PORT).path(ADMIN).path(VERSION_NAME).path(TARGETS).build());
         response = webTarget.request().get();
         Assert.assertEquals("should return status 200", Response.Status.OK.getStatusCode(), response.getStatus());
@@ -192,23 +199,23 @@ public class EndpointTest extends UnitTest {
         responseEntity = response.readEntity(String.class);
         LOGGER.info(responseEntity);
 
-        try {
-            Assert.assertEquals("", JsonNodeType.ARRAY, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).getNodeType());
-            Assert.assertEquals("", 0, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).get(0).get(RESPONSE_KEY_RETURN_CODE).asInt());
-            Assert.assertEquals("", SERVICE_NAME, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).get(0).get(RESPONSE_KEY_SERVICE_NAME).asText());
-            Assert.assertEquals(
-                    "", JsonNodeType.ARRAY, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).get(0).get(RESPONSE_KEY_COLUMN_HEADERS).getNodeType());
-            Assert.assertEquals("", JsonNodeType.ARRAY, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).get(0).get(RESPONSE_KEY_ROWS).getNodeType());
-        } catch (IOException e) {
-            Assert.fail("should not fail! " + e.getMessage());
-        }
+        JsonNode results = mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS);
+        Assert.assertEquals("Results should be a JSON array", JsonNodeType.ARRAY, results.getNodeType());
+        JsonNode currentNodeResult = results.get(0);
+        Assert.assertEquals(0, currentNodeResult.get(RESPONSE_KEY_RETURN_CODE).asInt());
+        Assert.assertEquals(SERVICE_NAME, currentNodeResult.get(RESPONSE_KEY_SERVICE_NAME).asText());
+        Assert.assertEquals(JsonNodeType.ARRAY, currentNodeResult.get(RESPONSE_KEY_COLUMN_HEADERS).getNodeType());
+        Assert.assertEquals(JsonNodeType.ARRAY, currentNodeResult.get(RESPONSE_KEY_ROWS).getNodeType());
+
     }
 
     /**
      * administration command execution test case
+     *
+     * @throws IOException error when parse response to JSON
      */
     @Test
-    public void administrationCommandExecutingTest() {
+    public void administrationCommandExecutingTest() throws IOException {
         LOGGER.info("execute display node command");
 
         final String TARGET_NODE = "node";
@@ -241,16 +248,15 @@ public class EndpointTest extends UnitTest {
         responseEntity = response.readEntity(String.class);
         LOGGER.info(responseEntity);
 
-        try {
-            Assert.assertEquals("", JsonNodeType.ARRAY, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).getNodeType());
-            Assert.assertEquals("", SERVICE_NAME, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).get(0).get(RESPONSE_KEY_SERVICE_NAME).asText());
-            Assert.assertEquals("", 0, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).get(0).get(RESPONSE_KEY_RETURN_CODE).asInt());
-            Assert.assertEquals(
-                    "", JsonNodeType.ARRAY, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).get(0).get(RESPONSE_KEY_COLUMN_HEADERS).getNodeType());
-            Assert.assertEquals("", JsonNodeType.ARRAY, mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS).get(0).get(RESPONSE_KEY_ROWS).getNodeType());
-        } catch (IOException e) {
-            Assert.fail("should not fail! " + e.getMessage());
-        }
+        JsonNode results = mapper.readTree(responseEntity).get(RESPONSE_KEY_RESULTS);
+        Assert.assertEquals("", JsonNodeType.ARRAY, results.getNodeType());
+        JsonNode currentNodeResult = results.get(0);
+        Assert.assertEquals("", SERVICE_NAME, currentNodeResult.get(RESPONSE_KEY_SERVICE_NAME).asText());
+        Assert.assertEquals("", 0, currentNodeResult.get(RESPONSE_KEY_RETURN_CODE).asInt());
+        Assert.assertEquals(
+                "", JsonNodeType.ARRAY, currentNodeResult.get(RESPONSE_KEY_COLUMN_HEADERS).getNodeType());
+        Assert.assertEquals("", JsonNodeType.ARRAY, currentNodeResult.get(RESPONSE_KEY_ROWS).getNodeType());
+
     }
 
     /**
@@ -262,10 +268,9 @@ public class EndpointTest extends UnitTest {
      */
     @After
     public void stopContainers() throws StreamBaseException, TransactionalMemoryLeakException, TransactionalDeadlockDetectedException {
-        // Complete test framework and check for any errors
-        this.complete();
-
         // after each test, dispose of the container instances
         server.stopContainers();
+        // Complete test framework and check for any errors
+        this.complete();
     }
 }
