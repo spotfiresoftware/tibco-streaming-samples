@@ -14,7 +14,7 @@ must to be provided for requesting the endpoints.
 
 ## Start the EventFlow fragment sample
 
-In this sample, since the aim is demostrating how to use administration web servicewe, we have a blank sbapp, 
+In this sample, since the aim is demonstrating how to use administration web service, we have a blank sbapp, 
 which is not related with our demo. After Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;, 
 the **Administration web service** is automatically deployed on the node web server.
 As we mentioned before, administration web service is integrated with the authentication services provide by the 
