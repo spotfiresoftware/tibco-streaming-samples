@@ -95,7 +95,7 @@ RUN yum --assumeyes --exclude=gcc --exclude=binutils install \
     unzip \
     libnsl \
     less \
-    && yum --assumeyes install java-1.8.0-openjdk-headless \
+    && yum --assumeyes install java-11-openjdk-headless \
     && yum clean all
 
 #
