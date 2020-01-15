@@ -455,7 +455,7 @@ it is possible to inject configurations and files at runtime.
 | Substitution variables    | add substitutions to **configuration**    | **STREAMING_SUBSTITUTIONS** from ConfigMap         |
 | Substitution file         | add file to **configuration**             | **STREAMING_SUBSTITUTIONFILE** to filename         |
 | Administration port       |                                           | **STREAMING_ADMINPORT**                            |
-| Logback file              | add file logback-test.xml to **resource** |                                                    |
+| Logback file              | add file logback-test.xml to **resource** | **STREAMING_DEPLOYDIRECTORIES** to /var/opt/tibco/streambase/resources |
 | Key store                 | add file to **configuration**             | **STREAMING_KEYSTORE** to filename                 |
 | Key password              | create a Secret                           | set **STREAMING_KEYSTOREPASSWORD** from the secret |
 
