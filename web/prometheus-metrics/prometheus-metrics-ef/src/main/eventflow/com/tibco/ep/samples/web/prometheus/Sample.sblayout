@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="InputStream">
+        <param name="gui:x" value="-251"/>
+        <param name="gui:y" value="-182"/>
+    </component>
+    <component name="Log">
+        <param name="gui:x" value="-144"/>
+        <param name="gui:y" value="-182"/>
+    </component>
+    <component name="OutputStream">
+        <param name="gui:x" value="-42"/>
+        <param name="gui:y" value="-182"/>
+    </component>
+    <component name="Note">
+        <param name="gui:x" value="-440"/>
+        <param name="gui:y" value="-333"/>
+        <param name="gui:width" value="279"/>
+        <param name="gui:height" value="68"/>
+    </component>
+</application-layout>
