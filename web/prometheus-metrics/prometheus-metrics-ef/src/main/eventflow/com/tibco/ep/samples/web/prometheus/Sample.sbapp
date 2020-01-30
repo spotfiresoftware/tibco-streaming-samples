@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.6.0-SNAPSHOT_9cbafc9efffe99efbb8a88323441128bacfbe5a5">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.web.prometheus.Sample"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <dynamic-variables/>
+        <stream name="InputStream">
+            <schema/>
+        </stream>
+        <box name="Log" type="outputadapter">
+            <input port="1" stream="InputStream"/>
+            <output port="1" stream="OutputStream"/>
+            <param name="start:state" value="true"/>
+            <param name="javaclass" value="com.streambase.sb.adapter.logger.Log"/>
+            <param name="CaptureStrategy" value="FLATTEN"/>
+        </box>
+        <output-stream name="OutputStream"/>
+        <gui.note name="Note">
+            <property name="description" value="NB: This module exists only to define a proper EventFlow fragment. It has no other purpose in this sample."/>
+        </gui.note>
+    </add>
+</modify>
