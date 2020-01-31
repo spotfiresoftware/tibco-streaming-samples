@@ -149,14 +149,6 @@ spec:
             httpGet:
               path: /healthcheck/v1/status
               port: 8008
-              #
-              # FIX THIS: SB-47864 need to specify basic authentication
-              # this use the username and password that the eventflow
-              # node was started with
-              #
-              httpHeaders:
-              - name: Authorization
-                value: Basic dGliY286dGliY28=
             initialDelaySeconds: 60
             periodSeconds: 10
           #
@@ -166,13 +158,5 @@ spec:
             httpGet:
               path: /healthcheck/v1/status
               port: 8008
-              #
-              # FIX THIS: SB-47864 need to specify basic authentication
-              # this use the username and password that the eventflow
-              # node was started with
-              #
-              httpHeaders:
-              - name: Authorization
-                value: Basic dGliY286dGliY28=
             initialDelaySeconds: 240
             periodSeconds: 10
