@@ -202,7 +202,7 @@
             <param name="queueDepth" value="0"/>
             <param name="queueDepthPolicy" value="Replace Old"/>
             <param name="queueTuples" value="false"/>
-            <param name="requestType" value="Synchronous"/>
+            <param name="requestType" value="Asynchronous"/>
             <param name="routerPolicy" value="Custom Node"/>
         </box>
         <output-stream name="OutputStream"/>
