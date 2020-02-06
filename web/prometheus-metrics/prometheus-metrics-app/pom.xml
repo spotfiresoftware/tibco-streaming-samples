@@ -41,13 +41,13 @@
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
     <name>Web: Prometheus Metrics Integration App</name>
-    <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - Application</description>
+    <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - Application
+    </description>
 
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
-        <artifactId>ep-application-samples
-        </artifactId> <!-- replace with ep-application to avoid sample metadata -->
+        <artifactId>ep-application-samples</artifactId>
         <version>10.6.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
@@ -124,31 +124,25 @@
         </resources>
 
         <plugins>
-            <!-- Get the host name. -->
-            <plugin>
-                <groupId>org.codehaus.groovy.maven</groupId>
-                <artifactId>gmaven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>execute</goal>
-                        </goals>
-                        <configuration>
-                            <source>
-                                project.properties["hostname"] = InetAddress.getLocalHost().getHostName()
-                            </source>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Assign free ports to the SB Node Web Server and Prometheus -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
                 <executions>
+
+                    <!-- Get the host name. -->
+                    <execution>
+                        <id>get-local-ip</id>
+                        <goals>
+                            <goal>local-ip</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <localIpProperty>hostname</localIpProperty>
+                        </configuration>
+                    </execution>
+
+                    <!-- Assign free ports to the SB Node Web Server and Prometheus -->
                     <execution>
                         <id>reserve-web-port</id>
                         <goals>
@@ -172,7 +166,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <skipTests>${skipLocalTests}</skipTests>
-                    <nodeDeployFile>${project.build.directory}/classes/deploy/node_deploy.conf</nodeDeployFile>
+                    <nodeDeployFile>
+                        ${project.build.directory}/classes/deploy/node_deploy.conf
+                    </nodeDeployFile>
                     <nodes>
                         <node>A</node>
                     </nodes>
@@ -310,7 +306,8 @@
                             <!-- If the Prometheus docker container isn't started, we cannot run the test.-->
                             <skipITs>${skipDockerTests}</skipITs>
                             <systemPropertyVariables>
-                                <prometheus.metrics.port>${prometheus.metrics.port}</prometheus.metrics.port>
+                                <prometheus.metrics.port>${prometheus.metrics.port}
+                                </prometheus.metrics.port>
                             </systemPropertyVariables>
                         </configuration>
                     </execution>
