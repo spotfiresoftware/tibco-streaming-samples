@@ -4,13 +4,13 @@ How to use Docker in TIBCO&reg; Streaming 10.5.0 projects.
 
 Samples :
 
-* [How to deploy a 2-node EventFlow application in Docker](ef-2node)
-* [How to deploy a LiveView application in Docker](lv-1node)
-* [How to user Docker to test proxy discovery.](pd-test)
-* [How to deploy a 2-node EventFlow application in Docker managed by Ansible](ef-2node-ansible)
+* [How to deploy a 2-node EventFlow application in Docker](ef-2node/README.md)
+* [How to deploy a LiveView application in Docker](lv-1node/README.md)
+* [How to user Docker to test proxy discovery.](pd-test/README.md)
+* [How to deploy a 2-node EventFlow application in Docker managed by Ansible](ef-2node-ansible/README.md)
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

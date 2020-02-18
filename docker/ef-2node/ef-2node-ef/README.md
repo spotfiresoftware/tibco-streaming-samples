@@ -5,7 +5,7 @@ How to deploy a 2-node EventFlow application in Docker - EventFlow Fragment
 * [ef-2node-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/docker/ef-2node/ef-2node-ef/))
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

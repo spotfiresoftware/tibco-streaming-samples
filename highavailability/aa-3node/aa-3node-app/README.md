@@ -5,7 +5,7 @@ How to build a 3-node active active deployment. - Application
 * [aa-3node-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/highavailability/aa-3node/aa-3node-app/))
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

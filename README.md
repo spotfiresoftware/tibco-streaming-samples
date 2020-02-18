@@ -10,15 +10,15 @@ Overview:
 
 Sample categories:
 
-* [How to structure TIBCO&reg; Streaming 10.5.0 projects.](structure)
-* [How to test TIBCO&reg; Streaming 10.5.0 projects.](testing)
-* [How to use native libraries in TIBCO&reg; Streaming 10.5.0 projects.](nativelibrary)
-* [How to invoke Java from TIBCO&reg; Streaming 10.5.0 projects.](java)
-* [How to build Highly Available TIBCO&reg; Streaming 10.5.0 projects.](highavailability)
-* [How to use Docker in TIBCO&reg; Streaming 10.5.0 projects.](docker)
+* [How to structure TIBCO&reg; Streaming 10.5.0 projects.](structure/README.md)
+* [How to test TIBCO&reg; Streaming 10.5.0 projects.](testing/README.md)
+* [How to use native libraries in TIBCO&reg; Streaming 10.5.0 projects.](nativelibrary/README.md)
+* [How to invoke Java from TIBCO&reg; Streaming 10.5.0 projects.](java/README.md)
+* [How to build Highly Available TIBCO&reg; Streaming 10.5.0 projects.](highavailability/README.md)
+* [How to use Docker in TIBCO&reg; Streaming 10.5.0 projects.](docker/README.md)
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
