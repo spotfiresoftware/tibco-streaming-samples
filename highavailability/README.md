@@ -4,16 +4,16 @@ How to build Highly Available TIBCO&reg; Streaming master projects.
 
 Samples :
 
-* [How to build a 2-node active standby deployment with static data distribution policy.](as-2node)
-* [How to build a 2-node active active deployment with dynamic data distribution policy.](aa-2node)
-* [How to build a 3-node active active deployment with dynamic data distribution policy.](aa-3node)
-* [How to build a 3-node active active deployment with dynamic data distribution policy and disaster recovery.](aa-3node-dr)
-* [How to build a 2-node active active deployment with dynamic data distribution policy and proxy discovery.](pd-2node)
-* [How to poll the filesystem with cluster aware operators](ca-polling)
-* [How to use the cluster aware state filter](ca-statefilter)
+* [How to build a 2-node active standby deployment with static data distribution policy.](as-2node/README.md)
+* [How to build a 2-node active active deployment with dynamic data distribution policy.](aa-2node/README.md)
+* [How to build a 3-node active active deployment with dynamic data distribution policy.](aa-3node/README.md)
+* [How to build a 3-node active active deployment with dynamic data distribution policy and disaster recovery.](aa-3node-dr/README.md)
+* [How to build a 2-node active active deployment with dynamic data distribution policy and proxy discovery.](pd-2node/README.md)
+* [How to poll the filesystem with cluster aware operators](ca-polling/README.md)
+* [How to use the cluster aware state filter](ca-statefilter/README.md)
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

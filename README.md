@@ -10,15 +10,16 @@ Overview:
 
 Sample categories:
 
-* [How to structure TIBCO&reg; Streaming master projects.](structure)
-* [How to test TIBCO&reg; Streaming master projects.](testing)
-* [How to use native libraries in TIBCO&reg; Streaming master projects.](nativelibrary)
-* [How to invoke Java from TIBCO&reg; Streaming master projects.](java)
-* [How to build Highly Available TIBCO&reg; Streaming master projects.](highavailability)
-* [How to use Docker in TIBCO&reg; Streaming master projects.](docker)
+* [How to structure TIBCO&reg; Streaming master projects.](structure/README.md)
+* [How to test TIBCO&reg; Streaming master projects.](testing/README.md)
+* [How to use native libraries in TIBCO&reg; Streaming master projects.](nativelibrary/README.md)
+* [How to invoke Java from TIBCO&reg; Streaming master projects.](java/README.md)
+* [How to build Highly Available TIBCO&reg; Streaming master projects.](highavailability/README.md)
+* [How to use Docker in TIBCO&reg; Streaming master projects.](docker/README.md)
+* [How to deploy web application in TIBCO&reg; Streaming master projects.](web/README.md)
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

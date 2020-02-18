@@ -4,13 +4,13 @@ How to user Docker to test proxy discovery
 
 Samples :
 
-* [How to user Docker to test proxy discovery - EventFlow Fragment](pd-test-eventflow)
+* [How to user Docker to test proxy discovery - EventFlow Fragment](pd-test-eventflow/README.md)
 * [Docker: proxy discovery test - Application](pd-test-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/pd-test/pd-test-app/))
 
 _This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

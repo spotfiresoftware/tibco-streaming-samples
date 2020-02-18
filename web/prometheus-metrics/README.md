@@ -1,15 +1,12 @@
-# Docker
+# Web: Prometheus Metrics Integration
 
-How to use Docker in TIBCO&reg; Streaming master projects.
+How to integrate with Prometheus Metrics in TIBCO Streaming.
 
-Samples :
+This is a maven aggregator project consisting of the following maven modules :
 
-* [How to deploy a 2-node EventFlow application in Docker](ef-2node/README.md)
-* [How to deploy a LiveView application in Docker](lv-1node/README.md)
-* [How to user Docker to test proxy discovery](pd-test/README.md)
-* [How to deploy a 2-node EventFlow application in Docker managed by Ansible](ef-2node-ansible/README.md)
-* [How to deploy an EventFlow application in Docker with Kubernetes](ef-kubernetes/README.md)
-* [How to deploy an EventFlow application in Docker with Kubernetes and Helm](ef-helm/README.md)
+* [Web: Prometheus Metrics Integration WAR](prometheus-metrics-war/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/prometheus-metrics/prometheus-metrics-war/))
+* [Web: Prometheus Metrics Integration EventFlow](prometheus-metrics-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/prometheus-metrics/prometheus-metrics-ef/))
+* [Web: Prometheus Metrics Integration App](prometheus-metrics-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/prometheus-metrics/prometheus-metrics-app/))
 
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.

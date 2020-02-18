@@ -5,7 +5,7 @@ How to build cluster aware TIBCO&reg; Streaming master projects - EventFlow Frag
 * [ca-statefilter-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/highavailability/ca-statefilter/ca-statefilter-ef/))
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

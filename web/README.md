@@ -1,13 +1,14 @@
 # Web
 
-How to use Administration web service and how to create and use WAR archive
+How to deploy web application in TIBCO&reg; Streaming master projects.
 
 Samples :
 
-* [Web : adminwebservice](adminwebservice/README.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/adminwebservice))
+* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/adminwebservice/))
+* [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
 
 ---
-Copyright (c) 2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

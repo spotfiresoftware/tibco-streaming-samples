@@ -1,13 +1,13 @@
-# Web: Administration web service
+# Web: Admin Web Service
 
-How to use administration web service in an EventFlow project
+How to use admin web service
 
-* [adminwebservice](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/adminwebservice))
+* [adminwebservice](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/adminwebservice/))
 
 _This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
