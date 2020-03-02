@@ -117,7 +117,7 @@ public class EndpointTest extends UnitTest {
 
         subs.clear();
         subs.put("ADDRESS", ADDRESS);
-        subs.put("NODE_NAME", "\"" + SERVICE_NAME + "\"");
+        subs.put("NODE_NAME", SERVICE_NAME);
         Configuration.forFile("node.conf", subs).load().activate();
 
         // create a StreamBase server and load modules once for all tests in this class
