@@ -430,14 +430,6 @@ is being used or plain http ) then it may be possible to still use the registry 
 
 ![resources](images/insecure-registry.png)
 
-Or via json :
-
-```
-{
-  "insecure-registries": [ "my.insecure.registry" ]
-}
-```
-
 See also https://docs.docker.com/registry/insecure/.
 
 <a name="runtime-settings"></a>
