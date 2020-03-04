@@ -196,7 +196,8 @@ epadmin --username=${USER_NAME} --password=${USER_NAME} install node \
     --nodename=${STREAMING_NODENAME} \
     --nodedirectory=${STREAMING_RUNTIME_HOME}/node \
     ${args}
-epadmin --servicename=${STREAMING_NODENAME} start node
+adminport=$(epadmin getadminport node --installpath=${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME})
+epadmin --adminport=${adminport} --hostname=${HOSTNAME} start node
 
 #
 # indicate that we've started and wait

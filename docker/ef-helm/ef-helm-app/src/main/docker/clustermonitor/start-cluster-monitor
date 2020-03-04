@@ -59,7 +59,8 @@ epadmin --username=${USER_NAME} --password=${USER_NAME} install node \
     --nodedirectory=${STREAMING_RUNTIME_HOME}/node \
     --substitutions=NODE_NAME=${STREAMING_NODENAME} \
     --application=${STREAMING_PRODUCT_HOME}/distrib/tibco/sb/applications/cluster-monitor.zip
-epadmin --servicename=${STREAMING_NODENAME} start node
+adminport=$(epadmin getadminport node --installpath=${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME})
+epadmin --adminport=${adminport} --hostname=${HOSTNAME} start node
 
 #
 # indicate that we've started and wait

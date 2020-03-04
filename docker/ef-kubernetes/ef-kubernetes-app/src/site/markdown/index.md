@@ -365,15 +365,25 @@ COMMAND FINISHED
 epadmin commands can be run with *kubectl exec* :
 
 ```shell
-$ kubectl exec ef-kubernetes-app-0 epadmin servicename=ef-kubernetes-app-0.default.ef-kubernetes-app display cluster
-[ef-kubernetes-app-0.default.ef-kubernetes-app] Node Name = ef-kubernetes-app-1.default.ef-kubernetes-app
-[ef-kubernetes-app-0.default.ef-kubernetes-app] Network Address = IPv4:ef-kubernetes-app-1:18364
-[ef-kubernetes-app-0.default.ef-kubernetes-app] Current State = Discovered
-[ef-kubernetes-app-0.default.ef-kubernetes-app] Last State Change = 2019-10-30 11:06:33
-[ef-kubernetes-app-0.default.ef-kubernetes-app] Number of Connections = 0
-[ef-kubernetes-app-0.default.ef-kubernetes-app] Number of Queued PDUs = 0
-[ef-kubernetes-app-0.default.ef-kubernetes-app] Discovered = Dynamic
-[ef-kubernetes-app-0.default.ef-kubernetes-app] Location Code = 7674331909344911063
+$ adminport=$(kubectl exec ef-kubernetes-app-0 epadmin getadminport node installpath=/var/opt/tibco/streambase/node/ef-kubernetes-app-0.default.ef-kubernetes-app)
+$ kubectl exec ef-kubernetes-app-0 epadmin adminport=${adminport} hostname=ef-kubernetes-app-0 display cluster
+Node Name = ef-kubernetes-app-1.default.ef-kubernetes-app
+Network Address = IPv4:ef-kubernetes-app-1.ef-kubernetes-app.default.svc.cluster.local:22764,IPv4:ef-kubernetes-app-1.ef-kubernetes-app.default.svc.cluster.local:22763
+Current State = Up
+Last State Change = 2020-03-04 09:43:03
+Number of Connections = 3
+Number of Queued PDUs = 0
+Discovered = Dynamic
+Location Code = 7674331909344911063
+
+Node Name = ef-kubernetes-app-2.default.ef-kubernetes-app
+Network Address = IPv4:ef-kubernetes-app-2.ef-kubernetes-app.default.svc.cluster.local:13669,IPv4:ef-kubernetes-app-2.ef-kubernetes-app.default.svc.cluster.local:13668
+Current State = Up
+Last State Change = 2020-03-04 09:43:03
+Number of Connections = 4
+Number of Queued PDUs = 0
+Discovered = Dynamic
+Location Code = 2949477628857434580
 ```
 
 ## Deployment
