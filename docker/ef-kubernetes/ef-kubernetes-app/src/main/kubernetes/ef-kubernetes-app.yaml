@@ -27,25 +27,6 @@
 #  POSSIBILITY OF SUCH DAMAGE.
 
 #
-# Service for the application cluster
-#
-apiVersion: v1
-kind: Service
-metadata:
-  name: ef-kubernetes-app
-  labels:
-    app: ef-kubernetes-app
-spec:
-  selector:
-    app: ef-kubernetes-app
-  clusterIP: None
-  #
-  # Publish DNS record early so startup works
-  #
-  publishNotReadyAddresses: true
----
-
-#
 # ConfigMap for configuration
 #
 apiVersion: v1
@@ -137,11 +118,6 @@ spec:
             value: ef-kubernetes-app
           - name: STREAMING_NODENAME
             value: "$(POD_NAME).$(POD_NAMESPACE).$(APPNAME)"
-          #
-          # Use the fully qualified hostname to avoid DNS issues
-          #
-          - name: HOSTNAME
-            value: "$(POD_NAME).$(APPNAME).$(POD_NAMESPACE).svc.cluster.local"
           #
           # use healthcheck API for an initial wait until the application is ready
           #

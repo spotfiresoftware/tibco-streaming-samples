@@ -50,12 +50,23 @@ In this sample we are using various technologies with terminology that overlap a
 2. Build this project to create Docker images.  
   See [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade) and 
   [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
-3. Use *kubectl apply* to start the Streaming Nodes in the Kubernetes cluster
-4. Use *kubectl get pod* to see what PODs were started
-5. Use *kubectl logs* to view the Streaming Node logs
-6. Use *kubectl delete* to stop the Streaming Nodes and remove the PODs
+3. Use *kubectl apply* to grant permissions
+4. Use *kubectl apply* to start the Streaming Nodes in the Kubernetes cluster
+5. Use *kubectl get pod* to see what PODs were started
+6. Use *kubectl logs* to view the Streaming Node logs
+7. Use *kubectl delete* to stop the Streaming Nodes and remove the PODs
 
 ```
+$ kubectl apply -f - <<!
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: service-reader
+rules:
+- apiGroups: [""]
+  resources: ["services", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+!
 $ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
 service/ef-kubernetes-app created
 configmap/configuration created
@@ -158,7 +169,7 @@ the necessary Kubernetes configurations for deployment.
 
 The Kubernetes configurations include -
 
-* [ef-kubernetes-app.yaml](../../../src/main/kubernetes/ef-kubernetes-app.yaml) - Kubernetes Service and StatefulSet definition for a scaling cluster
+* [ef-kubernetes-app.yaml](../../../src/main/kubernetes/ef-kubernetes-app.yaml) - Kubernetes definition for a scaling cluster
 * [security.conf](../../../src/main/configurations/security.conf) - Trusted hosts names need to match Kubernetes DNS names
 * [start-node](../../../src/main/docker/base/start-node) - Script to start the Streaming node
 

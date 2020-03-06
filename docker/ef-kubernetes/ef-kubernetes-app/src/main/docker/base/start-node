@@ -110,7 +110,7 @@
 #     - name: STREAMING_NODEDEPLOY
 #       value: "/var/opt/tibco/streambase/configuration/node.conf"
 #
-# POD_NAMESPACE, POD_NAME and HOSTNAME are passed through from Kubernetes to support security.conf.
+# POD_NAMESPACE and POD_NAME are passed through from Kubernetes to support security.conf.
 #
 # See Docker, Kubernetes and Helm documentation for further details.
 #
@@ -153,14 +153,14 @@ if [ "${STREAMING_SUBSTITUTIONS}" != "" ]
 then
     if [ "${POD_NAMESPACE}" != "" ]
     then
-        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},HOSTNAME=${HOSTNAME},${STREAMING_SUBSTITUTIONS}"
+        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},${STREAMING_SUBSTITUTIONS}"
     else
         args="${args} --substitutions=${STREAMING_SUBSTITUTIONS}"
     fi
 else
     if [ "${POD_NAMESPACE}" != "" ]
     then
-        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},HOSTNAME=${HOSTNAME}"
+        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME}"
     fi
 fi
 if [ "${STREAMING_SUBSTITUTIONFILE}" != "" ]
@@ -196,8 +196,13 @@ epadmin --username=${USER_NAME} --password=${USER_NAME} install node \
     --nodename=${STREAMING_NODENAME} \
     --nodedirectory=${STREAMING_RUNTIME_HOME}/node \
     ${args}
-adminport=$(epadmin getadminport node --installpath=${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME})
-epadmin --adminport=${adminport} --hostname=${HOSTNAME} start node
+if [ "${POD_NAMESPACE}" != "" ]
+then
+    adminport=$(epadmin getadminport node --installpath=${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME})
+    epadmin --adminport=${adminport} start node
+else
+    epadmin --servicename=${STREAMING_NODENAME} start node
+fi
 
 #
 # indicate that we've started and wait
