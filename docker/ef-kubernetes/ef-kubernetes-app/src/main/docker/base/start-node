@@ -130,6 +130,11 @@ then
 fi
 
 #
+# find default route - ie address of kube-controller-manager
+#
+DEFAULT_ROUTE=$(ip route | grep ^default | head -1 | cut -f3 -d\ )
+
+#
 # required for openshift - see https://docs.okd.io/latest/creating_images/guidelines.html#openshift-specific-guidelines
 #
 if ! whoami &> /dev/null; then
@@ -153,14 +158,14 @@ if [ "${STREAMING_SUBSTITUTIONS}" != "" ]
 then
     if [ "${POD_NAMESPACE}" != "" ]
     then
-        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},${STREAMING_SUBSTITUTIONS}"
+        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},DEFAULT_ROUTE=${DEFAULT_ROUTE},${STREAMING_SUBSTITUTIONS}"
     else
         args="${args} --substitutions=${STREAMING_SUBSTITUTIONS}"
     fi
 else
     if [ "${POD_NAMESPACE}" != "" ]
     then
-        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME}"
+        args="${args} --substitutions=POD_NAMESPACE=${POD_NAMESPACE},POD_NAME=${POD_NAME},DEFAULT_ROUTE=${DEFAULT_ROUTE}"
     fi
 fi
 if [ "${STREAMING_SUBSTITUTIONFILE}" != "" ]
