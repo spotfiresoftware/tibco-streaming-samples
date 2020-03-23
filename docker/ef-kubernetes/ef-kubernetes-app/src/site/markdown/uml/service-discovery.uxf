@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>100</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>admin</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>30</x>
+      <y>40</y>
+      <w>310</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Pod ef-kubernetes-app-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>50</x>
+      <y>90</y>
+      <w>270</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Streaming node ef-kubernetes-app-0
+image ef-kubernetes-app:1.0.0
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>430</x>
+      <y>40</y>
+      <w>150</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Service 
+ClusterIP
+efkubernetesapp0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>130</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>web</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>160</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>distribution</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>190</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>eventflow</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>100</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>admin port 2000</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>130</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>web port 80</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>160</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>distribution port 3000</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>190</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>eventflow port 10000</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>

@@ -11,6 +11,7 @@ node.
 * [Creating an application archive project for Kubernetes from TIBCO Streaming Studio&trade;](#creating-an-application-archive-project-for-kubernetes-from-tibco-streaming-studio-trade)
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
+* [Service discovery](#service-discovery)
 * [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Deployment](#deployment)
@@ -173,7 +174,7 @@ The Kubernetes configurations include -
 * [security.conf](../../../src/main/configurations/security.conf) - Trusted hosts names need to match Kubernetes DNS names
 * [start-node](../../../src/main/docker/base/start-node) - Script to start the Streaming node
 
-**Note:** - current version of Kitematic doesn't display container logs.  I've been using the older 0.17.6 from https://github.com/docker/kitematic/releases/download/v0.17.6/Kitematic-0.17.6-Mac.zip
+<a name="cluster-monitor"></a>
 
 ## Cluster monitor
 
@@ -261,6 +262,46 @@ The goal of this sample is to construct the deployment shown below :
 2. A StatefulSet controls the set of PODs that forms the application cluster
 3. The Cluster Monitor is controlled by a second StatefuleSet and the lvweb console exposed via a NodePort
 4. The Kubernetes Dashboard is exposed via a proxy service
+
+<a name="service-discovery"></a>
+
+## Service discovery
+
+Many kubernetes versions specifically block UDP between POD's ... this prevents TIBCO Streaming UDP based service discovery from working.  Hence, when the 
+Streaming nodes detect that kubernetes is in use, service discovery via UDP is disabled and service discovery via kubernetes is enabled.
+
+Each TIBCO Streaming node creates an kubernetes service object and populates with service discovery data.  Other TIBCO Streaming nodes
+will detect these service objects to support discovery of remote TIBCO Streaming nodes.
+
+Regardless of the ports used by the POD, the ports exposed via the service object are fixed :
+
+![resources](images/service-discovery.svg)
+
+Hence, epadmin commands should include adminport set to 2000 and hostname set to the service object name :
+
+```
+$ kubectl exec ef-kubernetes-app-0 epadmin adminport=2000 hostname=efkubernetesapp0-default-efkubernetesapp display node
+Node Name = efkubernetesapp0.default.efkubernetesapp
+Node Description = No description
+Node State = Started
+Host Name = ef-kubernetes-app-0
+Administration Port = 46655
+Discovery Service Implementation = Kubernetes
+Discovery Service Port = Not applicable
+Discovery Service State = Running
+Node Directory = /var/opt/tibco/streambase/node/efkubernetesapp0.default.efkubernetesapp
+Deployment Directories = /var/opt/tibco/streambase/node/efkubernetesapp0.default.efkubernetesapp/deploy
+Install Time = 2020-03-23 16:38:12 +0000 UTC
+Last Start Time = 2020-03-23 16:39:23 +0000 UTC
+Build Type = PRODUCTION
+Product Version = TIBCO StreamBase Runtime 10.6.0-SNAPSHOT (build 2003231557)
+Product Installation Directory = /opt/tibco/streambase
+Sensitive Configuration Data Encryption = Disabled
+Secure Communication Profile Name = None
+```
+
+The POD must have sufficient kubernetes permissions to create, update and delete service objects.
+
 
 ## Building and running from TIBCO Streaming Studio&trade;
 

@@ -41,7 +41,7 @@
       <x>70</x>
       <y>140</y>
       <w>1110</w>
-      <h>820</h>
+      <h>840</h>
     </coordinates>
     <panel_attributes>Kubernetes node docker-desktop
 fg=blue</panel_attributes>
@@ -77,7 +77,7 @@ fg=blue</panel_attributes>
       <x>90</x>
       <y>280</y>
       <w>350</w>
-      <h>660</h>
+      <h>670</h>
     </coordinates>
     <panel_attributes>Stateful set controller 
 ef-kubernetes-app</panel_attributes>
@@ -87,13 +87,13 @@ ef-kubernetes-app</panel_attributes>
     <id>UMLDeployment</id>
     <coordinates>
       <x>430</x>
-      <y>280</y>
+      <y>360</y>
       <w>180</w>
-      <h>660</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>Service 
-ClusterIP None
-ef-kubernetes-app</panel_attributes>
+ClusterIP
+efkubernetesapp0</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -102,7 +102,7 @@ ef-kubernetes-app</panel_attributes>
       <x>100</x>
       <y>560</y>
       <w>310</w>
-      <h>180</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>Pod ef-kubernetes-app-1</panel_attributes>
     <additional_attributes/>
@@ -111,7 +111,7 @@ ef-kubernetes-app</panel_attributes>
     <id>UMLGeneric</id>
     <coordinates>
       <x>110</x>
-      <y>600</y>
+      <y>610</y>
       <w>270</w>
       <h>60</h>
     </coordinates>
@@ -124,7 +124,7 @@ fg=blue</panel_attributes>
     <id>UMLDeployment</id>
     <coordinates>
       <x>100</x>
-      <y>750</y>
+      <y>760</y>
       <w>310</w>
       <h>180</h>
     </coordinates>
@@ -135,7 +135,7 @@ fg=blue</panel_attributes>
     <id>UMLGeneric</id>
     <coordinates>
       <x>110</x>
-      <y>790</y>
+      <y>810</y>
       <w>270</w>
       <h>60</h>
     </coordinates>
@@ -148,7 +148,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>370</x>
-      <y>610</y>
+      <y>620</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -159,7 +159,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>370</x>
-      <y>800</y>
+      <y>820</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -181,7 +181,7 @@ fg=blue</panel_attributes>
     <id>UMLGeneric</id>
     <coordinates>
       <x>170</x>
-      <y>870</y>
+      <y>890</y>
       <w>150</w>
       <h>30</h>
     </coordinates>
@@ -193,7 +193,7 @@ fg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>230</x>
-      <y>840</y>
+      <y>860</y>
       <w>110</w>
       <h>50</h>
     </coordinates>
@@ -206,7 +206,7 @@ HealthCheck
     <id>UMLGeneric</id>
     <coordinates>
       <x>170</x>
-      <y>680</y>
+      <y>690</y>
       <w>150</w>
       <h>30</h>
     </coordinates>
@@ -218,7 +218,7 @@ fg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>230</x>
-      <y>650</y>
+      <y>660</y>
       <w>110</w>
       <h>50</h>
     </coordinates>
@@ -292,9 +292,9 @@ fg=blue</panel_attributes>
     <id>UMLDeployment</id>
     <coordinates>
       <x>630</x>
-      <y>280</y>
+      <y>360</y>
       <w>180</w>
-      <h>250</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>Service
 NodePort lvweb
@@ -414,6 +414,32 @@ fg=blue</panel_attributes>
     <panel_attributes>Kubernetes
 Dashboard
 fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>430</x>
+      <y>760</y>
+      <w>180</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Service 
+ClusterIP
+efkubernetesapp2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>430</x>
+      <y>560</y>
+      <w>180</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Service 
+ClusterIP
+efkubernetesapp1</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
