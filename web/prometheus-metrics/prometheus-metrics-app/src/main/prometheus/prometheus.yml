@@ -44,6 +44,6 @@ scrape_configs:
     basic_auth:
       username: '${user.name}'
 
-    metrics_path: '/com.tibco.ep.samples.web-prometheus-metrics-war-1.0.0'
+    metrics_path: '/prometheus-metrics-war/'
     static_configs:
       - targets: ['${hostname}:${streambase.node.admin.web.port}']
