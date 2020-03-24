@@ -6,7 +6,6 @@ This sample builds on the [main Kubernetes sample](../../../../../ef-kubernetes/
 * [Quick runthrough](#quick-runthrough)
 * [Packaging with Helm](#packaging-with-helm)
 * [Deployment](#deployment)
-* [Alternative Kubernetes Implementations](#alternative-kubernetes-implementations)
 
 <a name="prerequisites"></a>
 
@@ -211,29 +210,4 @@ To learn more about the release, try:
 
 Note that in the above example the Helm variable dockerRegistry is set to the location of the
 docker images.
-
-<a name="alternative-kubernetes-implementations"></a>
-
-## Alternative Kubernetes Implementations
-
-Some alternatives to **docker-for-desktop** have slightly different ways to run helm :
-
-
-### Minishift
-
-Helm installation is via a add-on - see https://github.com/minishift/minishift-addons/tree/master/add-ons/helm
-for details.
-
-```shell
-$ git clone https://github.com/minishift/minishift-addons.git
-$ minishift addons install minishift-addons/add-ons/helm/
-$ minishift addons install --defaults
-$ minishift addons enable admin-user
-$ minishift start ...
-$ eval $(minishift docker-env)
-$ eval $(minishift oc-env)
-
-```
-
-**Note:** So far I've always got an error installing helm on minishift.
 
