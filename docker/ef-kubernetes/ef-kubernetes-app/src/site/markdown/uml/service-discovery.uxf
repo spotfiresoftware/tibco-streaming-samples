@@ -41,12 +41,14 @@ fg=blue</panel_attributes>
     <coordinates>
       <x>430</x>
       <y>40</y>
-      <w>150</w>
+      <w>330</w>
       <h>230</h>
     </coordinates>
     <panel_attributes>Service 
+
 ClusterIP
-efkubernetesapp0</panel_attributes>
+
+efkubernetesapp0-default-efkubernetesapp</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -85,45 +87,139 @@ efkubernetesapp0</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>100</y>
-      <w>190</w>
+      <x>750</x>
+      <y>70</y>
+      <w>220</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>admin port 2000</panel_attributes>
-    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=()-
+admin port 2000</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
+      <x>750</x>
+      <y>120</y>
+      <w>220</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-
+web port 80</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>170</y>
+      <w>220</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-
+distribution port 3000</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>220</y>
+      <w>220</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-
+eventflow port 10000</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1040</x>
+      <y>70</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>epadmin</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>80</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1040</x>
+      <y>120</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>REST</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
       <y>130</y>
-      <w>190</w>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1040</x>
+      <y>170</y>
+      <w>130</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>web port 80</panel_attributes>
-    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>Other
+Streaming nodes</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>160</y>
-      <w>190</w>
+      <x>950</x>
+      <y>180</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1040</x>
+      <y>220</y>
+      <w>130</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>distribution port 3000</panel_attributes>
-    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>eventflow
+client</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>190</y>
-      <w>190</w>
-      <h>40</h>
+      <x>950</x>
+      <y>230</y>
+      <w>110</w>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>eventflow port 10000</panel_attributes>
-    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
   </element>
 </diagram>

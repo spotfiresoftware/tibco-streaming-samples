@@ -51,23 +51,13 @@ In this sample we are using various technologies with terminology that overlap a
 2. Build this project to create Docker images.  
   See [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade) and 
   [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
-3. Use *kubectl apply* to grant permissions
+3. Use *kubectl apply* to grant permissions (if required )
 4. Use *kubectl apply* to start the Streaming Nodes in the Kubernetes cluster
 5. Use *kubectl get pod* to see what PODs were started
 6. Use *kubectl logs* to view the Streaming Node logs
 7. Use *kubectl delete* to stop the Streaming Nodes and remove the PODs
 
 ```
-$ kubectl apply -f - <<!
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: service-reader
-rules:
-- apiGroups: [""]
-  resources: ["services", "pods"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
-!
 $ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
 service/ef-kubernetes-app created
 configmap/configuration created
@@ -277,30 +267,166 @@ Regardless of the ports used by the POD, the ports exposed via the service objec
 
 ![resources](images/service-discovery.svg)
 
+The service objects can be inspected with *kubectl get service* :
+
+```shell
+$ kubectl get service
+NAME                                       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                                                                                                                                                                               AGE
+efkubernetesapp0-default-efkubernetesapp   ClusterIP   10.106.48.118   <none>        2000/TCP,80/TCP,3000/TCP,3001/TCP,3002/TCP,3003/TCP,3004/TCP,3005/TCP,3006/TCP,3007/TCP,3008/TCP,3009/TCP,3010/TCP,3011/TCP,3012/TCP,3013/TCP,3014/TCP,3015/TCP,3016/TCP,3017/TCP,3018/TCP,3019/TCP   56s
+efkubernetesapp1-default-efkubernetesapp   ClusterIP   10.99.247.71    <none>        2000/TCP,80/TCP,3000/TCP,3001/TCP,3002/TCP,3003/TCP,3004/TCP,3005/TCP,3006/TCP,3007/TCP,3008/TCP,3009/TCP,3010/TCP,3011/TCP,3012/TCP,3013/TCP,3014/TCP,3015/TCP,3016/TCP,3017/TCP,3018/TCP,3019/TCP   54s
+efkubernetesapp2-default-efkubernetesapp   ClusterIP   10.110.244.93   <none>        2000/TCP,80/TCP   
+
+$ kubectl get service efkubernetesapp0-default-efkubernetesapp -o yaml
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    discovery.ep.tibco.com/streaming-location-code: "2854553609309321499"
+  creationTimestamp: "2020-03-24T10:26:18Z"
+  labels:
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/name: ef-kubernetes-app
+    app.kubernetes.io/version: 1.0.0
+    discovery.ep.tibco.com/streaming-node-service: ""
+  name: efkubernetesapp0-default-efkubernetesapp
+  namespace: default
+  resourceVersion: "14250"
+  selfLink: /api/v1/namespaces/default/services/efkubernetesapp0-default-efkubernetesapp
+  uid: d20b418d-5366-4c73-83ac-d5600329ae48
+spec:
+  clusterIP: 10.106.48.118
+  ports:
+  - name: administration
+    port: 2000
+    protocol: TCP
+    targetPort: 25144
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8008
+  - name: distribution
+    port: 3000
+    protocol: TCP
+    targetPort: 55479
+...
+```
+
 Hence, epadmin commands should include adminport set to 2000 and hostname set to the service object name :
 
-```
+```shell
 $ kubectl exec ef-kubernetes-app-0 epadmin adminport=2000 hostname=efkubernetesapp0-default-efkubernetesapp display node
 Node Name = efkubernetesapp0.default.efkubernetesapp
 Node Description = No description
 Node State = Started
 Host Name = ef-kubernetes-app-0
-Administration Port = 46655
+Administration Port = 25144
 Discovery Service Implementation = Kubernetes
 Discovery Service Port = Not applicable
 Discovery Service State = Running
 Node Directory = /var/opt/tibco/streambase/node/efkubernetesapp0.default.efkubernetesapp
 Deployment Directories = /var/opt/tibco/streambase/node/efkubernetesapp0.default.efkubernetesapp/deploy
-Install Time = 2020-03-23 16:38:12 +0000 UTC
-Last Start Time = 2020-03-23 16:39:23 +0000 UTC
+Install Time = 2020-03-24 10:26:14 +0000 UTC
+Last Start Time = 2020-03-24 10:27:24 +0000 UTC
 Build Type = PRODUCTION
-Product Version = TIBCO StreamBase Runtime 10.6.0-SNAPSHOT (build 2003231557)
+Product Version = TIBCO StreamBase Runtime 10.6.0-SNAPSHOT (build 2003240528 UNTESTED-nd.master.linux-276)
 Product Installation Directory = /opt/tibco/streambase
 Sensitive Configuration Data Encryption = Disabled
 Secure Communication Profile Name = None
 ```
 
-The POD must have sufficient kubernetes permissions to create, update and delete service objects.
+Webservice calls should similarly use the hostname set to the service object name :
+
+```
+$ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:tibco -X POST "http://efkubernetesapp0-default-efkubernetesapp/admin/v1/targets/services?command=display" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "parameters=" | jq
+{
+  "results": [
+    {
+      "serviceName": "dtm",
+      "returnCode": 0,
+      "statusMessage": [],
+      "columnHeaders": [
+        {
+          "columnName": "Service Name",
+          "columnType": "STRING"
+        },
+        {
+          "columnName": "Service Type",
+          "columnType": "STRING"
+        },
+        {
+          "columnName": "Network Address",
+          "columnType": "STRING"
+        }
+      ],
+      "rows": [
+        [
+          "efkubernetesapp0.default.efkubernetesapp",
+          "node",
+          "10.106.48.118:2000"
+        ],
+        [
+          "distribution.efkubernetesapp0.default.efkubernetesapp",
+          "distribution",
+          "IPv4:10.106.48.118:3000"
+        ],
+        [
+          "http.efkubernetesapp0.default.efkubernetesapp",
+          "http",
+          "http://10.106.48.118:80"
+        ],
+        [
+          "eventflow.eventflow-1.efkubernetesapp0.default.efkubernetesapp",
+          "eventflow",
+          "sb://10.106.48.118:10000"
+        ],
+        [
+          "efkubernetesapp1.default.efkubernetesapp",
+          "node",
+          "10.99.247.71:2000"
+        ],
+        [
+          "distribution.efkubernetesapp1.default.efkubernetesapp",
+          "distribution",
+          "IPv4:10.99.247.71:3000"
+        ],
+        [
+          "http.efkubernetesapp1.default.efkubernetesapp",
+          "http",
+          "http://10.99.247.71:80"
+        ],
+        [
+          "eventflow.eventflow-1.efkubernetesapp1.default.efkubernetesapp",
+          "eventflow",
+          "sb://10.99.247.71:10000"
+        ],
+        [
+          "efkubernetesapp2.default.efkubernetesapp",
+          "node",
+          "10.110.244.93:2000"
+        ],
+        [
+          "distribution.efkubernetesapp2.default.efkubernetesapp",
+          "distribution",
+          "IPv4:10.110.244.93:3000"
+        ],
+        [
+          "http.efkubernetesapp2.default.efkubernetesapp",
+          "http",
+          "http://10.110.244.93:80"
+        ],
+        [
+          "eventflow.eventflow-1.efkubernetesapp2.default.efkubernetesapp",
+          "eventflow",
+          "sb://10.110.244.93:10000"
+        ]
+      ]
+    }
+  ]
+}
+
+```
+
+Note that the POD must have sufficient kubernetes permissions to create, update and delete service objects.
 
 
 ## Building and running from TIBCO Streaming Studio&trade;
@@ -414,30 +540,6 @@ COMMAND FINISHED
 11:08:34.610  [tid=202] INFO  n.ActiveNodeNotifier : Node ef-kubernetes-app-1.default.ef-kubernetes-app is active
 ```
 
-epadmin commands can be run with *kubectl exec* :
-
-```shell
-$ adminport=$(kubectl exec ef-kubernetes-app-0 epadmin getadminport node installpath=/var/opt/tibco/streambase/node/ef-kubernetes-app-0.default.ef-kubernetes-app)
-$ kubectl exec ef-kubernetes-app-0 epadmin adminport=${adminport} hostname=ef-kubernetes-app-0 display cluster
-Node Name = ef-kubernetes-app-1.default.ef-kubernetes-app
-Network Address = IPv4:ef-kubernetes-app-1.ef-kubernetes-app.default.svc.cluster.local:22764,IPv4:ef-kubernetes-app-1.ef-kubernetes-app.default.svc.cluster.local:22763
-Current State = Up
-Last State Change = 2020-03-04 09:43:03
-Number of Connections = 3
-Number of Queued PDUs = 0
-Discovered = Dynamic
-Location Code = 7674331909344911063
-
-Node Name = ef-kubernetes-app-2.default.ef-kubernetes-app
-Network Address = IPv4:ef-kubernetes-app-2.ef-kubernetes-app.default.svc.cluster.local:13669,IPv4:ef-kubernetes-app-2.ef-kubernetes-app.default.svc.cluster.local:13668
-Current State = Up
-Last State Change = 2020-03-04 09:43:03
-Number of Connections = 4
-Number of Queued PDUs = 0
-Discovered = Dynamic
-Location Code = 2949477628857434580
-```
-
 ## Deployment
 
 The Docker image(s) can be pushed to a Docker registry using the *mvn deploy* command.  Parameters
@@ -532,14 +634,6 @@ data:
             nodes = {
                 "${EP_NODE_NAME}" = {
                     nodeType = "docker"
-                    communication = {
-                        administration = {
-                            address = "${HOSTNAME:-localhost}"
-                        }
-                        distributionListenerInterfaces = [ {
-                            address = "${HOSTNAME:-localhost}"
-                        } ]
-                    }
                 }
             }
         }
@@ -652,33 +746,33 @@ statefulset.apps/ef-kubernetes-app scaled
 The new node is discovered and added to the cluster :
 
 ```shell
-$ kubectl exec ef-kubernetes-app-0 epadmin servicename=ef-kubernetes-app-0.ef-kubernetes-app display cluster
-[ef-kubernetes-app-0.ef-kubernetes-app] Node Name = ef-kubernetes-app-3.ef-kubernetes-app
-[ef-kubernetes-app-0.ef-kubernetes-app] Network Address = IPv4:ef-kubernetes-app-3:53214,IPv4:ef-kubernetes-app-3:53213
-[ef-kubernetes-app-0.ef-kubernetes-app] Current State = Up
-[ef-kubernetes-app-0.ef-kubernetes-app] Last State Change = 2019-10-14 13:16:59
-[ef-kubernetes-app-0.ef-kubernetes-app] Number of Connections = 2
-[ef-kubernetes-app-0.ef-kubernetes-app] Number of Queued PDUs = 0
-[ef-kubernetes-app-0.ef-kubernetes-app] Discovered = Dynamic
-[ef-kubernetes-app-0.ef-kubernetes-app] Location Code = 840900389728819536
+$ kubectl exec ef-kubernetes-app-0 epadmin adminport=2000 hostname=efkubernetesapp0-default-efkubernetesapp display cluster
+Node Name = efkubernetesapp2.default.efkubernetesapp
+Network Address = IPv4:efkubernetesapp2-default-efkubernetesapp:3001,IPv4:10.110.244.93:3000
+Current State = Up
+Last State Change = 2020-03-24 10:27:23
+Number of Connections = 3
+Number of Queued PDUs = 0
+Discovered = Dynamic
+Location Code = 15563842514483186585
 
-[ef-kubernetes-app-0.ef-kubernetes-app] Node Name = ef-kubernetes-app-2.ef-kubernetes-app
-[ef-kubernetes-app-0.ef-kubernetes-app] Network Address = IPv4:ef-kubernetes-app-2:17318,IPv4:ef-kubernetes-app-2:17317
-[ef-kubernetes-app-0.ef-kubernetes-app] Current State = Up
-[ef-kubernetes-app-0.ef-kubernetes-app] Last State Change = 2019-10-14 12:59:46
-[ef-kubernetes-app-0.ef-kubernetes-app] Number of Connections = 2
-[ef-kubernetes-app-0.ef-kubernetes-app] Number of Queued PDUs = 0
-[ef-kubernetes-app-0.ef-kubernetes-app] Discovered = Dynamic
-[ef-kubernetes-app-0.ef-kubernetes-app] Location Code = 9439063122635943377
+Node Name = efkubernetesapp3.default.efkubernetesapp
+Network Address = IPv4:efkubernetesapp3-default-efkubernetesapp:3001,IPv4:10.110.5.80:3000
+Current State = Up
+Last State Change = 2020-03-24 10:45:56
+Number of Connections = 1
+Number of Queued PDUs = 0
+Discovered = Dynamic
+Location Code = 8325170846741803864
 
-[ef-kubernetes-app-0.ef-kubernetes-app] Node Name = ef-kubernetes-app-1.ef-kubernetes-app
-[ef-kubernetes-app-0.ef-kubernetes-app] Network Address = IPv4:ef-kubernetes-app-1:15968,IPv4:ef-kubernetes-app-1:15967
-[ef-kubernetes-app-0.ef-kubernetes-app] Current State = Up
-[ef-kubernetes-app-0.ef-kubernetes-app] Last State Change = 2019-10-14 12:59:43
-[ef-kubernetes-app-0.ef-kubernetes-app] Number of Connections = 3
-[ef-kubernetes-app-0.ef-kubernetes-app] Number of Queued PDUs = 0
-[ef-kubernetes-app-0.ef-kubernetes-app] Discovered = Dynamic
-[ef-kubernetes-app-0.ef-kubernetes-app] Location Code = 11990177587896688850
+Node Name = efkubernetesapp1.default.efkubernetesapp
+Network Address = IPv4:efkubernetesapp1-default-efkubernetesapp:3001,IPv4:10.99.247.71:3000
+Current State = Up
+Last State Change = 2020-03-24 10:27:02
+Number of Connections = 2
+Number of Queued PDUs = 0
+Discovered = Dynamic
+Location Code = 11175780062534640858
 
 ```
 
@@ -871,19 +965,19 @@ Alternatives to **docker-for-desktop** include :
 ### Minikube
 
 An alternative is **Minikube** - see https://kubernetes.io/docs/setup/learning-environment/minikube/ 
-for installation instructions.  Minikube runs Kubernetes and Docker in VirtualBox.  See also 
+for installation instructions.  Minikube runs Kubernetes and Docker in VirtualBox, hyperkit or docker.  See also 
 https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon
 to allow Minikube to access locally built docker images.  
 
 ```shell
 $ minikube start
-😄  minikube v1.5.2 on Darwin 10.15
-💡  Tip: Use 'minikube start -p <name>' to create a new cluster, or 'minikube delete' to delete this one.
+😄  minikube v1.8.2 on Darwin 10.15.3
+✨  Using the hyperkit driver based on existing profile
+⌛  Reconfiguring existing host ...
 🔄  Starting existing hyperkit VM for "minikube" ...
-⌛  Waiting for the host to be provisioned ...
-🐳  Preparing Kubernetes v1.16.2 on Docker '18.09.9' ...
-🔄  Relaunching Kubernetes using kubeadm ... 
-⌛  Waiting for: apiserver
+🐳  Preparing Kubernetes v1.17.3 on Docker 19.03.6 ...
+🚀  Launching Kubernetes ... 
+🌟  Enabling addons: default-storageclass, storage-provisioner
 🏄  Done! kubectl is now configured to use "minikube"
 
 $ eval $(minikube docker-env)
@@ -903,15 +997,44 @@ $ kubectl config current-context
 minikube
 ```
 
+Grant permissions for pod's to create service objects :
+
+```shell
+$ kubectl apply -f - <<!
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: service-update
+rules:
+- apiGroups: [""]
+  resources: ["services", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: service-update
+  namespace: default
+subjects:
+- kind: User
+  name: system:serviceaccount:default:default
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: service-update
+  apiGroup: rbac.authorization.k8s.io
+!
+```
+
 Starting the dashboard in a **minikube** context is via the *minikube dashboard* command :
 
 ```shell
 $ minikube dashboard
-🔌  Enabling dashboard ...
 🤔  Verifying dashboard health ...
 🚀  Launching proxy ...
 🤔  Verifying proxy health ...
-🎉  Opening http://127.0.0.1:57841/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+🎉  Opening http://127.0.0.1:54942/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
 ```
 
 Minikube only supports a single Kubernetes Node.
@@ -924,51 +1047,28 @@ This is a Docker-in-Docker approach, so its usage is slightly different.
 ```shell
 $ kind create cluster
 Creating cluster "kind" ...
- ✓ Ensuring node image (kindest/node:v1.15.3) 🖼 
- ✓ Preparing nodes 📦 
- ✓ Creating kubeadm config 📜 
+ ✓ Ensuring node image (kindest/node:v1.17.0) 🖼 
+ ✓ Preparing nodes 📦  
+ ✓ Writing configuration 📜 
  ✓ Starting control-plane 🕹️ 
  ✓ Installing CNI 🔌 
  ✓ Installing StorageClass 💾 
-Cluster creation complete. You can now use the cluster with:
+Set kubectl context to "kind-kind"
+You can now use your cluster with:
 
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-kubectl cluster-info
+kubectl cluster-info --context kind-kind
 
-$ export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+Not sure what to do next? 😅 Check out https://kind.sigs.k8s.io/docs/user/quick-start/
+
+$ kubectl cluster-info --context kind-kind
+Kubernetes master is running at https://127.0.0.1:32768
+KubeDNS is running at https://127.0.0.1:32768/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
 Kind supports multiple Kubernetes Nodes.
 
-**FIX THIS:** **Kind** doesn't support UDP broadcasts so Streaming Nodes won't discover each other.  See https://github.com/kubernetes-sigs/kind/issues/1063.
-Pending specific support for Kubernetes Discovery.  Work-around is to add **weave-net** :
-
-The default CNI, kind-net, can be disabled by using the following yaml :
-
-```yaml
-kind: Cluster
-apiVersion: kind.sigs.k8s.io/v1alpha3
-networking:
-  disableDefaultCNI: true
-```
-
-and used when the cluster is created :
-
-```shell
-$ kind create cluster --config cluster.yaml
-```
-
-Once the default CNI is disabled, an alternative CNI can be loaded such as **weave-net** that does support UDP broadcasts :
-
-```shell
-$ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&disable-npc=true"
-serviceaccount/weave-net created
-clusterrole.rbac.authorization.k8s.io/weave-net created
-clusterrolebinding.rbac.authorization.k8s.io/weave-net created
-role.rbac.authorization.k8s.io/weave-net created
-rolebinding.rbac.authorization.k8s.io/weave-net created
-daemonset.apps/weave-net created
-```
 
 When pushing images into the **Kind** registry, a specific tool *kind load docker-image* is used instead :
 
@@ -977,68 +1077,35 @@ $ kind load docker-image ef-kubernetes-app:1.0.0
 
 ```
 
-Yaml file can then be applied.
-
-
-### Minishift
-
-An alternative is **Minishift** - see https://docs.okd.io/latest/minishift/getting-started/installing.html
-for installation instructions.
-
-**Minishift** contains OpenShift 3.
+Grant permissions for pod's to create service objects :
 
 ```shell
-$ minishift start
--- Starting profile 'minishift'
--- Check if deprecated options are used ... OK
--- Checking if https://github.com is reachable ... OK
-...
-OpenShift server started.
-
-The server is accessible via web console at:
-    https://192.168.99.112:8443/console
-
-You are logged in as:
-    User:     developer
-    Password: <any value>
-
-To login as administrator:
-    oc login -u system:admin
-
-$ eval $(minishift docker-env)
-
-$ eval $(minishift oc-env)
-...
+$ kubectl apply -f - <<!
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: service-update
+rules:
+- apiGroups: [""]
+  resources: ["services", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: service-update
+  namespace: default
+subjects:
+- kind: User
+  name: system:serviceaccount:default:default
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: service-update
+  apiGroup: rbac.authorization.k8s.io
+!
 ```
-
-You may need to specify the driver to use (only needed on first use) if the default fails :
-
-```shell
-$ minishift start --vm-driver virtualbox
-```
-
-You may want to grant more resources to **Minishift**, for example :
-
-```shell
-$ minishift start --cpus=4 --memory=8GB
-```
-
-Default namespace is **myproject**.
-
-Starting the dashboard in a **minishift** context is via the *minishift console* command :
-
-```shell
-$ minishift console
-Opening the OpenShift Web console in the default browser...
-```
-
-When pushing images into the **MiniShift** registry, the password token can be obtained from *oc whoami -t* :
-
-```shell
-$ mvn -Dmaven.deploy.skip=true -Ddocker.push.registry=$(minishift openshift registry)/myproject -Ddocker.push.username=$(oc whoami) -Ddocker.push.password=$(oc whoami -t) deploy
-```
-
-**FIX THIS:** DNS is failing for me - see https://github.com/minishift/minishift/issues/3368
 
 ### CodeReady Containers
 
@@ -1049,21 +1116,23 @@ for installation instructions ( requires RedHat account and pull secret ).
 
 ```shell
 $ crc start
-INFO Checking if running as non-root              
 INFO Checking if oc binary is cached              
+INFO Checking if podman remote binary is cached   
+INFO Checking if running as non-root              
 INFO Checking if HyperKit is installed            
 INFO Checking if crc-driver-hyperkit is installed 
 INFO Checking file permissions for /etc/resolver/testing 
 INFO Checking file permissions for /etc/hosts     
-INFO Starting CodeReady Containers VM for OpenShift 4.2.2... 
+INFO Starting CodeReady Containers VM for OpenShift 4.3.1... 
 INFO Verifying validity of the cluster certificates ... 
 INFO Network restart not needed                   
 INFO Check internal and public DNS query ...      
+INFO Check DNS query from host ...                
 INFO Starting OpenShift cluster ... [waiting 3m]  
 INFO                                              
 INFO To access the cluster, first set up your environment by following 'crc oc-env' instructions 
 INFO Then you can access it by running 'oc login -u developer -p developer https://api.crc.testing:6443' 
-INFO To login as an admin, username is 'kubeadmin' and password is e4FEb-9dxdF-9N2wH-Dj7B8 
+INFO To login as an admin, run 'oc login -u kubeadmin -p db9Dr-J2csc-8oP78-9sbmf https://api.crc.testing:6443' 
 INFO                                              
 INFO You can now run 'crc console' and use these credentials to access the OpenShift web console 
 Started the OpenShift cluster
@@ -1074,7 +1143,7 @@ $ eval $(crc oc-env)
 $ oc login -u kubeadmin -p e4FEb-9dxdF-9N2wH-Dj7B8 https://api.crc.testing:6443
 Login successful.
 
-You have access to 51 projects, the list has been suppressed. You can list all projects with 'oc projects'
+You have access to 55 projects, the list has been suppressed. You can list all projects with 'oc projects'
 
 Using project "default".
 ```
@@ -1093,7 +1162,7 @@ config.imageregistry.operator.openshift.io/cluster patched (no change)
 The exposed registry address can be found with *oc get route* :
 
 ```
-$ oc login -u kubeadmin -p $(crc console --credentials | grep admin | cut -f4 -d\') https://api.crc.testing:6443
+$ oc login -u kubeadmin -p $(crc console --credentials | grep admin | cut -f12 -d\ ) https://api.crc.testing:6443
 $ oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}'
 default-route-openshift-image-registry.apps-crc.testing
 ```
@@ -1129,8 +1198,29 @@ $ oc login -u developer -p developer  https://api.crc.testing:6443
 $ mvn -Dmaven.deploy.skip=true -Ddocker.push.registry=default-route-openshift-image-registry.apps-crc.testing/ef-kubernetes -Ddocker.push.username=$(oc whoami) -Ddocker.push.password=$(oc whoami -t) deploy
 ```
 
+Grant permissions for pod's to create service objects :
 
-**FIX THIS:** **CodeReady Containers** doesn't support UDP broadcasts so Streaming Nodes won't discover each other.
-Pending specific support for Kubernetes Discovery.
-
-
+```shell
+$ kubectl apply -f - <<!
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: service-update
+rules:
+- apiGroups: [""]
+  resources: ["services", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+kind: ClusterRoleBinding
+apiVersion: authorization.openshift.io/v1
+metadata:
+  name: service-update
+userNames:
+  - "system:serviceaccount:default:default"
+groupNames: []
+subjects: []
+roleRef:
+  name: service-update
+!
+```
