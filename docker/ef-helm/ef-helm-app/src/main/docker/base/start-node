@@ -135,6 +135,11 @@ fi
 DEFAULT_ROUTE=$(ip route | grep ^default | head -1 | cut -f3 -d\ )
 
 #
+# service discovery doesn't allow for '-' in streaming node name, so remove it
+#
+STREAMING_NODENAME=$(echo ${STREAMING_NODENAME} | tr -d '-')
+
+#
 # required for openshift - see https://docs.okd.io/latest/creating_images/guidelines.html#openshift-specific-guidelines
 #
 if ! whoami &> /dev/null; then

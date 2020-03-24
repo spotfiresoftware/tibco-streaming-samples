@@ -47,6 +47,11 @@ then
 fi
 
 #
+# service discovery doesn't allow for '-' in streaming node name, so remove it
+#
+STREAMING_NODENAME=$(echo ${STREAMING_NODENAME} | tr -d '-')
+
+#
 # clean up from any previous run
 #
 rm -rf ${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME}
