@@ -141,19 +141,9 @@ The [TIBCO Streaming maven plugin](https://github.com/TIBCOSoftware/tibco-stream
 
 ## Creating an application archive project for Kubernetes from TIBCO Streaming Studio&trade;
 
-Create a new Streaming Project and enable both Docker and Kubernetes :
+Create a new Streaming Project, select StreamBase Application and enable both Docker and Kubernetes :
 
-**FIX THIS:** We need to update studio menu to something like :
-
-* Existing tickbox for **Docker**
-  * If **Docker** tickbox selected, show new radio button for container orchestration framework.  Options are **None** or  **Kubernetes**
-    * **None** - Docker only files generated
-    * **Kubernetes** - Kubernetes yaml file generated in src/main/kubernetes, security.conf updated for the default Kubernetes network name
-  * If **Kubernetes** is selected, new radio button for packaging type.  Options are **None** and **Helm**
-    * **None** - no change
-    * **Helm** - Helm Chart yaml file generated in src/main/helm and Kubernetes files are generated in the Helm structure instead.  Rule added to pom.xml to generate and deploy helm package.
-
-**FIX THIS:** - show animated gif of creating new project in studio
+![resources](images/studio-new-project.png)
 
 The resulting project contains maven rules for building a Docker image containing the application and 
 the necessary Kubernetes configurations for deployment.
