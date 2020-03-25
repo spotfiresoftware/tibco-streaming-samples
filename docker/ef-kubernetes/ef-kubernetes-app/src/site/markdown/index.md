@@ -214,7 +214,7 @@ The trusted hosts configuration needs to include the cluster monitor host(s) :
 ```scala
 configuration = {
     TrustedHosts = {
-        hosts = [ "*.ef-kubernetes-app.${POD_NAMESPACE:-default}.svc.cluster.local", "*.clustermonitor.${POD_NAMESPACE:-default}.svc.cluster.local" ]
+        hosts = [ "${DEFAULT_ROUTE:-10.1.0.1}", "*.ef-kubernetes-app.${POD_NAMESPACE:-default}.svc.cluster.local", "*.clustermonitor.${POD_NAMESPACE:-default}.svc.cluster.local" ]
     }
 }
 ```
