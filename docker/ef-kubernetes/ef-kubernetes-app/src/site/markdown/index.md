@@ -12,6 +12,7 @@ node.
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
 * [Service discovery](#service-discovery)
+* [Exposing web interface](#exposing-web-interface)
 * [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Deployment](#deployment)
@@ -29,7 +30,6 @@ In this sample we are using various technologies with terminology that overlap a
     * **[Kubernetes Node](https://kubernetes.io/docs/concepts/architecture/nodes/)** -  A worker machine
     * **[Kubernetes Cluster](https://kubernetes.io/docs/concepts/)** - A set of machines, called nodes, that run containerized applications managed by Kubernetes. A cluster has at least one worker node and at least one master node.
     * **[K8s](https://kubernetes.io/)** - Abbreviation of Kubernetes
-    * **[CNI](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)** - Kubernetes Container Network Interface
     * **[POD](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)** - Smallest deployable unit of computing that can be created and managed in Kubernetes.
     * **[StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)** - Manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.
     * **[Service](https://kubernetes.io/docs/concepts/services-networking/service/)** - An abstract way to expose an application running on a set of Pods as a network service
@@ -59,7 +59,6 @@ In this sample we are using various technologies with terminology that overlap a
 
 ```
 $ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
-service/ef-kubernetes-app created
 configmap/configuration created
 configmap/resources created
 statefulset.apps/ef-kubernetes-app created
@@ -364,60 +363,83 @@ $ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:tibco -X POST "http://efk
           "http",
           "http://10.106.48.118:80"
         ],
-        [
-          "eventflow.eventflow-1.efkubernetesapp0.default.efkubernetesapp",
-          "eventflow",
-          "sb://10.106.48.118:10000"
-        ],
-        [
-          "efkubernetesapp1.default.efkubernetesapp",
-          "node",
-          "10.99.247.71:2000"
-        ],
-        [
-          "distribution.efkubernetesapp1.default.efkubernetesapp",
-          "distribution",
-          "IPv4:10.99.247.71:3000"
-        ],
-        [
-          "http.efkubernetesapp1.default.efkubernetesapp",
-          "http",
-          "http://10.99.247.71:80"
-        ],
-        [
-          "eventflow.eventflow-1.efkubernetesapp1.default.efkubernetesapp",
-          "eventflow",
-          "sb://10.99.247.71:10000"
-        ],
-        [
-          "efkubernetesapp2.default.efkubernetesapp",
-          "node",
-          "10.110.244.93:2000"
-        ],
-        [
-          "distribution.efkubernetesapp2.default.efkubernetesapp",
-          "distribution",
-          "IPv4:10.110.244.93:3000"
-        ],
-        [
-          "http.efkubernetesapp2.default.efkubernetesapp",
-          "http",
-          "http://10.110.244.93:80"
-        ],
-        [
-          "eventflow.eventflow-1.efkubernetesapp2.default.efkubernetesapp",
-          "eventflow",
-          "sb://10.110.244.93:10000"
-        ]
-      ]
-    }
-  ]
-}
+...
 
 ```
 
 Note that the POD must have sufficient kubernetes permissions to create, update and delete service objects.
 
+<a name="exposing-web-interface"></a>
+
+## Exposing web interface
+
+The web port can be exposed by using *kubectl apply* to create a service object :
+
+```
+$ kubectl apply -f - <<!
+apiVersion: v1
+kind: Service
+metadata:
+  name: ef-kubernetes-app
+  labels:
+    app: ef-kubernetes-app
+spec:
+  selector:
+    app: ef-kubernetes-app
+  ports:
+  - port: 8008
+    protocol: TCP
+    name: web
+  type: NodePort
+!
+```
+
+This allocates a node port that can be found with *kubectl get service* :
+
+```
+$ kubectl get service ef-kubernetes-app
+NAME                TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+ef-kubernetes-app   NodePort   10.99.219.246   <none>        8008:31448/TCP   10s
+```
+REST clients can now run administration commands external to the cluster using the nodeport ( 31448 in this case ) :
+
+```
+$ curl -s -u tibco:tibco -X POST "http://localhost:31448/admin/v1/targets/services?command=display" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "parameters=" | jq
+{
+  "results": [
+    {
+      "serviceName": "dtm",
+      "returnCode": 0,
+      "statusMessage": [],
+      "columnHeaders": [
+        {
+          "columnName": "Service Name",
+          "columnType": "STRING"
+        },
+        {
+          "columnName": "Service Type",
+          "columnType": "STRING"
+        },
+        {
+          "columnName": "Network Address",
+          "columnType": "STRING"
+        }
+      ],
+      "rows": [
+        [
+          "efkubernetesapp0.default.efkubernetesapp",
+          "node",
+          "10.111.3.108:2000"
+        ],
+        [
+          "distribution.efkubernetesapp0.default.efkubernetesapp",
+          "distribution",
+          "IPv4:10.111.3.108:3000"
+        ],
+...
+
+```
+<a name="building-and-running-from-tibco-streaming-studio-trade"></a>
 
 ## Building and running from TIBCO Streaming Studio&trade;
 
@@ -815,6 +837,16 @@ service "ef-kubernetes-app" deleted
 
 $ kubectl delete statefulset ef-kubernetes-app
 statefulset.apps "ef-kubernetes-app" deleted
+```
+
+Service discovert service objects can be deleted by label :
+
+```
+$ kubectl delete service -l discovery.ep.tibco.com/streaming-node-service
+service "clustermonitor0-clustermonitor" deleted
+service "efhelmapp0-default-efhelmapp" deleted
+service "efhelmapp1-default-efhelmapp" deleted
+service "efhelmapp2-default-efhelmapp" deleted
 ```
 
 ### Rolling upgrades
