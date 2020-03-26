@@ -12,8 +12,8 @@ node.
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
 * [Service discovery](#service-discovery)
-* [Exposing web interface via web port](#exposing-web-interface-via-web-port)
-* [Exposing web interface via ingress](#exposing-web-interface-via-ingress)
+* [Exposing webservices via web port](#exposing-webservices-via-web-port)
+* [Exposing webservices via ingress](#exposing-webservices-via-ingress)
 * [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Deployment](#deployment)
@@ -59,7 +59,7 @@ In this sample we are using various technologies with terminology that overlap a
 6. Use *kubectl logs* to view the Streaming Node logs
 7. Use *kubectl delete* to stop the Streaming Nodes and remove the PODs
 
-```
+```shell
 $ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
 configmap/configuration created
 configmap/resources created
@@ -241,8 +241,9 @@ The goal of this sample is to construct the deployment shown below :
 
 1. One POD contains one Streaming node and liveness probe
 2. A StatefulSet controls the set of PODs that forms the application cluster
-3. The Cluster Monitor is controlled by a second StatefuleSet and the lvweb console exposed via a NodePort
-4. The Kubernetes Dashboard is exposed via a proxy service
+3. Each streaming node creates a service object for [service discovery](#service-discovery)
+4. The Cluster Monitor is controlled by a second StatefuleSet and the lvweb console exposed via a NodePort
+5. The Kubernetes Dashboard is exposed via a proxy service
 
 <a name="service-discovery"></a>
 
@@ -257,6 +258,8 @@ will detect these service objects to support discovery of remote TIBCO Streaming
 Regardless of the ports used by the POD, the ports exposed via the service object are fixed :
 
 ![resources](images/service-discovery.svg)
+
+In this example, administration is available on host **efkubernetesapp0-default-efkubernetesapp** port **2000**.
 
 The service objects can be inspected with *kubectl get service* :
 
@@ -371,13 +374,13 @@ $ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:tibco -X POST "http://efk
 
 Note that the POD must have sufficient kubernetes permissions to create, update and delete service objects.
 
-<a name="exposing-web-interface-via-web-port"></a>
+<a name="exposing-webservices-via-web-port"></a>
 
-## Exposing web interface via web port
+## Exposing webservices via web port
 
-The web port can be exposed by using *kubectl apply* to create a service object :
+Webservices can be exposed by using *kubectl apply* to create a service object :
 
-```
+```shell
 $ kubectl apply -f - <<!
 apiVersion: v1
 kind: Service
@@ -398,14 +401,14 @@ spec:
 
 This allocates a node port that can be found with *kubectl get service* :
 
-```
+```shell
 $ kubectl get service ef-kubernetes-app
 NAME                TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 ef-kubernetes-app   NodePort   10.99.219.246   <none>        8008:31448/TCP   10s
 ```
 REST clients can now run administration commands external to the cluster using the nodeport ( 31448 in this case ) :
 
-```
+```shell
 $ curl -s -u tibco:tibco -X POST "http://localhost:31448/admin/v1/targets/services?command=display" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "parameters=" | jq
 {
   "results": [
@@ -442,11 +445,11 @@ $ curl -s -u tibco:tibco -X POST "http://localhost:31448/admin/v1/targets/servic
 
 ```
 
-<a name="exposing-web-interface-via-ingress"></a>
+<a name="exposing-webservices-via-ingress"></a>
 
-## Exposing web interface via ingress
+## Exposing webservices via ingress
 
-In addition to node ports, Kubernetes also supports exposing web services via ingress configuration.  However, ingress does depends on a suitable ingress controller installed.
+In addition to node ports, Kubernetes also supports exposing webservices via ingress configuration.  Note, however, ingress does depends on a suitable ingress controller installed.
 
 For docker-for-desktop, one such controller is **ngnix** - see https://github.com/kubernetes/ingress-nginx for an overview and https://kubernetes.github.io/ingress-nginx/deploy/
 for specific installation instructions.
@@ -513,12 +516,11 @@ Events:
   Normal  UPDATE  12m   nginx-ingress-controller  Ingress default/web
 ```
 
-External clients can now access the web service :
+External clients can now access the webservice :
 
 ![resources](images/ingress.png)
 
-Note that to avoid Possible cross-origin (CORS) issue, the explore URL will need to be replaced with the ingress URL ( for example, replace *http://ef-kubernetes-app-0:8008/apidoc/healthcheck.json* with *http://localhost/apidoc/healthcheck.json* ).
-
+Note that to avoid possible cross-origin (CORS) issue, the explore URL will need to be replaced with the ingress URL ( for example, replace *http://ef-kubernetes-app-0:8008/apidoc/healthcheck.json* with *http://localhost/apidoc/healthcheck.json* ).
 
 <a name="building-and-running-from-tibco-streaming-studio-trade"></a>
 
@@ -922,7 +924,7 @@ statefulset.apps "ef-kubernetes-app" deleted
 
 Service discovert service objects can be deleted by label :
 
-```
+```shell
 $ kubectl delete service -l discovery.ep.tibco.com/streaming-node-service
 service "clustermonitor0-clustermonitor" deleted
 service "efhelmapp0-default-efhelmapp" deleted
@@ -1256,7 +1258,7 @@ expernally and push the images into **CodeReady Containers**.
 
 To enable pushing images into **CodeReady Containers** ensure a default route is enabled :
 
-```
+```shell
 $ oc login -u kubeadmin -p $(crc console --credentials | grep admin | cut -f4 -d\') https://api.crc.testing:6443
 $ oc patch config.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
 config.imageregistry.operator.openshift.io/cluster patched (no change)
@@ -1264,7 +1266,7 @@ config.imageregistry.operator.openshift.io/cluster patched (no change)
 
 The exposed registry address can be found with *oc get route* :
 
-```
+```shell
 $ oc login -u kubeadmin -p $(crc console --credentials | grep admin | cut -f12 -d\ ) https://api.crc.testing:6443
 $ oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}'
 default-route-openshift-image-registry.apps-crc.testing
@@ -1274,7 +1276,7 @@ This address should be added to the list of insecure registries - see [Deploymen
 
 and update the yaml file to reference the internal registry :
 
-```
+```yaml
           #
           # docker image to use
           #
