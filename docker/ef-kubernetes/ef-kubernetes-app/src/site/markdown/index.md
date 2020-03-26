@@ -12,7 +12,8 @@ node.
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
 * [Service discovery](#service-discovery)
-* [Exposing web interface](#exposing-web-interface)
+* [Exposing web interface via web port](#exposing-web-interface-via-web-port)
+* [Exposing web interface via ingress](#exposing-web-interface-via-ingress)
 * [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Deployment](#deployment)
@@ -30,9 +31,10 @@ In this sample we are using various technologies with terminology that overlap a
     * **[Kubernetes Node](https://kubernetes.io/docs/concepts/architecture/nodes/)** -  A worker machine
     * **[Kubernetes Cluster](https://kubernetes.io/docs/concepts/)** - A set of machines, called nodes, that run containerized applications managed by Kubernetes. A cluster has at least one worker node and at least one master node.
     * **[K8s](https://kubernetes.io/)** - Abbreviation of Kubernetes
-    * **[POD](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)** - Smallest deployable unit of computing that can be created and managed in Kubernetes.
-    * **[StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)** - Manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.
+    * **[POD](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)** - Smallest deployable unit of computing that can be created and managed in Kubernetes
+    * **[StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)** - Manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods
     * **[Service](https://kubernetes.io/docs/concepts/services-networking/service/)** - An abstract way to expose an application running on a set of Pods as a network service
+    * **[Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)** - An API object that manages external access to the services in a cluster, typically HTTP
     * **[Proxy](https://kubernetes.io/docs/concepts/cluster-administration/proxies/)** - Exposes REST API
 * **Tibco**
     * **[Streaming Machine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - An execution context for a node
@@ -369,9 +371,9 @@ $ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:tibco -X POST "http://efk
 
 Note that the POD must have sufficient kubernetes permissions to create, update and delete service objects.
 
-<a name="exposing-web-interface"></a>
+<a name="exposing-web-interface-via-web-port"></a>
 
-## Exposing web interface
+## Exposing web interface via web port
 
 The web port can be exposed by using *kubectl apply* to create a service object :
 
@@ -439,6 +441,85 @@ $ curl -s -u tibco:tibco -X POST "http://localhost:31448/admin/v1/targets/servic
 ...
 
 ```
+
+<a name="exposing-web-interface-via-ingress"></a>
+
+## Exposing web interface via ingress
+
+In addition to node ports, Kubernetes also supports exposing web services via ingress configuration.  However, ingress does depends on a suitable ingress controller installed.
+
+For docker-for-desktop, one such controller is **ngnix** - see https://github.com/kubernetes/ingress-nginx for an overview and https://kubernetes.github.io/ingress-nginx/deploy/
+for specific installation instructions.
+
+In the docker for mac case, installation consists of :
+
+```shell
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+namespace/ingress-nginx created
+configmap/nginx-configuration created
+configmap/tcp-services created
+configmap/udp-services created
+serviceaccount/nginx-ingress-serviceaccount created
+clusterrole.rbac.authorization.k8s.io/nginx-ingress-clusterrole created
+role.rbac.authorization.k8s.io/nginx-ingress-role created
+rolebinding.rbac.authorization.k8s.io/nginx-ingress-role-nisa-binding created
+clusterrolebinding.rbac.authorization.k8s.io/nginx-ingress-clusterrole-nisa-binding created
+deployment.apps/nginx-ingress-controller created
+limitrange/ingress-nginx created
+
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/provider/cloud-generic.yaml
+service/ingress-nginx created
+
+```
+
+Once the controller is installed, ingress configurations can be applied using **kubectl apply**.  For example :
+
+```shell
+$ kubectl apply -f <<!
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: web
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: efkubernetesapp0-default-efkubernetesapp
+          servicePort: 80
+!
+```
+
+The **kubectl describe ingress** command can be used to show the status of the ingress :
+
+```shell
+$ kubectl describe ingress
+Name:             web
+Namespace:        default
+Address:          localhost
+Default backend:  default-http-backend:80 (<none>)
+Rules:
+  Host  Path  Backends
+  ----  ----  --------
+  *     
+           efkubernetesapp0-default-efkubernetesapp:80 (10.1.4.185:8008)
+Annotations:
+  kubectl.kubernetes.io/last-applied-configuration:  {"apiVersion":"networking.k8s.io/v1beta1","kind":"Ingress","metadata":{"annotations":{},"name":"web","namespace":"default"},"spec":{"rules":[{"http":{"paths":[{"backend":{"serviceName":"efkubernetesapp0-default-efkubernetesapp","servicePort":80}}]}}]}}
+
+Events:
+  Type    Reason  Age   From                      Message
+  ----    ------  ----  ----                      -------
+  Normal  CREATE  12m   nginx-ingress-controller  Ingress default/web
+  Normal  UPDATE  12m   nginx-ingress-controller  Ingress default/web
+```
+
+External clients can now access the web service :
+
+![resources](images/ingress.png)
+
+Note that to avoid Possible cross-origin (CORS) issue, the explore URL will need to be replaced with the ingress URL ( for example, replace *http://ef-kubernetes-app-0:8008/apidoc/healthcheck.json* with *http://localhost/apidoc/healthcheck.json* ).
+
+
 <a name="building-and-running-from-tibco-streaming-studio-trade"></a>
 
 ## Building and running from TIBCO Streaming Studio&trade;
