@@ -973,21 +973,22 @@ $ kubectl describe service clustermonitor
 Name:                     clustermonitor
 Namespace:                default
 Labels:                   app=clustermonitor
-Annotations:              <none>
+Annotations:              kubectl.kubernetes.io/last-applied-configuration:
+                            {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"clustermonitor"},"name":"clustermonitor","namespace":"de...
 Selector:                 app=clustermonitor
 Type:                     NodePort
-IP:                       10.100.141.122
+IP:                       10.110.255.119
 LoadBalancer Ingress:     localhost
 Port:                     lvweb  11080/TCP
 TargetPort:               11080/TCP
-NodePort:                 lvweb  31044/TCP
-Endpoints:                10.1.1.38:11080
+NodePort:                 lvweb  31907/TCP
+Endpoints:                10.1.4.188:11080
 Session Affinity:         None
 External Traffic Policy:  Cluster
 Events:                   <none>
 ```
 
-In this case the URL http://localhost:31044 can be used to access the cluster monitor :
+In this case the URL http://localhost:31907 can be used to access the cluster monitor :
 
 ![resources](images/clustermonitor.png)
 
