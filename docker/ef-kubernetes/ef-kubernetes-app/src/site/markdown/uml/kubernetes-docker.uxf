@@ -4,386 +4,43 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>110</y>
-      <w>80</w>
-      <h>150</h>
+      <x>660</x>
+      <y>90</y>
+      <w>30</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=()-
 </panel_attributes>
-    <additional_attributes>60.0;10.0;60.0;130.0;10.0;130.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>380</x>
-      <y>420</y>
-      <w>140</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>10.1.0.24</panel_attributes>
-    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>770</x>
-      <y>260</y>
-      <w>90</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;10.0;160.0;70.0;160.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>70</x>
-      <y>140</y>
-      <w>1110</w>
-      <h>840</h>
-    </coordinates>
-    <panel_attributes>Kubernetes node docker-desktop
-fg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>100</x>
-      <y>360</y>
-      <w>310</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>Pod ef-kubernetes-app-0</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>120</x>
-      <y>410</y>
-      <w>270</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Streaming node ef-kubernetes-app-0
-image ef-kubernetes-app:1.0.0
-fg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>90</x>
-      <y>280</y>
-      <w>350</w>
-      <h>670</h>
-    </coordinates>
-    <panel_attributes>Stateful set controller 
-ef-kubernetes-app</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>430</x>
-      <y>360</y>
-      <w>180</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>Service 
-ClusterIP
-efkubernetesapp0</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>100</x>
-      <y>560</y>
-      <w>310</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>Pod ef-kubernetes-app-1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>110</x>
-      <y>610</y>
-      <w>270</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Streaming node ef-kubernetes-app-1
-image ef-kubernetes-app:1.0.0
-fg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>100</x>
-      <y>760</y>
-      <w>310</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes>Pod ef-kubernetes-app-2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>110</x>
-      <y>810</y>
-      <w>270</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Streaming node ef-kubernetes-app-2
-image ef-kubernetes-app:1.0.0
-fg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>370</x>
-      <y>620</y>
-      <w>150</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>10.1.0.25</panel_attributes>
-    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>370</x>
-      <y>820</y>
-      <w>150</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>10.1.0.26</panel_attributes>
-    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>490</x>
-      <y>380</y>
+      <y>90</y>
       <w>30</w>
-      <h>540</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;10.0;520.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>170</x>
-      <y>890</y>
-      <w>150</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>liveness probe
-fg=red</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>230</x>
-      <y>860</y>
-      <w>110</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-HealthCheck
-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>170</x>
-      <y>690</y>
-      <w>150</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>liveness probe
-fg=red</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>230</x>
-      <y>660</y>
-      <w>110</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-HealthCheck
-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>170</x>
-      <y>490</y>
-      <w>150</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>liveness probe
-fg=red</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>230</x>
-      <y>460</y>
-      <w>110</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-HealthCheck
-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>800</x>
-      <y>280</y>
-      <w>350</w>
-      <h>250</h>
-    </coordinates>
-    <panel_attributes>Stateful set controller 
-clustermonitor</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>840</x>
-      <y>410</y>
-      <w>270</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>LiveView node clustermonitor-0
-docker/clustermonitor:1.0.0
-fg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>820</x>
-      <y>360</y>
-      <w>310</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>Pod clustermonitor-0</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>630</x>
-      <y>360</y>
-      <w>180</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>Service
-NodePort lvweb
-clustermonitor</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>720</x>
-      <y>420</y>
-      <w>140</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>10.1.0.27</panel_attributes>
-    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>720</x>
-      <y>390</y>
-      <w>30</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>490</x>
-      <y>440</y>
-      <w>260</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>630</x>
-      <y>210</y>
-      <w>180</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>NodePort</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>430</x>
-      <y>210</y>
-      <w>180</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Proxy</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>360</x>
-      <y>110</y>
-      <w>90</w>
-      <h>150</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=()-
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;130.0;70.0;130.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>850</x>
-      <y>70</y>
+      <x>660</x>
+      <y>60</y>
       <w>30</w>
-      <h>60</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>760</x>
-      <y>20</y>
+      <x>570</x>
+      <y>10</y>
       <w>190</w>
       <h>60</h>
     </coordinates>
@@ -395,19 +52,19 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>70</y>
+      <x>380</x>
+      <y>60</y>
       <w>30</w>
-      <h>60</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>270</x>
-      <y>20</y>
+      <x>290</x>
+      <y>10</y>
       <w>190</w>
       <h>60</h>
     </coordinates>
@@ -417,29 +74,414 @@ fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLDeployment</id>
+    <id>UMLGeneric</id>
     <coordinates>
-      <x>430</x>
-      <y>760</y>
-      <w>180</w>
-      <h>190</h>
+      <x>10</x>
+      <y>130</y>
+      <w>1100</w>
+      <h>870</h>
     </coordinates>
-    <panel_attributes>Service 
-ClusterIP
-efkubernetesapp2</panel_attributes>
+    <panel_attributes>Kubernetes
+Node
+halign=left
+lt=.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLDeployment</id>
+    <id>UMLGeneric</id>
     <coordinates>
-      <x>430</x>
+      <x>320</x>
+      <y>170</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Proxy
+
+halign=center
+layer=3
+bg=#BCB0E7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>600</x>
+      <y>170</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>NodePort
+halign=center
+layer=3
+bg=#BCB0E7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>30</x>
+      <y>300</y>
+      <w>330</w>
+      <h>680</h>
+    </coordinates>
+    <panel_attributes>StatefulSet Controller
+ef-kubernetes-app
+halign=center
+layer=2
+bg=#F1E1B8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>40</x>
+      <y>350</y>
+      <w>310</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Pod ef-kubernetes-app-0
+
+halign=center
+layer=3
+bg=#A3C1F3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>490</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>liveness probe
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>380</y>
+      <w>290</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Streaming node ef-kubernetes-app-0
+image ef-kubernetes-app:1.0.0
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>460</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>40</x>
       <y>560</y>
-      <w>180</w>
+      <w>310</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Pod ef-kubernetes-app-1
+
+halign=center
+layer=3
+bg=#A3C1F3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>700</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>liveness probe
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>590</y>
+      <w>290</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Streaming node ef-kubernetes-app-1
+image ef-kubernetes-app:1.0.0
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>670</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>40</x>
+      <y>770</y>
+      <w>310</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Pod ef-kubernetes-app-2
+
+halign=center
+layer=3
+bg=#A3C1F3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>910</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>liveness probe
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>800</y>
+      <w>290</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Streaming node ef-kubernetes-app-2
+image ef-kubernetes-app:1.0.0
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>880</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>390</x>
+      <y>560</y>
+      <w>150</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>Service 
 ClusterIP
-efkubernetesapp1</panel_attributes>
+efkubernetesapp1
+
+halign=center
+bg=#BCB0E7</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>390</x>
+      <y>350</y>
+      <w>150</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Service 
+ClusterIP
+efkubernetesapp0
+
+halign=center
+bg=#BCB0E7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>390</x>
+      <y>770</y>
+      <w>150</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Service 
+ClusterIP
+efkubernetesapp2
+
+halign=center
+bg=#BCB0E7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>420</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>630</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>830</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>600</x>
+      <y>350</y>
+      <w>150</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Service
+NodePort lvweb
+clustermonitor
+
+halign=center
+bg=#BCB0E7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>380</y>
+      <w>290</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Streaming node ef-kubernetes-app-0
+image ef-kubernetes-app:1.0.0
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>790</x>
+      <y>350</y>
+      <w>310</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Pod ef-kubernetes-app-0
+
+halign=center
+layer=3
+bg=#A3C1F3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>410</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>230</y>
+      <w>30</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>420</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>630</y>
+      <w>60</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>830</y>
+      <w>60</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>400</y>
+      <w>30</w>
+      <h>500</h>
+    </coordinates>
+    <panel_attributes>lt=-
+layer=4</panel_attributes>
+    <additional_attributes>10.0;480.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

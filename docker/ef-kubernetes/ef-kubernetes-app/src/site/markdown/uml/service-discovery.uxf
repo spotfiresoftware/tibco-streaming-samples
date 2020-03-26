@@ -4,90 +4,51 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
+      <x>330</x>
       <y>100</y>
-      <w>140</w>
+      <w>130</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>admin</panel_attributes>
-    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>30</x>
-      <y>40</y>
-      <w>310</w>
-      <h>230</h>
-    </coordinates>
-    <panel_attributes>Pod ef-kubernetes-app-0</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>50</x>
-      <y>90</y>
-      <w>270</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>Streaming node ef-kubernetes-app-0
-image ef-kubernetes-app:1.0.0
-fg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLDeployment</id>
-    <coordinates>
-      <x>430</x>
-      <y>40</y>
-      <w>330</w>
-      <h>230</h>
-    </coordinates>
-    <panel_attributes>Service 
-
-ClusterIP
-
-efkubernetesapp0-default-efkubernetesapp</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
+      <x>330</x>
       <y>130</y>
-      <w>140</w>
+      <w>130</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>web</panel_attributes>
-    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
+      <x>330</x>
       <y>160</y>
-      <w>140</w>
+      <w>130</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>distribution</panel_attributes>
-    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
+      <x>330</x>
       <y>190</y>
-      <w>140</w>
+      <w>130</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>eventflow</panel_attributes>
-    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
+      <x>760</x>
       <y>70</y>
       <w>220</w>
       <h>40</h>
@@ -99,7 +60,7 @@ admin port 2000</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
+      <x>760</x>
       <y>120</y>
       <w>220</w>
       <h>40</h>
@@ -111,7 +72,7 @@ web port 80</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
+      <x>760</x>
       <y>170</y>
       <w>220</w>
       <h>40</h>
@@ -123,7 +84,7 @@ distribution port 3000</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
+      <x>760</x>
       <y>220</y>
       <w>220</w>
       <h>40</h>
@@ -135,7 +96,7 @@ eventflow port 10000</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1040</x>
+      <x>1050</x>
       <y>70</y>
       <w>130</w>
       <h>40</h>
@@ -146,7 +107,7 @@ eventflow port 10000</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>950</x>
+      <x>960</x>
       <y>80</y>
       <w>110</w>
       <h>30</h>
@@ -157,7 +118,7 @@ eventflow port 10000</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1040</x>
+      <x>1050</x>
       <y>120</y>
       <w>130</w>
       <h>40</h>
@@ -168,7 +129,7 @@ eventflow port 10000</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>950</x>
+      <x>960</x>
       <y>130</y>
       <w>110</w>
       <h>30</h>
@@ -179,7 +140,7 @@ eventflow port 10000</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1040</x>
+      <x>1050</x>
       <y>170</y>
       <w>130</w>
       <h>40</h>
@@ -191,7 +152,7 @@ Streaming nodes</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>950</x>
+      <x>960</x>
       <y>180</y>
       <w>110</w>
       <h>30</h>
@@ -202,7 +163,7 @@ Streaming nodes</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1040</x>
+      <x>1050</x>
       <y>220</y>
       <w>130</w>
       <h>40</h>
@@ -214,12 +175,58 @@ client</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>950</x>
+      <x>960</x>
       <y>230</y>
       <w>110</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>100</y>
+      <w>300</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Streaming node ef-kubernetes-app-0
+image ef-kubernetes-app:1.0.0
+layer=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>30</x>
+      <y>60</y>
+      <w>320</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>Pod ef-kubernetes-app-0
+
+halign=center
+layer=3
+bg=#A3C1F3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>440</x>
+      <y>70</y>
+      <w>330</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Service 
+
+ClusterIP
+
+efkubernetesapp0-default-efkubernetesapp
+
+halign=center
+bg=#BCB0E7</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
