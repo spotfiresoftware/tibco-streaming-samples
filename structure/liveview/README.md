@@ -2,7 +2,7 @@
 
 How to structure an LiveView fragment.
 
-* [liveview](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/structure/liveview/))
+* [liveview](src/site/markdown/index.md) 
 
 _This is a TIBCO approved sample._
 

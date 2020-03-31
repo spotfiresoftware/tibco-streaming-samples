@@ -2,7 +2,7 @@
 
 How to use cluster aware in TIBCO&reg; Streaming 10.5.0 projects - EventFlow Fragment
 
-* [ca-polling-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.5.0/highavailability/ca-polling/ca-polling-ef/))
+* [ca-polling-ef](src/site/markdown/index.md) 
 
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.
