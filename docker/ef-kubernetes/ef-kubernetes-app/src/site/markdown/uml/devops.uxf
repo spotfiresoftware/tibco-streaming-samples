@@ -28,8 +28,8 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>100</x>
-      <y>330</y>
+      <x>60</x>
+      <y>210</y>
       <w>150</w>
       <h>70</h>
     </coordinates>
@@ -40,8 +40,8 @@ Repository</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>450</y>
+      <x>90</x>
+      <y>320</y>
       <w>400</w>
       <h>280</h>
     </coordinates>
@@ -53,8 +53,8 @@ layer=0</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>590</y>
+      <x>130</x>
+      <y>460</y>
       <w>130</w>
       <h>80</h>
     </coordinates>
@@ -68,8 +68,8 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>270</x>
-      <y>530</y>
+      <x>290</x>
+      <y>400</y>
       <w>170</w>
       <h>170</h>
     </coordinates>
@@ -83,8 +83,8 @@ layer=1</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>300</x>
-      <y>570</y>
+      <x>320</x>
+      <y>440</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -96,8 +96,8 @@ layer=2</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>300</x>
-      <y>610</y>
+      <x>320</x>
+      <y>480</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -110,8 +110,8 @@ layer=2</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>300</x>
-      <y>650</y>
+      <x>320</x>
+      <y>520</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -124,8 +124,8 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>610</y>
+      <x>250</x>
+      <y>480</y>
       <w>90</w>
       <h>40</h>
     </coordinates>
@@ -137,8 +137,8 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>620</y>
+      <x>250</x>
+      <y>490</y>
       <w>90</w>
       <h>70</h>
     </coordinates>
@@ -150,21 +150,21 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>390</y>
-      <w>60</w>
-      <h>220</h>
+      <x>120</x>
+      <y>270</y>
+      <w>90</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-&gt;&gt;
 Pull
 Push</panel_attributes>
-    <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
+    <additional_attributes>70.0;190.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>240</x>
-      <y>250</y>
+      <x>60</x>
+      <y>110</y>
       <w>150</w>
       <h>70</h>
     </coordinates>
@@ -175,10 +175,10 @@ Repository</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>310</y>
-      <w>180</w>
-      <h>300</h>
+      <x>110</x>
+      <y>170</y>
+      <w>170</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>Dependencies
 
@@ -190,13 +190,13 @@ Repository</panel_attributes>
 
 
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;280.0;120.0;10.0</additional_attributes>
+    <additional_attributes>100.0;290.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>290</y>
+      <x>600</x>
+      <y>70</y>
       <w>470</w>
       <h>370</h>
     </coordinates>
@@ -208,8 +208,8 @@ layer=0</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>630</x>
-      <y>250</y>
+      <x>340</x>
+      <y>40</y>
       <w>150</w>
       <h>70</h>
     </coordinates>
@@ -221,8 +221,8 @@ System</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>380</y>
+      <x>340</x>
+      <y>160</y>
       <w>130</w>
       <h>80</h>
     </coordinates>
@@ -236,10 +236,10 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>290</y>
-      <w>280</w>
-      <h>210</h>
+      <x>190</x>
+      <y>150</y>
+      <w>170</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>Dependencies
 
@@ -251,15 +251,15 @@ layer=2</panel_attributes>
 
 
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>260.0;130.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
-      <y>270</y>
-      <w>270</w>
-      <h>200</h>
+      <x>200</x>
+      <y>130</y>
+      <w>160</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>Deployment
 
@@ -271,27 +271,27 @@ lt=&lt;&lt;-</panel_attributes>
 
 
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;250.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;140.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>310</y>
+      <x>400</x>
+      <y>100</y>
       <w>60</w>
-      <h>90</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Build
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>360</y>
-      <w>410</w>
-      <h>180</h>
+      <x>200</x>
+      <y>210</y>
+      <w>160</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>Pull
 
@@ -303,13 +303,13 @@ lt=&lt;&lt;-</panel_attributes>
 
 
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>390.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>140.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1150</x>
-      <y>370</y>
+      <x>850</x>
+      <y>150</y>
       <w>170</w>
       <h>120</h>
     </coordinates>
@@ -323,8 +323,8 @@ layer=1</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>1180</x>
-      <y>420</y>
+      <x>880</x>
+      <y>200</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -336,8 +336,8 @@ layer=2</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>950</x>
-      <y>380</y>
+      <x>650</x>
+      <y>160</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -350,8 +350,8 @@ layer=2</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>950</x>
-      <y>430</y>
+      <x>650</x>
+      <y>210</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -364,9 +364,9 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>380</y>
-      <w>220</w>
+      <x>460</x>
+      <y>160</y>
+      <w>210</w>
       <h>160</h>
     </coordinates>
     <panel_attributes>Push
@@ -379,14 +379,14 @@ layer=2</panel_attributes>
 
 
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>430</y>
-      <w>220</w>
+      <x>460</x>
+      <y>210</y>
+      <w>210</w>
       <h>160</h>
     </coordinates>
     <panel_attributes>Push
@@ -399,13 +399,13 @@ lt=&lt;&lt;-</panel_attributes>
 
 
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>197.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>187.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1150</x>
-      <y>500</y>
+      <x>850</x>
+      <y>280</y>
       <w>170</w>
       <h>120</h>
     </coordinates>
@@ -419,8 +419,8 @@ layer=1</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>1180</x>
-      <y>550</y>
+      <x>880</x>
+      <y>330</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -432,8 +432,8 @@ layer=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1050</x>
-      <y>380</y>
+      <x>750</x>
+      <y>160</y>
       <w>90</w>
       <h>160</h>
     </coordinates>
@@ -452,8 +452,8 @@ lt=&lt;&lt;-</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1050</x>
-      <y>430</y>
+      <x>750</x>
+      <y>210</y>
       <w>90</w>
       <h>160</h>
     </coordinates>
@@ -472,8 +472,8 @@ lt=&lt;&lt;-</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1120</x>
-      <y>340</y>
+      <x>820</x>
+      <y>120</y>
       <w>230</w>
       <h>300</h>
     </coordinates>
@@ -481,6 +481,19 @@ lt=&lt;&lt;-</panel_attributes>
 
 bg=white
 layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>10</y>
+      <w>500</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>Continuous Integration Environment
+bg=orange
+layer=0</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

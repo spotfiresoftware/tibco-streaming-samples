@@ -392,8 +392,8 @@ bg=#BCB0E7</panel_attributes>
       <w>290</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>Streaming node ef-kubernetes-app-0
-image ef-kubernetes-app:1.0.0
+    <panel_attributes>Streaming node clustermonitor-0
+image clustermonitor:1.0.0
 layer=4</panel_attributes>
     <additional_attributes/>
   </element>
@@ -405,7 +405,7 @@ layer=4</panel_attributes>
       <w>310</w>
       <h>190</h>
     </coordinates>
-    <panel_attributes>Pod ef-kubernetes-app-0
+    <panel_attributes>Pod clustermonitor-0
 
 halign=center
 layer=3
@@ -483,5 +483,20 @@ layer=4</panel_attributes>
     <panel_attributes>lt=-
 layer=4</panel_attributes>
     <additional_attributes>10.0;480.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>780</x>
+      <y>310</y>
+      <w>330</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>StatefulSet Controller
+clustermonitor
+halign=center
+layer=2
+bg=#F1E1B8</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

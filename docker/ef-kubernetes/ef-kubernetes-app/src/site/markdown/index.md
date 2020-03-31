@@ -1,19 +1,20 @@
 # Docker : Kubernetes EventFlow
 
 This sample describes how to deploy an application archive containing a Streaming fragment to Docker using 
-Kubernetes.  The primary focus is desktop development, ie testing of application images in a desktop Kubernetes 
+Kubernetes.  The primary focus is desktop development, i.e. testing of application images in a desktop Kubernetes 
 node.
 
 * [Terminology](#terminology)
+* [Overview](#overview)
 * [Quick runthrough](#quick-runthrough)
 * [Prerequisites](#prerequisites)
-* [Development lifecycle](#development-lifecycle)
+* [Clound native development lifecycle](#cloud-native-development-lifecycle)
 * [Creating an application archive project for Kubernetes from TIBCO Streaming Studio&trade;](#creating-an-application-archive-project-for-kubernetes-from-tibco-streaming-studio-trade)
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
 * [Service discovery](#service-discovery)
-* [Exposing webservices via web port](#exposing-webservices-via-web-port)
-* [Exposing webservices via ingress](#exposing-webservices-via-ingress)
+* [Exposing REST endpoints via web port](#exposing-rest-endpoints-via-web-port)
+* [Exposing REST endpoints via ingress](#exposing-rest-endpoints-via-ingress)
 * [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Deployment](#deployment)
@@ -30,12 +31,13 @@ In this sample we are using various technologies with terminology that overlap a
 * **Kubernetes**
     * **[Kubernetes Node](https://kubernetes.io/docs/concepts/architecture/nodes/)** -  A worker machine
     * **[Kubernetes Cluster](https://kubernetes.io/docs/concepts/)** - A set of machines, called nodes, that run containerized applications managed by Kubernetes. A cluster has at least one worker node and at least one master node.
+    * **[Kubernetes Master Node](https://kubernetes.io/docs/concepts/#kubernetes-master)** - A specific Kubernetes Node with responsibility for maintaining the state of the cluster
     * **[K8s](https://kubernetes.io/)** - Abbreviation of Kubernetes
     * **[POD](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)** - Smallest deployable unit of computing that can be created and managed in Kubernetes
     * **[StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)** - Manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods
     * **[Service](https://kubernetes.io/docs/concepts/services-networking/service/)** - An abstract way to expose an application running on a set of Pods as a network service
     * **[Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)** - An API object that manages external access to the services in a cluster, typically HTTP
-    * **[Proxy](https://kubernetes.io/docs/concepts/cluster-administration/proxies/)** - Exposes REST API
+    * **[Kubectl Proxy](https://kubernetes.io/docs/concepts/cluster-administration/proxies/)** - Usually runs on users desktop and proxies localhost address to the kubernetes apiserver
 * **Tibco**
     * **[Streaming Machine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - An execution context for a node
     * **[Streaming Application](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - Business specific functionality
@@ -43,6 +45,13 @@ In this sample we are using various technologies with terminology that overlap a
     * **[Streaming Cluster](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - A logical grouping of Streaming nodes that communicate to support an application
     * **[Streaming Node](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - A Streaming container for engines
     * **[Streaming Engine](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/architectsguide/ch03s01.html)** - Executable context for a fragment
+
+<a name="overview"></a>
+
+## Overview
+
+This sample consists of a basic eventflow fragment contained in an application archive.  Additional files are included to support deploying
+in a Kubernetes environment.  The sample shows how to build, deploy and use TIBCO Streaming applications in Kubernetes.
 
 <a name="quick_runthrough"></a>
 
@@ -60,10 +69,14 @@ In this sample we are using various technologies with terminology that overlap a
 7. Use *kubectl delete* to stop the Streaming Nodes and remove the PODs
 
 ```shell
+# deploy application which triggers starting the pods
+
 $ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
 configmap/configuration created
 configmap/resources created
 statefulset.apps/ef-kubernetes-app created
+
+# get the status of the pods
 
 $ kubectl get pod
 NAME                  READY   STATUS    RESTARTS   AGE
@@ -71,12 +84,16 @@ ef-kubernetes-app-0   0/1     Running   0          11s
 ef-kubernetes-app-1   0/1     Running   0          11s
 ef-kubernetes-app-2   0/1     Running   0          11s
 
+# view streaming node logs
+
 $ kubectl logs ef-kubernetes-app-0
 ...
 [ef-kubernetes-app-0.default.ef-kubernetes-app]     Node started
 COMMAND FINISHED
 08:50:26.000 [334] WARN  c.t.e.d.runtime - (osdisp.cpp:146) findEvent: object reference = 2111918189:1720523304:40121159345600:45
 08:50:26.627 [Thread- ThreadPool - 1] INFO  c.s.s.s.n.StreamBaseHTTPServer - sbd at ef-kubernetes-app-0.ef-kubernetes-app.default.svc.cluster.local:10000; pid=216; version=10.6.0-SNAPSHOT_2af0df501f80b68677b966f66006f5aa3a61c17b; Listening
+
+# delete application which stops and removes the pods
 
 $ kubectl delete -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
 service "ef-kubernetes-app" deleted
@@ -106,11 +123,11 @@ docker-for-desktop
 
 Docker for desktop only supports a single Kubernetes Node.
 
-<a name="development_lifecycle"></a>
+<a name="cloud-native-development-lifecycle"></a>
 
-## Development lifecycle
+## Cloud native development lifecycle
 
-The assumed development lifecycle is :
+The cloud native development lifecycle is :
 
 * All source in git
 * Images and packages are built from source by maven
@@ -130,7 +147,7 @@ Maven lifecycle mapping is :
 
 * **mvn compile** - compile any java source in a Streaming Fragment to classes
 * **mvn test** - run any junit test cases on the Streaming Fragment
-* **mvn package** - build Streaming Fragment archive, Streaming Application archive or docker images
+* **mvn package** - build Streaming Fragment archive, Streaming Application archive and docker images
 * **mvn pre-integration-phase** - start Docker container(s)
 * **mvn integration-phase** - run any system test cases
 * **mvn post-integration-phase** - stop Docker container(s)
@@ -220,6 +237,9 @@ configuration = {
 }
 ```
 
+*DEFAULT_ROUTE* is set in the container startup script and contains the source address of internal administration requests via the discovery services.  We also allow 
+administration requests directly from other pods in the streaming cluster and from the cluster monitor.
+
 Along with additional files :
 
 * [start-cluster-monitor](../../../src/main/docker/clustermonitor/start-cluster-monitor)
@@ -230,8 +250,9 @@ Along with additional files :
 
 ## Containers and nodes
 
-Streaming nodes require the hostname, nodename and DNS working together.  Tests have shown that the Kubernetes 
-*statefulset* option supports Streaming nodes easiest.
+We use the Kubernetes *statefulset* controller to support good networking 
+( hostname, nodename and DNS working together ), logical scaling ( pods are
+started and stopped in order ) and natural pod naming.
 
 The goal of this sample is to construct the deployment shown below :
 
@@ -249,25 +270,24 @@ The goal of this sample is to construct the deployment shown below :
 
 ## Service discovery
 
-Many kubernetes versions specifically block UDP between POD's ... this prevents TIBCO Streaming UDP based service discovery from working.  Hence, when the 
-Streaming nodes detect that kubernetes is in use, service discovery via UDP is disabled and service discovery via kubernetes is enabled.
+The TIBCO streaming node detects that its deployed in kubernetes and autmatically switches to kubernetes based discovery.
 
 Each TIBCO Streaming node creates an kubernetes service object and populates with service discovery data.  Other TIBCO Streaming nodes
 will detect these service objects to support discovery of remote TIBCO Streaming nodes.
 
-Regardless of the ports used by the POD, the ports exposed via the service object are fixed :
+Regardless of the ports used by the POD, the ports exposed to other pods via the service object are fixed :
 
 ![resources](images/service-discovery.svg)
 
-In this example, administration is available on host **efkubernetesapp0-default-efkubernetesapp** port **2000**.
+Administration is available on host **efkubernetesapp0-default-efkubernetesapp** port **2000**.
 
 The service objects can be inspected with *kubectl get service* :
 
 ```shell
 $ kubectl get service
 NAME                                       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                                                                                                                                                                               AGE
-efkubernetesapp0-default-efkubernetesapp   ClusterIP   10.106.48.118   <none>        2000/TCP,80/TCP,3000/TCP,3001/TCP,3002/TCP,3003/TCP,3004/TCP,3005/TCP,3006/TCP,3007/TCP,3008/TCP,3009/TCP,3010/TCP,3011/TCP,3012/TCP,3013/TCP,3014/TCP,3015/TCP,3016/TCP,3017/TCP,3018/TCP,3019/TCP   56s
-efkubernetesapp1-default-efkubernetesapp   ClusterIP   10.99.247.71    <none>        2000/TCP,80/TCP,3000/TCP,3001/TCP,3002/TCP,3003/TCP,3004/TCP,3005/TCP,3006/TCP,3007/TCP,3008/TCP,3009/TCP,3010/TCP,3011/TCP,3012/TCP,3013/TCP,3014/TCP,3015/TCP,3016/TCP,3017/TCP,3018/TCP,3019/TCP   54s
+efkubernetesapp0-default-efkubernetesapp   ClusterIP   10.106.48.118   <none>        2000/TCP,80/TCP,3000/TCP,3001/TCP,3002/TCP,3003/TCP,3004/TCP   56s
+efkubernetesapp1-default-efkubernetesapp   ClusterIP   10.99.247.71    <none>        2000/TCP,80/TCP,3000/TCP,3001/TCP,3002/TCP,3003/TCP,3004/TCP   54s
 efkubernetesapp2-default-efkubernetesapp   ClusterIP   10.110.244.93   <none>        2000/TCP,80/TCP   
 
 $ kubectl get service efkubernetesapp0-default-efkubernetesapp -o yaml
@@ -305,7 +325,8 @@ spec:
 ...
 ```
 
-Hence, epadmin commands should include adminport set to 2000 and hostname set to the service object name :
+Note that epadmin doesn't support service names when using kubernetes discovery.  So to use epadmin commands from within a pod, 
+include adminport set to 2000 and hostname set to the service object name :
 
 ```shell
 $ kubectl exec ef-kubernetes-app-0 epadmin adminport=2000 hostname=efkubernetesapp0-default-efkubernetesapp display node
@@ -328,7 +349,7 @@ Sensitive Configuration Data Encryption = Disabled
 Secure Communication Profile Name = None
 ```
 
-Webservice calls should similarly use the hostname set to the service object name :
+Webservice calls within a pod should similarly use the hostname set to the service object name :
 
 ```
 $ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:tibco -X POST "http://efkubernetesapp0-default-efkubernetesapp/admin/v1/targets/services?command=display" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "parameters=" | jq
@@ -374,9 +395,9 @@ $ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:tibco -X POST "http://efk
 
 Note that the POD must have sufficient kubernetes permissions to create, update and delete service objects.
 
-<a name="exposing-webservices-via-web-port"></a>
+<a name="exposing-rest-endpoints-via-web-port"></a>
 
-## Exposing webservices via web port
+## Exposing REST endpoints via web port
 
 Webservices can be exposed by using *kubectl apply* to create a service object :
 
@@ -445,11 +466,11 @@ $ curl -s -u tibco:tibco -X POST "http://localhost:31448/admin/v1/targets/servic
 
 ```
 
-<a name="exposing-webservices-via-ingress"></a>
+<a name="exposing-rest-endpoints-via-ingress"></a>
 
-## Exposing webservices via ingress
+## Exposing REST endpoints via ingress
 
-In addition to node ports, Kubernetes also supports exposing webservices via ingress configuration.  Note, however, ingress does depends on a suitable ingress controller installed.
+In addition to node ports, Kubernetes also supports exposing webservices via ingress configuration.  Note, however, an ingress configuration depends on an ingress controller being available.
 
 For docker-for-desktop, one such controller is **ngnix** - see https://github.com/kubernetes/ingress-nginx for an overview and https://kubernetes.github.io/ingress-nginx/deploy/
 for specific installation instructions.
@@ -553,10 +574,7 @@ Running *mvn install* will :
 
 ![resources](images/maven.gif)
 
-Some Kubernetes environments ( notably **Kind** and **CodeReady Containers** ) require the image to be pushed to the internal registry 
-before running *kubectl apply*. See [Deployment](#deployment) below.
-
-To start the cluster use the *kubectl apply* command :
+To start the streaming cluster use the *kubectl apply* command :
 
 ```shell
 $ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
@@ -616,7 +634,7 @@ Events:
   Normal  SuccessfulCreate  75s   statefulset-controller  create Pod ef-kubernetes-app-2 in StatefulSet ef-kubernetes-app successful
 ```
 
-The configuration file defines 3 replicas and so 3 POD's were created ( ef-kubernetes-app-0, ef-kubernetes-app-1 and ef-kubernetes-app-2 ).
+The configuration file defines 3 replicas, so 3 POD's are created ( ef-kubernetes-app-0, ef-kubernetes-app-1 and ef-kubernetes-app-2 ).
 
 To view the logs use *kubectl logs* :
 
@@ -634,6 +652,9 @@ COMMAND FINISHED
 11:06:37.296 adPool - 1 INFO  StreamBaseHTTPServer : sbd at ef-kubernetes-app-0.ef-kubernetes-app.default.svc.cluster.local:10000; pid=190; version=10.6.0-SNAPSHOT_a2fc1c56fa113822f013c4031f0895e3d53fcc89; Listening
 11:08:34.610  [tid=202] INFO  n.ActiveNodeNotifier : Node ef-kubernetes-app-1.default.ef-kubernetes-app is active
 ```
+
+Note that some Kubernetes environments ( notably [**Kind**](https://kind.sigs.k8s.io/) and [**CodeReady Containers**](https://cloud.redhat.com/openshift/install/crc/installer-provisioned) ) require the image 
+to be pushed to the internal registry before running *kubectl apply*. See [Deployment](#deployment) below.
 
 ## Deployment
 
@@ -659,7 +680,7 @@ a51f3f96403a: Layer already exists
 ...
 ```
 
-Registry parameters are typically set in continuous integration builds in maven's settings.xml :
+Registry parameters are typically set in continuous integration builds using a maven settings.xml file :
 
 ```xml
 <settings>
@@ -695,14 +716,15 @@ See also https://docs.docker.com/registry/insecure/.
 
 ## Runtime settings
 
-The application docker image will usually contain all configurations and files to support the application.  However
-it is possible to inject configurations and files at runtime.
+An application container image can be completely self-contained, but it is also possible to inject configuration and data files 
+when a container is run. The table below defines how this is done.
+
 
 | Configuration             | ConfigMap                                 | Set Environment Variable                           |
 |---------------------------|-------------------------------------------|----------------------------------------------------|
 | Streaming node name       |                                           | **STREAMING_NODENAME**                             |
 | Node deployment file      | add file to **configuration**             | **STREAMING_NODEDEPLOY** to filename               |
-| Substitution variables or |                                           | **STREAMING_SUBSTITUTIONS**                        |
+| Substitution variables    |                                           | **STREAMING_SUBSTITUTIONS**                        |
 | Substitution variables    | add substitutions to **configuration**    | **STREAMING_SUBSTITUTIONS** from ConfigMap         |
 | Substitution file         | add file to **configuration**             | **STREAMING_SUBSTITUTIONFILE** to filename         |
 | Administration port       |                                           | **STREAMING_ADMINPORT**                            |
@@ -774,7 +796,7 @@ data:
   keystorepassword: c2VjcmV0c2VjcmV0
 ```
 
-Example environment variables are shown below :
+Example environment variables in the statefulset controller are shown below :
 
 
 ```yaml
@@ -823,7 +845,7 @@ spec:
 ```
 
 A few Streaming configuration files reference files (for example trust store).  These can be included in 
-the docker image or via a ConfigMap in the same was as above.
+the docker image or via a ConfigMap in the same way as above.
 
 <a name="further-kubernetes-commands"></a>
 
@@ -920,16 +942,6 @@ service "ef-kubernetes-app" deleted
 
 $ kubectl delete statefulset ef-kubernetes-app
 statefulset.apps "ef-kubernetes-app" deleted
-```
-
-Service discovert service objects can be deleted by label :
-
-```shell
-$ kubectl delete service -l discovery.ep.tibco.com/streaming-node-service
-service "clustermonitor0-clustermonitor" deleted
-service "efhelmapp0-default-efhelmapp" deleted
-service "efhelmapp1-default-efhelmapp" deleted
-service "efhelmapp2-default-efhelmapp" deleted
 ```
 
 ### Rolling upgrades
@@ -1044,7 +1056,7 @@ with token credentials as exported above :
 
 ![resources](images/web-ui.png)
 
-For **demo** purposes, a skip button can be added to the login screen by running :
+For **demo** purposes, a skip button can be added to the login screen ( to avoid requiring the authentication token ) by running :
 
 ```shell
 $ kubectl -n kubernetes-dashboard patch deploy kubernetes-dashboard --type='json' -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--enable-skip-login"}]'
@@ -1255,7 +1267,7 @@ Using project "default".
 ```
 
 Although **CodeReady Containers** is designed to perform builds internally, it is possible to build
-expernally and push the images into **CodeReady Containers**.
+externally and push the images into **CodeReady Containers**.
 
 To enable pushing images into **CodeReady Containers** ensure a default route is enabled :
 
@@ -1265,7 +1277,7 @@ $ oc patch config.imageregistry.operator.openshift.io/cluster --patch '{"spec":{
 config.imageregistry.operator.openshift.io/cluster patched (no change)
 ```
 
-The exposed registry address can be found with *oc get route* :
+The exposed registry address can be found with *oc get route* command :
 
 ```shell
 $ oc login -u kubeadmin -p $(crc console --credentials | grep admin | cut -f12 -d\ ) https://api.crc.testing:6443
