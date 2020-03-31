@@ -2,7 +2,7 @@
 
 How to write unit tests for EventFlow fragments.
 
-* [junit](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.4.4/testing/junit/))
+* [junit](src/site/markdown/index.md) 
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

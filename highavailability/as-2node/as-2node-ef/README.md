@@ -2,7 +2,7 @@
 
 How to build a 2-node active standby deployment. - EventFlow Fragment
 
-* [as-2node-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.4.4/highavailability/as-2node/as-2node-ef/))
+* [as-2node-ef](src/site/markdown/index.md) 
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

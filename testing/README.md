@@ -4,7 +4,7 @@ How to test TIBCO&reg; Streaming 10.4.4 projects.
 
 Samples :
 
-* [Testing : Junit](junit/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.4.4/testing/junit/))
+* [Testing : Junit](junit/src/site/markdown/index.md) 
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

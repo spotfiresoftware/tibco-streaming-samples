@@ -2,7 +2,7 @@
 
 How to build a 3-node active active deployment with disaster recovery. - Application
 
-* [aa-3node-dr-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.4.4/highavailability/aa-3node-dr/aa-3node-dr-app/))
+* [aa-3node-dr-app](src/site/markdown/index.md) 
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

@@ -2,7 +2,7 @@
 
 How to build a 2-node active active deployment + proxy discovery. - EventFlow Fragment
 
-* [pd-2node-ef](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.4.4/highavailability/pd-2node/pd-2node-ef/))
+* [pd-2node-ef](src/site/markdown/index.md) 
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.

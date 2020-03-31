@@ -2,7 +2,7 @@
 
 How to compile C++ source to a NAR.
 
-* [nar-cpplib](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.4.4/nativelibrary/nar/nar-cpplib/))
+* [nar-cpplib](src/site/markdown/index.md) 
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
