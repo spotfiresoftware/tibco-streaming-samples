@@ -1,11 +1,13 @@
-# Ansible-Docker: 2-node EventFlow - Application
+# Web: Prometheus Metrics Integration WAR
 
-How to deploy a 2-node EventFlow application in Docker to AWS EC2 instance(s) managed by Ansible - Application
+How to integrate with Prometheus Metrics in TIBCO Streaming. - WAR
 
-* [ef-2node-awsec2-app](src/site/markdown/index.md)
+* [prometheus-metrics-war](src/site/markdown/index.md)
+
+_This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
