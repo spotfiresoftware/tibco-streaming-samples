@@ -2,7 +2,7 @@
 
 How to integrate with Prometheus Metrics in TIBCO Streaming. - Application
 
-* [prometheus-metrics-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/prometheus-metrics/prometheus-metrics-app/))
+* [prometheus-metrics-app](src/site/markdown/index.md)
 
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.

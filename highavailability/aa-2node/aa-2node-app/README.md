@@ -2,7 +2,7 @@
 
 How to build a 2-node active active deployment. - Application
 
-* [aa-2node-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/highavailability/aa-2node/aa-2node-app/))
+* [aa-2node-app](src/site/markdown/index.md)
 
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.

@@ -2,10 +2,10 @@
 
 How to structure a maven aggregate project with EventFlow fragment and application archive.
 
-This is a maven aggregator project consisting of the following maven modules :
+Samples :
 
-* [Structure: Application - EventFlow Fragment](application-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/structure/application/application-ef/))
-* [Structure: Application - Application](application-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/structure/application/application-app/))
+* [Structure: Application - EventFlow Fragment](application-ef/src/site/markdown/index.md)
+* [Structure: Application - Application](application-app/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 

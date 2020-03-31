@@ -2,7 +2,7 @@
 
 How to deploy an EventFlow application in Docker with Kubernetes and Helm - Application
 
-* [ef-helm-app](src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-helm/ef-helm-app/))
+* [ef-helm-app](src/site/markdown/index.md)
 
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.

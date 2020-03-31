@@ -2,10 +2,10 @@
 
 How to deploy an EventFlow application in Docker with Kubernetes and Helm
 
-This is a maven aggregator project consisting of the following maven modules :
+Samples :
 
-* [Docker: Helm EventFlow - EventFlow Fragment](ef-helm-eventflow/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-helm/ef-helm-eventflow/))
-* [Docker: Helm EventFlow - Application](ef-helm-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-helm/ef-helm-app/))
+* [Docker: Helm EventFlow - EventFlow Fragment](ef-helm-eventflow/src/site/markdown/index.md)
+* [Docker: Helm EventFlow - Application](ef-helm-app/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 

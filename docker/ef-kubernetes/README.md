@@ -2,10 +2,10 @@
 
 How to deploy an EventFlow application in Docker with Kubernetes
 
-This is a maven aggregator project consisting of the following maven modules :
+Samples :
 
-* [Docker: Kubernetes EventFlow - EventFlow Fragment](ef-kubernetes-eventflow/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-kubernetes/ef-kubernetes-eventflow/))
-* [Docker: Kubernetes EventFlow - Application](ef-kubernetes-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/docker/ef-kubernetes/ef-kubernetes-app/))
+* [Docker: Kubernetes EventFlow - EventFlow Fragment](ef-kubernetes-eventflow/src/site/markdown/index.md)
+* [Docker: Kubernetes EventFlow - Application](ef-kubernetes-app/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 

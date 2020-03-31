@@ -2,11 +2,11 @@
 
 How to integrate with Prometheus Metrics in TIBCO Streaming.
 
-This is a maven aggregator project consisting of the following maven modules :
+Samples :
 
-* [Web: Prometheus Metrics Integration WAR](prometheus-metrics-war/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/prometheus-metrics/prometheus-metrics-war/))
-* [Web: Prometheus Metrics Integration EventFlow](prometheus-metrics-ef/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/prometheus-metrics/prometheus-metrics-ef/))
-* [Web: Prometheus Metrics Integration App](prometheus-metrics-app/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/prometheus-metrics/prometheus-metrics-app/))
+* [Web: Prometheus Metrics Integration WAR](prometheus-metrics-war/src/site/markdown/index.md)
+* [Web: Prometheus Metrics Integration EventFlow](prometheus-metrics-ef/src/site/markdown/index.md)
+* [Web: Prometheus Metrics Integration App](prometheus-metrics-app/src/site/markdown/index.md)
 
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.

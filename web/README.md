@@ -4,7 +4,7 @@ How to deploy web application in TIBCO&reg; Streaming master projects.
 
 Samples :
 
-* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md) ([html](https://tibcosoftware.github.io/tibco-streaming-samples/10.6.0-SNAPSHOT/web/adminwebservice/))
+* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
 * [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
 
 ---
