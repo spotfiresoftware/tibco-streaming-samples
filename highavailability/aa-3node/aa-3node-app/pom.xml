@@ -167,12 +167,26 @@
                     <execution>
                         <id>stop node A</id>
                         <phase>integration-test</phase>
-                        <goals><goal>stop-nodes</goal></goals>
+                        <goals><goal>administer-nodes</goal></goals>
                         <configuration>
                             <skip>${skipTests}</skip>
-                            <nodes>
-                                <node>A</node>
-                            </nodes>
+                            <command>kill</command>
+                            <target>node</target>
+                            <serviceName>A.${project.artifactId}</serviceName>
+                        </configuration>
+                    </execution>  
+
+                    <execution>
+                        <id>browse services</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>administer-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <command>browse</command>
+                            <target>services</target>
+                            <arguments>
+                                <iterations>10</iterations>
+                            </arguments>
                         </configuration>
                     </execution>
 
@@ -203,15 +217,47 @@
                     <execution>
                         <id>stop node B and C</id>
                         <phase>integration-test</phase>
+                        <goals><goal>administer-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <command>kill</command>
+                            <target>node</target>
+                            <serviceName>${project.artifactId}</serviceName>
+                        </configuration>
+                    </execution>  
+
+                    <execution>
+                        <id>remove node A</id>
+                        <phase>integration-test</phase>
                         <goals><goal>stop-nodes</goal></goals>
                         <configuration>
                             <skip>${skipTests}</skip>
-                            <nodes>
-                                <node>B</node>
-                                <node>C</node>
-                            </nodes>
+                            <installPath>${project.build.directory}/test-nodes/A.${project.artifactId}</installPath>
+                            <failOnStopError>false</failOnStopError>
                         </configuration>
-                    </execution>                    
+                    </execution>
+
+                    <execution>
+                        <id>remove node B</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>stop-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <installPath>${project.build.directory}/test-nodes/B.${project.artifactId}</installPath>
+                            <failOnStopError>false</failOnStopError>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>remove node C</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>stop-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <installPath>${project.build.directory}/test-nodes/C.${project.artifactId}</installPath>
+                            <failOnStopError>false</failOnStopError>
+                        </configuration>
+                    </execution>
 
                 </executions>
             </plugin>

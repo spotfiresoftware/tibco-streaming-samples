@@ -110,13 +110,14 @@
                     <execution>
                         <id>stop node A</id>
                         <phase>integration-test</phase>
-                        <goals><goal>stop-nodes</goal></goals>
+                        <goals><goal>administer-nodes</goal></goals>
                         <configuration>
-                            <nodes>
-                                <node>A</node>
-                            </nodes>
+                            <skip>${skipTests}</skip>
+                            <command>kill</command>
+                            <target>node</target>
+                            <serviceName>A.${project.artifactId}</serviceName>
                         </configuration>
-                    </execution>
+                    </execution>  
 
                     <execution>
                         <id>display display operators 1 2</id>
@@ -137,13 +138,37 @@
                     <execution>
                         <id>stop node B</id>
                         <phase>integration-test</phase>
+                        <goals><goal>administer-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <command>kill</command>
+                            <target>node</target>
+                            <serviceName>B.${project.artifactId}</serviceName>
+                        </configuration>
+                    </execution>  
+
+                    <execution>
+                        <id>remove node A</id>
+                        <phase>integration-test</phase>
                         <goals><goal>stop-nodes</goal></goals>
                         <configuration>
-                            <nodes>
-                                <node>B</node>
-                            </nodes>
+                            <skip>${skipTests}</skip>
+                            <installPath>${project.build.directory}/test-nodes/A.${project.artifactId}</installPath>
+                            <failOnStopError>false</failOnStopError>
                         </configuration>
                     </execution>
+
+                    <execution>
+                        <id>remove node B</id>
+                        <phase>integration-test</phase>
+                        <goals><goal>stop-nodes</goal></goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <installPath>${project.build.directory}/test-nodes/B.${project.artifactId}</installPath>
+                            <failOnStopError>false</failOnStopError>
+                        </configuration>
+                    </execution>
+
                 </executions>
 
             </plugin>
