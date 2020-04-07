@@ -195,7 +195,7 @@
                             <command>browse</command>
                             <target>services</target>
                             <arguments>
-                                <iterations>10</iterations>
+                                <iterations>15</iterations>
                             </arguments>
                         </configuration>
                     </execution>
