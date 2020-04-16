@@ -72,13 +72,13 @@ The base image [Dockerfile](../../main/docker/base/Dockerfile) is updated to inc
 RUN yum --assumeyes install \
     sysstat \
     gdb \
-    java-1.8.0-openjdk \
     zip \
     unzip \
     net-tools \
     iptables \
     tc \
     sudo \
+    && yum --assumeyes install java-11-openjdk-headless \
     && yum clean all
 ...
 RUN echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
