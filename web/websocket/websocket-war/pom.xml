@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (C) 2019-2020, TIBCO Software Inc.
+  Copyright (C) 2019, TIBCO Software Inc.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -28,49 +28,54 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tibco.ep.samples</groupId>
-    <artifactId>web</artifactId>
-    <packaging>pom</packaging>
+    <groupId>com.tibco.ep.samples.web</groupId>
+    <artifactId>websocket-war</artifactId>
+    <packaging>war</packaging>
     <version>1.0.0</version>
-    <name>Web</name>
-    <description>How to deploy web application in TIBCO Streaming projects.</description>
+    <name>Web: create WebSocket WAR</name>
+    <description>How to create a WAR which has a WebSocket endpoint</description>
 
-    <modules>
-        <module>adminwebservice</module>
-        <module>prometheus-metrics</module>
-        <module>websocket</module>
-    </modules>
+    <!-- common definitions for this version of StreamBase -->
+    <parent>
+        <groupId>com.tibco.ep.sb.parent</groupId>
+        <artifactId>common</artifactId>
+        <version>10.6.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
 
-    <!-- skip site docs in this aggregator -->
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-api</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
+            <!-- Package as a war -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
+                <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <skipDeploy>true</skipDeploy>
-                    <skip>true</skip>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <message>Updated site documentation from jenkins</message>
-                    <skip>true</skip>
-                </configuration>
+                <version>3.2.3</version>
             </plugin>
         </plugins>
     </build>
-
 </project>
+
