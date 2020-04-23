@@ -1,5 +1,5 @@
 /* *****************************************************************************
- Copyright (C) 2018-2019, TIBCO Software Inc.
+ Copyright (C) 2020, TIBCO Software Inc.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -47,7 +47,7 @@ import java.io.IOException;
 @ServerEndpoint(WebSocketEndpoint.PATH)
 public class WebSocketEndpoint {
 
-    static final String PATH = "/test";
+    static final String PATH = "/test"; //$NON-NLS-1$
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketEndpoint.class);
 

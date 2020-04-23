@@ -1,8 +1,8 @@
 # Web : WebSocket WAR
 
 This sample describes how to build a WAR (.war) which contains a WebSocket endpoint (/test).  After the 
-WebSocket connection is built, this endpoint returns the same string as what it receives.
-The resulting archive can then be used in a downstream EventFlow fragment.
+WebSocket connection is built, this endpoint returns the same string as what it receives with prefix 
+"Received message: ".  The resulting archive can then be used in a downstream EventFlow fragment.
 
 * [Create a WebSocket endpoint](#create-websocket-endpoint)
 * [Generate WAR archive](#generate-war-archive)
