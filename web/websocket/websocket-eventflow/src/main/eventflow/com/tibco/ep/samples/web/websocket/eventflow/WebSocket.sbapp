@@ -6,7 +6,7 @@
         </annotations>
         <type-metadata>
             <param name="type" value="module"/>
-            <param name="fully-qualified-name" value="com.tibco.ep.samples.web.websocket.eventflow.Demo"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.web.websocket.eventflow.WebSocket"/>
         </type-metadata>
         <memory-model-settings/>
         <dynamic-variables/>

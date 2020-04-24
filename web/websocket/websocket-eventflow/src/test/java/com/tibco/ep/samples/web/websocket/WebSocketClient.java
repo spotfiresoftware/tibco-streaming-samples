@@ -45,7 +45,7 @@ import java.io.IOException;
 import java.net.URI;
 
 /**
- * Web socket client class for testing
+ * WebSocket client class for testing
  */
 @ClientEndpoint(configurator = WebSocketClientConfiguration.class)
 public class WebSocketClient {
@@ -130,9 +130,8 @@ public class WebSocketClient {
 
     /**
      * @return message
-     * @throws InterruptedException Unexpected error
      */
-    String getMessage() throws InterruptedException {
+    String getMessage() {
         return this.message;
     }
 }

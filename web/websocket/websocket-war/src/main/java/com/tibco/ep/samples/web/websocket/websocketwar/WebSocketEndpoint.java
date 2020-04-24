@@ -98,13 +98,14 @@ public class WebSocketEndpoint {
     }
 
     /**
-     * The user closes the connection.
+     * Gets called when an error occurs on the WebSocket
      *
+     * @param t throwable t
      * @param session current session
      */
     @OnError
     public void onError(Throwable t, Session session) {
-        LOGGER.info("{} session onError: {}", session.getId(), t.getMessage()); //$NON-NLS-1$
+        LOGGER.error("{} session onError: {}", session.getId(), t.getMessage()); //$NON-NLS-1$
 
     }
 }
