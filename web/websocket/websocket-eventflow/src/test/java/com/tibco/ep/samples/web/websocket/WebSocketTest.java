@@ -66,14 +66,14 @@ public class WebSocketTest extends UnitTest {
         Administration administration = new Administration();
 
         final Results results = administration.execute("display", "web");
-        if (results.returnCode() == DtmCommand.COMMAND_SUCCEEDED) {
-            address = results.getCommandResults()
-                             .get(0)
-                             .getResultSet()
-                             .getRows()
-                             .get(0)
-                             .getColumn(results.getCommandResults().get(0).getHeaderColumn("Network Address"));
-        }
+        Assert.assertEquals(DtmCommand.COMMAND_SUCCEEDED, results.returnCode());
+
+        address = results.getCommandResults()
+                         .get(0)
+                         .getResultSet()
+                         .getRows()
+                         .get(0)
+                         .getColumn(results.getCommandResults().get(0).getHeaderColumn("Network Address"));
     }
 
     /**
@@ -90,7 +90,7 @@ public class WebSocketTest extends UnitTest {
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
         boolean isTestSuccess = false;
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             try {
                 WebSocketClient client = new WebSocketClient(container, new JerseyUriBuilder().path(baseURL).build());
 

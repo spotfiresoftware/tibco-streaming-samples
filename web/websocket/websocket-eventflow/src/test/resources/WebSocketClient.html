@@ -1,5 +1,5 @@
 <!--
-  Copyright (C) 2019, TIBCO Software Inc.
+  Copyright (C) 2020, TIBCO Software Inc.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -88,7 +88,7 @@
             }
             var ws_webservice = document.getElementById("webservice").value;
             if (ws_webservice.length == 0) {
-                alert("Endpoint can not be null");
+                alert("Web service name can not be null");
                 return;
             }
             var ws_username = document.getElementById("username").value;
@@ -163,7 +163,7 @@
         <td><input type="text" id="hostname"/></td>
     </tr>
     <tr>
-        <td>WS Port</td>
+        <td>WS Port number</td>
         <td><input type="text" id="port"/></td>
     </tr>
     <tr>

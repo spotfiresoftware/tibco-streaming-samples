@@ -9,7 +9,7 @@ Samples :
 _This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2019, TIBCO Software Inc.
+Copyright (c) 2020, TIBCO Software Inc.
 
 modification, are permitted provided that the following conditions are met:
 
