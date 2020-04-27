@@ -1,0 +1,210 @@
+<!--
+  Copyright (C) 2020, TIBCO Software Inc.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+  1. Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+
+  2. Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+
+  3. Neither the name of the copyright holder nor the names of its contributors
+     may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocketClient</title>
+    <style>
+        table {
+            border: 2px solid black;
+        }
+
+        input {
+            width: 300px;
+        }
+
+        select {
+            width: 300px;
+        }
+
+        textarea {
+            width: 513px;
+            border: 2px solid black;
+        }
+
+        #btnConnect {
+            width: 100px;
+        }
+
+        #btnDisconnect {
+            width: 100px;
+        }
+
+        #btnSend {
+            width: 100px;
+        }
+    </style>
+    <script>
+        var ws;
+        if (!"WebSocket" in window) {
+            alert("WebSocket is not supported by your browser!");
+        }
+
+        function onConnectClick() {
+
+            var ws_protocol = document.getElementById("protocol").value;
+            var ws_hostname = document.getElementById("hostname").value;
+            if (ws_hostname.length == 0) {
+                alert("Host name can not be null");
+                return;
+            }
+            var ws_port = document.getElementById("port").value;
+            if (ws_port.length == 0) {
+                alert("Port number can not be null");
+                return;
+            }
+            var ws_endpoint = document.getElementById("endpoint").value;
+            if (ws_endpoint.length == 0) {
+                alert("Endpoint can not be null");
+                return;
+            }
+            var ws_webservice = document.getElementById("webservice").value;
+            if (ws_webservice.length == 0) {
+                alert("Web service name can not be null");
+                return;
+            }
+            var ws_username = document.getElementById("username").value;
+            var webSocketURL;
+            if (ws_username.length == 0) {
+                webSocketURL = ws_protocol + "://" + ws_hostname + ":" + ws_port + "/" + ws_webservice + ws_endpoint;
+
+            } else {
+                var ws_password = document.getElementById("password").value;
+
+                webSocketURL = ws_protocol + "://" + ws_username + ":" + ws_password + "@" + ws_hostname + ":" + ws_port + "/" + ws_webservice + ws_endpoint;
+            }
+            connectServer(webSocketURL);
+        }
+
+        function connectServer(webSocketURL) {
+            try {
+
+                ws = new WebSocket(webSocketURL);
+                ws.onopen = function () {
+                    document.getElementById("incomingMsgOutput").value += "Connecting with server" + "\n";
+                    changeButtonsStatus(true);
+                };
+                ws.onmessage = function (evt) {
+                    document.getElementById("incomingMsgOutput").value += "Server respond: " + evt.data + "\n";
+                };
+                ws.onclose = function () {
+                    document.getElementById("incomingMsgOutput").value += "Connection is closed..." + "\n";
+                    changeButtonsStatus(false);
+                };
+            } catch (exception) {
+                alert(exception.toString());
+            }
+
+        }
+
+        function onSendClick() {
+            var message = document.getElementById("message").value;
+            document.getElementById("message").value = null;
+            ws.send(message);
+            document.getElementById("incomingMsgOutput").value += "Client send: " + message + "\n";
+
+        }
+
+        function onDisconnectClick() {
+            ws.close();
+        }
+
+        function changeButtonsStatus(connected) {
+            document.getElementById("btnConnect").disabled = connected;
+            document.getElementById("btnDisconnect").disabled = !connected;
+            document.getElementById("btnSend").disabled = !connected;
+        }
+    </script>
+</head>
+<body>
+
+<h1>WebSocket Client</h1>
+<!-- WebSocket Connection Parameters Table -->
+<table>
+    <tr>
+        <td width="200px">WS Protocol</td>
+        <td>
+            <select id="protocol">
+                <option value="ws" selected="selected">ws</option>
+                <option value="wss">wss</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>WS Hostname</td>
+        <td><input type="text" id="hostname"/></td>
+    </tr>
+    <tr>
+        <td>WS Port number</td>
+        <td><input type="text" id="port"/></td>
+    </tr>
+    <tr>
+        <td>WS Web service name</td>
+        <td><input type="text" id="webservice"/></td>
+    </tr>
+    <tr>
+        <td>WS Endpoint</td>
+        <td><input type="text" id="endpoint"/></td>
+    </tr>
+    <tr>
+        <td>WS Username</td>
+        <td><input type="text" id="username"/></td>
+    </tr>
+    <tr>
+        <td>WS Password</td>
+        <td><input type="text" id="password"/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input id="btnConnect" type="button" value="Connect" onclick="onConnectClick()">&nbsp;&nbsp;
+            <input id="btnDisconnect" type="button" value="Disconnect" onclick="onDisconnectClick()" disabled="disabled">
+        </td>
+    </tr>
+</table>
+<br/>
+<!-- Send Message Table -->
+<table>
+    <tr>
+        <td width="200px">Message</td>
+        <td><input type="text" id="message"/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input id="btnSend" type="button" value="Send Message" disabled="disabled" onclick="onSendClick()">
+        </td>
+    </tr>
+</table>
+<br/>
+<textarea id="incomingMsgOutput" rows="10" cols="20" disabled="disabled"></textarea>
+</body>
+</html>

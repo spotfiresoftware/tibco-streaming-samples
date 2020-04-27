@@ -1,15 +1,14 @@
-# Web
+# Web: WebSocket WAR
 
-How to deploy web application in TIBCO&reg; Streaming master projects.
+How to create WAR which has a WebSocket endpoint and use it in an EventFlow project.
 
-Samples :
+* [websocket-eventflow](websocket-eventflow/src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/websocket/websocket-eventflow))
+* [websocket-war](websocket-war/src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/websocket/websocket-war))
 
-* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
-* [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
-* [Web: How to create WAR which has a WebSocket endpoint and use it in an EventFlow project](websocket/README.md)
+_This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2018-2020, TIBCO Software Inc.
+Copyright (c) 2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

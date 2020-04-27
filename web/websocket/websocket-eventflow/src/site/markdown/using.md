@@ -1,15 +1,35 @@
-# Web
+# Using
 
-How to deploy web application in TIBCO&reg; Streaming master projects.
+This component is available via maven.  Include in your pom.xml file the following :-
 
-Samples :
-
-* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
-* [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
-* [Web: How to create WAR which has a WebSocket endpoint and use it in an EventFlow project](websocket/README.md)
+```
+    <project>
+        ...
+        <dependencies>
+            <dependency>
+                <groupId>com.tibco.ep.samples.web</groupId>
+                <artifactId>websocket-eventflow</artifactId>
+                <type>ep-eventflow-fragment</type>
+            </dependency>
+            ...
+        </dependencies>
+        ...
+        <dependencyManagement>
+            <dependencies>
+                <dependency>
+                     <groupId>com.tibco.ep.samples.web</groupId>
+                     <artifactId>websocket-eventflow</artifactId>
+                     <version>1.0.0</version>
+                 </dependency>
+                 ...
+             </dependencies>
+        </dependencyManagement>
+        ...
+    </project>
+```
 
 ---
-Copyright (c) 2018-2020, TIBCO Software Inc.
+Copyright (c) 2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
