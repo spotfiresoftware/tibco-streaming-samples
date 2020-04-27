@@ -43,6 +43,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.websocket.ContainerProvider;
+import javax.websocket.DeploymentException;
 import javax.websocket.WebSocketContainer;
 import java.io.IOException;
 
@@ -56,6 +57,8 @@ public class WebSocketTest extends UnitTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketTest.class);
 
     private static String address;
+
+    private static final int TOTAL_TRY_TIMES = 30;
 
     /**
      * get web server address
@@ -84,38 +87,53 @@ public class WebSocketTest extends UnitTest {
     @Test
     public void EndpointTest() throws Exception {
 
+        WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+
+        try {
+            WebSocketClient client = waitForWAR(container);
+
+            client.sendMessage();
+            Thread.sleep(1000);
+            String response = client.getMessage();
+            Assert.assertNotNull("Response message should not be null", response);
+            Assert.assertTrue("Response message should contain the message", response.contains(messageContent));
+        } finally {
+            if (container instanceof ClientContainer) {
+                ((ClientContainer) container).getClient().stop();
+            }
+        }
+
+    }
+
+    /**
+     * check if the WAR is ready in 30 seconds
+     *
+     * @param container WebSocketContainer
+     * @return WebSocketClient instance which is connecting to the webSocket WAR
+     * @throws DeploymentException
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    private WebSocketClient waitForWAR(WebSocketContainer container) throws DeploymentException, IOException, InterruptedException {
         final String baseURL = address.replace("http", "ws") + "/websocket-war/test";
         LOGGER.info(baseURL);
-
-        WebSocketContainer container = ContainerProvider.getWebSocketContainer();
         boolean isTestSuccess = false;
-
-        for (int i = 0; i < 30; i++) {
+        WebSocketClient client = null;
+        for (int i = 0; i < TOTAL_TRY_TIMES; i++) {
             try {
-                WebSocketClient client = new WebSocketClient(container, new JerseyUriBuilder().path(baseURL).build());
-
-                client.sendMessage();
-                Thread.sleep(1000);
-                String response = client.getMessage();
-                Assert.assertNotNull("Response message should not be null", response);
-                Assert.assertTrue("Response message should contain the message", response.contains(messageContent));
+                client = new WebSocketClient(container, new JerseyUriBuilder().path(baseURL).build());
                 isTestSuccess = true;
                 break;
             } catch (IOException e) {
-                if (!e.getMessage().equals("Connect failure")) {
-                    Assert.fail(e.getMessage());
+                if (!"Connect failure".equals(e.getMessage())) {
+                    throw e;
                 }
-            } finally {
-                if (container instanceof ClientContainer) {
-                    ((ClientContainer) container).getClient().stop();
-                }
+                Thread.sleep(1000);
             }
-            Thread.sleep(1000);
         }
         if (!isTestSuccess) {
-            Assert.fail("webSocket-war is not ready in 20 secs, fail the test.");
-
+            Assert.fail(String.format("webSocket-war is not ready in %d secs, fail the test.", TOTAL_TRY_TIMES));
         }
-
+        return client;
     }
 }

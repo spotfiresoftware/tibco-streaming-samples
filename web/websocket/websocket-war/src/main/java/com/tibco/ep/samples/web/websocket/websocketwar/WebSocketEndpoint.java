@@ -30,9 +30,6 @@
 
 package com.tibco.ep.samples.web.websocket.websocketwar;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -44,12 +41,8 @@ import java.io.IOException;
 /**
  * Provides a simple sample of WebSocket endpoint
  */
-@ServerEndpoint(WebSocketEndpoint.PATH)
+@ServerEndpoint("/test")
 public class WebSocketEndpoint {
-
-    static final String PATH = "/test"; //$NON-NLS-1$
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketEndpoint.class);
 
     /**
      * When a user tries to initiated a new WebSocket connection, this method is invoked and sends a
@@ -58,12 +51,8 @@ public class WebSocketEndpoint {
      * @param session current session
      */
     @OnOpen
-    public void onOpen(Session session) {
-        try {
-            session.getBasicRemote().sendText("Connection Established"); //$NON-NLS-1$
-        } catch (IOException ex) {
-            LOGGER.error("Error on onOpen: {}", ex.getMessage()); //$NON-NLS-1$
-        }
+    public void onOpen(Session session) throws IOException {
+        session.getBasicRemote().sendText("Connection Established"); //$NON-NLS-1$
     }
 
     /**
@@ -75,12 +64,8 @@ public class WebSocketEndpoint {
      * @param session current session
      */
     @OnMessage
-    public void onMessage(String message, Session session) {
-        try {
-            session.getBasicRemote().sendText("Received message: " + message); //$NON-NLS-1$
-        } catch (IOException ex) {
-            LOGGER.error("Error on onMessage: {}", ex.getMessage()); //$NON-NLS-1$
-        }
+    public void onMessage(String message, Session session) throws IOException {
+        session.getBasicRemote().sendText("Received message: " + message); //$NON-NLS-1$
     }
 
     /**
@@ -89,24 +74,18 @@ public class WebSocketEndpoint {
      * @param session current session
      */
     @OnClose
-    public void onClose(Session session) {
-        try {
-            session.getBasicRemote().sendText("Connection is close"); //$NON-NLS-1$
-        } catch (IOException ex) {
-            LOGGER.error("Error on onClose: {}", ex.getMessage()); //$NON-NLS-1$
-        }
+    public void onClose(Session session) throws IOException {
+        session.getBasicRemote().sendText("Connection is close"); //$NON-NLS-1$
     }
 
     /**
      * Gets called when an error occurs on the WebSocket
      *
      * @param t throwable t
-     * @param session current session
      */
     @OnError
-    public void onError(Throwable t, Session session) {
-        LOGGER.error("{} session onError: {}", session.getId(), t.getMessage()); //$NON-NLS-1$
-
+    public void onError(Throwable t) throws Throwable {
+        throw t;
     }
 }
 

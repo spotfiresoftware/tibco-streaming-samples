@@ -14,14 +14,14 @@ This sample describes how to use a WAR which has a WebSocket endpoint in an Even
 
 ## Create a WAR file which has web socket endpoint
 See [websocket-war](../../../../websocket-war/src/site/markdown/index.md).
-The WAR provides a GET endpoint which path is **/test**.
+The WAR provides a GET endpoint which path is **http://<webserver-hostname>:<webserver-port-number>/websocket-war/test**.
 
 
 <a name="declare-the-war-as-a-dependency"></a>
 
 ## Create an EventFlow fragment and declare the WAR as a dependency
-In this sample, since the aim is demonstrating how to use , we have a blank sbapp, 
-which is not related with our demo. Add the WAR into fragment's pom.xml in the same 
+In this sample, this sample contains [a no-op EventFlow file](../../main/eventflow/com/tibco/ep/samples/web/websocket/eventflow/WebSocket.sbapp),  
+that represent a simply runnable Eventflow fragment.  To use the WAR, just add the WAR into fragment's pom.xml in the same 
 way as any other maven dependency:
 
 ```xml
@@ -69,7 +69,7 @@ In this sample, an integration test is defined in the **pom.xml** file. The test
   same message.
 * Stop node A
 
-Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system :
+Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
 ![maven](images/maven.gif)
 

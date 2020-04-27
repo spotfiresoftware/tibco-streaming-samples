@@ -39,7 +39,7 @@ The project's packaging type is **war**.
     <version>1.0.0</version>
 
 ```
-The [maven war plugin](https://maven.apache.org/plugins/maven-war-plugin/) is used to build the WAR (.war).  The following maven build rule is used :
+The [maven war plugin](https://maven.apache.org/plugins/maven-war-plugin/) is used to build the WAR (.war).  The following maven build rule is used:
 
 ```xml
     <plugins>
@@ -58,7 +58,7 @@ The [maven war plugin](https://maven.apache.org/plugins/maven-war-plugin/) is us
 
 ## Building this sample from the command line
 
-Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system :
+Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
 ![maven](images/maven.gif)
 

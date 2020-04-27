@@ -42,6 +42,10 @@
     <name>Web: create WebSocket WAR</name>
     <description>How to create a WAR which has a WebSocket endpoint</description>
 
+    <properties>
+        <jakarta.websocket.api.version>1.1.1</jakarta.websocket.api.version>
+        <maven.war.plugin.version>3.2.3</maven.war.plugin.version>
+    </properties>
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
@@ -54,13 +58,8 @@
         <dependency>
             <groupId>jakarta.websocket</groupId>
             <artifactId>jakarta.websocket-api</artifactId>
-            <version>1.1.1</version>
+            <version>${jakarta.websocket.api.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
         </dependency>
     </dependencies>
 
@@ -73,7 +72,7 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-                <version>3.2.3</version>
+                <version>${maven.war.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
