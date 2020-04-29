@@ -14,6 +14,10 @@ This sample builds on the [main Kubernetes sample](../../../../../ef-kubernetes/
 In addition to Docker and Kubernetes ( see [main Kubernetes sample](../../../../../ef-kubernetes/ef-kubernetes-app/src/site/markdown/index.md) ), 
 Helm 3 is also required to be installed and configured - see https://helm.sh/docs/using_helm/ .
 
+Note that the helm binary must be locatable via PATH - both from the command line and inside
+studio.  This may require setting PATH in studio ( see the Environment tab of the run configurations ).
+
+
 ## Quick runthrough
 
 On **docker-desktop** :
