@@ -37,8 +37,8 @@
     <artifactId>openapi</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web: web client generation with OpenAPI Code Generation tool</name>
-    <description>How to generate a HealthCheck web client with OpenAPI Code Generation tool and use it talk to HealthCheck web service</description>
+    <name>Web: web client generation and how to use</name>
+    <description>How to generate a Health check web client with OpenAPI Code Generation tool and use it talk to Health check web service</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
 

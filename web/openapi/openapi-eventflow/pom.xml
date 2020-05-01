@@ -39,8 +39,8 @@
     <artifactId>openapi-eventflow</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Web : openapi-eventflow</name>
-    <description>How to use the generated web client communicate with HealthCheck web service.</description>
+    <name>Web : how to use the generated web client</name>
+    <description>How to use the generated web client to communicate with Health check web service.</description>
 
     <!-- common definitions for this version of StreamBase -->
     <parent>

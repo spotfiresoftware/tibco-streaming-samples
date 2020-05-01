@@ -68,7 +68,7 @@ In this sample, an integration test is defined in the **pom.xml** file. The test
   once the connection is successful, it sends a message **Hello, TIBCO**, and validates the response message contains the 
   same message.
 * Stop node A
-
+![diagram](images/diagram.png)
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
 ![maven](images/maven.gif)

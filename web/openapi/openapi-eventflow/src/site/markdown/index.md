@@ -1,10 +1,8 @@
-# Web : Administration Web Service
+# Web : Using generated web client
 
-This sample describes how to use generated web client to communication with HealthCheck web service.
-HealthCheck web service provides a GET endpoint for monitoring node status.  After the node started, 
-the **HealthCheck web service** is automatically deployed on the node web server.  This web service 
-is integrated with the authentication services provided by the node web server, which means a valid 
-username:password pair must to be provided for requesting the endpoints.  
+This sample describes how to use generated web client to communication with Health check web service.
+Health check web service provides a GET endpoint for monitoring node status.  After the node started, 
+the **Health check web service** is automatically deployed on the node web server.  
 
 * [Create an EventFlow fragment and declare the web client as a test dependency](#declare-the-client-as-a-dependency)
 * [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
@@ -25,9 +23,10 @@ way as any other maven dependency:
         <scope>test</scope>
     </dependency>
 ``` 
-Since we are going to use it in the demo test [OpenAPIClientTest](../../../src/test/java/com/tibco/ep/samples/web/openapi/OpenAPIClientTest.java),  
-we mark the scope of the dependency is **test**.  In the **com.tibco.ep.samples.web.openapi.OpenAPIClientTest.getStatusTest**, 
-we uses the generated API client talk to HealthCheck web service */status* endpoint, and validate the response.
+Since we are going to use it in the demo test [OpenAPIClientTest](../../../src/test/java/com/tibco/ep/samples/web/openapi/OpenAPIClientTest.java),  we mark the scope of the dependency is **test**.  
+In the **com.tibco.ep.samples.web.openapi.OpenAPIClientTest.getStatusTest**, we uses the generated API client talk to Health check web service */status* endpoint, and validate the response.  
+This web service is integrated with the authentication services provided by the node web server, which means a valid username:password pair must to be provided for requesting the endpoints.  
+In this example, we use the default authentication and system username as the username, no password is needed.
 
 
 <a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>

@@ -1,6 +1,6 @@
 # Web: web client generation with OpenAPI Code Generation tool
 
-How to generating a HealthCheck web client with OpenAPI Code Generation tool.
+How to generating a Health check web client with OpenAPI Code Generation tool.
 
 Samples :
 

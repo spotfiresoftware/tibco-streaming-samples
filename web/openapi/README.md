@@ -1,9 +1,10 @@
 # Web: web client generation with OpenAPI Code Generation tool
 
-How to generating a HealthCheck web client with OpenAPI Code Generation tool and use it talk to HealthCheck web service in an EventFlow fragment.
+How to generate a web client from Health check web service OpenAPI specification with OpenAPI Code Generation tool
+and use it for communicating with Health check web service in TIBCO Streaming node
 
 * [openapi-eventflow](openapi-eventflow/src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/openapi/openapi-eventflow))
-* [openapi-client](openapi-war/src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/openapi/openapi-war))
+* [openapi-client](openapi-client/src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/openapi/openapi-client))
 
 _This is a TIBCO approved sample._
 

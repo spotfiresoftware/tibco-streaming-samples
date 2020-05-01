@@ -72,7 +72,6 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-                <version>${maven.war.plugin.version}</version>
             </plugin>
         </plugins>
     </build>

@@ -7,6 +7,8 @@ Samples :
 * [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
 * [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
 * [Web: How to create WAR which has a WebSocket endpoint and use it in an EventFlow project](websocket/README.md)
+* [Web: How to generate a web client from an given web service OpenAPI specification and use it 
+for communicating with that web service deployed on TIBCO Streaming node server](openapi/README.md)
 
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.

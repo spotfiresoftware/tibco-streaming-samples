@@ -39,7 +39,7 @@
     <artifactId>openapi-client</artifactId>
     <version>1.0.0</version>
     <name>Web: web client generation with OpenAPI Code Generation tool</name>
-    <description>How to generate a web client for HealthCheck web service with OpenAPI Code Generation tool</description>
+    <description>How to generate a web client for Health check web service with OpenAPI Code Generation tool</description>
 
     <properties>
         <default.package>com.tibco.ep.samples.web.openapi.openapiclient</default.package>
@@ -90,11 +90,10 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            https://github.com/OpenAPITools/openapi-generator/issues/3272-->
+            <!--     work around for java doc generation issue in java 11, if using java 8, no need to add this plugin, see https://github.com/OpenAPITools/openapi-generator/issues/3272-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -120,15 +119,11 @@
 
     <dependencies>
         <!-- dependencies are needed for the client being generated -->
-
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>${swagger-annotations-version}</version>
         </dependency>
-
-        <!-- You can find the dependencies for the library configuration you chose by looking in JavaClientCodegen.
-             Then find the corresponding dependency on Maven Central, and set the versions in the property section below -->
 
         <!-- HTTP client: jersey-client -->
         <dependency>
@@ -185,6 +180,7 @@
             <artifactId>jackson-databind-nullable</artifactId>
             <version>${jackson-databind-nullable-version}</version>
         </dependency>
+
         <!-- Base64 encoding that works in both JVM and Android -->
         <dependency>
             <groupId>com.brsanthu</groupId>

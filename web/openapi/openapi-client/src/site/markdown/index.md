@@ -1,22 +1,22 @@
-# Web : OpenAPI Client
+# Web : web client generation with OpenAPI Code Generation tool
 
-This sample describes how to use the OpenAPI Code Generation tool to generate a HealthCheck web client 
+This sample describes how to use the OpenAPI Code Generation tool to generate a Health check web client 
 from OpenAPI specification yaml file by using OpenAPI Code Generation tool.  The generated web client 
 is in Java and supported by Jersey framework.  It can be used for building requests or accessing the 
-response from the Streaming node server HealthCheck web service. 
+response from the Streaming node server Health check web service. 
 
-* [Add HealthCheck web service OpenAPI specification YAML file](#add-healthcheck-openapi-specification)
+* [Add Health check web service OpenAPI specification YAML file](#add-healthcheck-openapi-specification)
 * [Add the required maven plugin and dependencies](#add-maven-plugin-and-dependecies)
 * [Build this jar from the command line](#build-this-war-from-the-command-line)
 
 <a name="add-healthcheck-openapi-specification"></a>
 
-## Add HealthCheck web service OpenAPI specification YAML file 
+## Add Health check web service OpenAPI specification YAML file 
 
-Add HealthCheck web service OpenAPI specification YAML file 
+Add Health check web service OpenAPI specification YAML file 
 
 A web service OpenAPI specification YAML file need to be provided and used as the template to
-generate web client. In this example, we uses the Streaming node server [HealthCheck web service
+generate web client. In this example, we uses the Streaming node server [Health check web service
 OpenAPI specification YAML file](../../main/resources/HealthCheck-REST-API-Definition.yaml) 
 
 
@@ -59,7 +59,7 @@ is used to support this OpenAPI generator project. The following maven build rul
     </plugin>    
 ```
 
-Adds the required maven dependencies for the client being generated.  
+Add the required maven dependencies for the client being generated.  
 see details in [pom.xml](../../../pom.xml)
 
 <a name="build-this-war-from-the-command-line"></a>

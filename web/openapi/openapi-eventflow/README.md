@@ -1,6 +1,6 @@
-# Web: How to use generated web client to communicate with Streaming node web server HealthCheck web service
+# Web: How to use generated web client
 
-How to use generated web client to communicate with Streaming node web server HealthCheck web service.
+How to use the generated web client to communicate with TIBCO Streaming node web server Health check web service.
 
 Samples :
 
