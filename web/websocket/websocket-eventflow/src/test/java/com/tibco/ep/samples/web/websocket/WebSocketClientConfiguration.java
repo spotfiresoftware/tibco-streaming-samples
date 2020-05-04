@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * WebSocket client configurator, using system.user as the user to pass authentication check of the default-realm,
+ * WebSocket client configurator, using the name of system user as the username to pass authentication check of the default-realm,
  * no password needed
  */
 public class WebSocketClientConfiguration extends ClientEndpointConfig.Configurator {

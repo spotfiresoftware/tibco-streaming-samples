@@ -47,6 +47,7 @@
         <module>adminwebservice</module>
         <module>prometheus-metrics</module>
         <module>websocket</module>
+        <module>openapi</module>
     </modules>
 
     <!-- skip site docs in this aggregator -->

@@ -53,6 +53,10 @@ public class WebSocketClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketClient.class);
     private Session userSession = null;
     private String message;
+
+    /**
+     * The message to be sent
+     */
     static final String messageContent = "Hello, TIBCO";
 
     /**
@@ -88,7 +92,6 @@ public class WebSocketClient {
             this.userSession = null;
         }
         LOGGER.debug("WebSocket is closed");
-
     }
 
     /**
@@ -103,8 +106,7 @@ public class WebSocketClient {
             userSession.close();
             this.userSession = null;
         }
-        LOGGER.debug("WebSocket is error");
-
+        LOGGER.debug("WebSocket is on error");
     }
 
     /**
@@ -120,12 +122,8 @@ public class WebSocketClient {
     /**
      * Send a message.
      */
-    void sendMessage() {
-        try {
-            this.userSession.getBasicRemote().sendText(messageContent);
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage());
-        }
+    void sendMessage() throws IOException {
+        this.userSession.getBasicRemote().sendText(messageContent);
     }
 
     /**

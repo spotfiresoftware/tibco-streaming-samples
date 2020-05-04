@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: Health Check REST API
+  description: <b>OpenAPI specification of the Health Check REST API</b>
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8008/healthcheck/v1'
+security:
+  - basicAuth: []
+
+paths:
+  /status:
+    get:
+      security:
+        - basicAuth: []
+      tags:
+        - Get the node status
+      summary: Check the current status of the node
+      responses:
+        '200':
+          description: Node is running
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeStatus'
+              example:
+                nodeName: nodeA
+                nodeState: STARTED
+        '401':
+          description: Unauthorized error
+          $ref: '#/components/responses/UnauthorizedError'
+        '503':
+          description: Node is stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeStatus'
+              example:
+                nodeName: nodeA
+                nodeState: STOPPED
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+  schemas:
+    NodeStatus:
+      type: object
+      properties:
+        nodeName:
+          type: string
+        nodeState:
+          type: string
+          description: Node state
+          enum:
+            - STARTED
+            - STOPPED
+
+

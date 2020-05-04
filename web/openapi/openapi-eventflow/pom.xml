@@ -36,18 +36,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tibco.ep.samples.web</groupId>
-    <artifactId>websocket-eventflow</artifactId>
+    <artifactId>openapi-eventflow</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Web : websocket-eventflow</name>
-    <description>How to use a WebSocket WAR in an EventFlow project.</description>
+    <name>Web : how to use the generated web client</name>
+    <description>How to use the generated web client to communicate with Health check web service.</description>
 
     <!-- common definitions for this version of StreamBase -->
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
-        <!-- Sample specific parent that includes sample licence metadata. -->
-        <!-- To avoid sample metadata, replace with ep-eventflow-fragment. -->
-        <artifactId>ep-eventflow-fragment-samples</artifactId>
+        <artifactId>ep-eventflow-fragment-samples</artifactId> <!-- replace with ep-eventflow-fragment to avoid sample metadata -->
         <version>10.6.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
@@ -55,23 +53,9 @@
     <dependencies>
         <dependency>
             <groupId>com.tibco.ep.samples.web</groupId>
-            <artifactId>websocket-war</artifactId>
-            <version>${project.version}</version>
-            <type>war</type>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.websocket</groupId>
-            <artifactId>jakarta.websocket-api</artifactId>
-            <version>1.1.1</version>
+            <artifactId>openapi-client</artifactId>
+            <version>1.0.0</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>javax-websocket-server-impl</artifactId>
-            <version>9.4.18.v20190429</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 </project>

@@ -28,50 +28,41 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
 
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.tibco.ep.samples.web</groupId>
-    <artifactId>websocket-eventflow</artifactId>
-    <packaging>ep-eventflow-fragment</packaging>
+    <artifactId>openapi</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web : websocket-eventflow</name>
-    <description>How to use a WebSocket WAR in an EventFlow project.</description>
+    <name>Web: web client generation and how to use</name>
+    <description>How to generate a Health check web client with OpenAPI Code Generation tool and use it talk to Health check web service</description>
 
-    <!-- common definitions for this version of StreamBase -->
-    <parent>
-        <groupId>com.tibco.ep.sb.parent</groupId>
-        <!-- Sample specific parent that includes sample licence metadata. -->
-        <!-- To avoid sample metadata, replace with ep-eventflow-fragment. -->
-        <artifactId>ep-eventflow-fragment-samples</artifactId>
-        <version>10.6.0-SNAPSHOT</version>
-        <relativePath/>
-    </parent>
+    <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.tibco.ep.samples.web</groupId>
-            <artifactId>websocket-war</artifactId>
-            <version>${project.version}</version>
-            <type>war</type>
-        </dependency>
+    <inceptionYear>2020</inceptionYear>
 
-        <dependency>
-            <groupId>jakarta.websocket</groupId>
-            <artifactId>jakarta.websocket-api</artifactId>
-            <version>1.1.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>javax-websocket-server-impl</artifactId>
-            <version>9.4.18.v20190429</version>
-            <scope>test</scope>
-        </dependency>
+    <organization>
+        <name>TIBCO Software Inc.</name>
+        <url>http://www.tibco.com</url>
+    </organization>
 
-    </dependencies>
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/master/docs/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
+    </properties>
+
+    <modules>
+        <module>openapi-client</module>
+        <module>openapi-eventflow</module>
+    </modules>
 </project>

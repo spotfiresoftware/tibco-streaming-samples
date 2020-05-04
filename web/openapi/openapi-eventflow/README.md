@@ -1,17 +1,15 @@
-# Web
+# Web: How to use generated web client
 
-How to deploy web application in TIBCO&reg; Streaming master projects.
+How to use the generated web client to communicate with TIBCO Streaming node web server Health check web service.
 
 Samples :
 
-* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
-* [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
-* [Web: How to create WAR which has a WebSocket endpoint and use it in an EventFlow project](websocket/README.md)
-* [Web: How to generate a web client from an given web service OpenAPI specification and use it 
-for communicating with that web service deployed on TIBCO Streaming node server](openapi/README.md)
+* [Web : openapi-eventflow](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/openapi/openapi-eventflow))
+
+_This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2018-2020, TIBCO Software Inc.
+Copyright (c) 2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
