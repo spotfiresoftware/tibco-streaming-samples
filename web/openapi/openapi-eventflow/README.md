@@ -1,15 +1,11 @@
-# Web: How to use generated web client
+# Web : how to use the generated web client
 
-How to use the generated web client to communicate with TIBCO Streaming node web server Health check web service.
+How to use the generated web client to communicate with Health check web service.
 
-Samples :
-
-* [Web : openapi-eventflow](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/openapi/openapi-eventflow))
-
-_This is a TIBCO approved sample._
+* [openapi-eventflow](src/site/markdown/index.md)
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

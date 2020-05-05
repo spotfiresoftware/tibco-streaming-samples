@@ -1,16 +1,13 @@
-# Web: WebSocket WAR
+# Web: create WebSocket WAR
 
-How to create a WAR which has a WebSocket endpoint.
+How to create a WAR which has a WebSocket endpoint
 
-Samples :
-
-* [Web : websocket-war](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/websocket/websocket-war))
-
-_This is a TIBCO approved sample._
+* [websocket-war](src/site/markdown/index.md)
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
+Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
 * Redistributions of source code must retain the above copyright notice, this
