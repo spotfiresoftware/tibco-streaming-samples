@@ -1,16 +1,13 @@
 # Web: web client generation with OpenAPI Code Generation tool
 
-How to generating a Health check web client with OpenAPI Code Generation tool.
+How to generate a web client for Health check web service with OpenAPI Code Generation tool
 
-Samples :
-
-* [Web : openapi-client](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/openapi/openapi-client))
-
-_This is a TIBCO approved sample._
+* [openapi-client](src/site/markdown/index.md)
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
+Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
 * Redistributions of source code must retain the above copyright notice, this

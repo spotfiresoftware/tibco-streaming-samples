@@ -1,6 +1,6 @@
 # Structure
 
-How to structure TIBCO&reg; Streaming master projects.
+How to structure TIBCO&reg; Streaming 10.6.0 projects.
 
 Samples :
 

@@ -1,22 +1,22 @@
-# TIBCO&reg; Streaming master Samples
+# TIBCO&reg; Streaming 10.6.0 Samples
 
-This GitHub repository contains a number of TIBCO&reg; Streaming master samples that can be cloned to your local workspace.
+This GitHub repository contains a number of TIBCO&reg; Streaming 10.6.0 samples that can be cloned to your local workspace.
 
 Overview:
 
-* [Using in TIBCO StreamBase Studio&trade; master](docs/studio.md)
+* [Using in TIBCO StreamBase Studio&trade; 10.6.0](docs/studio.md)
 * [Contributing](docs/contributing.md)
 * [License](docs/LICENSE)
 
 Sample categories:
 
-* [How to structure TIBCO&reg; Streaming master projects.](structure/README.md)
-* [How to test TIBCO&reg; Streaming master projects.](testing/README.md)
-* [How to use native libraries in TIBCO&reg; Streaming master projects.](nativelibrary/README.md)
-* [How to invoke Java from TIBCO&reg; Streaming master projects.](java/README.md)
-* [How to build Highly Available TIBCO&reg; Streaming master projects.](highavailability/README.md)
-* [How to use Docker in TIBCO&reg; Streaming master projects.](docker/README.md)
-* [How to deploy web application in TIBCO&reg; Streaming master projects.](web/README.md)
+* [How to structure TIBCO&reg; Streaming 10.6.0 projects.](structure/README.md)
+* [How to test TIBCO&reg; Streaming 10.6.0 projects.](testing/README.md)
+* [How to use native libraries in TIBCO&reg; Streaming 10.6.0 projects.](nativelibrary/README.md)
+* [How to invoke Java from TIBCO&reg; Streaming 10.6.0 projects.](java/README.md)
+* [How to build Highly Available TIBCO&reg; Streaming 10.6.0 projects.](highavailability/README.md)
+* [How to use Docker in TIBCO&reg; Streaming 10.6.0 projects.](docker/README.md)
+* [How to deploy web application in TIBCO&reg; Streaming 10.6.0 projects.](web/README.md)
 
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.
@@ -45,4 +45,3 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-

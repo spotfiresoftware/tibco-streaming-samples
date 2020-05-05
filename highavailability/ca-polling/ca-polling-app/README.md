@@ -1,6 +1,6 @@
 # HA: cluster aware polling - Application
 
-How to use cluster aware in TIBCO&reg; Streaming master projects - Application
+How to use cluster aware in TIBCO&reg; Streaming 10.6.0 projects - Application
 
 * [ca-polling-app](src/site/markdown/index.md)
 

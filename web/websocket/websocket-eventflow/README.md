@@ -1,15 +1,11 @@
-# Web: Using WebSocket WAR in an EventFlow project
+# Web : websocket-eventflow
 
-How to use a WAR which has a WebSocket endpoint in an EventFlow project.
+How to use a WebSocket WAR in an EventFlow project.
 
-Samples :
-
-* [Web : websocket-eventflow](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/websocket/websocket-eventflow))
-
-_This is a TIBCO approved sample._
+* [websocket-eventflow](src/site/markdown/index.md)
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
