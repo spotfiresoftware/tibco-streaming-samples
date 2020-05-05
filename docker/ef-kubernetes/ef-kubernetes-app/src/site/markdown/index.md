@@ -91,7 +91,7 @@ $ kubectl logs ef-kubernetes-app-0
 [ef-kubernetes-app-0.default.ef-kubernetes-app]     Node started
 COMMAND FINISHED
 08:50:26.000 [334] WARN  c.t.e.d.runtime - (osdisp.cpp:146) findEvent: object reference = 2111918189:1720523304:40121159345600:45
-08:50:26.627 [Thread- ThreadPool - 1] INFO  c.s.s.s.n.StreamBaseHTTPServer - sbd at ef-kubernetes-app-0.ef-kubernetes-app.default.svc.cluster.local:10000; pid=216; version=10.6.0-SNAPSHOT_2af0df501f80b68677b966f66006f5aa3a61c17b; Listening
+08:50:26.627 [Thread- ThreadPool - 1] INFO  c.s.s.s.n.StreamBaseHTTPServer - sbd at ef-kubernetes-app-0.ef-kubernetes-app.default.svc.cluster.local:10000; pid=216; version=11.0.0-SNAPSHOT_2af0df501f80b68677b966f66006f5aa3a61c17b; Listening
 
 # delete application which stops and removes the pods
 
@@ -343,7 +343,7 @@ Deployment Directories = /var/opt/tibco/streambase/node/efkubernetesapp0.default
 Install Time = 2020-03-24 10:26:14 +0000 UTC
 Last Start Time = 2020-03-24 10:27:24 +0000 UTC
 Build Type = PRODUCTION
-Product Version = TIBCO StreamBase Runtime 10.6.0-SNAPSHOT (build 2003240528 UNTESTED-nd.master.linux-276)
+Product Version = TIBCO StreamBase Runtime 11.0.0-SNAPSHOT (build 2003240528 UNTESTED-nd.master.linux-276)
 Product Installation Directory = /opt/tibco/streambase
 Sensitive Configuration Data Encryption = Disabled
 Secure Communication Profile Name = None
@@ -649,7 +649,7 @@ $ kubectl logs ef-kubernetes-app-0
 [ef-kubernetes-app-0.default.ef-kubernetes-app]         Service name is ef-kubernetes-app-0.default.ef-kubernetes-app
 [ef-kubernetes-app-0.default.ef-kubernetes-app]     Node started
 COMMAND FINISHED
-11:06:37.296 adPool - 1 INFO  StreamBaseHTTPServer : sbd at ef-kubernetes-app-0.ef-kubernetes-app.default.svc.cluster.local:10000; pid=190; version=10.6.0-SNAPSHOT_a2fc1c56fa113822f013c4031f0895e3d53fcc89; Listening
+11:06:37.296 adPool - 1 INFO  StreamBaseHTTPServer : sbd at ef-kubernetes-app-0.ef-kubernetes-app.default.svc.cluster.local:10000; pid=190; version=11.0.0-SNAPSHOT_a2fc1c56fa113822f013c4031f0895e3d53fcc89; Listening
 11:08:34.610  [tid=202] INFO  n.ActiveNodeNotifier : Node ef-kubernetes-app-1.default.ef-kubernetes-app is active
 ```
 
