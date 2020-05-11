@@ -9,6 +9,7 @@ This sample describes how to deploy an application archive containing an EventFl
 * [Building and running from TIBCO StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Example docker commands](#example-docker-commands)
+* [Potential problems](#potential-problems)
 
 See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
 
@@ -296,6 +297,26 @@ $ docker rm A.ef-2node-app
 $ docker stop B.ef-2node-app
 $ docker rm B.ef-2node-app
 ```
+
+<a name="potential-problems"></a>
+
+## Potential problems
+
+### Connection is still allocated when running unit tests
+
+On some operating systems and docker versions the following might be seen :
+
+```
+[ERROR] DOCKER> I/O Error [Cannot extract API version from server npipe://127.0.0.1:1 : Connection is still allocated]
+```
+
+To work around this problem :
+
+* In docker settings, enable the **Expose daemon on tcp://localhost:2375 without TLS** option
+* Set the environment variable **DOCKER_HOST** to **tcp://localhost:2375**
+
+See also https://success.docker.com/article/unable-to-connect-to-docker-engine-locally-via-namedpipe .
+
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
