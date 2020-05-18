@@ -1,13 +1,32 @@
-# Web: OpenAPI Code Generation tool
+# Using
 
-How to generate web client or web server stub from OpenAPI specification documentation with OpenAPI Code Generation tool.
+This component is available via maven.  Include in your pom.xml file the following :-
 
-Samples :
-
-* [Web: web client generation with OpenAPI Code Generation tool](openapi-client/README.md)
-* [Web: web server stub generation with OpenAPI Code Generation tool](openapi-server/README.md)
-
-_This is a TIBCO approved sample._
+```
+    <project>
+        ...
+        <dependencies>
+            <dependency>
+                <groupId>com.tibco.ep.samples.web</groupId>
+                <artifactId>websocket-eventflow</artifactId>
+                <type>ep-eventflow-fragment</type>
+            </dependency>
+            ...
+        </dependencies>
+        ...
+        <dependencyManagement>
+            <dependencies>
+                <dependency>
+                     <groupId>com.tibco.ep.samples.web</groupId>
+                     <artifactId>websocket-eventflow</artifactId>
+                     <version>1.0.0</version>
+                 </dependency>
+                 ...
+             </dependencies>
+        </dependencyManagement>
+        ...
+    </project>
+```
 
 ---
 Copyright (c) 2020, TIBCO Software Inc.

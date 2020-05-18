@@ -33,15 +33,30 @@
     <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.tibco.ep.samples.web</groupId>
-    <artifactId>openapi</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0.0</version>
-    <name>Web: how to use OpenAPI Code Generation tool</name>
-    <description>how to use OpenAPI Code Generation tool</description>
 
-    <modules>
-        <module>openapi-client</module>
-        <module>openapi-server</module>
-    </modules>
+    <groupId>com.tibco.ep.samples.web</groupId>
+    <artifactId>openapi-server-ef</artifactId>
+    <packaging>ep-eventflow-fragment</packaging>
+    <version>1.0.0</version>
+    <name>Web: using OpenAPI generated WAR in EventFlow</name>
+    <description>How to using OpenAPI generated WAR an EventFlow project</description>
+
+    <!-- common definitions for this version of StreamBase -->
+    <parent>
+        <groupId>com.tibco.ep.sb.parent</groupId>
+        <artifactId>ep-eventflow-fragment-samples</artifactId>
+        <version>11.0.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.tibco.ep.samples.web</groupId>
+            <artifactId>openapi-server-war</artifactId>
+            <version>1.0.0</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
 </project>
+

@@ -11,7 +11,7 @@ the **Health check web service** is automatically deployed on the node web serve
 <a name="declare-the-client-as-a-dependency"></a>
 
 ## Create an EventFlow fragment and declare the web client as a test dependency
-Since the aim is demonstrating how to use the generated web client, this sample contains [a no-op EventFlow file](../../../src/main/eventflow/com/tibco/ep/samples/web/openapi/eventflow/Demo.sbapp),  
+Since the aim is demonstrating how to use the generated web client, this sample contains [a no-op EventFlow file](../../main/eventflow/com/tibco/ep/samples/web/openapi/eventflow/Demo.sbapp),  
 that represent a simply runnable Eventflow fragment and not related with the demo.  To use the generated web client, just add the jar into fragment's pom.xml in the same 
 way as any other maven dependency:
 

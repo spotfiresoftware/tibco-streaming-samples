@@ -1,13 +1,8 @@
-# Web: OpenAPI Code Generation tool
+# Web: web server stub generation with OpenAPI Code Generation tool
 
-How to generate web client or web server stub from OpenAPI specification documentation with OpenAPI Code Generation tool.
+How to create a web application from OpenAPI specification documentation with OpenAPI Code Generation tool
 
-Samples :
-
-* [Web: web client generation with OpenAPI Code Generation tool](openapi-client/README.md)
-* [Web: web server stub generation with OpenAPI Code Generation tool](openapi-server/README.md)
-
-_This is a TIBCO approved sample._
+* [openapi-server-ef](src/site/markdown/index.md)
 
 ---
 Copyright (c) 2020, TIBCO Software Inc.
