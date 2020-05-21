@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.tibco.ep.samples.web</groupId>
             <artifactId>springboot-war</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
             <type>war</type>
         </dependency>
         <dependency>

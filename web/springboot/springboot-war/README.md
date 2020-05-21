@@ -2,7 +2,7 @@
 
 How to use Spring Boot to create a WAR.
 
-* [Web:springboot-war](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/springboot/springboot-war))
+* [Web: springboot-war](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/springboot/springboot-war))
 
 _This is a TIBCO approved sample._
 

@@ -1,8 +1,8 @@
 # Web: Springboot WAR
 
 This sample describes how to use Spring Boot to build a WAR Archive (.war). 
-The WAR contains a GET endpoint **"/test"**, which returns "Hello, TIBCO!" when 
-receives a request. The resulting archive can be used in a downstream EventFlow fragment.
+The WAR contains a GET endpoint **"springboot-war/test"**, which returns "Hello, TIBCO!" when 
+gets called. The resulting archive can be used in a downstream EventFlow fragment.
 
 * [Create a GET endpoint](#create-endpoint)
 * [Generate WAR archive](#generate-war-archive)
@@ -46,7 +46,7 @@ excluded from **org.springframework.boot:spring-boot-starter-web**, and
 ```
 
 The [sample java code folder](../../../main/java/com/tibco/ep/samples/web/springboot/springbootwar)([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/websocket/websocket-war/src/main/java/com/tibco/ep/samples/web/springboot/springbootwar)) 
-provides a GET endpoint to response "Hello, TIBCO!" when receives a request.
+provides a GET endpoint to response "Hello, TIBCO!" when gets called.
 
 
 <a name="generate-war-archive"></a>
