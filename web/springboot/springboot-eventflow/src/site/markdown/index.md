@@ -13,7 +13,7 @@ This sample describes how to use a Spring Boot WAR in an EventFlow project.
 <a name="create-springboot-war"></a>
 
 ## Using Spring Boot to create a WAR file
-See [spring-war](../../../../springboot-war/src/site/markdown/index.md).
+See [springboot-war](../../../../springboot-war/src/site/markdown/index.md).
 The WAR provides a GET endpoint which path is **"/springboot-war/test"**.
 
 
@@ -53,7 +53,7 @@ The information we need is **Web Help UI Address**
 ## Send request to the /test endpoint provided by the WAR
 Open a web browser, enter **Web Help UI Address**, select **springboot-war** from 
 the **Select a Web Service** drop-down list, choose the **GET /test** endpoint and click 
-**Try it out**. Then click *Execute* button, a popping up window will ask for user name and password. 
+**Try it out**. Then click **Execute** button, a popping up window will ask for user name and password. 
 Since we use **default-realm** in this sample, which does NOT require password when a 
 connection originates from a trusted address, just enter computer username as the username, and no password is needed, 
 then "Hello, TIBCO!" shows up in the **Responses** section with Code 200.
@@ -67,7 +67,7 @@ then "Hello, TIBCO!" shows up in the **Responses** section with Code 200.
 In this sample, an integration test is defined in the **pom.xml** file. The test will:
 
 * Install/Start node A
-* Trigger the java integration test: it has web client which send a request to the **springboot-war/test** endpoint of Spring Boot WAR,
+* Trigger the java integration test: it has web client which sends a request to the **/springboot-war/test** endpoint of Spring Boot WAR,
   and validates the response is **200_OK** with a message **Hello, TIBCO!**.
 * Stop/Remove node A
 
