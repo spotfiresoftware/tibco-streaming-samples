@@ -28,7 +28,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
 
@@ -37,32 +38,11 @@
     <artifactId>openapi</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web: web client generation and how to use</name>
-    <description>How to generate a Health check web client with OpenAPI Code Generation tool and use it talk to Health check web service</description>
-
-    <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
-
-    <inceptionYear>2020</inceptionYear>
-
-    <organization>
-        <name>TIBCO Software Inc.</name>
-        <url>http://www.tibco.com</url>
-    </organization>
-
-    <licenses>
-        <license>
-            <name>BSD 3-Clause License</name>
-            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/master/docs/LICENSE</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <properties>
-        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
-    </properties>
+    <name>Web: How to use OpenAPI Code Generation tool</name>
+    <description>How to generate web client or WAR from OpenAPI specification documentation with OpenAPI Code Generation tool.</description>
 
     <modules>
         <module>openapi-client</module>
-        <module>openapi-eventflow</module>
+        <module>openapi-server</module>
     </modules>
 </project>

@@ -7,7 +7,7 @@ Samples :
 * [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
 * [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
 * [How to create WAR which has a WebSocket endpoint and use it in an EventFlow project.](websocket/README.md)
-* [How to generate a Health check web client with OpenAPI Code Generation tool and use it talk to Health check web service](openapi/README.md)
+* [How to use OpenAPI Code Generation tool](openapi/README.md)
 * [How to create WAR with Spring Boot](springboot/README.md)
 
 ---
