@@ -40,7 +40,7 @@
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
     <name>Web: using OpenAPI generated WAR in EventFlow</name>
-    <description>How to use OpenAPI generated WAR in an EventFlow project</description>
+    <description>How to use an OpenAPI generated WAR in an EventFlow project</description>
 
     <properties>
         <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>

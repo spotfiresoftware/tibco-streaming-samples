@@ -14,13 +14,13 @@ This sample describes how to use a WAR which is created with OpenAPI Code Genera
 
 ## Create a WAR file with OpenAPI Code Generation tool
 See [openapi-server-war](../../../../openapi-server-war/src/site/markdown/index.md).
-The WAR provides a GET endpoint which path is **http://<webserver-hostname>:<webserver-port-number>/openapi-server-war/test**.
+The WAR provides a GET endpoint which path is **http://{webserver-hostname}:{webserver-port-number}/openapi-server-war/test**.
 
 
 <a name="declare-the-war-as-a-dependency"></a>
 
 ## Create an EventFlow fragment and declare the WAR as a dependency
-In this sample, this sample contains [a no-op EventFlow file](../../main/eventflow/com/tibco/ep/samples/web/openapi/server/eventflow/Demo.sbapp),  
+This sample contains [a no-op EventFlow file](../../main/eventflow/com/tibco/ep/samples/web/openapi/server/eventflow/Demo.sbapp),  
 that represent a simply runnable Eventflow fragment.  To use the WAR, just add the WAR into fragment's pom.xml in the same 
 way as any other maven dependency:
 
@@ -62,9 +62,10 @@ just enter computer username as the username, and no password is needed, then "H
 In this sample, an integration test is defined in the **pom.xml** file. The test will:
 
 * Start node A
-* Trigger [OpenAPIWARTest](../../test/java/com/tibco/ep/samples/web/openapi/server/OpenAPIWARTest.java): it uses Jersey web client which sends a request to the **/openapi-server-war/test** endpoint 
+* Trigger [OpenAPIWARTest](../../test/java/com/tibco/ep/samples/web/openapi/server/OpenAPIWARTest.java): it uses a Jersey web client which sends a request to the **/openapi-server-war/test** endpoint 
 of OpenAPI Generated WAR, and validates the response is **200_OK** with a message **Hello, TIBCO!**.
 * Stop node A
+
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
 ![maven](images/maven.gif)

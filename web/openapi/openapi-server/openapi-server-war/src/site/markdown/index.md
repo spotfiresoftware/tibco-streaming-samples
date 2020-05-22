@@ -4,7 +4,7 @@ This sample describes how to use OpenAPI Code Generation tool to create a WAR fr
 The resulting archive can then be used in a downstream EventFlow fragment.
 
 * [Add a sample OpenAPI specification YAML file](#add-openapi-specification)
-* [Add the required maven plugins and dependencies](#add-maven-plugin-and-dependecies)
+* [Add the OpenAPI generator maven plugin and dependencies](#add-maven-plugin-and-dependecies)
 * [Implement the generated interface and add web.xml](#implement-interface-and-add-web.xml)
 * [Build this WAR from the command line](#build-this-war-from-the-command-line)
 
@@ -20,7 +20,7 @@ The **Message** object has a single string field.
 
 <a name="add-maven-plugin-and-dependecies"></a>
 
-## Add the required maven plugins and dependencies
+## Add OpenAPI generator maven plugin and dependencies
 
 The [openapi-generator-maven-plugin](https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin) 
 is used to support this OpenAPI generator project. The following maven build rule is used:
@@ -67,9 +67,9 @@ see details in [pom.xml](../../../pom.xml)
 ## Implement the generated interface and add web.xml
 
 To enable the generated interface, we add [TestApiImpl.java](../../../src/main/java/com/tibco/ep/samples/web/openapi/server/apiimpl/TestApiImpl.java).  
-This class implement the **com.tibco.ep.samples.web.openapi.server.api.TestApi.testGet** method, and return 
-a **com.tibco.ep.samples.web.openapi.server.model.Message** instance with a message **Hello, TIBCO!**.     
-We also add [web.xml](../../main/webapp/WEB-INF/web.xml) for servlet mapping. 
+This class implements the **com.tibco.ep.samples.web.openapi.server.api.TestApi.testGet** method, and returns 
+a JSON format **com.tibco.ep.samples.web.openapi.server.model.Message** instance with a message **Hello, TIBCO!**.     
+We also add [web.xml](../../main/webapp/WEB-INF/web.xml) for supporting servlet mapping. 
 
 
 <a name="generate-war-archive"></a>
