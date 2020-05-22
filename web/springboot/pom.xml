@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (C) 2019-2020, TIBCO Software Inc.
+  Copyright (C) 2020, TIBCO Software Inc.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -28,51 +28,44 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tibco.ep.samples</groupId>
-    <artifactId>web</artifactId>
+    <groupId>com.tibco.ep.samples.web</groupId>
+    <artifactId>springboot</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web</name>
-    <description>How to deploy web application in TIBCO Streaming projects.</description>
+    <name>Web: Spring Boot WAR</name>
+    <description>How to use Spring Boot to create a WAR and use it in an EventFlow project</description>
+
+    <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
+
+    <inceptionYear>2019</inceptionYear>
+
+    <organization>
+        <name>TIBCO Software Inc.</name>
+        <url>http://www.tibco.com</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/master/docs/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
+    </properties>
 
     <modules>
-        <module>adminwebservice</module>
-        <module>prometheus-metrics</module>
-        <module>websocket</module>
-        <module>openapi</module>
-        <module>springboot</module>
+        <module>springboot-eventflow</module>
+        <module>springboot-war</module>
     </modules>
-
-    <!-- skip site docs in this aggregator -->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
-                <configuration>
-                    <skipDeploy>true</skipDeploy>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <message>Updated site documentation from jenkins</message>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
+

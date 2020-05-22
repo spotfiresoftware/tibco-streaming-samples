@@ -1,17 +1,15 @@
-# Web
+# Web: Using Spring Boot WAR in an EventFlow project
 
-How to deploy web application in TIBCO&reg; Streaming 11.0.0-SNAPSHOT projects.
+How to use a WAR created by Spring Boot in an EventFlow project.
 
 Samples :
 
-* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
-* [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
-* [How to create WAR which has a WebSocket endpoint and use it in an EventFlow project.](websocket/README.md)
-* [How to generate a Health check web client with OpenAPI Code Generation tool and use it talk to Health check web service](openapi/README.md)
-* [How to create WAR with Spring Boot](springboot/README.md)
+* [Web : springboot-eventflow](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/springboot/springboot-eventflow))
+
+_This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2018-2020, TIBCO Software Inc.
+Copyright (c) 2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
