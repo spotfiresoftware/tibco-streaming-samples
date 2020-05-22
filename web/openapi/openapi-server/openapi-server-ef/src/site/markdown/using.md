@@ -8,7 +8,7 @@ This component is available via maven.  Include in your pom.xml file the followi
         <dependencies>
             <dependency>
                 <groupId>com.tibco.ep.samples.web</groupId>
-                <artifactId>websocket-eventflow</artifactId>
+                <artifactId>openapi-server-ef</artifactId>
                 <type>ep-eventflow-fragment</type>
             </dependency>
             ...
@@ -17,9 +17,9 @@ This component is available via maven.  Include in your pom.xml file the followi
         <dependencyManagement>
             <dependencies>
                 <dependency>
-                     <groupId>com.tibco.ep.samples.web</groupId>
-                     <artifactId>websocket-eventflow</artifactId>
-                     <version>1.0.0</version>
+                    <groupId>com.tibco.ep.samples.web</groupId>
+                    <artifactId>openapi-server-ef</artifactId>
+                    <version>1.0.0</version>
                  </dependency>
                  ...
              </dependencies>

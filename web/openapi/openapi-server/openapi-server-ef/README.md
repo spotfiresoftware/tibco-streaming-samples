@@ -1,6 +1,6 @@
-# Web: web server stub generation with OpenAPI Code Generation tool
+# Web: Using OpenAPI generated WAR in an EventFlow project
 
-How to create a web application from OpenAPI specification documentation with OpenAPI Code Generation tool
+How to use OpenAPI generated WAR
 
 * [openapi-server-ef](src/site/markdown/index.md)
 

@@ -1,74 +1,103 @@
-# Web: Using WebSocket WAR in EventFlow project
+# Web: Use OpenAPI Code Generation tool create a WAR from OpenAPI specification documentation
 
-This sample describes how to use a WAR which has a WebSocket endpoint in an EventFlow project.
+This sample describes how to use OpenAPI Code Generation tool create a WAR from OpenAPI specification documentation. 
+The resulting archive can then be used in a downstream EventFlow fragment.
 
-* [Create a WAR file which has a web socket endpoint](#create-websocket-endpoint)
-* [Create a blank EventFlow fragment and declare the WAR as a dependency](#declare-the-war-as-a-dependency)
-* [Running this sample from TIBCO StreamBase Studio&trade;](#running-this-sample-from-tibco-streambase-studiotrade)
-* [Using "epadmin display web" command to retrieve information about web server](#using-epadmin-display-web-command-to-retrieve-information)
-* [Using "WebSocketClient"  to to connect to the WebSocket endpoint](#using-websocketclient-to-connect-to-the-websocket-endpoint)
-* [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
+* [Add a sample OpenAPI specification YAML file](#add-openapi-specification)
+* [Add the required maven plugins and dependencies](#add-maven-plugin-and-dependecies)
+* [Implement the generated interface and add web.xml](#implement-interface-and-add-web.xml)
+* [Build this WAR from the command line](#build-this-war-from-the-command-line)
+
+<a name="add-openapi-specification"></a>
+
+## Add a sample OpenAPI specification YAML file 
+
+A web service OpenAPI specification YAML file need to be provided and used as the template to
+generate WAR. In this example, we use [api.yaml](../../main/resources/apidoc/api.yaml), which 
+defines a **/test** endpoint response a **Message** object in JSON format when gets called. The 
+**Message** object has a single string field.
 
 
-<a name="create-websocket-endpoint"></a>
+<a name="add-maven-plugin-and-dependecies"></a>
 
-## Create a WAR file which has web socket endpoint
-See [websocket-war](../../../../websocket-war/src/site/markdown/index.md).
-The WAR provides a GET endpoint which path is **http://<webserver-hostname>:<webserver-port-number>/websocket-war/test**.
+## Add the required maven plugins and dependencies
+
+The [openapi-generator-maven-plugin](https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin) 
+is used to support this OpenAPI generator project. The following maven build rule is used:
+```xml
+    <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>4.2.3</version>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>generate</goal>
+                </goals>
+                <configuration>
+                    <!-- specify the OpenAPI yaml -->
+                    <inputSpec>${project.basedir}/src/main/resources/apidoc/api.yaml</inputSpec>
+                    <!-- target to generate web application code -->                    
+                    <generatorName>jaxrs-spec</generatorName>
+                    <configOptions>
+                        <sourceFolder>src/main/java</sourceFolder>
+                        <dateLibrary>java8</dateLibrary>
+                        <java8>true</java8>
+                        <title>${project.artifactId}</title>
+                        <artifactId>${project.artifactId}</artifactId>
+                        <interfaceOnly>true</interfaceOnly>
+                        <basePackage>com.tibco.ep.samples.web.openapi.server</basePackage>
+                        <apiPackage>com.tibco.ep.samples.web.openapi.server.api</apiPackage>
+                        <modelPackage>com.tibco.ep.samples.web.openapi.server.model</modelPackage>
+                        <returnResponse>true</returnResponse>
+                        <useSwaggerAnnotations>false</useSwaggerAnnotations>
+                    </configOptions>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+```
+
+Add the required maven dependencies for the code being generated.  
+see details in [pom.xml](../../../pom.xml)
 
 
-<a name="declare-the-war-as-a-dependency"></a>
+<a name="implement-interface-and-add-web.xml"></a>
 
-## Create an EventFlow fragment and declare the WAR as a dependency
-In this sample, this sample contains [a no-op EventFlow file](../../main/eventflow/com/tibco/ep/samples/web/websocket/eventflow/WebSocket.sbapp),  
-that represent a simply runnable Eventflow fragment.  To use the WAR, just add the WAR into fragment's pom.xml in the same 
-way as any other maven dependency:
+## Implement the generated interface and add web.xml
+
+To enable the generated interface, we add [TestApiImpl.java](../../../src/main/java/com/tibco/ep/samples/web/openapi/server/apiimpl/TestApiImpl.java).
+We also add [web.xml](../../main/webapp/WEB-INF/web.xml) for servlet mapping. 
+
+
+<a name="generate-war-archive"></a>
+
+## Generate WAR archive
+
+The project's packaging type is **war**.
+```xml
+    <groupId>com.tibco.ep.samples.web</groupId>
+    <artifactId>openapi-server-war</artifactId>
+    <packaging>war</packaging>
+    <version>1.0.0</version>
+
+```
+The [maven war plugin](https://maven.apache.org/plugins/maven-war-plugin/) is used to build the WAR (.war).  The following maven build rule is used:
 
 ```xml
-    <dependency>
-        <groupId>com.tibco.ep.samples.web</groupId>
-        <artifactId>websocket-war</artifactId>
-        <version>1.0.0</version>
-        <type>war</type>
-    </dependency>
-``` 
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.2.3</version>
+        </plugin>
+    </plugins>
+```
 
-<a name="running-this-sample-from-tibco-streambase-studiotrade"></a>
+<a name="build-this-war-from-the-command-line"></a>
 
-## Running this sample from TIBCO StreamBase Studio&trade;
-Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;:
-![RunFromStudio](images/studio.gif)
+## Building this sample from the command line
 
-
-<a name="using-epadmin-display-web-command-to-retrieve-information"></a>
-
-## Using "epadmin display web" command to retrieve web information.
-The information we need is **hostname**, **port number**, **web service name**
-![DisplayWeb](images/epadmin.gif)
-
-<a name="using-websocketclient-to-connect-to-the-websocket-endpoint"></a>
-
-## Using [WebSocketClient](../../test/resources/WebSocketClient.html) to connect to the WebSocket endpoint
-Open [WebSocketClient](../../test/resources/WebSocketClient.html) file in a web browser which supports WebSocket, 
-fill the tables with the information got in last step, since we use **default-realm** in this sample, which does NOT 
-require password when a connection originates from a trusted address, no password is entered. 
-Then click **connect** button. After connection is built, type message in Message table 
-and click **Send Message** button. Click **disconnect** for disconnecting from the WebSocket endpoint.
-![ConnectToWSEndpoint](images/endpoint.gif)
-
-
-<a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
-
-## Building this sample from the command line and running the integration test cases
-
-In this sample, an integration test is defined in the **pom.xml** file. The test will:
-
-* Start node A
-* Trigger the java integration test: it has a websocket client with is trying to connect to the **/test** endpoint of depolyed websocket-war,
-  once the connection is successful, it sends a message **Hello, TIBCO**, and validates the response message contains the 
-  same message.
-* Stop node A
-![diagram](images/diagram.png)
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
 ![maven](images/maven.gif)

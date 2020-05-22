@@ -1,6 +1,6 @@
-# Web: web server stub generation with OpenAPI Code Generation tool
+# Web: WAR generation with OpenAPI Code Generation tool
 
-How to create a web application from OpenAPI specification documentation with OpenAPI Code Generation tool
+How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool
 
 * [openapi-server-war](src/site/markdown/index.md)
 

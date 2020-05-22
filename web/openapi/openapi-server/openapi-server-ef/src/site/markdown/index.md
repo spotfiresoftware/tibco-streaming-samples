@@ -1,33 +1,33 @@
-# Web: Using WebSocket WAR in EventFlow project
+# Web: Using OpenAPI generated WAR in EventFlow project
 
-This sample describes how to use a WAR which has a WebSocket endpoint in an EventFlow project.
+This sample describes how to use a WAR which is created with OpenAPI Code Generation tool in an EventFlow project.
 
-* [Create a WAR file which has a web socket endpoint](#create-websocket-endpoint)
-* [Create a blank EventFlow fragment and declare the WAR as a dependency](#declare-the-war-as-a-dependency)
+* [Create a WAR file with OpenAPI Code Generation tool](#create-war)
+* [Create a no-op EventFlow fragment and declare the WAR as a dependency](#declare-the-war-as-a-dependency)
 * [Running this sample from TIBCO StreamBase Studio&trade;](#running-this-sample-from-tibco-streambase-studiotrade)
 * [Using "epadmin display web" command to retrieve information about web server](#using-epadmin-display-web-command-to-retrieve-information)
 * [Using "WebSocketClient"  to to connect to the WebSocket endpoint](#using-websocketclient-to-connect-to-the-websocket-endpoint)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 
 
-<a name="create-websocket-endpoint"></a>
+<a name="create-war"></a>
 
-## Create a WAR file which has web socket endpoint
-See [websocket-war](../../../../websocket-war/src/site/markdown/index.md).
-The WAR provides a GET endpoint which path is **http://<webserver-hostname>:<webserver-port-number>/websocket-war/test**.
+## Create a WAR file with OpenAPI Code Generation tool
+See [openapi-server-war](../../../../openapi-server-war/src/site/markdown/index.md).
+The WAR provides a GET endpoint which path is **http://<webserver-hostname>:<webserver-port-number>/openapi-server-war/test**.
 
 
 <a name="declare-the-war-as-a-dependency"></a>
 
 ## Create an EventFlow fragment and declare the WAR as a dependency
-In this sample, this sample contains [a no-op EventFlow file](../../main/eventflow/com/tibco/ep/samples/web/websocket/eventflow/WebSocket.sbapp),  
+In this sample, this sample contains [a no-op EventFlow file](../../main/eventflow/com/tibco/ep/samples/web/openapi/server/eventflow/Demo.sbapp),  
 that represent a simply runnable Eventflow fragment.  To use the WAR, just add the WAR into fragment's pom.xml in the same 
 way as any other maven dependency:
 
 ```xml
     <dependency>
         <groupId>com.tibco.ep.samples.web</groupId>
-        <artifactId>websocket-war</artifactId>
+        <artifactId>openapi-server-war</artifactId>
         <version>1.0.0</version>
         <type>war</type>
     </dependency>
@@ -37,24 +37,22 @@ way as any other maven dependency:
 
 ## Running this sample from TIBCO StreamBase Studio&trade;
 Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;:
-![RunFromStudio](images/studio.gif)
 
 
 <a name="using-epadmin-display-web-command-to-retrieve-information"></a>
 
-## Using "epadmin display web" command to retrieve web information.
-The information we need is **hostname**, **port number**, **web service name**
+## Using "epadmin display web" command to retrieve Web Help UI Address
+The information we need is **Web Help UI Address**
 ![DisplayWeb](images/epadmin.gif)
 
-<a name="using-websocketclient-to-connect-to-the-websocket-endpoint"></a>
 
-## Using [WebSocketClient](../../test/resources/WebSocketClient.html) to connect to the WebSocket endpoint
-Open [WebSocketClient](../../test/resources/WebSocketClient.html) file in a web browser which supports WebSocket, 
-fill the tables with the information got in last step, since we use **default-realm** in this sample, which does NOT 
-require password when a connection originates from a trusted address, no password is entered. 
-Then click **connect** button. After connection is built, type message in Message table 
-and click **Send Message** button. Click **disconnect** for disconnecting from the WebSocket endpoint.
-![ConnectToWSEndpoint](images/endpoint.gif)
+<a name="using-websocketclient-to-connect-to-the-websocket-endpoint"></a>
+## Send request to the /test endpoint provided by the WAR
+Open a web browser, enter **Web Help UI Address**, select **openapi-server-war** from the **Select a Web Service** drop-down list, 
+choose the **GET /test** endpoint and click **Try it out**. Then click **Execute** button, a popping up window will ask for user name and password. 
+Since we use default-realm in this sample, which does NOT require password when a connection originates from a trusted address, 
+just enter computer username as the username, and no password is needed, then "Hello, TIBCO!" shows up in the **Responses** section with Code 200.
+![Help UI](images/helpui.gif)
 
 
 <a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
@@ -63,12 +61,10 @@ and click **Send Message** button. Click **disconnect** for disconnecting from t
 
 In this sample, an integration test is defined in the **pom.xml** file. The test will:
 
-* Start node A
-* Trigger the java integration test: it has a websocket client with is trying to connect to the **/test** endpoint of depolyed websocket-war,
-  once the connection is successful, it sends a message **Hello, TIBCO**, and validates the response message contains the 
-  same message.
-* Stop node A
-![diagram](images/diagram.png)
+* Install/Start node A
+* Trigger the java integration test: it has web client which sends a request to the **/openapi-server-war/test** endpoint 
+of OpenAPI Generated WAR, and validates the response is **200_OK** with a message **Hello, TIBCO!**.
+* Stop/remove node A
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
 ![maven](images/maven.gif)

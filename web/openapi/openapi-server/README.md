@@ -1,6 +1,7 @@
-# Web: web server stub generation and usage with OpenAPI Code Generation tool
+# Web: WAR generation and usage with OpenAPI Code Generation tool
 
-How to create a web application from OpenAPI specification documentation with OpenAPI Code Generation tool
+How to create a web application from OpenAPI specification documentation with OpenAPI Code Generation tool, 
+and use it in an EventFlow project
 
 * [openapi-server-war](openapi-server-war/README.md)
 * [openapi-server-ef](openapi-server-ef/README.md)

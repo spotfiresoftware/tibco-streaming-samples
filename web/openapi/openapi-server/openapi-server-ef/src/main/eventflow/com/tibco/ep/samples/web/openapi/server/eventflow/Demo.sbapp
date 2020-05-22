@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.6.0">
+    <add>
+        <gui.metadata>
+            <property name="description" value="\\&#10;\\ Copyright(c) 2020. TIBCO Software Inc.&#10;\\ All rights Reserved. Confidential &amp; Proprietary.&#10;\\"/>
+        </gui.metadata>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.tibco.ep.samples.web.openapi.server.eventflow.Demo"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <dynamic-variables/>
+        <stream name="InputStream">
+            <schema/>
+        </stream>
+        <box name="Map" type="map">
+            <input port="1" stream="InputStream"/>
+            <output port="1" stream="OutputStream"/>
+            <target-list>
+                <item name="input" selection="all"/>
+            </target-list>
+        </box>
+        <output-stream name="OutputStream"/>
+    </add>
+</modify>
