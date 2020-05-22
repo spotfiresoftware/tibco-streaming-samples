@@ -66,10 +66,10 @@ then "Hello, TIBCO!" shows up in the **Responses** section with Code 200.
 
 In this sample, an integration test is defined in the **pom.xml** file. The test will:
 
-* Install/Start node A
-* Trigger the java integration test: it has web client which sends a request to the **/springboot-war/test** endpoint of Spring Boot WAR,
+* Start node A
+* Trigger [SpringBootTest](../../test/java/com/tibco/ep/samples/web/springboot/SpringBootTest.java): it has a Jersey web client which sends a request to the **/springboot-war/test** endpoint of Spring Boot WAR,
   and validates the response is **200_OK** with a message **Hello, TIBCO!**.
-* Stop/Remove node A
+* Stop node A
 
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
