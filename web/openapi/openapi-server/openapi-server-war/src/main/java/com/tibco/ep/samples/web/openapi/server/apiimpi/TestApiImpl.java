@@ -28,7 +28,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-package com.tibco.ep.samples.web.openapi.server.apiimpl;
+package com.tibco.ep.samples.web.openapi.server.apiimpi;
 
 import com.tibco.ep.samples.web.openapi.server.api.TestApi;
 import com.tibco.ep.samples.web.openapi.server.model.Message;

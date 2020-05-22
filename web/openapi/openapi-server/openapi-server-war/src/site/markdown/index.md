@@ -66,7 +66,7 @@ see details in [pom.xml](../../../pom.xml)
 
 ## Implement the generated interface and add web.xml
 
-To enable the generated interface, we add [TestApiImpl.java](../../../src/main/java/com/tibco/ep/samples/web/openapi/server/apiimpl/TestApiImpl.java).  
+To enable the generated interface, we add [TestApiImpl.java](../../main/java/com/tibco/ep/samples/web/openapi/server/apiimpi/TestApiImpl.java).  
 This class implements the **com.tibco.ep.samples.web.openapi.server.api.TestApi.testGet** method, and returns 
 a JSON format **com.tibco.ep.samples.web.openapi.server.model.Message** instance with a message **Hello, TIBCO!**.     
 We also add [web.xml](../../main/webapp/WEB-INF/web.xml) for supporting servlet mapping. 

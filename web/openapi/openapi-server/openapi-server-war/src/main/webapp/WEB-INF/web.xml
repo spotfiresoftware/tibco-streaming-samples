@@ -17,7 +17,7 @@
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>
                 <!-- Project servlets -->
-                com.tibco.ep.samples.web.openapi.server.apiimpl;
+                com.tibco.ep.samples.web.openapi.server.apiimpi;
             </param-value>
         </init-param>
         <async-supported>true</async-supported>
