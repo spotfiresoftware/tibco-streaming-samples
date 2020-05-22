@@ -1,6 +1,6 @@
 # Web: Use OpenAPI Code Generation tool create a WAR from OpenAPI specification documentation
 
-This sample describes how to use OpenAPI Code Generation tool create a WAR from OpenAPI specification documentation. 
+This sample describes how to use OpenAPI Code Generation tool to create a WAR from OpenAPI specification documentation. 
 The resulting archive can then be used in a downstream EventFlow fragment.
 
 * [Add a sample OpenAPI specification YAML file](#add-openapi-specification)
@@ -12,10 +12,10 @@ The resulting archive can then be used in a downstream EventFlow fragment.
 
 ## Add a sample OpenAPI specification YAML file 
 
-A web service OpenAPI specification YAML file need to be provided and used as the template to
+A web service OpenAPI specification YAML file needs to be provided and is uses as the template to
 generate WAR. In this example, we use [api.yaml](../../main/resources/apidoc/api.yaml), which 
-defines a **/test** endpoint response a **Message** object in JSON format when gets called. The 
-**Message** object has a single string field.
+defines a **/test** endpoint. This endpoint responses a **Message** object in JSON format when gets called. 
+The **Message** object has a single string field.
 
 
 <a name="add-maven-plugin-and-dependecies"></a>
@@ -66,7 +66,9 @@ see details in [pom.xml](../../../pom.xml)
 
 ## Implement the generated interface and add web.xml
 
-To enable the generated interface, we add [TestApiImpl.java](../../../src/main/java/com/tibco/ep/samples/web/openapi/server/apiimpl/TestApiImpl.java).
+To enable the generated interface, we add [TestApiImpl.java](../../../src/main/java/com/tibco/ep/samples/web/openapi/server/apiimpl/TestApiImpl.java).  
+This class implement the **com.tibco.ep.samples.web.openapi.server.api.TestApi.testGet** method, and return 
+a **com.tibco.ep.samples.web.openapi.server.model.Message** instance with a message **Hello, TIBCO!**.     
 We also add [web.xml](../../main/webapp/WEB-INF/web.xml) for servlet mapping. 
 
 

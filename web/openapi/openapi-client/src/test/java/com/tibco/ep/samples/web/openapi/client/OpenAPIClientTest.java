@@ -28,15 +28,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-package com.tibco.ep.samples.web.openapi;
+package com.tibco.ep.samples.web.openapi.client;
 
 import com.kabira.platform.property.Status;
-import com.streambase.sb.StreamBaseException;
-import com.tibco.ep.samples.web.openapi.openapiclient.handler.ApiClient;
-import com.tibco.ep.samples.web.openapi.openapiclient.handler.ApiException;
-import com.tibco.ep.samples.web.openapi.openapiclient.handler.GetTheNodeStatusApi;
-import com.tibco.ep.samples.web.openapi.openapiclient.model.NodeStatus;
-import com.tibco.ep.testing.framework.ConfigurationException;
+import com.tibco.ep.dtm.management.DtmCommand;
+import com.tibco.ep.samples.web.openapi.client.handler.ApiClient;
+import com.tibco.ep.samples.web.openapi.client.handler.ApiException;
+import com.tibco.ep.samples.web.openapi.client.handler.GetTheNodeStatusApi;
+import com.tibco.ep.samples.web.openapi.client.model.NodeStatus;
+import com.tibco.ep.testing.framework.Administration;
+import com.tibco.ep.testing.framework.Results;
 import com.tibco.ep.testing.framework.UnitTest;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.glassfish.jersey.uri.internal.JerseyUriBuilder;
@@ -49,21 +50,20 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
-import java.util.HashMap;
-import java.util.Map;
+import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * OpenAPI generated web client test
+ */
 public class OpenAPIClientTest extends UnitTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenAPIClientTest.class);
 
+    private static final int TRY_TIMES_IN_SECS = 60;
     private static final String USERNAME = System.getProperty("user.name");
     private static final String NODE_NAME = System.getProperty(Status.NODE_NAME);
-    private final static String ADDRESS = "localhost";
-    //node web server default port number
-    private final static int PORT = 8008;
     private final static String HEALTH_CHECK = "healthcheck";
     private final static String VERSION_NAME = "v1";
     private final static String STATUS = "status";
@@ -75,28 +75,28 @@ public class OpenAPIClientTest extends UnitTest {
      */
     @BeforeClass
     public static void waitForWARDeployed() throws InterruptedException {
+
+        final String webAddress = getWebServerAddress();
+
         final HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, "");
 
         Client client = ClientBuilder.newClient();
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
-        webTarget = client.target(new JerseyUriBuilder().scheme("http").host(ADDRESS).port(PORT).path(HEALTH_CHECK).path(VERSION_NAME).path(STATUS).build());
+        webTarget = client.target(new JerseyUriBuilder().path(webAddress).path(HEALTH_CHECK).path(VERSION_NAME).path(STATUS).build());
         boolean isStarted = false;
 
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < TRY_TIMES_IN_SECS; i++) {
             response = webTarget.request().get();
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
                 isStarted = true;
                 break;
             }
-            LOGGER.info("Healthcheck web service is not ready, wait for 1 sec. Then re-try");
+            LOGGER.info("The health check web service is not ready, wait for 1 sec. Then re-try");
             Thread.sleep(1000);
         }
-
-        if (!isStarted) {
-            Assert.fail("Starting Healthcheck web service is failed.");
-        }
+        assertThat(isStarted).describedAs("The health check web service never started after {} seconds", TRY_TIMES_IN_SECS).isTrue();
     }
 
     /**
@@ -111,7 +111,22 @@ public class OpenAPIClientTest extends UnitTest {
         apiClient.setUsername(USERNAME);
         GetTheNodeStatusApi getTheNodeStatusApi = new GetTheNodeStatusApi();
         getTheNodeStatusApi.setApiClient(apiClient);
-        Assert.assertEquals(NodeStatus.NodeStateEnum.STARTED, getTheNodeStatusApi.statusGet().getNodeState());
-        Assert.assertEquals(NODE_NAME, getTheNodeStatusApi.statusGet().getNodeName());
+        assertThat(getTheNodeStatusApi.statusGet().getNodeState()).as("validate response entity: node state").isEqualTo(NodeStatus.NodeStateEnum.STARTED);
+        assertThat(getTheNodeStatusApi.statusGet().getNodeName()).as("validate response entity: node name").isEqualTo(NODE_NAME);
+    }
+
+    private static String getWebServerAddress() {
+
+        Administration administration = new Administration();
+
+        final Results results = administration.execute("display", "web");
+        Assert.assertEquals(DtmCommand.COMMAND_SUCCEEDED, results.returnCode());
+
+        return results.getCommandResults()
+                      .get(0)
+                      .getResultSet()
+                      .getRows()
+                      .get(0)
+                      .getColumn(results.getCommandResults().get(0).getHeaderColumn("Network Address"));
     }
 }

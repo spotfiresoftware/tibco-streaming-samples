@@ -1,4 +1,4 @@
-# Web: WAR generation and usage with OpenAPI Code Generation tool
+# Web: OpenAPI WAR generation and usage
 
 How to create a web application from OpenAPI specification documentation with OpenAPI Code Generation tool, 
 and use it in an EventFlow project

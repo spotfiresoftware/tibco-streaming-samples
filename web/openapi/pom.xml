@@ -38,8 +38,8 @@
     <artifactId>openapi</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web: how to use OpenAPI Code Generation tool</name>
-    <description>how to use OpenAPI Code Generation tool</description>
+    <name>Web: How to use OpenAPI Code Generation tool</name>
+    <description>How to generate web client or WAR from OpenAPI specification documentation with OpenAPI Code Generation tool.</description>
 
     <modules>
         <module>openapi-client</module>

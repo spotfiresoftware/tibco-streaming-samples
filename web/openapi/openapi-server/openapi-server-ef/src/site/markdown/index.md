@@ -6,7 +6,7 @@ This sample describes how to use a WAR which is created with OpenAPI Code Genera
 * [Create a no-op EventFlow fragment and declare the WAR as a dependency](#declare-the-war-as-a-dependency)
 * [Running this sample from TIBCO StreamBase Studio&trade;](#running-this-sample-from-tibco-streambase-studiotrade)
 * [Using "epadmin display web" command to retrieve information about web server](#using-epadmin-display-web-command-to-retrieve-information)
-* [Using "WebSocketClient"  to to connect to the WebSocket endpoint](#using-websocketclient-to-connect-to-the-websocket-endpoint)
+* [Using HelpUI to send request to test endpoint](#using-helpui)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 
 
@@ -46,7 +46,7 @@ The information we need is **Web Help UI Address**
 ![DisplayWeb](images/epadmin.gif)
 
 
-<a name="using-websocketclient-to-connect-to-the-websocket-endpoint"></a>
+<a name="using-helpui"></a>
 ## Send request to the /test endpoint provided by the WAR
 Open a web browser, enter **Web Help UI Address**, select **openapi-server-war** from the **Select a Web Service** drop-down list, 
 choose the **GET /test** endpoint and click **Try it out**. Then click **Execute** button, a popping up window will ask for user name and password. 
@@ -61,10 +61,10 @@ just enter computer username as the username, and no password is needed, then "H
 
 In this sample, an integration test is defined in the **pom.xml** file. The test will:
 
-* Install/Start node A
-* Trigger the java integration test: it has web client which sends a request to the **/openapi-server-war/test** endpoint 
+* Start node A
+* Trigger [OpenAPIWARTest](../../test/java/com/tibco/ep/samples/web/openapi/server/OpenAPIWARTest.java): it uses Jersey web client which sends a request to the **/openapi-server-war/test** endpoint 
 of OpenAPI Generated WAR, and validates the response is **200_OK** with a message **Hello, TIBCO!**.
-* Stop/remove node A
+* Stop node A
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 
 ![maven](images/maven.gif)

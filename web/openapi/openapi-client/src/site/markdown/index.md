@@ -1,22 +1,20 @@
 # Web : web client generation with OpenAPI Code Generation tool
 
-This sample describes how to use the OpenAPI Code Generation tool to generate a Health check web client 
-from OpenAPI specification yaml file by using OpenAPI Code Generation tool.  The generated web client 
-is in Java and supported by Jersey framework.  It can be used for building requests or accessing the 
-response from the Streaming node server Health check web service. 
+This sample describes how to use the OpenAPI Code Generation tool to generate a web client 
+from the health check web service OpenAPI specification yaml file by using OpenAPI Code Generation tool.  
+The generated web client is in Java and supported by Jersey framework.  
+It can be used for building requests or accessing the response from the Streaming node server health check web service. 
 
-* [Add Health check web service OpenAPI specification YAML file](#add-healthcheck-openapi-specification)
+* [Add the health check web service OpenAPI specification YAML file](#add-healthcheck-openapi-specification)
 * [Add the required maven plugin and dependencies](#add-maven-plugin-and-dependecies)
 * [Build this jar from the command line](#build-this-war-from-the-command-line)
 
 <a name="add-healthcheck-openapi-specification"></a>
 
-## Add Health check web service OpenAPI specification YAML file 
+## Add the health check web service OpenAPI specification YAML file 
 
-Add Health check web service OpenAPI specification YAML file 
-
-A web service OpenAPI specification YAML file need to be provided and used as the template to
-generate web client. In this example, we uses the Streaming node server [Health check web service
+A web service OpenAPI specification YAML file needs to be provided and is used as the template to
+generate the web client. In this example, we use the Streaming node server [Health check web service
 OpenAPI specification YAML file](../../main/resources/HealthCheck-REST-API-Definition.yaml) 
 
 
@@ -41,7 +39,7 @@ is used to support this OpenAPI generator project. The following maven build rul
                     <inputSpec>${project.basedir}/src/main/resources/HealthCheck-REST-API-Definition.yaml</inputSpec>
                     <!-- target to generate java client code -->
                     <generatorName>java</generatorName>
-                    <!-- override the default library to jersey2 -->
+                    <!-- override the default library 'okhttp-gson' to 'jersey2' -->
                     <library>jersey2</library>
                     <output>${project.build.directory}/generated-sources</output>
                     <apiPackage>${default.package}.handler</apiPackage>
@@ -64,7 +62,15 @@ see details in [pom.xml](../../../pom.xml)
 
 <a name="build-this-war-from-the-command-line"></a>
 
-## Building this sample from the command line
+## Building this sample from the command line and running the integration test cases
+
+In this sample, an integration test is defined in the **pom.xml** file. The test will:
+
+* Start node A
+* Trigger [OpenAPIClientTest](../../test/java/com/tibco/ep/samples/web/openapi/client/OpenAPIClientTest.java): 
+it uses the generated **com.tibco.ep.samples.web.openapi.client.handler.GetTheNodeStatusApi** send 
+a request to the health check web service, and validates the response. 
+* Stop node A
 
 Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system:
 

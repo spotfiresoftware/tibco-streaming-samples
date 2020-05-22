@@ -109,6 +109,6 @@ public class OpenAPIWARTest extends UnitTest {
             }
             Thread.sleep(1000);
         }
-        Assert.fail(String.format("springboot-war is not ready in %d secs, fail the test.", TRY_TIMES_IN_SECS));
+        Assert.fail(String.format("springboot-war never started after %s seconds, fail the test.", TRY_TIMES_IN_SECS));
     }
 }

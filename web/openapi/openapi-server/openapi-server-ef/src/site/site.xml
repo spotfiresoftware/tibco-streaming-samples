@@ -50,11 +50,9 @@
 
     <body>
         <menu name="Overview">
-            <item name="Introduction" href="index.html" />
-            <item name="Using" href="using.html" />
+            <item name="Introduction" href="index.html"/>
+            <item name="Using" href="using.html"/>
         </menu>
-
-        <menu ref="reports" />
-
+        <menu ref="reports"/>
     </body>
 </project>

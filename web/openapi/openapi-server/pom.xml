@@ -39,8 +39,9 @@
     <artifactId>openapi-server</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web: OpenAPI WAR generation</name>
-    <description>How to create WAR which has a WebSocket endpoint and use it in an EventFlow project.</description>
+    <name>Web: OpenAPI WAR generation and usage</name>
+    <description>How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool, and use it in an EventFlow project
+    </description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
 

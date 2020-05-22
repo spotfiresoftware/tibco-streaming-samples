@@ -1,11 +1,11 @@
-# Web: OpenAPI Code Generation tool
+# Web: How to use OpenAPI Code Generation tool
 
-How to generate web client jar or WAR from OpenAPI specification documentation with OpenAPI Code Generation tool.
+How to generate web client or WAR from OpenAPI specification documentation with OpenAPI Code Generation tool.
 
 Samples :
 
-* [Web: web client generation with OpenAPI Code Generation tool](openapi-client/README.md)
-* [Web: WAR generation with OpenAPI Code Generation tool](openapi-server/README.md)
+* [Web: How to create an OpenAPI web client](openapi-client/README.md)
+* [Web: How to create an OpenAPI WAR](openapi-server/README.md)
 
 _This is a TIBCO approved sample._
 

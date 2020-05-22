@@ -1,6 +1,6 @@
 # Web: Using OpenAPI generated WAR in an EventFlow project
 
-How to use OpenAPI generated WAR
+How to use OpenAPI generated WAR in an EventFlow project
 
 * [openapi-server-ef](src/site/markdown/index.md)
 
