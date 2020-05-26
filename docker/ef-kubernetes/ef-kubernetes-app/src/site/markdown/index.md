@@ -499,7 +499,7 @@ service/ingress-nginx created
 Once the controller is installed, ingress configurations can be applied using **kubectl apply**.  For example :
 
 ```shell
-$ kubectl apply -f <<!
+$ kubectl apply -f - <<!
 kind: Ingress
 apiVersion: networking.k8s.io/v1beta1
 metadata:
