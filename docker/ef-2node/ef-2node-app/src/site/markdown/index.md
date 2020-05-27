@@ -317,6 +317,16 @@ To work around this problem :
 
 See also https://success.docker.com/article/unable-to-connect-to-docker-engine-locally-via-namedpipe .
 
+### [WARNING] Error reading service account token
+
+If kubernetes has never been started, the directory $HOME/.kube won't have been created - in this case, the
+maven plugin issues some rather odd warnings :
+
+```
+[WARNING] Error reading service account token from: [/var/run/secrets/kubernetes.io/serviceaccount/token]. Ignoring.
+```
+
+These can be ignored.
 
 ---
 Copyright (c) 2018-2019, TIBCO Software Inc.
