@@ -21,8 +21,8 @@ In this sample the following simple EventFlow fragment is used :
 
 ## Using the test framework
 
-Test cases can use the [test framework](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/package-frame.html) 
-by inheriting from the [UnitTest](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/UnitTest.html) base class :
+Test cases can use the [test framework](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/package-frame.html) 
+by inheriting from the [UnitTest](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/UnitTest.html) base class :
 
 ``` java
 import com.tibco.ep.testing.framework.UnitTest;
@@ -34,13 +34,13 @@ public class TestCase extends UnitTest {
 
 This allows access to :
 
-* [Running administration commands](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/Administration.html)
-* [Loading configurations](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/Configuration.html)
-* [Co-ordinating across multiple test node](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/MultiNodeCoordinator.html)
-* [Transactional deadlock detection](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/UnitTest.html#initialize--)
-* [Transactional memory detection](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/UnitTest.html#initialize--)
-* [Test case timeout handling](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/UnitTest.html#initialize--)
-* [transactional abort mode](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/dtm/com/tibco/ep/testing/framework/UnitTest.html#initialize--)
+* [Running administration commands](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/Administration.html)
+* [Loading configurations](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/Configuration.html)
+* [Co-ordinating across multiple test node](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/MultiNodeCoordinator.html)
+* [Transactional deadlock detection](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/UnitTest.html#initialize--)
+* [Transactional memory detection](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/UnitTest.html#initialize--)
+* [Test case timeout handling](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/UnitTest.html#initialize--)
+* [Transactional abort mode](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/tibco/ep/testing/framework/UnitTest.html#initialize--)
 
 <a name="starting-stopping-and-loading-configuration"></a>
 
@@ -116,7 +116,7 @@ Any configuration required by the unit test case should be loaded and activated 
 
 ## Test cases
 
-Junit test cases can use the [unittest](http://devzone.tibco.com/sites/streambase/latest/sb/sb-product/documentation/reference/sb/com/streambase/sb/unittest/package-frame.html)
+Junit test cases can use the [unittest](http://devzone.tibco.com/sites/streambase/10.5.0/sb/sb-product/documentation/reference/sb/com/streambase/sb/unittest/package-frame.html)
 API to enqueue tubles and verify the results :
 
 ```java
