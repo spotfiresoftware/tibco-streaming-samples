@@ -37,8 +37,11 @@ import com.kabira.platform.property.Status;
 import com.streambase.sb.StreamBaseException;
 import com.streambase.sb.unittest.SBServerManager;
 import com.streambase.sb.unittest.ServerManagerFactory;
+import com.tibco.ep.dtm.management.DtmCommand;
+import com.tibco.ep.testing.framework.Administration;
 import com.tibco.ep.testing.framework.Configuration;
 import com.tibco.ep.testing.framework.ConfigurationException;
+import com.tibco.ep.testing.framework.Results;
 import com.tibco.ep.testing.framework.TransactionalDeadlockDetectedException;
 import com.tibco.ep.testing.framework.TransactionalMemoryLeakException;
 import com.tibco.ep.testing.framework.UnitTest;
@@ -83,6 +86,7 @@ public class EndpointTest extends UnitTest {
     private static String url;
     private final static String TARGETS = "targets";
     private final static String ADMIN = "admin";
+    private final static String VERSION_NUMBER = "v1";
     private final static String RESPONSE_KEY_RESULTS = "results";
     private final static String RESPONSE_KEY_SERVICE_NAME = "serviceName";
     private final static String RESPONSE_KEY_RETURN_CODE = "returnCode";
@@ -124,9 +128,6 @@ public class EndpointTest extends UnitTest {
         server.loadApp("com.tibco.ep.samples.web.adminwebservice.eventflow.Demo");
 
         Administration administration = new Administration();
-        subs.clear();
-        subs.put("type", "webservice");
-        subs.put("name", ADMIN);
         final Results results = administration.execute("display", "web");
         Assert.assertEquals(DtmCommand.COMMAND_SUCCEEDED, results.returnCode());
 
@@ -135,13 +136,13 @@ public class EndpointTest extends UnitTest {
                      .getResultSet()
                      .getRows()
                      .get(0)
-                     .getColumn(results.getCommandResults().get(0).getHeaderColumn("Base URL"));
+                     .getColumn(results.getCommandResults().get(0).getHeaderColumn("Network Address"));
 
         Client client = ClientBuilder.newClient();
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
-        webTarget = client.target(new JerseyUriBuilder().path(url).path(TARGETS).build());
+        webTarget = client.target(new JerseyUriBuilder().path(url).path(ADMIN).path(VERSION_NUMBER).path(TARGETS).build());
         boolean isStarted = false;
 
         for (int i = 0; i < 60; i++) {
@@ -204,7 +205,7 @@ public class EndpointTest extends UnitTest {
         String responseEntity;
 
         LOGGER.info("find all administration targets, equals to 'epadmin help targets'");
-        webTarget = client.target(new JerseyUriBuilder().path(url).path(TARGETS).build());
+        webTarget = client.target(new JerseyUriBuilder().path(url).path(ADMIN).path(VERSION_NUMBER).path(TARGETS).build());
         response = webTarget.request().get();
         Assert.assertEquals("should return status 200", Response.Status.OK.getStatusCode(), response.getStatus());
         Assert.assertNotNull("Should return help information", response.getEntity());
@@ -245,11 +246,7 @@ public class EndpointTest extends UnitTest {
         form = new FormDataMultiPart();
         parametersBody = new FormDataBodyPart("parameters", "");
         form.bodyPart(parametersBody);
-        webTarget = client.target(new JerseyUriBuilder().path(url)
-                                                        .path(TARGETS)
-                                                        .path(TARGET_NODE)
-                                                        .queryParam(PARAMETER_COMMAND, COMMAND_DISPLAY)
-                                                        .build());
+        webTarget = client.target(new JerseyUriBuilder().path(url).path(ADMIN).path(VERSION_NUMBER).path(TARGETS).path(TARGET_NODE).queryParam(PARAMETER_COMMAND, COMMAND_DISPLAY).build());
 
         response = webTarget.request().post(Entity.entity(form, MediaType.MULTIPART_FORM_DATA_TYPE));
         Assert.assertEquals("should return status 200", Response.Status.OK.getStatusCode(), response.getStatus());

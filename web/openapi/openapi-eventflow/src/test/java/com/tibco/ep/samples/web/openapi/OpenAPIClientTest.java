@@ -62,10 +62,8 @@ public class OpenAPIClientTest extends UnitTest {
     private static final String USERNAME = System.getProperty("user.name");
     private static final String NODE_NAME = System.getProperty(Status.NODE_NAME);
     private final static String ADDRESS = "localhost";
-    //node web server default port number
-    private final static int PORT = 8008;
     private final static String HEALTH_CHECK = "healthcheck";
-    private final static String VERSION_NAME = "v1";
+    private final static String VERSION_NUMBER = "v1";
     private final static String STATUS = "status";
     private static String url;
 
@@ -79,9 +77,6 @@ public class OpenAPIClientTest extends UnitTest {
     public static void waitForWARDeployed() throws InterruptedException {
 
         Administration administration = new Administration();
-        Map<String, String> subs = new HashMap<>();
-        subs.put("type", "webservice");
-        subs.put("name", HEALTH_CHECK);
         final Results results = administration.execute("display", "web");
         Assert.assertEquals(DtmCommand.COMMAND_SUCCEEDED, results.returnCode());
 
@@ -90,7 +85,7 @@ public class OpenAPIClientTest extends UnitTest {
                      .getResultSet()
                      .getRows()
                      .get(0)
-                     .getColumn(results.getCommandResults().get(0).getHeaderColumn("Base URL"));
+                     .getColumn(results.getCommandResults().get(0).getHeaderColumn("Network Address"));
 
 
         final HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, "");
@@ -99,7 +94,7 @@ public class OpenAPIClientTest extends UnitTest {
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
-        webTarget = client.target(new JerseyUriBuilder().path(url).path(VERSION_NAME).path(STATUS).build());
+        webTarget = client.target(new JerseyUriBuilder().path(url).path(HEALTH_CHECK).path(VERSION_NUMBER).path(STATUS).build());
         boolean isStarted = false;
 
         for (int i = 0; i < 60; i++) {
