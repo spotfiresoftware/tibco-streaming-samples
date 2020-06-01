@@ -67,6 +67,8 @@ public class OpenAPIClientTest extends UnitTest {
     private final static String HEALTH_CHECK = "healthcheck";
     private final static String VERSION_NAME = "v1";
     private final static String STATUS = "status";
+    private static String url;
+
 
     /**
      * Wait for the health check web service get deployed
@@ -75,13 +77,29 @@ public class OpenAPIClientTest extends UnitTest {
      */
     @BeforeClass
     public static void waitForWARDeployed() throws InterruptedException {
+
+        Administration administration = new Administration();
+        Map<String, String> subs = new HashMap<>();
+        subs.put("type", "webservice");
+        subs.put("name", HEALTH_CHECK);
+        final Results results = administration.execute("display", "web");
+        Assert.assertEquals(DtmCommand.COMMAND_SUCCEEDED, results.returnCode());
+
+        url = results.getCommandResults()
+                     .get(0)
+                     .getResultSet()
+                     .getRows()
+                     .get(0)
+                     .getColumn(results.getCommandResults().get(0).getHeaderColumn("Base URL"));
+
+
         final HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, "");
 
         Client client = ClientBuilder.newClient();
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
-        webTarget = client.target(new JerseyUriBuilder().scheme("http").host(ADDRESS).port(PORT).path(HEALTH_CHECK).path(VERSION_NAME).path(STATUS).build());
+        webTarget = client.target(new JerseyUriBuilder().path(url).path(VERSION_NAME).path(STATUS).build());
         boolean isStarted = false;
 
         for (int i = 0; i < 60; i++) {
