@@ -22,7 +22,7 @@ The WAR provides a GET endpoint which path is **"/springboot-war/test"**.
 ## Create an EventFlow fragment and declare the WAR as a dependency
 In this sample, since the aim is demonstrating how to use a Spring Boot WAR, we use 
 a [no-op EventFlow](../../main/eventflow/com/tibco/ep/samples/web/springboot/eventflow/SpringBoot.sbapp), 
-which is not related with our demo. Add the WAR into fragment's pom.xml in the same 
+which is not related to our demo. Add the WAR into fragment's pom.xml in the same 
 way as any other maven dependency:
 
 ```xml

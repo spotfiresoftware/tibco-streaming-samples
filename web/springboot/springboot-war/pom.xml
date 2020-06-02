@@ -50,11 +50,19 @@
         <relativePath/>
     </parent>
 
+    <!-- FIX THIS, TOZHU, SB-49173 SAMPLE: move all hard coded version numbers into parent POM -->
+    <properties>
+        <springboot-version>2.2.6.RELEASE</springboot-version>
+        <common-logging-version>1.2</common-logging-version>
+        <hibernate-validator-version>6.1.4.Final</hibernate-validator-version>
+        <spring-context-version>5.2.1.RELEASE</spring-context-version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.2.6.RELEASE</version>
+            <version>${springboot-version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -73,7 +81,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
-            <version>2.2.6.RELEASE</version>
+            <version>${springboot-version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -85,12 +93,12 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
+            <version>${common-logging-version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.1.4.Final</version>
+            <version>${hibernate-validator-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

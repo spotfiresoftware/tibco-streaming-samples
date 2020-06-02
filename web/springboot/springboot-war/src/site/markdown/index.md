@@ -13,7 +13,8 @@ gets called. The resulting archive can be used in a downstream EventFlow fragmen
 ## Create a GET endpoint
 
 Add the following maven dependencies into the pom.xml. 
-Please notes that **org.springframework.boot:spring-boot-starter-tomcat** must be 
+Since runtime node web server is an embedded Jetty web server, the
+ **org.springframework.boot:spring-boot-starter-tomcat** must be 
 excluded from **org.springframework.boot:spring-boot-starter-web**, and 
 **org.springframework.boot:spring-boot-starter-jetty** has to be added with the **provided** scope.
 
@@ -61,7 +62,7 @@ The project's packaging type is **war**.
     <version>1.0.0</version>
 
 ```
-The [maven war plugin](https://maven.apache.org/plugins/maven-war-plugin/) and 
+The [maven war plugin](https://maven.apache.org/plugins/maven-war-plugin/) 
 is used to build the WAR archive (.war).  The following maven build rule is used:
 
 ```xml
@@ -81,7 +82,7 @@ is used to build the WAR archive (.war).  The following maven build rule is used
 
 ## Building this sample from the command line
 
-Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system :
+Use [maven](https://maven.apache.org) to build from the command line or Continuous Integration System by running **mvn install**:"
 
 ![maven](images/maven.gif)
 
