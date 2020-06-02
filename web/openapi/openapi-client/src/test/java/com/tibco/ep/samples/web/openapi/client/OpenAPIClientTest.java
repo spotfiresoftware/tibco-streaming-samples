@@ -37,6 +37,8 @@ import com.tibco.ep.samples.web.openapi.client.handler.ApiException;
 import com.tibco.ep.samples.web.openapi.client.handler.GetTheNodeStatusApi;
 import com.tibco.ep.samples.web.openapi.client.model.NodeStatus;
 import com.tibco.ep.testing.framework.Administration;
+import com.tibco.ep.testing.framework.Configuration;
+import com.tibco.ep.testing.framework.ConfigurationException;
 import com.tibco.ep.testing.framework.Results;
 import com.tibco.ep.testing.framework.UnitTest;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
@@ -53,6 +55,9 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -67,6 +72,8 @@ public class OpenAPIClientTest extends UnitTest {
     private final static String HEALTH_CHECK = "healthcheck";
     private final static String VERSION_NAME = "v1";
     private final static String STATUS = "status";
+    // FIX THIS: TOZHU make PORT_NUMBER configurable
+    private final static String PORT_NUMBER = "8011";
 
     /**
      * Wait for the health check web service get deployed
@@ -74,7 +81,13 @@ public class OpenAPIClientTest extends UnitTest {
      * @throws InterruptedException on start server error
      */
     @BeforeClass
-    public static void waitForWARDeployed() throws InterruptedException {
+    public static void waitForWARDeployed() throws InterruptedException, ConfigurationException {
+
+        Map<String, String> subs = new HashMap<>();
+        subs.put("WEB_PORT", PORT_NUMBER);
+        subs.put("NODE_NAME", NODE_NAME);
+        Configuration.forFile("node.conf", subs).load().activate();
+
 
         final String webAddress = getWebServerAddress();
 

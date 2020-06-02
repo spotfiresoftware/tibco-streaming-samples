@@ -31,7 +31,8 @@ info:
   description: <b>OpenAPI specification of the Health Check REST API</b>
   version: 1.0.0
 servers:
-  - url: 'http://localhost:8008/healthcheck/v1'
+  # FIX THIS: TOZHU make PORT_NUMBER configurable
+    - url: 'http://localhost:8011/healthcheck/v1'
 security:
   - basicAuth: []
 
