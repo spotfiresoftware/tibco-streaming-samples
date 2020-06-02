@@ -39,7 +39,6 @@ import com.streambase.sb.unittest.SBServerManager;
 import com.streambase.sb.unittest.ServerManagerFactory;
 import com.tibco.ep.dtm.management.DtmCommand;
 import com.tibco.ep.testing.framework.Administration;
-import com.tibco.ep.testing.framework.ConfigurationException;
 import com.tibco.ep.testing.framework.Results;
 import com.tibco.ep.testing.framework.TransactionalDeadlockDetectedException;
 import com.tibco.ep.testing.framework.TransactionalMemoryLeakException;
@@ -99,7 +98,6 @@ public class EndpointTest extends UnitTest {
      * Set up the server
      *
      * @throws StreamBaseException    on start server error
-     * @throws ConfigurationException on configuration failure
      * @throws InterruptedException   on start server error
      */
     @BeforeClass
