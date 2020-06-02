@@ -1,11 +1,11 @@
-# Web: web client generation and how to use
+# Web: How to use OpenAPI Code Generation tool
 
-How to generate a Health check web client with OpenAPI Code Generation tool and use it talk to Health check web service
+How to generate web client or WAR from OpenAPI specification documentation with OpenAPI Code Generation tool.
 
 Samples :
 
-* [Web: web client generation with OpenAPI Code Generation tool](openapi-client/src/site/markdown/index.md)
-* [Web : how to use the generated web client](openapi-eventflow/src/site/markdown/index.md)
+* [Web: How to create an OpenAPI web client](openapi-client/README.md)
+* [Web: How to create an OpenAPI WAR](openapi-server/README.md)
 
 _This is a TIBCO approved sample._
 
