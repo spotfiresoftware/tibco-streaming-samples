@@ -1,7 +1,7 @@
 # Web: Use OpenAPI Code Generation tool create a WAR from OpenAPI specification documentation
 
-This sample describes how to use OpenAPI Code Generation tool to create a WAR from OpenAPI specification documentation. 
-The resulting archive can then be used in a downstream EventFlow fragment.
+This sample describes how to use OpenAPI Code Generation tool to create a server stub from OpenAPI specification documentation, 
+and package it as a WAR. The resulting archive can then be used in a downstream EventFlow fragment.
 
 * [Add a sample OpenAPI specification YAML file](#add-openapi-specification)
 * [Add the OpenAPI generator maven plugin and dependencies](#add-maven-plugin-and-dependecies)
@@ -28,7 +28,6 @@ is used to support this OpenAPI generator project. The following maven build rul
     <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>4.2.3</version>
         <executions>
             <execution>
                 <goals>
@@ -66,7 +65,7 @@ see details in [pom.xml](../../../pom.xml)
 
 ## Implement the generated interface and add web.xml
 
-To enable the generated interface, we add [TestApiImpl.java](../../main/java/com/tibco/ep/samples/web/openapi/server/apiimpi/TestApiImpl.java).  
+To enable the generated interface, we add [TestApiImpl.java](../../main/java/com/tibco/ep/samples/web/openapi/server/apiimpl/TestApiImpl.java).  
 This class implements the **com.tibco.ep.samples.web.openapi.server.api.TestApi.testGet** method, and returns 
 a JSON format **com.tibco.ep.samples.web.openapi.server.model.Message** instance with a message **Hello, TIBCO!**.     
 We also add [web.xml](../../main/webapp/WEB-INF/web.xml) for supporting servlet mapping. 
@@ -91,7 +90,6 @@ The [maven war plugin](https://maven.apache.org/plugins/maven-war-plugin/) is us
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-war-plugin</artifactId>
-            <version>3.2.3</version>
         </plugin>
     </plugins>
 ```

@@ -41,7 +41,25 @@
     <name>Web: web client generation with OpenAPI Code Generation tool</name>
     <description>How to generate a web client for Health check web service with OpenAPI Code Generation tool</description>
 
+    <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
+
+    <inceptionYear>2019</inceptionYear>
+
+    <organization>
+        <name>TIBCO Software Inc.</name>
+        <url>http://www.tibco.com</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://raw.githubusercontent.com/TIBCOSoftware/tibco-streaming-samples/master/docs/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <properties>
+        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
         <default.package>com.tibco.ep.samples.web.openapi.client</default.package>
         <!-- FIX THIS, TOZHU, SB-49173 SAMPLE: move all hard coded version numbers into parent POM -->
         <jersey-version>2.28</jersey-version>
