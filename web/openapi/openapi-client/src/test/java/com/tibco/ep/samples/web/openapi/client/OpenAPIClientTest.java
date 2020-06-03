@@ -81,8 +81,6 @@ public class OpenAPIClientTest extends UnitTest {
     public static void waitForWARDeployed() throws InterruptedException {
 
         address = getWebServerAddress();
-        System.out.println(address);
-
         final HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, "");
 
         Client client = ClientBuilder.newClient();
@@ -118,7 +116,7 @@ public class OpenAPIClientTest extends UnitTest {
         apiClient.setServerIndex(null);
         GetTheNodeStatusApi getTheNodeStatusApi = new GetTheNodeStatusApi();
         getTheNodeStatusApi.setApiClient(apiClient);
-        System.out.println(getTheNodeStatusApi.getApiClient().getBasePath());
+        LOGGER.info(getTheNodeStatusApi.getApiClient().getBasePath());
         assertThat(getTheNodeStatusApi.statusGet().getNodeState()).as("validate response entity: node state").isEqualTo(NodeStatus.NodeStateEnum.STARTED);
         assertThat(getTheNodeStatusApi.statusGet().getNodeName()).as("validate response entity: node name").isEqualTo(NODE_NAME);
     }
