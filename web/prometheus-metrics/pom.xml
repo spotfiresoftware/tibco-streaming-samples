@@ -41,6 +41,10 @@
     <name>Web: Prometheus Metrics Integration</name>
     <description>How to integrate with Prometheus Metrics in TIBCO Streaming.</description>
 
+    <properties>
+        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
+    </properties>
+
     <modules>
         <module>prometheus-metrics-war</module>
         <module>prometheus-metrics-ef</module>
