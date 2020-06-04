@@ -38,7 +38,7 @@
     <groupId>com.tibco.ep.samples.web</groupId>
     <artifactId>openapi-client</artifactId>
     <version>1.0.0</version>
-    <name>Web: web client generation with OpenAPI Code Generation tool</name>
+    <name>Web: OpenAPI client</name>
     <description>How to generate a web client for Health check web service with OpenAPI Code Generation tool</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
