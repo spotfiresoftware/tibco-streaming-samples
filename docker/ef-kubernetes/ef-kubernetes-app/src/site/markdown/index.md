@@ -13,7 +13,7 @@ node.
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
 * [Service discovery](#service-discovery)
-* [Exposing REST endpoints via web port](#exposing-rest-endpoints-via-web-port)
+* [Exposing REST endpoints via node port](#exposing-rest-endpoints-via-node-port)
 * [Exposing REST endpoints via ingress](#exposing-rest-endpoints-via-ingress)
 * [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
@@ -395,9 +395,9 @@ $ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:tibco -X POST "http://efk
 
 Note that the POD must have sufficient kubernetes permissions to create, update and delete service objects.
 
-<a name="exposing-rest-endpoints-via-web-port"></a>
+<a name="exposing-rest-endpoints-via-node-port"></a>
 
-## Exposing REST endpoints via web port
+## Exposing REST endpoints via node port
 
 Webservices can be exposed by using *kubectl apply* to create a service object :
 
