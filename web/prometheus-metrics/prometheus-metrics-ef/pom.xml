@@ -39,11 +39,9 @@
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
     <name>Web: Prometheus Metrics Integration EventFlow</name>
-    <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - EventFlow
-    </description>
+    <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - EventFlow</description>
 
     <properties>
-        <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
         <prometheus.simpleclient.version>0.8.0</prometheus.simpleclient.version>
     </properties>
 

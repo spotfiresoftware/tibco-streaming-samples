@@ -37,8 +37,6 @@ import com.tibco.ep.samples.web.openapi.client.handler.ApiException;
 import com.tibco.ep.samples.web.openapi.client.handler.GetTheNodeStatusApi;
 import com.tibco.ep.samples.web.openapi.client.model.NodeStatus;
 import com.tibco.ep.testing.framework.Administration;
-import com.tibco.ep.testing.framework.Configuration;
-import com.tibco.ep.testing.framework.ConfigurationException;
 import com.tibco.ep.testing.framework.Results;
 import com.tibco.ep.testing.framework.UnitTest;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
@@ -55,9 +53,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -70,10 +65,9 @@ public class OpenAPIClientTest extends UnitTest {
     private static final String USERNAME = System.getProperty("user.name");
     private static final String NODE_NAME = System.getProperty(Status.NODE_NAME);
     private final static String HEALTH_CHECK = "healthcheck";
-    private final static String VERSION_NAME = "v1";
+    private final static String VERSION_NUMBER = "v1";
     private final static String STATUS = "status";
-    // FIX THIS: TOZHU make PORT_NUMBER configurable
-    private final static String PORT_NUMBER = "8011";
+    private static String address;
 
     /**
      * Wait for the health check web service get deployed
@@ -81,23 +75,16 @@ public class OpenAPIClientTest extends UnitTest {
      * @throws InterruptedException on start server error
      */
     @BeforeClass
-    public static void waitForWARDeployed() throws InterruptedException, ConfigurationException {
+    public static void waitForWARDeployed() throws InterruptedException {
 
-        Map<String, String> subs = new HashMap<>();
-        subs.put("WEB_PORT", PORT_NUMBER);
-        subs.put("NODE_NAME", NODE_NAME);
-        Configuration.forFile("node.conf", subs).load().activate();
-
-
-        final String webAddress = getWebServerAddress();
-
+        address = getWebServerAddress();
         final HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, "");
 
         Client client = ClientBuilder.newClient();
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
-        webTarget = client.target(new JerseyUriBuilder().path(webAddress).path(HEALTH_CHECK).path(VERSION_NAME).path(STATUS).build());
+        webTarget = client.target(new JerseyUriBuilder().path(address).path(HEALTH_CHECK).path(VERSION_NUMBER).path(STATUS).build());
         boolean isStarted = false;
 
         for (int i = 0; i < TRY_TIMES_IN_SECS; i++) {
@@ -122,8 +109,11 @@ public class OpenAPIClientTest extends UnitTest {
 
         ApiClient apiClient = new ApiClient();
         apiClient.setUsername(USERNAME);
+        apiClient.setBasePath(address + "/" + HEALTH_CHECK + "/" + VERSION_NUMBER);
+        apiClient.setServerIndex(null);
         GetTheNodeStatusApi getTheNodeStatusApi = new GetTheNodeStatusApi();
         getTheNodeStatusApi.setApiClient(apiClient);
+        LOGGER.info(getTheNodeStatusApi.getApiClient().getBasePath());
         assertThat(getTheNodeStatusApi.statusGet().getNodeState()).as("validate response entity: node state").isEqualTo(NodeStatus.NodeStateEnum.STARTED);
         assertThat(getTheNodeStatusApi.statusGet().getNodeName()).as("validate response entity: node name").isEqualTo(NODE_NAME);
     }
@@ -134,7 +124,7 @@ public class OpenAPIClientTest extends UnitTest {
 
         final Results results = administration.execute("display", "web");
         Assert.assertEquals(DtmCommand.COMMAND_SUCCEEDED, results.returnCode());
-
+        LOGGER.info("display web result: " + results.toString());
         return results.getCommandResults()
                       .get(0)
                       .getResultSet()

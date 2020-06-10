@@ -39,8 +39,6 @@ import com.streambase.sb.unittest.SBServerManager;
 import com.streambase.sb.unittest.ServerManagerFactory;
 import com.tibco.ep.dtm.management.DtmCommand;
 import com.tibco.ep.testing.framework.Administration;
-import com.tibco.ep.testing.framework.Configuration;
-import com.tibco.ep.testing.framework.ConfigurationException;
 import com.tibco.ep.testing.framework.Results;
 import com.tibco.ep.testing.framework.TransactionalDeadlockDetectedException;
 import com.tibco.ep.testing.framework.TransactionalMemoryLeakException;
@@ -67,8 +65,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -82,7 +78,8 @@ public class EndpointTest extends UnitTest {
     private static SBServerManager server;
 
     private final static String SERVICE_NAME = System.getProperty(Status.NODE_NAME);
-    private final static String ADDRESS = "localhost";
+    private static final String USERNAME = System.getProperty("user.name");
+
     private static String url;
     private final static String TARGETS = "targets";
     private final static String ADMIN = "admin";
@@ -93,34 +90,18 @@ public class EndpointTest extends UnitTest {
     private final static String RESPONSE_KEY_ROWS = "rows";
     private final static String RESPONSE_KEY_COLUMN_HEADERS = "columnHeaders";
 
-    //the username and password pair gets from secure.conf
-    private final static String PASSWORD = "admin";
-    private final static String USERNAME = "admin";
+    private final static HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, "");
 
-    private final static HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, PASSWORD);
-
-    private ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     /**
      * Set up the server
      *
      * @throws StreamBaseException    on start server error
-     * @throws ConfigurationException on configuration failure
      * @throws InterruptedException   on start server error
      */
     @BeforeClass
-    public static void setupServer() throws StreamBaseException, ConfigurationException, InterruptedException {
-        Map<String, String> subs = new HashMap<>();
-
-        // Example configuration load
-        subs.put("PASSWORD", PASSWORD);
-        subs.put("USERNAME", USERNAME);
-        Configuration.forFile("secure.conf", subs).load().activate();
-
-        subs.clear();
-        subs.put("ADDRESS", ADDRESS);
-        subs.put("NODE_NAME", SERVICE_NAME);
-        Configuration.forFile("node.conf", subs).load().activate();
+    public static void setupServer() throws StreamBaseException, InterruptedException {
 
         // create a StreamBase server and load modules once for all tests in this class
         server = ServerManagerFactory.getEmbeddedServer();
@@ -137,7 +118,7 @@ public class EndpointTest extends UnitTest {
                      .getRows()
                      .get(0)
                      .getColumn(results.getCommandResults().get(0).getHeaderColumn("Network Address"));
-
+        LOGGER.info(url);
         Client client = ClientBuilder.newClient();
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
@@ -150,6 +131,8 @@ public class EndpointTest extends UnitTest {
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
                 isStarted = true;
                 break;
+            } else {
+                LOGGER.info("response: " + response.readEntity(String.class));
             }
             LOGGER.info("Admin web service is not ready, wait for 1 sec. Then re-try");
             Thread.sleep(1000);
@@ -168,13 +151,9 @@ public class EndpointTest extends UnitTest {
      */
     @AfterClass
     public static void stopServer() throws InterruptedException, StreamBaseException {
-        try {
             assertNotNull(server);
             server.shutdownServer();
             server = null;
-        } finally {
-            Configuration.deactiveAndRemoveAll();
-        }
     }
 
     /**

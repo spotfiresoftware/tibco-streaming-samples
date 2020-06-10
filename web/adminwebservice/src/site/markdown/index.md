@@ -17,9 +17,8 @@ must to be provided for requesting the endpoints.
 In this sample, since the aim is demonstrating how to use administration web service, we have a blank sbapp, 
 which is not related with our demo. After Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;, 
 the **Administration web service** is automatically deployed on the node web server.
-As we mentioned before, administration web service is integrated with the authentication services provide by the 
-node service, a authentication realm is defined in [secure.conf](../../test/resources/secure.conf) which has a 
-valid username:password pair as **admin:admin**
+Since we use **default-realm** in this sample, which does NOT require password when a connection originates from a trusted address, 
+just enter computer username as the username, and no password is needed,
 ![RunFromStudio](images/studio.gif)
 
 <a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
