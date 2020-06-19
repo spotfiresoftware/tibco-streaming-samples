@@ -47,37 +47,26 @@
     <name>Web: WAR generation with OpenAPI Code Generation tool</name>
     <description>How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool</description>
 
-    <properties>
-        <!-- FIX THIS, TOZHU, SB-49173: SAMPLE: move all hard coded version numbers into parent POM-->
-        <jersey-version>2.28</jersey-version>
-        <jackson-version>2.10.2</jackson-version>
-        <openapitools-version>4.2.3</openapitools-version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>${jersey-version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
-            <version>${jersey-version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
-            <version>${jersey-version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-binding</artifactId>
-            <version>${jersey-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -85,7 +74,6 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapitools-version}</version>
                 <executions>
                     <execution>
                         <goals>

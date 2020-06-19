@@ -60,8 +60,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <!-- FIX THIS, TOZHU, SB-49173 SAMPLE: move all hard coded version numbers into parent POM -->
-            <version>3.14.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

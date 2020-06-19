@@ -61,13 +61,6 @@
     <properties>
         <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
         <default.package>com.tibco.ep.samples.web.openapi.client</default.package>
-        <!-- FIX THIS, TOZHU, SB-49173 SAMPLE: move all hard coded version numbers into parent POM -->
-        <jersey-version>2.28</jersey-version>
-        <jackson-version>2.10.2</jackson-version>
-        <jackson-databind-nullable-version>0.2.0</jackson-databind-nullable-version>
-        <swagger-annotations-version>1.5.8</swagger-annotations-version>
-        <openapitools-version>4.3.0</openapitools-version>
-        <assertj-version>3.16.1</assertj-version>
     </properties>
 
     <!-- common definitions for this version of StreamBase -->
@@ -84,7 +77,6 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapitools-version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -172,24 +164,20 @@
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>${swagger-annotations-version}</version>
         </dependency>
 
         <!-- HTTP client: jersey-client -->
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>${jersey-version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-multipart</artifactId>
-            <version>${jersey-version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${jersey-version}</version>
         </dependency>
 
         <!-- @Nullable annotation -->
@@ -203,32 +191,26 @@
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-base</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>org.openapitools</groupId>
             <artifactId>jackson-databind-nullable</artifactId>
-            <version>${jackson-databind-nullable-version}</version>
         </dependency>
 
         <!-- Base64 encoding that works in both JVM and Android -->
@@ -255,7 +237,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>${assertj-version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
