@@ -1,3 +1,3 @@
 # Docker: Helm EventFlow
 
-How to deploy an EventFlow application in Docker with Kubernetes and Helm - EventFlow Fragment
+In this sample the eventflow module is empty since the sample is about deploying into kubernetes rather than application functionality.
