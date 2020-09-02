@@ -4,8 +4,6 @@ How to integrate with Prometheus Metrics in TIBCO Streaming. - WAR
 
 * [prometheus-metrics-war](src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
-
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.
 

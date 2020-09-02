@@ -1,13 +1,16 @@
 # Web: OpenAPI WAR generation and usage
 
-How to create a web application from OpenAPI specification documentation with OpenAPI Code Generation tool, 
-and use it in an EventFlow project
+How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool, and use it in an EventFlow project
 
-* [openapi-server-war](openapi-server-war/README.md)
-* [openapi-server-ef](openapi-server-ef/README.md)
+Samples :
+
+* [Web: WAR generation with OpenAPI Code Generation tool](openapi-server-war/src/site/markdown/index.md)
+* [Web: using OpenAPI generated WAR in EventFlow](openapi-server-ef/src/site/markdown/index.md)
+
+_This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

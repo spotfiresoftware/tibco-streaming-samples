@@ -4,6 +4,8 @@ How to generate a web client for Health check web service with OpenAPI Code Gene
 
 * [openapi-client](src/site/markdown/index.md)
 
+_This is a TIBCO approved sample._
+
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.
 

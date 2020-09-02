@@ -1,11 +1,11 @@
 # Web: WAR generation with OpenAPI Code Generation tool
 
-How to create a server stub from OpenAPI specification documentation with OpenAPI Code Generation tool and package it as a WAR
+How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool
 
 * [openapi-server-war](src/site/markdown/index.md)
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

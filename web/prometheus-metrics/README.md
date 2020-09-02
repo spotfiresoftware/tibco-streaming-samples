@@ -8,6 +8,8 @@ Samples :
 * [Web: Prometheus Metrics Integration EventFlow](prometheus-metrics-ef/src/site/markdown/index.md)
 * [Web: Prometheus Metrics Integration App](prometheus-metrics-app/src/site/markdown/index.md)
 
+_This is a TIBCO approved sample._
+
 ---
 Copyright (c) 2018-2020, TIBCO Software Inc.
 
