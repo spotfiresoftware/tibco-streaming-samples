@@ -61,6 +61,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -82,6 +83,7 @@ public class EndpointTest extends UnitTest {
 
     private static String url;
     private final static String TARGETS = "targets";
+    private final static String CONTEXT_LOGIN = "login";
     private final static String ADMIN = "admin";
     private final static String VERSION_NUMBER = "v1";
     private final static String RESPONSE_KEY_RESULTS = "results";
@@ -89,16 +91,18 @@ public class EndpointTest extends UnitTest {
     private final static String RESPONSE_KEY_RETURN_CODE = "returnCode";
     private final static String RESPONSE_KEY_ROWS = "rows";
     private final static String RESPONSE_KEY_COLUMN_HEADERS = "columnHeaders";
+    public static final String COOKIE_NAME_JSESSIONID = "JSESSIONID"; //$NON-NLS-1$
 
     private final static HttpAuthenticationFeature AUTHENTICATION_FEATURE = HttpAuthenticationFeature.basic(USERNAME, "");
 
     private final ObjectMapper mapper = new ObjectMapper();
+    private static Cookie cookie = null;
 
     /**
      * Set up the server
      *
-     * @throws StreamBaseException    on start server error
-     * @throws InterruptedException   on start server error
+     * @throws StreamBaseException  on start server error
+     * @throws InterruptedException on start server error
      */
     @BeforeClass
     public static void setupServer() throws StreamBaseException, InterruptedException {
@@ -123,13 +127,13 @@ public class EndpointTest extends UnitTest {
         client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
-        webTarget = client.target(new JerseyUriBuilder().path(url).path(ADMIN).path(VERSION_NUMBER).path(TARGETS).build());
-        boolean isStarted = false;
+        webTarget = client.target(new JerseyUriBuilder().path(url).path(ADMIN).path(VERSION_NUMBER).path(CONTEXT_LOGIN).build());
 
         for (int i = 0; i < 60; i++) {
-            response = webTarget.request().get();
+            response = webTarget.request().post(null);
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-                isStarted = true;
+                assertNotNull(response.getCookies().get(COOKIE_NAME_JSESSIONID));
+                cookie = response.getCookies().get(COOKIE_NAME_JSESSIONID);
                 break;
             } else {
                 LOGGER.info("response: " + response.readEntity(String.class));
@@ -138,7 +142,7 @@ public class EndpointTest extends UnitTest {
             Thread.sleep(1000);
         }
 
-        if (!isStarted) {
+        if (cookie == null) {
             Assert.fail("Starting Admin web service is failed.");
         }
     }
@@ -151,9 +155,9 @@ public class EndpointTest extends UnitTest {
      */
     @AfterClass
     public static void stopServer() throws InterruptedException, StreamBaseException {
-            assertNotNull(server);
-            server.shutdownServer();
-            server = null;
+        assertNotNull(server);
+        server.shutdownServer();
+        server = null;
     }
 
     /**
@@ -179,14 +183,13 @@ public class EndpointTest extends UnitTest {
     @Test
     public void administrationCommandDiscoveryTest() throws IOException {
         Client client = ClientBuilder.newClient();
-        client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
         String responseEntity;
 
         LOGGER.info("find all administration targets, equals to 'epadmin help targets'");
         webTarget = client.target(new JerseyUriBuilder().path(url).path(ADMIN).path(VERSION_NUMBER).path(TARGETS).build());
-        response = webTarget.request().get();
+        response = webTarget.request().cookie(cookie).get();
         Assert.assertEquals("should return status 200", Response.Status.OK.getStatusCode(), response.getStatus());
         Assert.assertNotNull("Should return help information", response.getEntity());
         responseEntity = response.readEntity(String.class);
@@ -216,7 +219,6 @@ public class EndpointTest extends UnitTest {
         final String PARAMETER_COMMAND = "command";
 
         Client client = ClientBuilder.newClient().register(MultiPartFeature.class);
-        client.register(AUTHENTICATION_FEATURE);
         WebTarget webTarget;
         Response response;
         FormDataMultiPart form;
@@ -226,9 +228,15 @@ public class EndpointTest extends UnitTest {
         form = new FormDataMultiPart();
         parametersBody = new FormDataBodyPart("parameters", "");
         form.bodyPart(parametersBody);
-        webTarget = client.target(new JerseyUriBuilder().path(url).path(ADMIN).path(VERSION_NUMBER).path(TARGETS).path(TARGET_NODE).queryParam(PARAMETER_COMMAND, COMMAND_DISPLAY).build());
+        webTarget = client.target(new JerseyUriBuilder().path(url)
+                                                        .path(ADMIN)
+                                                        .path(VERSION_NUMBER)
+                                                        .path(TARGETS)
+                                                        .path(TARGET_NODE)
+                                                        .queryParam(PARAMETER_COMMAND, COMMAND_DISPLAY)
+                                                        .build());
 
-        response = webTarget.request().post(Entity.entity(form, MediaType.MULTIPART_FORM_DATA_TYPE));
+        response = webTarget.request().cookie(cookie).post(Entity.entity(form, MediaType.MULTIPART_FORM_DATA_TYPE));
         Assert.assertEquals("should return status 200", Response.Status.OK.getStatusCode(), response.getStatus());
         responseEntity = response.readEntity(String.class);
         LOGGER.info(responseEntity);
