@@ -1,33 +1,16 @@
-# Web : Prometheus Metrics - WAR
+# Web: web client generation and how to use
 
-This sample describes how to expose TIBCO&reg; Streaming node metrics as a Prometheus consumable
-REST endpoint.
+How to generate a Health check web client with OpenAPI Code Generation tool and use it talk to Health check web service
 
-## Initialize the servlet
+Samples :
 
-See [PrometheusExporterServlet.java](../../main/java/com/tibco/ep/samples/prometheus/PrometheusExporterServlet.java)
+* [Web: web client generation with OpenAPI Code Generation tool](openapi-client/src/site/markdown/index.md)
+* [Web : how to use the generated web client](openapi-eventflow/src/site/markdown/index.md)
 
-The main initialization method consists in registering the internal metrics in the Prometheus 
-collector registry.
-
-
-## Making the packaging type as war
-
-The project's packaging type is **war**.
-```xml
-    <groupId>com.tibco.ep.samples.web</groupId>
-    <artifactId>prometheus-metrics-war</artifactId>
-    <packaging>war</packaging>
-    <version>1.0.0</version>
-```
-
-## Building this sample from the command line
-
-Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system.
-
+_This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2020, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

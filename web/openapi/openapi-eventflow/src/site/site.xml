@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
+
 <!--
   Copyright (C) 2020, TIBCO Software Inc.
-  
+
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
-  
+
   1. Redistributions of source code must retain the above copyright notice,
      this list of conditions and the following disclaimer.
-  
+
   2. Redistributions in binary form must reproduce the above copyright notice,
      this list of conditions and the following disclaimer in the documentation
      and/or other materials provided with the distribution.
-  
+
   3. Neither the name of the copyright holder nor the names of its contributors
      may be used to endorse or promote products derived from this software
      without specific prior written permission.
-  
+
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -27,45 +30,31 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ -->
 
-    <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
+<project>
 
-    <modelVersion>4.0.0</modelVersion>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.8</version>
+    </skin>
 
-    <groupId>com.tibco.ep.samples.web</groupId>
-    <artifactId>prometheus-metrics-ef</artifactId>
-    <packaging>ep-eventflow-fragment</packaging>
-    <version>1.0.0</version>
-    <name>Web: Prometheus Metrics Integration EventFlow</name>
-    <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - EventFlow
-    </description>
+    <custom>
+        <fluidoSkin>
+            <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+            <leftColumnClass>span2</leftColumnClass>
+            <bodyColumnClass>span10</bodyColumnClass>
+        </fluidoSkin>
+    </custom>
 
-    <properties>
-        <prometheus.simpleclient.version>0.8.0</prometheus.simpleclient.version>
-    </properties>
+    <body>
+        <menu name="Overview">
+            <item name="Introduction" href="index.html" />
+            <item name="Using" href="using.html" />
+        </menu>
 
-    <!-- common definitions for this version of StreamBase -->
-    <parent>
-        <groupId>com.tibco.ep.sb.parent</groupId>
-        <artifactId>ep-eventflow-fragment-samples</artifactId>
-        <version>11.0.0-SNAPSHOT</version>
-        <relativePath/>
-    </parent>
+        <menu ref="reports" />
 
-    <dependencies>
-        <dependency>
-            <groupId>com.tibco.ep.samples.web</groupId>
-            <artifactId>prometheus-metrics-war</artifactId>
-            <version>1.0.0</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>com.tibco.ep.dtm</groupId>
-            <artifactId>metrics</artifactId>
-            <version>11.0.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
+    </body>
 </project>

@@ -1,30 +1,31 @@
-# Web : Prometheus Metrics - WAR
+# Using
 
-This sample describes how to expose TIBCO&reg; Streaming node metrics as a Prometheus consumable
-REST endpoint.
+This component is available via maven.  Include in your pom.xml file the following :
 
-## Initialize the servlet
-
-See [PrometheusExporterServlet.java](../../main/java/com/tibco/ep/samples/prometheus/PrometheusExporterServlet.java)
-
-The main initialization method consists in registering the internal metrics in the Prometheus 
-collector registry.
-
-
-## Making the packaging type as war
-
-The project's packaging type is **war**.
-```xml
-    <groupId>com.tibco.ep.samples.web</groupId>
-    <artifactId>prometheus-metrics-war</artifactId>
-    <packaging>war</packaging>
-    <version>1.0.0</version>
 ```
-
-## Building this sample from the command line
-
-Use the [maven](https://maven.apache.org) as **mvn install** to build from the command line or Continuous Integration system.
-
+    <project>
+        ...
+        <dependencies>
+            <dependency>
+                <groupId>com.tibco.ep.samples.web</groupId>
+                <artifactId>openapi-client</artifactId>
+            </dependency>
+            ...
+        </dependencies>
+        ...
+        <dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>com.tibco.ep.samples.web</groupId>
+                    <artifactId>openapi-client</artifactId>
+                    <version>1.0.0</version>
+                 </dependency>
+                 ...
+             </dependencies>
+        </dependencyManagement>
+        ...
+    </project>
+```
 
 ---
 Copyright (c) 2020, TIBCO Software Inc.

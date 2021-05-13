@@ -29,16 +29,27 @@
 package com.tibco.ep.samples.prometheus;
 
 import com.codahale.metrics.MetricRegistry;
+import com.kabira.platform.Transaction;
+import com.tibco.ep.dtm.metrics.api.IMetric;
+import com.tibco.ep.dtm.metrics.dtm.MetricConstants;
 import com.tibco.ep.dtm.metrics.reporter.Metrics;
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.dropwizard.DropwizardExports;
+import io.prometheus.client.dropwizard.samplebuilder.CustomMappingSampleBuilder;
+import io.prometheus.client.dropwizard.samplebuilder.MapperConfig;
+import io.prometheus.client.dropwizard.samplebuilder.SampleBuilder;
 import io.prometheus.client.exporter.MetricsServlet;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PrometheusExporterServlet extends MetricsServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public PrometheusExporterServlet() {
+    public PrometheusExporterServlet() {
         initialize();
     }
 
@@ -49,7 +60,39 @@ public class PrometheusExporterServlet extends MetricsServlet {
 
     private void initialize() {
 
+        final List<MapperConfig> configs = new ArrayList<>();
+        new Transaction("parse properties to prometheus labels") {
+            @Override
+            protected void run() {
+                for (final String metricName : Metrics.getInstance().getAllMetrics().keySet()) {
+                    final IMetric metric = Metrics.getInstance().getAllMetrics().get(metricName);
+                    // if metric has properties, we parse it to a MapperConfig
+                    if (!metric.getProperties().isEmpty()) {
+                        final MapperConfig config = new MapperConfig();
+                        final Map<String, String> labels = new HashMap<>();
+                        final StringBuilder nameTemplate = new StringBuilder(metric.getName());
+                        for (int i = 0; i < metric.getProperties().size(); i++) {
+                            nameTemplate.append(MetricConstants.NAME_SEPARATOR).append("*");
+                            labels.put(metric.getProperties().get(i).getName(), "${" + i + "}");
+                        }
+                        config.setName(metricName);
+                        config.setMatch(nameTemplate.toString());
+                        config.setLabels(labels);
+                        configs.add(config);
+                    }
+                }
+            }
+        }.execute();
         MetricRegistry metricRegistry = Metrics.getInstance().getMetricRegistry();
-        CollectorRegistry.defaultRegistry.register(new DropwizardExports(metricRegistry).register());
+
+        // if no metric has property, we don't pass it to DropwizardExports,
+        if (configs.isEmpty()) {
+            CollectorRegistry.defaultRegistry.register(new DropwizardExports(metricRegistry).register());
+
+            // if any metric has property, we create a CustomMappingSampleBuilder and pass it to DropwizardExports
+        } else {
+            final SampleBuilder sampleBuilder = new CustomMappingSampleBuilder(configs);
+            CollectorRegistry.defaultRegistry.register(new DropwizardExports(metricRegistry, sampleBuilder).register());
+        }
     }
 }
