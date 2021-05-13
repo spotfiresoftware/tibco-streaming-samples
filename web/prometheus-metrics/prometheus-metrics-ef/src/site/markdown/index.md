@@ -1,6 +1,8 @@
-# Web : Prometheus Metrics - EF
+# Web : Prometheus Metrics - EventFlow project
 
-This sample is a nearly empty EventFlow which only purpose is to depend on the Prometheus Metrics WAR.
+In this sample, the Metronome and Map send out a tuple with a random length (< 10 characters) string every second, 
+then the stream passes the StringLengthCounter which integrates a counter with a property *length*, this counter records 
+the count of strings in different length.
 
 ## Adding a dependency to the Prometheus Metrics WAR
 

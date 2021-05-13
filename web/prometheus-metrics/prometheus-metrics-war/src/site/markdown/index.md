@@ -7,44 +7,19 @@ REST endpoint.
 
 See [PrometheusExporterServlet.java](../../main/java/com/tibco/ep/samples/prometheus/PrometheusExporterServlet.java)
 
-The main intialisation method consists in registering the internal metrics in the Prometheus 
-collector registry:
+The main initialization method consists in registering the internal metrics in the Prometheus 
+collector registry.
 
-```java
 
-import io.prometheus.client.exporter.MetricsServlet;
+## Making the packaging type as war
 
-public class PrometheusExporterServlet extends MetricsServlet {
-
-	private static final long serialVersionUID = 1L;
-
-    public PrometheusExporterServlet() {
-        initialize();
-    }
-
-    public PrometheusExporterServlet(CollectorRegistry registry) {
-        super(registry);
-        initialize();
-    }
-
-    private void initialize() {
-
-        MetricRegistry metricRegistry = Metrics.getInstance().getMetricRegistry();
-        CollectorRegistry.defaultRegistry.register(new DropwizardExports(metricRegistry).register());
-    }
-}
-
+The project's packaging type is **war**.
+```xml
+    <groupId>com.tibco.ep.samples.web</groupId>
+    <artifactId>prometheus-metrics-war</artifactId>
+    <packaging>war</packaging>
+    <version>1.0.0</version>
 ```
-
-
-## Building this sample from TIBCO StreamBase Studio&trade; 
-
-Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade;.
-
-See this the following capture from the NAR EventFlow build:
-
-![studio](../../../../../../nativelibrary/nar/nar-eventflow/src/site/resources/images/studiounit.gif)
-
 
 ## Building this sample from the command line
 
