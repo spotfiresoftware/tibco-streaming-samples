@@ -71,9 +71,9 @@ public class PrometheusExporterServlet extends MetricsServlet {
                         final MapperConfig config = new MapperConfig();
                         final Map<String, String> labels = new HashMap<>();
                         final StringBuilder nameTemplate = new StringBuilder(metric.getName());
-                        for (int i = 0; i < metric.getProperties().size(); i++) {
+                        for (int i = 0; i < metric.getPropertyTypes().size(); i++) {
                             nameTemplate.append(MetricConstants.NAME_SEPARATOR).append("*");
-                            labels.put(metric.getProperties().get(i).getName(), "${" + i + "}");
+                            labels.put(metric.getPropertyTypes().get(i).getName(), "${" + i + "}");
                         }
                         config.setName(metricName);
                         config.setMatch(nameTemplate.toString());

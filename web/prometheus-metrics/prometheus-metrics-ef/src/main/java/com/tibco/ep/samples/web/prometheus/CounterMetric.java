@@ -1,12 +1,13 @@
 package com.tibco.ep.samples.web.prometheus;
 
-import java.util.Collections;
+import java.util.Collection;
 import java.util.HashSet;
 
 import com.streambase.sb.*;
 import com.streambase.sb.operator.*;
 import com.tibco.ep.dtm.metrics.api.ICounter;
 import com.tibco.ep.dtm.metrics.api.Property;
+import com.tibco.ep.dtm.metrics.api.PropertyType;
 import com.tibco.ep.dtm.metrics.api.Registry;
 
 /**
@@ -18,14 +19,15 @@ public class CounterMetric extends Operator implements Parameterizable {
 
     public static final long serialVersionUID = 1620840540942L;
     // Local variables
-    private int inputPorts = 1;
-    private int outputPorts = 1;
+    private final int inputPorts = 1;
+    private final int outputPorts = 1;
     private int nextOutputPort = 0;
     private Schema[] outputSchemas; // caches the Schemas given during init() for use at processTuple()
 
     private static final String STRING_LENGTH_COUNTER_NAME = "string.count";
     private static final String LENGTH_PROPERTY_NAME = "length";
-    private final Property<Integer> property = Property.builder(LENGTH_PROPERTY_NAME, Integer.class).build();
+
+    private final PropertyType<Integer> integerPropertyType = PropertyType.builder(LENGTH_PROPERTY_NAME, Integer.class).build();
     private ICounter stringLengthCounter;
 
     /**
@@ -67,15 +69,19 @@ public class CounterMetric extends Operator implements Parameterizable {
 
         // if the counter is null, then register one
         if (stringLengthCounter == null) {
-            stringLengthCounter = Registry.getInstance().register(STRING_LENGTH_COUNTER_NAME, "", null, ICounter.builder().withProperty(property));
+            stringLengthCounter =
+                    Registry.getInstance().register(STRING_LENGTH_COUNTER_NAME, "", null, ICounter.builder().withPropertyType(integerPropertyType));
         }
 
         Tuple out = outputSchemas[inputPort].createTuple();
 
+        final Collection<Property<?>> properties = new HashSet<>();
         for (int i = 0; i < out.getSchema().getFieldCount(); ++i) {
+            properties.clear();
+            properties.add(Property.builder(integerPropertyType).withValue(tuple.getString(i).length()).build());
+
             // increase the count according to the string length
-            stringLengthCounter.increment(new HashSet<>(
-                    Collections.singletonList(Property.builder(LENGTH_PROPERTY_NAME, Integer.class).withValue(tuple.getString(i).length()).build())));
+            stringLengthCounter.increment(stringLengthCounter.createSample(properties));
             out.setField(i, tuple.getField(i));
         }
 
