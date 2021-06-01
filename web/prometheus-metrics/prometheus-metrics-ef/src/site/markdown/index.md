@@ -1,8 +1,7 @@
 # Web : Prometheus Metrics - EventFlow project
 
 In this sample, the Metronome and Map send out a tuple with a random length (< 10 characters) string every second, 
-then the stream passes the StringLengthCounter which integrates a counter with a property *length*, this counter records 
-the count of strings in different length.
+then the stream passes the StringLengthCounter which integrates a counter with a property *length*, this counter property counts the number of strings with the specified length.
 
 ## Adding a dependency to the Prometheus Metrics WAR
 
