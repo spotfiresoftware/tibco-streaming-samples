@@ -304,6 +304,7 @@
                 <configuration>
                     <chartDirectory>${project.build.directory}/helm/${project.artifactId}</chartDirectory>
                     <chartVersion>${project.version}</chartVersion>
+		    <addDefaultRepo>false</addDefaultRepo>
                     <uploadRepoStable>
                         <name>helm.registry</name>
                         <url>${helm.registry}</url>
