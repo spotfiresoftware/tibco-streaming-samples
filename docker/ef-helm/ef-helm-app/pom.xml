@@ -57,7 +57,6 @@
         <skipStreamBaseDockerBase>true</skipStreamBaseDockerBase>
         <skipDockerTests>true</skipDockerTests>
         <skipDockerBuild>true</skipDockerBuild>
-        <skipHelmBuild>true</skipHelmBuild>
     </properties>
     
     <dependencies>
@@ -114,29 +113,6 @@
             </properties>
         </profile>
 
-        <!-- if helm is available, build helm projects -->
-        <profile>
-            <id>Helm in local</id>
-            <activation>
-                <file>
-                    <exists>/usr/local/bin/helm</exists>
-                </file>
-            </activation>
-            <properties>
-                <skipHelmBuild>false</skipHelmBuild>
-            </properties>
-        </profile>
-        <profile>
-            <id>Helm in bin</id>
-            <activation>
-                <file>
-                    <exists>/usr/bin/helm</exists>
-                </file>
-            </activation>
-            <properties>
-                <skipHelmBuild>false</skipHelmBuild>
-            </properties>
-        </profile>
     </profiles>
 
     <build>
@@ -329,15 +305,20 @@
                 <configuration>
                     <chartDirectory>${project.build.directory}/helm/${project.artifactId}</chartDirectory>
                     <chartVersion>${project.version}</chartVersion>
-                    <useLocalHelmBinary>true</useLocalHelmBinary>
                     <uploadRepoStable>
                         <name>helm.registry</name>
                         <url>${helm.registry}</url>
                         <type>${helm.registry.type}</type>
                     </uploadRepoStable>
-                    <skip>${skipHelmBuild}</skip>
                 </configuration>
                 <executions>
+                    <execution>
+                        <id>download helm</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>init</goal>
+                        </goals>
+                    </execution>
                     <execution>
                         <id>create helm package</id>
                         <phase>package</phase>
