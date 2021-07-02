@@ -301,6 +301,7 @@
             <plugin>
                 <groupId>com.kiwigrid</groupId>
                 <artifactId>helm-maven-plugin</artifactId>
+		<version>5.7</version>
                 <configuration>
                     <chartDirectory>${project.build.directory}/helm/${project.artifactId}</chartDirectory>
                     <chartVersion>${project.version}</chartVersion>
