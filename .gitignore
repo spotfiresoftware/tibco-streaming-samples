@@ -5,3 +5,5 @@
 .project
 **/*~
 .DS_Store
+**/lv-user-webapps/lvweb.war
+pom.xml.versionsBackup
