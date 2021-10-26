@@ -38,12 +38,11 @@ global:
 
 scrape_configs:
   - job_name: 'ep-node'
-
-    scrape_interval: 5s
-
+    scrape_interval: 1s
     basic_auth:
       username: '${user.name}'
+      password: ""
 
     metrics_path: '/prometheus-metrics-war/'
     static_configs:
-      - targets: ['${hostname}:${streambase.node.admin.web.port}']
+      - targets: [ 'host.docker.internal:${streambase.node.admin.web.port}' ]
