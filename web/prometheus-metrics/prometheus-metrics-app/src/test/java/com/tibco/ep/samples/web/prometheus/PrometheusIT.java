@@ -28,6 +28,7 @@
 
 package com.tibco.ep.samples.web.prometheus;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -41,6 +42,8 @@ public class PrometheusIT {
     public static final String BUILTIN_CPU_IDLE_UTILIZATION_PERCENTAGE = "builtin_cpu_idle_utilization_percentage";
 
     @Test
+    @Ignore
+    //FIX THIS: TOZHU SB-51300
     public void test() throws IOException, InterruptedException {
         String prometheus_port = System.getProperty("prometheus.metrics.port");
 
