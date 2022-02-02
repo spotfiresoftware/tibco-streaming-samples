@@ -30,7 +30,7 @@
 #
 ### Build temporary image in multi-stage docker image build process
 #
-FROM centos:8 AS build
+FROM almalinux:8 AS build
 
 ###Note: LABEL statement build by Ansible playbook
 LABEL build-image=0.0.0
@@ -40,7 +40,7 @@ LABEL build-image=0.0.0
 #
 ENV PRODUCT_HOME     /opt/tibco/streambase
 
-RUN yum -y install unzip
+RUN dnf --assumeyes install unzip
 
 #
 # Install runtime
@@ -56,7 +56,7 @@ RUN chmod a+x ${PRODUCT_HOME}/start-node
 ### Build base image
 #
 
-FROM centos:8
+FROM almalinux:8
 
 LABEL description="TIBCO Streaming base image"
 LABEL PRODUCT_VERSION=${docker_base_version}
@@ -84,19 +84,16 @@ ENV USER_NAME        tibco
 # libnsl    required by epadmin
 # less      to aid log file reading
 #
-# FIX THIS:
-#	java installed separately due to https://access.redhat.com/solutions/1277233
-#	java pending update to 11
-#
-RUN yum --assumeyes --exclude=gcc --exclude=binutils install \
+RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && dnf --assumeyes update && dnf --setopt=install_weak_deps=False --best --assumeyes --exclude=gcc --exclude=binutils install \
     sysstat \
     gdb \
     zip \
     unzip \
     libnsl \
     less \
-    && yum --assumeyes install java-11-openjdk-headless \
-    && yum clean all
+    java-11-openjdk-headless \
+    iproute \
+    && dnf clean all
 
 #
 # Create a user to run nodes

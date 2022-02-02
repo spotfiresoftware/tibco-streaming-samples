@@ -69,17 +69,19 @@ prodxy discovery configuration :
 The base image [Dockerfile](../../main/docker/base/Dockerfile) is updated to include the sudo tool and its configuration :
 
 ```dockerfile
-RUN yum --assumeyes install \
+RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && dnf --assumeyes update && dnf --setopt=install_weak_deps=False --best --assumeyes --exclude=gcc --exclude=binutils install \
     sysstat \
     gdb \
     zip \
     unzip \
+    libnsl \
+    less \
+    java-11-openjdk-headless \
+    iproute \
     net-tools \
     iptables \
-    tc \
     sudo \
-    && yum --assumeyes install java-11-openjdk-headless \
-    && yum clean all
+    && dnf clean all
 ...
 RUN echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 ```

@@ -27,10 +27,10 @@
 #  POSSIBILITY OF SUCH DAMAGE.
 
 ---
-- name: Pull Centos7 image
+- name: Pull AlmaLinux image
   hosts: localhost
   tasks:
-  - name: pull Centos image
+  - name: pull Almalinux image
     docker_image:
-      name: centos:7
+      name: almalinux:8
       source: pull

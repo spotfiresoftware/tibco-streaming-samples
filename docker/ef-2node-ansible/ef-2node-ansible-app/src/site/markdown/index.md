@@ -20,7 +20,7 @@ See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tib
 
 Docker needs to be running for this project. For more information on how to install and configure a docker please refer to this [Docker: ef-2node EventFlow](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node/ef-2node-app/src/site/markdown/index.md) sample.
 
-Ansible managament server must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS and RHEL/CentOS.
+Ansible managament server must be installed - see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html for further details. Playbook from this sample was built and tested on a localhost with Ansible 2.8.1 on MacOS and RHEL/Almalinux.
 
 Ansible cannot run on a Windows host natively. Please see more information under 
 [Ansile documentation website](https://docs.ansible.com/ansible/latest/user_guide/windows_faq.html).
@@ -69,7 +69,7 @@ Files:
 - [ansible.cfg](../../main/ansible/ansible.cfg) - contains basic ansible configuration for this project to run locally
 - [inventory](../../main/ansible/inventory) - contains only one - localhost - as a target for all playbook tasks 
 - [project-playbook.yml](../../main/ansible/project-playbook.yml) - is the main playbook file with all tasks
-- [ansible-docker-test-playbook.yml](../../main/ansible/ansible-docker-test-playbook.yml) - this is a one task playbook file. This task will pull CentOS 7 docker container to your host and can be used to test if your Ansible and docker installation is correct.
+- [ansible-docker-test-playbook.yml](../../main/ansible/ansible-docker-test-playbook.yml) - this is a one task playbook file. This task will pull Almalinux docker container to your host and can be used to test if your Ansible and docker installation is correct.
 - [additional-playbooks](../../main/ansible/additional-playbooks/) folder - contains few short playbooks to execute from command line. Please see description below.
 
 The one task ansible playbook can be executed from the current directory via command listed below :
@@ -211,7 +211,7 @@ Use the [maven commands](https://maven.apache.org) to build from the command lin
 
 ```ansible
 ...
-[INFO] PLAY [StreamBase create base and application docker image based on CentOs] ****
+[INFO] PLAY [StreamBase create base and application docker image based on Almalinux] ****
 [INFO] 
 [INFO] TASK [Gathering Facts] *********************************************************
 [INFO] ok: [127.0.0.1]

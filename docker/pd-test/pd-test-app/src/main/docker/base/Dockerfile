@@ -29,7 +29,7 @@
 #
 # Dockerfile for Streaming generic base image
 #
-FROM centos:8
+FROM almalinux:8
 
 LABEL description="TIBCO Streaming base image"
 LABEL PRODUCT_VERSION=${docker_base_version}
@@ -57,23 +57,19 @@ ENV USER_NAME        tibco
 # iptables  useful to simulate network issues
 # tc        useful to simulate network issues
 #
-# FIX THIS:
-#	java installed separately due to https://access.redhat.com/solutions/1277233
-#	java pending update to 11
-#
-RUN yum --assumeyes --exclude=gcc --exclude=binutils install \
+RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && dnf --assumeyes update && dnf --setopt=install_weak_deps=False --best --assumeyes --exclude=gcc --exclude=binutils install \
     sysstat \
     gdb \
     zip \
     unzip \
     libnsl \
     less \
+    java-11-openjdk-headless \
+    iproute \
     net-tools \
     iptables \
-    tc \
     sudo \
-    && yum --assumeyes install java-11-openjdk-headless \
-    && yum clean all
+    && dnf clean all
 
 #
 # Create a user to run nodes

@@ -28,7 +28,7 @@
 
 
 ---
-- name: Play 1 -- Create StreamBase base and application docker image based on CentOs
+- name: Play 1 -- Create StreamBase base and application docker image based on Almalinux
   hosts: localhost
   vars_files:
     - "{{ project_basedir }}/target/classes/global_vars/docker_hub.yml"
@@ -289,7 +289,7 @@
           cidr_ip: "{{ cidr_ip }}"
           rule_desc: "{{ rule_desc }}"
 
-  - name: Create EC2 instance -- Centos7 -- {{ instance_type }}
+  - name: Create EC2 instance -- Almalinux -- {{ instance_type }}
     ec2:
       aws_access_key: "{{ assumed_role.sts_creds.access_key | default(omit) }}"
       aws_secret_key: "{{ assumed_role.sts_creds.secret_key  | default(omit) }}"
@@ -328,42 +328,42 @@
 - name: Play 3 -- Install Docker on ec2 instance(s) and pull docker image
   hosts: AnsibleVms
   gather_facts: false
-  remote_user: centos
+  remote_user: almalinux
   become: yes
   vars_files:
      - "{{ project_basedir }}/target/classes/global_vars/docker_hub.yml"
 
   tasks:
-  - name: Install Docker CE on CentOs7 -- getting docker-ce repo
+  - name: Install Docker CE on Almalinux -- getting docker-ce repo
     get_url:
-      url: https://download.docker.com/linux/centos/docker-ce.repo
+      url: https://download.docker.com/linux/almalinux/docker-ce.repo
       dest: /etc/yum.repos.d/docker-ce.repo
 
-  - name: Install Docker CE on CentOs7 -- install docker-ce
+  - name: Install Docker CE on Almalinux -- install docker-ce
     package:
       name: docker-ce
       state: latest
 
-  - name: Install Docker CE on CentOs7 -- install epel-release
+  - name: Install Docker CE on Almalinux -- install epel-release
     package: 
       name: epel-release
       state: latest
 
-  - name: Install Docker CE on CentOs7 -- install python-pip
+  - name: Install Docker CE on Almalinux -- install python-pip
     package:
       name: python-pip
       state: latest
 
-  - name: Install Docker CE on CentOs7 -- install python-py
+  - name: Install Docker CE on Almalinux -- install python-py
     shell: pip install docker
 
-  - name: Install Docker CE on CentOs7 -- add user centos to docker group
+  - name: Install Docker CE on Almalinux -- add user almalinux to docker group
     user:
-      name: centos
+      name: almalinux
       groups: docker
       append: yes
 
-  - name: Install Docker CE on CentOs7 -- start and enable docker service
+  - name: Install Docker CE on Almalinux -- start and enable docker service
     service:
       name: docker
       state: started
@@ -384,9 +384,9 @@
   - name: Copy files to EC2 instance(s) (files in additional-scripts folder)
     copy:
       src: "{{ project_basedir }}/target/classes/{{ item }}"
-      dest: "/home/centos/additional-scripts/"
-      owner: centos
-      group: centos
+      dest: "/home/almalinux/additional-scripts/"
+      owner: almalinux
+      group: almalinux
       mode: 0744
     with_items:
       [ 1-start_cluster.sh, 2-validate_cluster.sh, 3-stop_cluster.sh ]
@@ -395,7 +395,7 @@
 - name: Play 4 -- Start, validate and stop cluster
   hosts: AnsibleVms
   gather_facts: false
-  remote_user: centos
+  remote_user: almalinux
   become: yes
   vars_files:
      - "{{ project_basedir }}/target/classes/global_vars/docker_hub.yml"
