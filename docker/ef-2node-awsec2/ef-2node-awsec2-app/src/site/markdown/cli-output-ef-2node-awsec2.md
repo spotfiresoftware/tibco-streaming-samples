@@ -17,7 +17,7 @@ Play #3 and #4 executed on EC2 instance (vm with IP: 54.159.20.34).
 [INFO] -----------------------[ ep-eventflow-fragment ]------------------------
 ...
 [INFO] 
-[INFO] PLAY [Play 1 -- Create StreamBase base and application docker image based on Centos7] ***
+[INFO] PLAY [Play 1 -- Create StreamBase base and application docker image based on Almalinux] ***
 [INFO] 
 [INFO] TASK [Gathering Facts] *********************************************************
 [INFO] ok: [127.0.0.1]
@@ -176,7 +176,7 @@ Play #3 and #4 executed on EC2 instance (vm with IP: 54.159.20.34).
 [INFO] TASK [Create a security group for SSH access ] *********************************
 [INFO] changed: [127.0.0.1]
 [INFO] 
-[INFO] TASK [Create EC2 instance -- Centos7 -- t2.small] ******************************
+[INFO] TASK [Create EC2 instance -- Almalinux -- t2.small] ******************************
 [INFO] changed: [127.0.0.1]
 [INFO] 
 [INFO] TASK [Update inventory list] ***************************************************
@@ -189,25 +189,25 @@ Play #3 and #4 executed on EC2 instance (vm with IP: 54.159.20.34).
 [INFO] 
 [INFO] PLAY [Play 3 -- Install Docker on ec2 instance(s) and pull docker image] *******
 [INFO] 
-[INFO] TASK [Install Docker CE on CentOs7 -- getting docker-ce repo] ******************
+[INFO] TASK [Install Docker CE on Almalinux -- getting docker-ce repo] ******************
 [INFO] changed: [54.159.20.34]
 [INFO] 
-[INFO] TASK [Install Docker CE on CentOs7 -- install docker-ce] ***********************
+[INFO] TASK [Install Docker CE on Almalinux -- install docker-ce] ***********************
 [INFO] changed: [54.159.20.34]
 [INFO] 
-[INFO] TASK [Install Docker CE on CentOs7 -- install epel-release] ********************
+[INFO] TASK [Install Docker CE on Almalinux -- install epel-release] ********************
 [INFO] changed: [54.159.20.34]
 [INFO] 
-[INFO] TASK [Install Docker CE on CentOs7 -- install python-pip] **********************
+[INFO] TASK [Install Docker CE on Almalinux -- install python-pip] **********************
 [INFO] changed: [54.159.20.34]
 [INFO] 
-[INFO] TASK [Install Docker CE on CentOs7 -- install python-py] ***********************
+[INFO] TASK [Install Docker CE on Almalinux -- install python-py] ***********************
 [INFO] changed: [54.159.20.34]
 [INFO] 
-[INFO] TASK [Install Docker CE on CentOs7 -- add user centos to docker group] *********
+[INFO] TASK [Install Docker CE on Almalinux -- add user almalinux to docker group] *********
 [INFO] changed: [54.159.20.34]
 [INFO] 
-[INFO] TASK [Install Docker CE on CentOs7 -- start and enable docker service] *********
+[INFO] TASK [Install Docker CE on Almalinux -- start and enable docker service] *********
 [INFO] changed: [54.159.20.34]
 [INFO] 
 [INFO] TASK [Login to DockerHub remote private registry] ******************************

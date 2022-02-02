@@ -171,7 +171,7 @@ sg_description: "ef-2node-awsec2 project security group"
 cidr_ip: "1.2.3.4/32"
 rule_desc: "SSH from MyIP only"
 
-#EC2 instance details - CentOS 7x64 (with minimum 1vCPU and 2GB memory)
+#EC2 instance details - Almalinux 7x64 (with minimum 1vCPU and 2GB memory)
 instance_type: "t2.small"
 image_id: "ami-02eac2c0129f6376b"
 keypair: "key_ef-2node-awsec2"				### ### Key Pair file name
@@ -199,7 +199,7 @@ email_address: "me@mycompany.com"
 In this sample the [playbook](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docker/ef-2node-awsec2/ef-2node-awsec2-app/src/main/ansible/project-playbook.yml) is divided into several plays with tasks. Please see description below.
 
 * Play #1: (see [selected tasks](play-1-tasks.md) with description)
-  - Create StreamBase base and application docker image based on CentOs7
+  - Create StreamBase base and application docker image based on Almalinux
   - Start, validate and stop nodes (unless executed via _mvn -DskipTests=true_ command or SkipTest checkbox in StreamBase Studio is selected)
   - Based on user information in ../src/main/resources/global_vars/docker_hub.yml file: 
     - tag application docker image
@@ -215,7 +215,7 @@ In this sample the [playbook](https://github.com/TIBCOSoftware/tibco-streaming-s
 * Play #3: (see [selected tasks](play-3-tasks.md) with description)
   - Install Docker on ec2 instance(s)
   - Pull application docker image from DockerHub
-  - Copy additional-scripts to /home/centos/additional-scripts folder located on new instance(s)
+  - Copy additional-scripts to /home/almalinux/additional-scripts folder located on new instance(s)
 
 * Play #4:
   - Start, validate and stop Nodes
@@ -334,7 +334,7 @@ See fragment from application _pom.xml_ file below.
 ...
 ```
 
-The scripts will be copied over to instance(s) and placed into the /home/centos/additional-scripts folder.
+The scripts will be copied over to instance(s) and placed into the /home/almalinux/additional-scripts folder.
 ```shell
 .
 ├── 1-start_cluster.sh

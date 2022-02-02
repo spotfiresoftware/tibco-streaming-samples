@@ -37,7 +37,7 @@ Project configuration files need to be updated.
 
 #### *** Task with [ec2](https://docs.ansible.com/ansible/latest/modules/ec2_module.html) module to launch an ec2 instance based on details listed below. 
 ```
-  - name: Create EC2 instance -- Centos7 -- {{ instance_type }}
+  - name: Create EC2 instance -- Almalinux -- {{ instance_type }}
     ec2:
       aws_access_key: "{{ assumed_role.sts_creds.access_key | default(omit) }}"
       aws_secret_key: "{{ assumed_role.sts_creds.secret_key  | default(omit) }}"
