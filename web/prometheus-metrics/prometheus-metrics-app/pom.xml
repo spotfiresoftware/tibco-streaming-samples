@@ -168,6 +168,9 @@
                     <nodeDeployFile>
                         ${project.build.directory}/classes/deploy/node_deploy.conf
                     </nodeDeployFile>
+                    <installArguments>
+                        <substitutions>adminWebPort=${streambase.node.admin.web.port}</substitutions>
+                    </installArguments>
                     <nodes>
                         <node>A</node>
                     </nodes>
@@ -305,8 +308,7 @@
                             <!-- If the Prometheus docker container isn't started, we cannot run the test.-->
                             <skipITs>${skipDockerTests}</skipITs>
                             <systemPropertyVariables>
-                                <prometheus.metrics.port>${prometheus.metrics.port}
-                                </prometheus.metrics.port>
+                                <prometheus.metrics.port>${prometheus.metrics.port}</prometheus.metrics.port>
                             </systemPropertyVariables>
                         </configuration>
                     </execution>

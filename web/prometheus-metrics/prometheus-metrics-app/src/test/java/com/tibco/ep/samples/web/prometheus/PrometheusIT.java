@@ -1,4 +1,4 @@
-//  Copyright (C) 2020, TIBCO Software Inc.
+//  Copyright (C) 2020-2022, TIBCO Software Inc.
 //
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -28,8 +28,9 @@
 
 package com.tibco.ep.samples.web.prometheus;
 
-import org.junit.Ignore;
 import org.junit.Test;
+
+import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,30 +38,38 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Test getting technical metrics from Prometheus
+ */
 public class PrometheusIT {
 
-    public static final String BUILTIN_CPU_IDLE_UTILIZATION_PERCENTAGE = "builtin_cpu_idle_utilization_percentage";
+    private static final String BUILTIN_CPU_IDLE_UTILIZATION_PERCENTAGE = "builtin_cpu_idle_utilization_percentage";
 
+    /**
+     * Test reading CPU utilization metric
+     * @throws IOException test failed
+     * @throws InterruptedException test failed
+     */
     @Test
-    @Ignore
-    //FIX THIS: TOZHU SB-51300
-    public void test() throws IOException, InterruptedException {
-        String prometheus_port = System.getProperty("prometheus.metrics.port");
-
+    public void testReadingCpuUtilization() throws IOException, InterruptedException {
+        
+        String prometheusPort = System.getProperty("prometheus.metrics.port");
+        URL url = new URL(
+                        "http://localhost:"
+                                        + prometheusPort
+                                        + "/api/v1/query?query="
+                                        + BUILTIN_CPU_IDLE_UTILIZATION_PERCENTAGE);
         int nbWait = 20;
+        
         while (nbWait > 0) {
-            URL url = new URL("http://localhost:" + prometheus_port
-                + "/api/v1/query?query=" + BUILTIN_CPU_IDLE_UTILIZATION_PERCENTAGE);
+            
             HttpURLConnection httpClient = (HttpURLConnection) url.openConnection();
-
             httpClient.setRequestMethod("GET");
 
-            int responseCode = httpClient.getResponseCode();
             System.out.println("\nSending 'GET' request to URL: " + url);
-            System.out.println("Response Code : " + responseCode);
+            System.out.println("Response Code : " + httpClient.getResponseCode());
 
-            try (BufferedReader in = new BufferedReader(
-                new InputStreamReader(httpClient.getInputStream()))) {
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(httpClient.getInputStream()))) {
 
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -68,7 +77,6 @@ public class PrometheusIT {
                 while ((line = in.readLine()) != null) {
                     response.append(line);
                 }
-
 
                 String output = response.toString();
                 System.out.println("Received: " + output);
@@ -80,11 +88,10 @@ public class PrometheusIT {
             }
 
             System.out.println("Metric not created. Waiting (remaining: " + nbWait +")...");
-            Thread.sleep( 5000);
+            Thread.sleep(5000);
             nbWait--;
         }
-
-        throw new AssertionError(
-            "Could not find metric named " + BUILTIN_CPU_IDLE_UTILIZATION_PERCENTAGE);
+        
+        fail("Could not find metric named " + BUILTIN_CPU_IDLE_UTILIZATION_PERCENTAGE);
     }
 }
