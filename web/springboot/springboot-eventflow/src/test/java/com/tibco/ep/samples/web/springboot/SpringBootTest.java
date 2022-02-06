@@ -1,5 +1,5 @@
 /* *****************************************************************************
- Copyright (C) 2020, TIBCO Software Inc.
+ Copyright (C) 2020-2022, TIBCO Software Inc.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -90,9 +90,10 @@ public class SpringBootTest extends UnitTest {
         webTarget = client.target(new JerseyUriBuilder().path(address).path("springboot-war").path("test").build());
         waitForWAR(webTarget);
 
-        Response response = webTarget.request().get();
-        final String responseEntity = response.readEntity(String.class);
-        assertThat(responseEntity).as("validate response entity").contains("Hello, TIBCO!");
+        try (Response response = webTarget.request().get()) {
+            final String responseEntity = response.readEntity(String.class);
+            assertThat(responseEntity).as("validate response entity").contains("Hello, TIBCO!");
+        }
     }
 
     /**
@@ -104,10 +105,13 @@ public class SpringBootTest extends UnitTest {
     private void waitForWAR(WebTarget webTarget) throws InterruptedException {
 
         for (int i = 0; i < TRY_TIMES_IN_SECS; i++) {
-            Response response = webTarget.request().get();
-            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-                return;
+            
+            try (Response response = webTarget.request().get()) {
+                if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                    return;
+                }  
             }
+
             Thread.sleep(1000);
         }
         Assert.fail(String.format("springboot-war is not ready in %d secs, fail the test.", TRY_TIMES_IN_SECS));
