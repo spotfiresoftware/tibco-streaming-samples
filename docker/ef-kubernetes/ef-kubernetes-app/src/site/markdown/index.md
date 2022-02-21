@@ -10,6 +10,7 @@ node.
 * [Prerequisites](#prerequisites)
 * [Clound native development lifecycle](#cloud-native-development-lifecycle)
 * [Creating an application archive project for Kubernetes from TIBCO Streaming Studio&trade;](#creating-an-application-archive-project-for-kubernetes-from-tibco-streaming-studio-trade)
+* [Kubernetes permissions](#kubernetes-permissions)
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
 * [Service discovery](#service-discovery)
@@ -172,7 +173,48 @@ The Kubernetes configurations include -
 * [security.conf](../../../src/main/configurations/security.conf) - Trusted hosts names need to match Kubernetes DNS names
 * [start-node](../../../src/main/docker/base/start-node) - Script to start the Streaming node
 
+<a name="kubernetes-permissions"></a>
+
+## Kubernetes permissions
+
 <a name="cluster-monitor"></a>
+
+Most kubernetes deployments will require sufficient permissions for the application to manage discovery service objects, for example
+when running in the default namespace :
+
+```shell
+$ kubectl apply -f - <<!
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: service-update
+rules:
+- apiGroups: [""]
+  resources: ["services", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: service-update
+subjects:
+- kind: User
+  name: system:serviceaccount:default:default
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: service-update
+  apiGroup: rbac.authorization.k8s.io
+!
+```
+
+When running in a non-default namespace, the user above will have to be adjusted.  For example in namespace production use :
+
+```shell
+- kind: User
+  name: system:serviceaccount:production:default
+  apiGroup: rbac.authorization.k8s.io
+```
 
 ## Cluster monitor
 
@@ -1115,36 +1157,6 @@ $ kubectl config current-context
 minikube
 ```
 
-Grant permissions for pod's to create service objects :
-
-```shell
-$ kubectl apply -f - <<!
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  namespace: default
-  name: service-update
-rules:
-- apiGroups: [""]
-  resources: ["services", "pods"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: service-update
-  namespace: default
-subjects:
-- kind: User
-  name: system:serviceaccount:default:default
-  apiGroup: rbac.authorization.k8s.io
-roleRef:
-  kind: ClusterRole
-  name: service-update
-  apiGroup: rbac.authorization.k8s.io
-!
-```
-
 Starting the dashboard in a **minikube** context is via the *minikube dashboard* command :
 
 ```shell
@@ -1195,37 +1207,8 @@ $ kind load docker-image ef-kubernetes-app:1.0.0
 
 ```
 
-Grant permissions for pod's to create service objects :
 
-```shell
-$ kubectl apply -f - <<!
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  namespace: default
-  name: service-update
-rules:
-- apiGroups: [""]
-  resources: ["services", "pods"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: service-update
-  namespace: default
-subjects:
-- kind: User
-  name: system:serviceaccount:default:default
-  apiGroup: rbac.authorization.k8s.io
-roleRef:
-  kind: ClusterRole
-  name: service-update
-  apiGroup: rbac.authorization.k8s.io
-!
-```
-
-### CodeReady Containers
+### OpenShift CodeReady Containers
 
 An alternative is **CodeReady Containers** - see https://cloud.redhat.com/openshift/install/crc/installer-provisioned
 for installation instructions ( requires RedHat account and pull secret ).
@@ -1323,7 +1306,6 @@ $ kubectl apply -f - <<!
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: default
   name: service-update
 rules:
 - apiGroups: [""]
