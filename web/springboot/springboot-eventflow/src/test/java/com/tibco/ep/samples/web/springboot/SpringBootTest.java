@@ -38,6 +38,7 @@ import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.glassfish.jersey.uri.internal.JerseyUriBuilder;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
@@ -81,6 +82,7 @@ public class SpringBootTest extends UnitTest {
      * @throws InterruptedException interruption on sleep
      */
     @Test
+    @Ignore("FIX THIS - DJS: SB-51532")
     public void endpointTest() throws InterruptedException {
 
         final HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(System.getProperty("user.name"), "");

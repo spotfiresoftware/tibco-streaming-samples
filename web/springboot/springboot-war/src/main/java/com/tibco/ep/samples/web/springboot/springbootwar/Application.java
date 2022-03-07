@@ -41,7 +41,9 @@ public class Application {
 
     /**
      * application start point
+     * @param args application arguments (not used)
      */
+    @SuppressWarnings("resource")
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
