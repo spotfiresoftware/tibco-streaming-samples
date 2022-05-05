@@ -1,7 +1,21 @@
+# Output directories
+**/target
+*/bin
+*/tmp
+
+# Maven build intermediates
+# From the maven shade plugin.
+dependency-reduced-pom.xml
+*.versionsBackup
+
 **/.settings/**
 **/.metadata/**
 **/target/**
 .classpath
 .project
+
+# Editors
 **/*~
+
+# Operating systems
 .DS_Store
