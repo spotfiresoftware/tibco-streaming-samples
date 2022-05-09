@@ -62,28 +62,15 @@
         <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
     </properties>
 
-    <!-- if Ansible is available, run playbook and build docker images -->
-    <!-- note that we assume if ansible is installed so is docker -->
+    <!-- If Ansible is available, run playbook and build Docker images. -->
+    <!-- Note that we assume if ansible is installed so is Docker. -->
+    <!-- Define add -PactiveAnsible on the command line when running. -->
     <profiles>
         <profile>
-            <id>Ansible-OSX</id>
+            <id>activeAnsible</id>
             <activation>
-                <file>
-                    <exists>/usr/local/bin/ansible</exists>
-                </file>
-            </activation>
-            <modules>
-                <module>ef-2node-ansible-eventflow</module>
-                <module>ef-2node-ansible-app</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>Ansible-Linux</id>
-            <activation>
-                <file>
-                    <exists>/usr/bin/ansible</exists>
-                </file>
+                <!-- or change this to true for ease of use inside Eclipse -->
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>ef-2node-ansible-eventflow</module>

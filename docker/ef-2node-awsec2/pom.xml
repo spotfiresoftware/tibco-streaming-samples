@@ -60,32 +60,19 @@
 
     <properties>
         <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>
+        <ansibleProgram>/usr/local/bin/ansible-new</ansibleProgram>
     </properties>
 
-    <!-- if Ansible is available, run playbook, build docker images and deploy to AWS EC2 instance-->
-    <!-- note that we assume if ansible is installed so is docker -->
-    <!-- if all information about AWS and Docker Hub account are available on your host, -->
-    <!-- change ../ansible-new to ../ansible in profiles below to execute the playbook --> 
+    <!-- If Ansible is available, run playbook, build Docker images and deploy to AWS EC2 instance-->
+    <!-- Note that we assume if ansible is installed so is Docker -->
+    <!-- If all information about AWS and Docker Hub account are available on your host, -->
+    <!-- define add -PactiveAnsibleAndAWS on the command line when running. -->
     <profiles>
         <profile>
-            <id>Ansible-OSX</id>
+            <id>activeAnsibleAndAWS</id>
             <activation>
-                <file>
-                    <exists>/usr/local/bin/ansible-new</exists>
-                </file>
-            </activation>
-            <modules>
-                <module>ef-2node-awsec2-eventflow</module>
-                <module>ef-2node-awsec2-app</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>Ansible-Linux</id>
-            <activation>
-                <file>
-                    <exists>/usr/bin/ansible-new</exists>
-                </file>
+                <!-- or change this to true for ease of use inside Eclipse -->
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>ef-2node-awsec2-eventflow</module>

@@ -206,8 +206,8 @@ Variables and values from above task are passed by maven plugin to ansible playb
 
 Use the [maven commands](https://maven.apache.org) to build from the command line or Continuous Integration system:
 
-- mvn clean  - it will clean the directories and files created by previous project
-- mvn install - it will run an ansible playbook, below is the example of the console output: Play and tasks
+- `mvn -PactiveAnsible clean` - it will clean the directories and files created by previous project
+- `mvn -PactiveAnsible install` - it will run an ansible playbook, below is the example of the console output: Play and tasks
 
 ```ansible
 ...

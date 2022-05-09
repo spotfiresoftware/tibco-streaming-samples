@@ -253,8 +253,8 @@ Plays and tasks info from Ansible playbook will show up on a console tab.
 
 Use the [maven commands](https://maven.apache.org) to build from the command line or Continuous Integration system:
 
-- mvn clean  - it will clean the directories and files created by previous project
-- mvn install - it will run an Ansible playbook, below is the example of the console output: Plays and tasks
+- `mvn -PactiveAnsibleAndAWS clean` - it will clean the directories and files created by previous project
+- `mvn -PactiveAnsibleAndAWS install` - it will run an Ansible playbook, below is the example of the console output: Plays and tasks
 
 Screenshot below shows Play #1 and #2 executed on Ansible management host (localhost / 127.0.0.1), Play #3 and #4 executed on EC2 instance. 
 ( [Example of command line output can be found here](cli-output-ef-2node-awsec2.md) )
