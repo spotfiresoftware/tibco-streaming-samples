@@ -49,11 +49,10 @@ version references.** So, we are currently obliged to add the
 following `mvn` command line options during such operations:
 
 * `-PactiveAnsible` for [docker/ef-2node-ansible](docker/ef-2node-ansible).
-* `-PactiveAnsibleAndAWS` for [docker/ef-2node-awsec2](docker/ef-2node-awsec2).
 
 Which then leaves a base command of:
 
-    mvn -PactiveAnsible -PactiveAnsibleAndAWS versions:update-parent ...
+    mvn -PactiveAnsible versions:update-parent ...
 
 ## Futures ##
 
