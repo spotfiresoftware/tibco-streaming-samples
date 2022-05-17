@@ -1,13 +1,11 @@
-# Web: create Spring Boot WAR
+# Web: create a Spring Boot WAR
 
-How to use Spring Boot to create a WAR.
+How to use Spring Boot to create a WAR
 
-* [Web: springboot-war](src/site/markdown/index.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/springboot/springboot-war))
-
-_This is a TIBCO approved sample._
+* [springboot-war](src/site/markdown/index.md)
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2022, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
