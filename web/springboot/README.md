@@ -1,14 +1,16 @@
 # Web: Spring Boot WAR
 
-How to use Spring Boot to create a WAR and use the WAR in an EventFlow project.
+How to use Spring Boot to create a WAR and use it in an EventFlow project
 
-* [springboot-eventflow](springboot-eventflow/README.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/springboot/springboot-eventflow))
-* [springboot-war](springboot-war/README.md) ([html](https://github.com/TIBCOSoftware/tibco-streaming-samples/tree/master/web/springboot/springboot-war))
+Samples :
+
+* [Web: create a Spring Boot WAR](springboot-war/src/site/markdown/index.md)
+* [Web: springboot-eventflow](springboot-eventflow/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2018-2022, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

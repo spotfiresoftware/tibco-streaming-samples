@@ -1,25 +1,19 @@
-# TIBCO&reg; Streaming 11.0.0-SNAPSHOT Samples
+# TIBCO&reg; Streaming 11.0.0 Samples
 
-This GitHub repository contains a number of TIBCO&reg; Streaming 11.0.0-SNAPSHOT samples that can be cloned to your local workspace.
+This GitHub repository contains a number of TIBCO&reg; Streaming 11.0.0 samples that can be cloned to your local workspace.
 
-Overview:
+Samples :
 
-* [Using in TIBCO StreamBase Studio&trade; 11.0.0-SNAPSHOT](docs/studio.md)
-* [Contributing](docs/contributing.md)
-* [License](docs/LICENSE)
-
-Sample categories:
-
-* [How to structure TIBCO&reg; Streaming 11.0.0-SNAPSHOT projects.](structure/README.md)
-* [How to test TIBCO&reg; Streaming 11.0.0-SNAPSHOT projects.](testing/README.md)
-* [How to use native libraries in TIBCO&reg; Streaming 11.0.0-SNAPSHOT projects.](nativelibrary/README.md)
-* [How to invoke Java from TIBCO&reg; Streaming 11.0.0-SNAPSHOT projects.](java/README.md)
-* [How to build Highly Available TIBCO&reg; Streaming 11.0.0-SNAPSHOT projects.](highavailability/README.md)
-* [How to use Docker in TIBCO&reg; Streaming 11.0.0-SNAPSHOT projects.](docker/README.md)
-* [How to deploy web application in TIBCO&reg; Streaming 11.0.0-SNAPSHOT projects.](web/README.md)
+* [How to structure TIBCO&reg; Streaming 11.0.0 projects.](structure/README.md)
+* [How to test TIBCO&reg; Streaming 11.0.0 projects.](testing/README.md)
+* [How to use native libraries in TIBCO&reg; Streaming 11.0.0 projects.](nativelibrary/README.md)
+* [How to invoke Java from TIBCO&reg; Streaming 11.0.0 projects.](java/README.md)
+* [How to build Highly Available TIBCO&reg; Streaming 11.0.0 projects.](highavailability/README.md)
+* [How to use Docker in TIBCO&reg; Streaming 11.0.0 projects.](docker/README.md)
+* [How to deploy web application in TIBCO&reg; Streaming 11.0.0 projects.](web/README.md)
 
 ---
-Copyright (c) 2018-2020, TIBCO Software Inc.
+Copyright (c) 2018-2022, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
