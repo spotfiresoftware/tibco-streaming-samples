@@ -3,6 +3,12 @@
 */bin
 */tmp
 
+# No commited user webapps
+**/lv-user-webapps
+
+# Index generation
+*-sub
+
 # Maven build intermediates
 # From the maven shade plugin.
 dependency-reduced-pom.xml
