@@ -54,6 +54,24 @@ Which then leaves a base command of:
 
     mvn -PactiveAnsible versions:update-parent ...
 
+## Regenerating Sample Indices ##
+
+After a branch's parent versions are updated, you should update the
+indices, which will make sure that all the sample documentation is linked
+from the top, and the correct Streaming versions are mentioned.
+
+Run this command:
+
+    [ MVN_OPTIONS=...more mvn parameters... ] ./EPDev/update-indices
+   
+You must be able to build all the samples locally because the updates
+require that all project depdendencies are available, including
+dependencies between the projects. So, Docker and Ansible need to
+be installed and functional because of the container technology
+samples.
+
+Then inspect the results, commit, and push.
+
 ## Futures ##
 
 It would be nice to get rid of the reliance on profiles because they
