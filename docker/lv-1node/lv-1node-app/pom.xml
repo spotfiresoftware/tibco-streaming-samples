@@ -154,12 +154,12 @@
                                             <enabled>true</enabled>
                                         </log>
                                         <ports> 
-                                            <port>10080:10080</port>
+                                            <port>11080:11080</port>
                                         </ports>
                                         <wait>
                                             <!-- <log>COMMAND FINISHED</log> -->
                                             <http>
-                                                <url>http://localhost:10080</url>
+                                                <url>http://localhost:11080</url>
                                                 <method>GET</method>
                                                 <status>200..399</status>
                                             </http>
