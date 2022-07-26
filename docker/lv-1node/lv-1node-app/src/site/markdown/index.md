@@ -47,7 +47,7 @@ Note that whilst this project will create a simple Docker image, changes to the 
 ## Containers and nodes
 
 In this sample we name the docker container as **A.lv-1node-app**,  which hosts the StreamBase node **A.lv-1node-app**, the TIBCO LiveView&trade; Web port 
-10080 is published to the host :
+11080 is published to the host :
 
 ![nodes](images/lv-docker.svg)
 
@@ -113,12 +113,12 @@ integration testing and wait until the web server is running :
 
 ```
     <ports> 
-        <port>10080:10080</port>
+        <port>11080:11080</port>
     </ports>
     ...
     <wait>
         <http>
-            <url>http://localhost:10080</url>
+            <url>http://localhost:11080</url>
             <method>GET</method>
             <status>200..399</status>
         </http>
@@ -170,17 +170,17 @@ Use the [docker run](https://docs.docker.com/engine/reference/run/) command.  In
 * **--hostname=A.example.com --network-alias=A.example.com --network=example.com** - set the container hostname and network name. This must match the docker network name and the [Trusted hosts HOCON configuration](../../main/configurations/security.conf)
 * **--name=A.lv-1node-app** - container name
 * **--env=NODENAME=A.lv-1node-app** - node name
-* **--publish 10080:10080** - publish the TIBCO LiveView&trade; Web port to the host
+* **--publish 11080:11080** - publish the TIBCO LiveView&trade; Web port to the host
 * **docker/lv-1node-app:1.0.0** - Docker image name
 
 ```shell
-$ docker run --detach --hostname=A.example.com --network-alias=A.example.com --name=A.lv-1node-app --network=example.com --env=NODENAME=A.lv-1node-app --publish 10080:10080 docker/lv-1node-app:1.0.0
+$ docker run --detach --hostname=A.example.com --network-alias=A.example.com --name=A.lv-1node-app --network=example.com --env=NODENAME=A.lv-1node-app --publish 11080:11080 docker/lv-1node-app:1.0.0
 ec0aaaa22b92707e74f15b9ada6e6c37c14669856744e88ebc1741b2b099cc0d
 ```
 
 ### Connect to the TIBCO LiveView&trade; Web console
 
-Use a web browser at http://localhost:10080/ :
+Use a web browser at http://localhost:11080/ :
 
 ![lvweb](images/lvweb.gif)
 
