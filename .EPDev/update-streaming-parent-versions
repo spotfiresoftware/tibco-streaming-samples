@@ -1,0 +1,39 @@
+#!/bin/bash
+
+source $(dirname "${0}")/common.bash
+
+declare -r new_version="${1}"
+
+if [ -z "${new_version}" ] ; then
+    echo "Please supply a new version."
+    exit 2
+fi
+
+declare -r starting_version=$(get_current_parent_version)
+
+# Validation also brings down a lot of artifacts, which will
+# speed up subsequent operations.
+echo "Starting with parent version ${starting_version}"
+
+echo -n "Validating current project state..."
+
+if ! run_maven -q validate ; then
+    exit 1
+fi
+
+echo "done."
+
+# Tricky: parentVersion is a range, so merely supplying a version is
+# actually saying "at least this version." We want an exact, bounded
+# range of exactly one version.
+# https://www.mojohaus.org/versions-maven-plugin/update-parent-mojo.html
+if ! run_maven versions:update-parent "-DparentVersion=[${new_version}]" ; then
+    echo "Project versions could not updated."
+    exit 1
+fi
+
+echo "Checking for traces of previous versions; some could be benign."
+
+find . -name pom.xml | xargs grep -l -F "<version>${starting_version}</version>"
+
+echo "...done with check."
