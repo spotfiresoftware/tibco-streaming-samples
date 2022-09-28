@@ -70,7 +70,7 @@ Which then leaves a base command of:
 These vexing issues are handled in
 [.EPDev/common.bash](.EPDev/common.bash).
 
-# Performingthe updates
+# Performing The Updates
 
 ## Maven Settings
 
