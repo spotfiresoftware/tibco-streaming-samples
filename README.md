@@ -1,25 +1,19 @@
-# TIBCO&reg; Streaming 10.6.2 Samples
+# TIBCO&reg; Streaming 10.6.3 Samples
 
-This GitHub repository contains a number of TIBCO&reg; Streaming 10.6.2 samples that can be cloned to your local workspace.
+This GitHub repository contains a number of TIBCO&reg; Streaming 10.6.3 samples that can be cloned to your local workspace.
 
-Overview:
+Samples :
 
-* [Using in TIBCO StreamBase Studio&trade; 10.6.2](docs/studio.md)
-* [Contributing](docs/contributing.md)
-* [License](docs/LICENSE)
-
-Sample categories:
-
-* [How to structure TIBCO&reg; Streaming 10.6.2 projects.](structure/README.md)
-* [How to test TIBCO&reg; Streaming 10.6.2 projects.](testing/README.md)
-* [How to use native libraries in TIBCO&reg; Streaming 10.6.2 projects.](nativelibrary/README.md)
-* [How to invoke Java from TIBCO&reg; Streaming 10.6.2 projects.](java/README.md)
-* [How to build Highly Available TIBCO&reg; Streaming 10.6.2 projects.](highavailability/README.md)
-* [How to use Docker in TIBCO&reg; Streaming 10.6.2 projects.](docker/README.md)
-* [How to deploy web application in TIBCO&reg; Streaming 10.6.2 projects.](web/README.md)
+* [How to structure TIBCO&reg; Streaming 10.6.3 projects.](structure/README.md)
+* [How to test TIBCO&reg; Streaming 10.6.3 projects.](testing/README.md)
+* [How to use native libraries in TIBCO&reg; Streaming 10.6.3 projects.](nativelibrary/README.md)
+* [How to invoke Java from TIBCO&reg; Streaming 10.6.3 projects.](java/README.md)
+* [How to build Highly Available TIBCO&reg; Streaming 10.6.3 projects.](highavailability/README.md)
+* [How to use Docker in TIBCO&reg; Streaming 10.6.3 projects.](docker/README.md)
+* [How to deploy web application in TIBCO&reg; Streaming 10.6.3 projects.](web/README.md)
 
 ---
-Copyright (c) 2018-2021, TIBCO Software Inc.
+Copyright (c) 2018-2022, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

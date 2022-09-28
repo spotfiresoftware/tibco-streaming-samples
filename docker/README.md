@@ -1,6 +1,6 @@
 # Docker
 
-How to use Docker in TIBCO&reg; Streaming 10.6.2 projects.
+How to use Docker in TIBCO&reg; Streaming 10.6.3 projects.
 
 Samples :
 
@@ -12,7 +12,7 @@ Samples :
 * [How to deploy an EventFlow application in Docker with Kubernetes and Helm](ef-helm/README.md)
 
 ---
-Copyright (c) 2018-2021, TIBCO Software Inc.
+Copyright (c) 2018-2022, TIBCO Software Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
