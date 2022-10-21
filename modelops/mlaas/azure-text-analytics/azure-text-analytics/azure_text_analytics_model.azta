@@ -1,0 +1,89 @@
+# Copyright (C) 2022, TIBCO Software Inc.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 
+# 3. Neither the name of the copyright holder nor the names of its contributors
+#    may be used to endorse or promote products derived from this software
+#    without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# import common packages needed for data manipulation
+import pandas as pd
+import numpy as np
+from typing import Iterable
+from typing import Tuple
+
+# import azure packages for authentication and text analytics
+# packages are listed in the requirements.txt model property file
+import azure.ai.textanalytics
+import azure.core.credentials
+
+# set columns for id and text columns
+idColumnName = 'id'
+textColumnName = 'comments'
+
+# Azure Text Analytics Endpoint Configuration - MAKE SURE TO PUT YOUR INFORMATION HERE
+azureCognitiveKey = "ENTER_YOUR_KEY_HERE_FROM_AZURE_COGNITIVE_SERVICES"
+azureCognitiveEndpoint = "ENTER_YOUR_COGNITIVE_SERVICES_URL_HERE"
+
+# Set Azure credentials
+azureCredentials = azure.core.credentials.AzureKeyCredential(azureCognitiveKey)
+# Get Azure text analytics client
+azureTextAnalyticsClient = azure.ai.textanalytics.TextAnalyticsClient(endpoint=azureCognitiveEndpoint, credential=azureCredentials)
+
+#---------------------------------------------------------------------
+# score function called by ModelOps during scoring step
+#---------------------------------------------------------------------
+def score(data: np.ndarray, column_names: Iterable[str]) -> Tuple[np.ndarray, Iterable[str]]:
+    #
+    # scoring logic is in this function
+    #
+    ## Create Empty results list for storing output
+    list_sentiment_results = []
+    ## Empty dataframe to pass back if no results
+    df_sentiment_results = pd.DataFrame(columns=('Sentiment','Positive','Neutral','Negative',idColumnName,'Language'))
+    # Convert incoming data from array to dataframe
+    input_data = pd.DataFrame(data, columns=column_names)
+    #
+    ## Loop through rows in input data
+    for index, row in input_data.iterrows():
+        if not pd.isna(row[idColumnName]):
+            #
+            ## Convert to required format by azure
+            input_documents = [{"id": row[idColumnName],"text" : row[textColumnName]}]
+            #
+            ## Run Azure sentiment analysis
+            text_sentiment_result = azureTextAnalyticsClient.analyze_sentiment(documents=input_documents)[0]
+            dictionay_result = {}
+            dictionay_result.update({"Sentiment": text_sentiment_result.sentiment,
+                                     "Positive" : text_sentiment_result.confidence_scores.positive,
+                                     "Neutral" : text_sentiment_result.confidence_scores.neutral,
+                                     "Negative" : text_sentiment_result.confidence_scores.negative,
+                                        idColumnName: text_sentiment_result.id, 
+                                        "Language": 'en'})
+            list_sentiment_results.append(dictionay_result)
+    #
+    if len(list_sentiment_results) > 0:
+        df_sentiment_results = pd.DataFrame.from_dict(list_sentiment_results, orient='columns')
+    # convert dataframe to numpy array to return to scoring flow
+    score_data = df_sentiment_results.to_numpy()
+    return score_data, None 

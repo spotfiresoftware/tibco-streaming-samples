@@ -1,0 +1,58 @@
+{
+  "projectName" : "amazon-comprehend",
+  "projectId" : "8dd7a22059d44d0ab2ddf4bbb6b7a9c2",
+  "artifacts" : {
+    "a1bd7d689e5447fea4ec94b82b31bbda" : {
+      "name" : "/requirements.txt",
+      "path" : "amazon-comprehend/requirements.txt",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T16:58:08+0000",
+      "type" : "TEXT_FILE",
+      "revisionNumber" : 0
+    },
+    "192eedccdd8b446a862721536bee4eb4" : {
+      "name" : "/amazon_comprehend_pipeline.scoringpipeline",
+      "path" : "amazon-comprehend/amazon_comprehend_pipeline.scoringpipeline",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T16:58:08+0000",
+      "type" : "SCORING_PIPELINE",
+      "revisionNumber" : 0
+    },
+    "236f465a18fb47168dbb60ad99c8a116" : {
+      "name" : "/amazon_comprehend_model.awsc",
+      "path" : "amazon-comprehend/amazon_comprehend_model.awsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T16:58:08+0000",
+      "type" : "SENTIMENT_AWS_COMPREHEND",
+      "revisionNumber" : 0,
+      "inputSchema" : "e958a1b345c34fbd8151b5c0ad52f516",
+      "outputSchema" : "2dfbe4a1a2ac4714b0b46359afc84f66",
+      "dependencies" : [ "a1bd7d689e5447fea4ec94b82b31bbda" ]
+    },
+    "2dfbe4a1a2ac4714b0b46359afc84f66" : {
+      "name" : "/output_amazon_comprehend.avsc",
+      "path" : "amazon-comprehend/output_amazon_comprehend.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T16:58:08+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "e958a1b345c34fbd8151b5c0ad52f516" : {
+      "name" : "/input_sentiment.avsc",
+      "path" : "amazon-comprehend/input_sentiment.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T16:58:08+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "dc94ca7ac9ef49d08ef52593cdcb8d16" : {
+      "name" : "/amazon_comprehend_flow.scoringflow",
+      "path" : "amazon-comprehend/amazon_comprehend_flow.scoringflow",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T16:58:08+0000",
+      "type" : "SCORING_FLOW",
+      "revisionNumber" : 0
+    }
+  },
+  "propertyDefinitions" : [ ]
+}

@@ -1,0 +1,66 @@
+{
+  "projectName" : "google-language",
+  "projectId" : "acd8294c475a4fd89e2d70b1a3970ef3",
+  "artifacts" : {
+    "7b20e6833e2f47d09c80cb7d28f78832" : {
+      "name" : "/google_language_model.gls",
+      "path" : "google-language/google_language_model.gls",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T16:11:01+0000",
+      "type" : "SENTIMENT_GOOGLE_LANGUAGE_SERVICE",
+      "revisionNumber" : 0,
+      "inputSchema" : "8812b1656bcb4eab8513b304302cdbce",
+      "outputSchema" : "106cc09cfc79464d96a6230969aa3a83",
+      "dependencies" : [ "fb3cc2e6433642f9a82ed7e50d95f21b", "bb6a404624db4869b9c462ecb88bb03a" ]
+    },
+    "106cc09cfc79464d96a6230969aa3a83" : {
+      "name" : "/output_google_language.avsc",
+      "path" : "google-language/output_google_language.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T16:11:01+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "080fa1e28b26425595c9575c9b46f872" : {
+      "name" : "/google_language_pipeline.scoringpipeline",
+      "path" : "google-language/google_language_pipeline.scoringpipeline",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T16:11:01+0000",
+      "type" : "SCORING_PIPELINE",
+      "revisionNumber" : 0
+    },
+    "5e196ff54af140aa8714bf2b5c8499dd" : {
+      "name" : "/google_language_flow.scoringflow",
+      "path" : "google-language/google_language_flow.scoringflow",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T16:11:01+0000",
+      "type" : "SCORING_FLOW",
+      "revisionNumber" : 0
+    },
+    "8812b1656bcb4eab8513b304302cdbce" : {
+      "name" : "/input_sentiment.avsc",
+      "path" : "google-language/input_sentiment.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T16:11:01+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "bb6a404624db4869b9c462ecb88bb03a" : {
+      "name" : "/service-acct.json",
+      "path" : "google-language/service-acct.json",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T16:11:01+0000",
+      "type" : "UNKNOWN",
+      "revisionNumber" : 0
+    },
+    "fb3cc2e6433642f9a82ed7e50d95f21b" : {
+      "name" : "/requirements.txt",
+      "path" : "google-language/requirements.txt",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T16:11:01+0000",
+      "type" : "TEXT_FILE",
+      "revisionNumber" : 0
+    }
+  },
+  "propertyDefinitions" : [ ]
+}

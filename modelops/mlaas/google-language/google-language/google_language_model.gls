@@ -1,0 +1,96 @@
+# Copyright (C) 2022, TIBCO Software Inc.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 
+# 3. Neither the name of the copyright holder nor the names of its contributors
+#    may be used to endorse or promote products derived from this software
+#    without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# import common packages needed for data manipulation
+import pandas as pd
+import numpy as np
+from typing import Iterable
+from typing import Tuple
+
+# import google packages for text analytics
+# packages are listed in the requirements.txt model property file
+import google.cloud.language_v1
+
+# set columns for id and text columns
+idColumnName = 'id'
+textColumnName = 'comments'
+
+# Get Google language client using service-acct.json file
+# make sure to update service-acct.json file with latest values
+client = google.cloud.language_v1.LanguageServiceClient.from_service_account_file('service-acct.json')
+
+#---------------------------------------------------------------------
+# score function called by ModelOps during scoring step
+#---------------------------------------------------------------------
+def score(data: np.ndarray, column_names: Iterable[str]) -> Tuple[np.ndarray, Iterable[str]]:
+    #
+    # scoring logic goes in this function
+    #
+    ## Empty results list
+    sentiment_results_list = []
+    # Convert from array to dataframe
+    input_data = pd.DataFrame(data, columns=column_names)
+    ## Empty dataframe to pass back if no results
+    sentiment_results = pd.DataFrame(columns=('Sentiment',idColumnName,'Language','Sentiment_Category'))
+    #
+    ## Loop through rows in input data
+    for index, row in input_data.iterrows():
+        if not pd.isna(row[idColumnName]):
+            #
+            ## Convert to required format by google
+            # language is optional.  Allow google to automatically detect it.
+            document = {"content": row[textColumnName], 
+                    "type_": google.cloud.language_v1.Document.Type.PLAIN_TEXT}
+            #
+            ## Run Google sentiment analysis
+            text_sentiment_result = client.analyze_sentiment(request = 
+                                {'document': document, 'encoding_type': google.cloud.language_v1.EncodingType.UTF8})
+            sent_result_dict = {}
+            sent_result_dict.update({"Sentiment": text_sentiment_result.document_sentiment.score,
+                                    "Magnitude": text_sentiment_result.document_sentiment.magnitude,
+                                        idColumnName: row[idColumnName], 
+                                        "Language": 'en'})
+            #
+            ## Google doesn't define text based sentiment categories so lets define our own based numeric values
+            conditions = [(sent_result_dict['Sentiment'] >= 0.6),
+                            (sent_result_dict['Sentiment'] > -0.6) & (sent_result_dict['Sentiment'] < 0.6) & 
+                                    (sent_result_dict['Magnitude'] <= 5.0),
+                            (sent_result_dict['Sentiment'] > -0.6) & (sent_result_dict['Sentiment'] < 0.6) & 
+                                    (sent_result_dict['Magnitude'] > 5.0),
+                            (sent_result_dict['Sentiment'] <= -0.6)]
+            choices = ['positive', 'neutral', 'mixed', 'negative']
+            #
+            ## Define sentiment category selected
+            sent_result_dict['Sentiment_Category'] = np.select(conditions, choices, default='').tolist()
+            sentiment_results_list.append(sent_result_dict)
+    #
+    if len(sentiment_results_list) > 0:
+        sentiment_results = pd.DataFrame.from_dict(sentiment_results_list, orient='columns')
+    # convert dataframe to numpy array to return to scoring flow
+    score_data = sentiment_results.to_numpy()
+    return score_data, None

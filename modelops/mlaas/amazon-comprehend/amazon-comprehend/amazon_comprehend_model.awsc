@@ -1,0 +1,131 @@
+# Copyright (C) 2022, TIBCO Software Inc.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 
+# 3. Neither the name of the copyright holder nor the names of its contributors
+#    may be used to endorse or promote products derived from this software
+#    without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# import common packages needed for data manipulation
+import pandas as pd
+import numpy as np
+from typing import Iterable
+from typing import Tuple
+from datetime import datetime
+
+# import amazon packages for authentication and text analytics
+# packages are listed in the requirements.txt model property file
+import boto3
+import boto3.session
+
+# set columns for id and text columns
+idColumnName = 'id'
+textColumnName = 'comments'
+
+# AWS authentication information needed to create service
+aws_access_keyIn="ENTER_YOUR_AWS_ACCESS_KEY_HERE"  
+aws_secret_keyIn="ENTER_YOUR_AWS_SECRET_KEY_HERE"
+aws_rolearn="ENTER_YOUR_ROLE_ARN_HERE"
+aws_region="ENTER_YOUR_REGION_HERE"
+
+assumed_role = None
+aws_service = None
+
+# Assume given role in AWS
+def getAWSRole(key_id, secret_key, roleArn, sessionName):
+    ## assume role using script
+    sts_client = boto3.client('sts', aws_access_key_id=key_id, aws_secret_access_key=secret_key)
+    ## call assume role to get federated access
+    return sts_client.assume_role(RoleArn=roleArn, RoleSessionName=sessionName)
+
+# Check to see if current session is still valid based on token expiration
+# if new session is needed, then reutrn new session.
+# If new session is not needed, then return None so existing service is used.
+def getAWSSession(key_id, secret_key, roleArn, sessionName):
+    global assumed_role
+    global aws_service
+    # check to see if have retrieved credentials
+    if (assumed_role is None):
+        assumed_role = getAWSRole(key_id, secret_key, roleArn, sessionName)
+    # need to check token expiration
+    tokenexp = assumed_role["Credentials"]["Expiration"]
+    if (tokenexp <= datetime.now(tokenexp.tzinfo)):
+        # need to refresh token
+        assumed_role = getAWSRole(key_id, secret_key, roleArn, sessionName)
+        # reset aws_service
+        aws_service = None
+    # if comprehend has not been defined yet then create
+    if (aws_service is None):
+        # get values for creating session    
+        aws_access_key=assumed_role["Credentials"]["AccessKeyId"]
+        aws_secret_key=assumed_role["Credentials"]["SecretAccessKey"]
+        aws_session_tkn=assumed_role["Credentials"]["SessionToken"]
+        # create session
+        aws_session = boto3.session.Session(region_name=aws_region, aws_access_key_id=aws_access_key, 
+              aws_secret_access_key=aws_secret_key, aws_session_token=aws_session_tkn)
+        return aws_session
+    return None
+
+# Return new aws_service given service name and authentication information
+def getAWSService(svcname, key_id, secret_key, roleArn):
+    global aws_service
+    ## get session - either None (if new service not needed) or new session
+    aws_session = getAWSSession(key_id, secret_key, roleArn, "aws-" + svcname + "-session")
+    # if session is not none then need to create new service
+    if (aws_service is None):
+        # create rekognition
+        aws_service = aws_session.client(service_name=svcname) #, region_name=aws_region)
+    # return value    
+    return aws_service
+
+#---------------------------------------------------------------------
+# score function called by ModelOps during scoring step
+#---------------------------------------------------------------------
+def score(data: np.ndarray, column_names: Iterable[str]) -> Tuple[np.ndarray, Iterable[str]]:
+    #
+    # scoring logic goes in this function
+    #
+    ## get comprehend service 
+    comprehendLocal = getAWSService('comprehend', aws_access_keyIn, aws_secret_keyIn, aws_rolearn)
+    ## Empty results list
+    results_list = []
+    # Convert from array to dataframe
+    input_data = pd.DataFrame(data, columns=column_names)    
+    ## Empty df to pass back if no results
+    sentiment_results = pd.DataFrame(columns=(idColumnName,'Mixed', 'Negative', 'Positive', 'Sentiment'))
+    #
+    ## Loop text in table - note AWS has a batch mode that may be more efficient to use
+    for index, row in input_data.iterrows():
+        if not pd.isna(row[idColumnName]):
+            ##  run text analytics
+            text_results = comprehendLocal.detect_sentiment(Text=row[textColumnName], LanguageCode='en')
+            text_results['SentimentScore']['Sentiment'] = text_results['Sentiment']
+            text_results['SentimentScore'][idColumnName] = row[idColumnName]
+            results_list.append(text_results['SentimentScore'])
+    #
+    if len(results_list) > 0:
+        sentiment_results = pd.DataFrame.from_dict(results_list, orient='columns')
+    #
+    score_data = sentiment_results.to_numpy()
+    return score_data, None
+        

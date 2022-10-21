@@ -1,0 +1,80 @@
+{
+  "processingSteps": {
+    "Input": {
+      "label": "Input",
+      "type": "INPUT",
+      "configuration": {
+        "dataSourceSchema": {
+          "type": "object",
+          "title": "topLevelRecord",
+          "properties": {
+            "id": {
+              "type": "string",
+              "ordinal": 0
+            },
+            "comments": {
+              "type": "string",
+              "ordinal": 1
+            }
+          },
+          "required": [
+            "id",
+            "comments"
+          ],
+          "additionalProperties": false
+        },
+        "replacements": [],
+        "outputVariableName": "INPUT_DATA"
+      }
+    },
+    "Score_Data": {
+      "label": "Score Data",
+      "type": "SCORE_DATA",
+      "configuration": {
+        "modelId": "7b20e6833e2f47d09c80cb7d28f78832",
+        "outputVariableName": "SCORE",
+        "scoringFieldValues": {
+          "id": {
+            "fieldValue": "INPUT_DATA.id"
+          },
+          "comments": {
+            "fieldValue": "INPUT_DATA.comments"
+          }
+        }
+      }
+    },
+    "Output": {
+      "label": "Output",
+      "type": "OUTPUT",
+      "configuration": {
+        "sinkFields": {
+          "Sentiment": {
+            "sinkFieldValue": "SCORE.scoreOutput.Sentiment"
+          },
+          "Magnitude": {
+            "sinkFieldValue": "SCORE.scoreOutput.Magnitude"
+          },
+          "id": {
+            "sinkFieldValue": "INPUT_DATA.id"
+          },
+          "Language": {
+            "sinkFieldValue": "SCORE.scoreOutput.Language"
+          },
+          "Sentiment_Category": {
+            "sinkFieldValue": "SCORE.scoreOutput.Sentiment_Category"
+          }
+        }
+      }
+    }
+  },
+  "edges": [
+    {
+      "from": "Input",
+      "to": "Score_Data"
+    },
+    {
+      "from": "Score_Data",
+      "to": "Output"
+    }
+  ]
+}

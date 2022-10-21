@@ -1,0 +1,29 @@
+{"type":"record","name":"topLevelRecord","fields":[
+    {"name":"Name","type":"string"},
+    {"name":"TagScores",
+    	"type": {
+    		"type" : "array",
+    		"items" :{
+    			"name" : "tagscore_fields",
+    			"type" : "record",
+	        	 "fields" : [ 
+	    			{"name":"Tag","type":"string"},
+	    			{"name":"Confidence","type":"double"}
+	    	    ]
+	    	 }
+    	 }
+    },
+    {"name":"CaptionScores",
+    	"type": {
+    		"type" : "array",
+    		"items" :{
+    			"name" : "captionscore_fields",
+    			"type" : "record",
+	        	 "fields" : [ 
+	       			{"name":"Caption","type":"string"},
+	    			{"name":"Confidence","type":"double"}
+	    	    ]
+	    	 }
+    	 }
+    }
+ ]}

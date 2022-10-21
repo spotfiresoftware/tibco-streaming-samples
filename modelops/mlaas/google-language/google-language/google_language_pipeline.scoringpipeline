@@ -1,0 +1,48 @@
+{
+  "scoringFlows": {
+    "google_language_flow": {
+      "label": "google-language-flow",
+      "scoringFlowId": "5e196ff54af140aa8714bf2b5c8499dd",
+      "parameters": []
+    }
+  },
+  "dataChannelConfiguration": {
+    "direction": "request-response",
+    "type": "rest",
+    "requestDataSchema": {
+      "id": {
+        "type": "string",
+        "ordinal": 0
+      },
+      "comments": {
+        "type": "string",
+        "ordinal": 1
+      }
+    },
+    "responseDataSchema": {
+      "Sentiment": {
+        "sinkFieldValue": "SCORE.scoreOutput.Sentiment"
+      },
+      "Magnitude": {
+        "sinkFieldValue": "SCORE.scoreOutput.Magnitude"
+      },
+      "id": {
+        "sinkFieldValue": "INPUT_DATA.id"
+      },
+      "Language": {
+        "sinkFieldValue": "SCORE.scoreOutput.Language"
+      },
+      "Sentiment_Category": {
+        "sinkFieldValue": "SCORE.scoreOutput.Sentiment_Category"
+      }
+    },
+    "typeSpecificConfiguration": {
+      "uniqueIdentifierField": "id",
+      "tokenExpirationInSeconds": 0,
+      "channelEndpointPathPrefix": "googlelangflow",
+      "requestResponseTrace": false,
+      "makeAPIPublic": true,
+      "externalHostName": "googlelangflow"
+    }
+  }
+}

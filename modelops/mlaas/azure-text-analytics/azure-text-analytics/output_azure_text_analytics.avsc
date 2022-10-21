@@ -1,0 +1,8 @@
+{"type":"record","name":"topLevelRecord","fields":[
+    {"name":"Sentiment","type":"string"},
+    {"name":"Positive","type":"double"},
+    {"name":"Negative","type":"double"},
+    {"name":"Neutral","type":"double"},
+    {"name":"id","type":"string"},
+    {"name":"Language","type":"string"}
+]}
