@@ -1,0 +1,66 @@
+{
+  "projectName" : "google-vision",
+  "projectId" : "7a9a2ef9a83e4419a6f1c18a2f977635",
+  "artifacts" : {
+    "a946846639d24aa7a36e0edb5f929524" : {
+      "name" : "/service-acct.json",
+      "path" : "google-vision/service-acct.json",
+      "author" : "admin",
+      "creationDate" : "2022-09-27T23:58:38+0000",
+      "type" : "UNKNOWN",
+      "revisionNumber" : 0
+    },
+    "4c93c7825c9a42f7956fd80a8aa03666" : {
+      "name" : "/requirements.txt",
+      "path" : "google-vision/requirements.txt",
+      "author" : "admin",
+      "creationDate" : "2022-09-27T23:58:38+0000",
+      "type" : "TEXT_FILE",
+      "revisionNumber" : 0
+    },
+    "6d43b998748a49c0956432da55aee0b3" : {
+      "name" : "/google_vision_model.gcv",
+      "path" : "google-vision/google_vision_model.gcv",
+      "author" : "admin",
+      "creationDate" : "2022-09-27T23:58:38+0000",
+      "type" : "IMAGE_LABELING_GOOGLE_COMPUTER_VISION",
+      "revisionNumber" : 0,
+      "inputSchema" : "9b9148d46e4245ccbdb5bced87e445ff",
+      "outputSchema" : "1918687f95d74e798f9f2c811bb964ef",
+      "dependencies" : [ "4c93c7825c9a42f7956fd80a8aa03666", "a946846639d24aa7a36e0edb5f929524" ]
+    },
+    "9b9148d46e4245ccbdb5bced87e445ff" : {
+      "name" : "/input_image.avsc",
+      "path" : "google-vision/input_image.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-27T23:58:38+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "497e94af8f794d95a25bdbff34b02f7d" : {
+      "name" : "/google_vision_pipeline.scoringpipeline",
+      "path" : "google-vision/google_vision_pipeline.scoringpipeline",
+      "author" : "admin",
+      "creationDate" : "2022-09-27T23:58:38+0000",
+      "type" : "SCORING_PIPELINE",
+      "revisionNumber" : 0
+    },
+    "6fb5a9927cc7499a8d2c3d32f07bec0a" : {
+      "name" : "/google_vision_flow.scoringflow",
+      "path" : "google-vision/google_vision_flow.scoringflow",
+      "author" : "admin",
+      "creationDate" : "2022-09-27T23:58:38+0000",
+      "type" : "SCORING_FLOW",
+      "revisionNumber" : 0
+    },
+    "1918687f95d74e798f9f2c811bb964ef" : {
+      "name" : "/output_google_vision.avsc",
+      "path" : "google-vision/output_google_vision.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-27T23:58:38+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    }
+  },
+  "propertyDefinitions" : [ ]
+}

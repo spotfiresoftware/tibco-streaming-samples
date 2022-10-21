@@ -1,0 +1,83 @@
+{
+  "processingSteps": {
+    "Input": {
+      "label": "Input",
+      "type": "INPUT",
+      "configuration": {
+        "dataSourceSchema": {
+          "type": "object",
+          "title": "topLevelRecord",
+          "properties": {
+            "id": {
+              "ordinal": 0,
+              "type": "string"
+            },
+            "comments": {
+              "ordinal": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "comments"
+          ],
+          "additionalProperties": false
+        },
+        "replacements": [],
+        "outputVariableName": "INPUT_DATA"
+      }
+    },
+    "Score_Data": {
+      "label": "Score Data",
+      "type": "SCORE_DATA",
+      "configuration": {
+        "modelId": "bcf0e63e0d16413aabf9df284944312f",
+        "outputVariableName": "SCORE",
+        "scoringFieldValues": {
+          "id": {
+            "fieldValue": "INPUT_DATA.id"
+          },
+          "comments": {
+            "fieldValue": "INPUT_DATA.comments"
+          }
+        }
+      }
+    },
+    "Output": {
+      "label": "Output",
+      "type": "OUTPUT",
+      "configuration": {
+        "sinkFields": {
+          "Sentiment": {
+            "sinkFieldValue": "SCORE.scoreOutput.Sentiment"
+          },
+          "Positive": {
+            "sinkFieldValue": "SCORE.scoreOutput.Positive"
+          },
+          "Negative": {
+            "sinkFieldValue": "SCORE.scoreOutput.Negative"
+          },
+          "Neutral": {
+            "sinkFieldValue": "SCORE.scoreOutput.Neutral"
+          },
+          "id": {
+            "sinkFieldValue": "INPUT_DATA.id"
+          },
+          "Language": {
+            "sinkFieldValue": "SCORE.scoreOutput.Language"
+          }
+        }
+      }
+    }
+  },
+  "edges": [
+    {
+      "from": "Input",
+      "to": "Score_Data"
+    },
+    {
+      "from": "Score_Data",
+      "to": "Output"
+    }
+  ]
+}

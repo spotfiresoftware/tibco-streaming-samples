@@ -1,0 +1,51 @@
+{
+  "scoringFlows": {
+    "amazon_comprehend_flow": {
+      "label": "amazon-comprehend-flow",
+      "scoringFlowId": "dc94ca7ac9ef49d08ef52593cdcb8d16",
+      "parameters": []
+    }
+  },
+  "dataChannelConfiguration": {
+    "direction": "request-response",
+    "type": "rest",
+    "requestDataSchema": {
+      "id": {
+        "type": "string",
+        "ordinal": 0
+      },
+      "comments": {
+        "type": "string",
+        "ordinal": 1
+      }
+    },
+    "responseDataSchema": {
+      "Positive": {
+        "sinkFieldValue": "SCORE.scoreOutput.Positive"
+      },
+      "Negative": {
+        "sinkFieldValue": "SCORE.scoreOutput.Negative"
+      },
+      "Neutral": {
+        "sinkFieldValue": "SCORE.scoreOutput.Neutral"
+      },
+      "Mixed": {
+        "sinkFieldValue": "SCORE.scoreOutput.Mixed"
+      },
+      "Sentiment": {
+        "sinkFieldValue": "SCORE.scoreOutput.Sentiment"
+      },
+      "id": {
+        "sinkFieldValue": "INPUT_DATA.id"
+      }
+    },
+    "typeSpecificConfiguration": {
+      "uniqueIdentifierField": "id",
+      "tokenExpirationInSeconds": 0,
+      "channelEndpointPathPrefix": "awscomprehendflow",
+      "requestResponseTrace": false,
+      "makeAPIPublic": true,
+      "externalHostName": "awscomprehendflow"
+    }
+  }
+}

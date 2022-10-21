@@ -1,0 +1,58 @@
+{
+  "projectName" : "azure-text-analytics",
+  "projectId" : "664ace52f62a4ac9a883721b297433dc",
+  "artifacts" : {
+    "bcf0e63e0d16413aabf9df284944312f" : {
+      "name" : "/azure_text_analytics_model.azta",
+      "path" : "azure-text-analytics/azure_text_analytics_model.azta",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:34:50+0000",
+      "type" : "SENTIMENT_AZURE_TEXT_ANALYTICS",
+      "revisionNumber" : 0,
+      "inputSchema" : "12a7431c58ef44fc9784e88d3b8c5fc6",
+      "outputSchema" : "f4078403b7dc42c0bda07e2068d9eeca",
+      "dependencies" : [ "dd9e18994cdc45428eef65742409bbe4" ]
+    },
+    "dd9e18994cdc45428eef65742409bbe4" : {
+      "name" : "/requirements.txt",
+      "path" : "azure-text-analytics/requirements.txt",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:34:50+0000",
+      "type" : "TEXT_FILE",
+      "revisionNumber" : 0
+    },
+    "4f19c9ae0f344fc195bd2e1af71acc56" : {
+      "name" : "/azure_text_analytics_flow.scoringflow",
+      "path" : "azure-text-analytics/azure_text_analytics_flow.scoringflow",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:34:50+0000",
+      "type" : "SCORING_FLOW",
+      "revisionNumber" : 0
+    },
+    "9131971e2a494b019541e0da55b772ff" : {
+      "name" : "/azure_text_analytics_pipeline.scoringpipeline",
+      "path" : "azure-text-analytics/azure_text_analytics_pipeline.scoringpipeline",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:34:50+0000",
+      "type" : "SCORING_PIPELINE",
+      "revisionNumber" : 0
+    },
+    "12a7431c58ef44fc9784e88d3b8c5fc6" : {
+      "name" : "/input_sentiment.avsc",
+      "path" : "azure-text-analytics/input_sentiment.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:34:50+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "f4078403b7dc42c0bda07e2068d9eeca" : {
+      "name" : "/output_azure_text_analytics.avsc",
+      "path" : "azure-text-analytics/output_azure_text_analytics.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:34:50+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    }
+  },
+  "propertyDefinitions" : [ ]
+}

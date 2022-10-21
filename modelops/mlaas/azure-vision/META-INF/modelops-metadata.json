@@ -1,0 +1,58 @@
+{
+  "projectName" : "azure-vision",
+  "projectId" : "dcc50790caa5483b9fd2c72d199391c5",
+  "artifacts" : {
+    "2ec9df388129496c843124b9b7a2c1c2" : {
+      "name" : "/azure_vision_flow.scoringflow",
+      "path" : "azure-vision/azure_vision_flow.scoringflow",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:26:32+0000",
+      "type" : "SCORING_FLOW",
+      "revisionNumber" : 0
+    },
+    "bbb3d67aea3d47f8899f237125c8ee74" : {
+      "name" : "/requirements.txt",
+      "path" : "azure-vision/requirements.txt",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:26:32+0000",
+      "type" : "TEXT_FILE",
+      "revisionNumber" : 0
+    },
+    "afcddf4f44af496fa63a64dfbc8084cb" : {
+      "name" : "/output_azure_vision.avsc",
+      "path" : "azure-vision/output_azure_vision.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:26:32+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "797f9e42facf44aca7a2ddf1b59a6cf5" : {
+      "name" : "/azure_vision_pipeline.scoringpipeline",
+      "path" : "azure-vision/azure_vision_pipeline.scoringpipeline",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:26:32+0000",
+      "type" : "SCORING_PIPELINE",
+      "revisionNumber" : 0
+    },
+    "5cfe35833d9c4065bef578c2909f1638" : {
+      "name" : "/azure_vision_model.azv",
+      "path" : "azure-vision/azure_vision_model.azv",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:26:32+0000",
+      "type" : "IMAGE_LABELING_AZURE_VISION",
+      "revisionNumber" : 0,
+      "inputSchema" : "0d19f300d0884aa4b46cb1ab746b71a3",
+      "outputSchema" : "afcddf4f44af496fa63a64dfbc8084cb",
+      "dependencies" : [ "bbb3d67aea3d47f8899f237125c8ee74" ]
+    },
+    "0d19f300d0884aa4b46cb1ab746b71a3" : {
+      "name" : "/input_image.avsc",
+      "path" : "azure-vision/input_image.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-29T18:26:32+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    }
+  },
+  "propertyDefinitions" : [ ]
+}

@@ -1,0 +1,104 @@
+# Copyright (C) 2022, TIBCO Software Inc.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 
+# 3. Neither the name of the copyright holder nor the names of its contributors
+#    may be used to endorse or promote products derived from this software
+#    without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# import common packages needed for data manipulation
+import io
+import pandas as pd
+import numpy as np
+from typing import Iterable
+from typing import Tuple
+
+# import azure packages for authentication and computer vision
+# packages are listed in the requirements.txt model property file
+import azure.cognitiveservices.vision.computervision  #.ComputerVisionClient
+import azure.cognitiveservices.vision.computervision.models  #.VisualFeatureTypes
+import msrest.authentication
+
+# set columns for id and image columns
+idColumnName = 'Name'
+imgColumnName = 'Image'
+
+# Azure Computer Vision Endpoint Configuration - MAKE SURE TO PUT YOUR INFORMATION HERE
+azureCognitiveKey = "ENTER_YOUR_KEY_HERE_FROM_AZURE_COGNITIVE_SERVICES"
+azureCognitiveEndpoint = "ENTER_YOUR_COGNITIVE_SERVICES_URL_HERE"
+
+# Set Azure credentials
+azureCredentials = msrest.authentication.CognitiveServicesCredentials(azureCognitiveKey)
+# Get Azure Computer Vision Client
+azureVisionAnalyticsClient = azure.cognitiveservices.vision.computervision.ComputerVisionClient(endpoint=azureCognitiveEndpoint, credentials=azureCredentials)
+
+#---------------------------------------------------------------------
+# score function called by ModelOps during scoring step
+#---------------------------------------------------------------------
+def score(data: np.ndarray, column_names: Iterable[str]) -> Tuple[np.ndarray, Iterable[str]]:
+    #
+    # scoring logic goes in this function
+    #
+    # Create Empty results list for storing output
+    list_image_results = []
+    # Empty dataframe to pass back if no results
+    df_vision_results = pd.DataFrame(columns=(idColumnName,'TagScores', 'CaptionScores'))
+    # Convert incoming data from array to dataframe
+    input_data = pd.DataFrame(data, columns=column_names)    
+    #
+    # Loop through rows in input data
+    for index, row in input_data.iterrows():
+        if not pd.isna(row[idColumnName]):
+            # Convert bytes image to stream
+            imgStream = io.BytesIO(row[imgColumnName])
+            # Call Azure Vision client with image 
+            visionResponse = azureVisionAnalyticsClient.analyze_image_in_stream(
+                image=imgStream,
+                visual_features=[
+                    azure.cognitiveservices.vision.computervision.models.VisualFeatureTypes.image_type,  # Could use simple str "ImageType"
+                    azure.cognitiveservices.vision.computervision.models.VisualFeatureTypes.categories,  # Could use simple str "Categories"
+                    azure.cognitiveservices.vision.computervision.models.VisualFeatureTypes.color,      # Could use simple str "Color"
+                    azure.cognitiveservices.vision.computervision.models.VisualFeatureTypes.tags,       # Could use simple str "Tags"
+                    azure.cognitiveservices.vision.computervision.models.VisualFeatureTypes.description,  # Could use simple str "Description"
+                    azure.cognitiveservices.vision.computervision.models.VisualFeatureTypes.objects
+                ]
+            )
+            img_results = {'Name' : row[idColumnName]}
+            # Get image tag confidence and name
+            dfImageScore = []
+            for imgTag in visionResponse.tags:
+                dfImageScore.append({'Tag':imgTag.name, 'Confidence':imgTag.confidence})     
+            # Get image caption information
+            dfCaptionScore = []
+            for caption in visionResponse.description.captions:
+                dfCaptionScore.append({'Caption':caption.text, 'Confidence':caption.confidence})
+            # Add image and caption information to results
+            img_results.update({"TagScores" : dfImageScore})
+            img_results.update({"CaptionScores" : dfCaptionScore})
+            list_image_results.append(img_results)
+    # Convert results to dataframe
+    if len(list_image_results) > 0:
+        df_vision_results = pd.DataFrame.from_dict(list_image_results, orient='columns')
+    # Convert dataframe to numpy array to return to scoring flow
+    score_data = df_vision_results.to_numpy()
+    return score_data, None

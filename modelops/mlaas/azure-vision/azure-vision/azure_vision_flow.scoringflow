@@ -1,0 +1,75 @@
+{
+  "processingSteps": {
+    "Input": {
+      "label": "Input",
+      "type": "INPUT",
+      "configuration": {
+        "dataSourceSchema": {
+          "type": "object",
+          "title": "topLevelRecord",
+          "properties": {
+            "Name": {
+              "type": "string",
+              "ordinal": 0
+            },
+            "Image": {
+              "type": "string",
+              "contentEncoding": "base64",
+              "ordinal": 1
+            }
+          },
+          "required": [
+            "Name",
+            "Image"
+          ],
+          "additionalProperties": false
+        },
+        "replacements": [],
+        "outputVariableName": "INPUT_DATA"
+      }
+    },
+    "Score_Data": {
+      "label": "Score Data",
+      "type": "SCORE_DATA",
+      "configuration": {
+        "modelId": "5cfe35833d9c4065bef578c2909f1638",
+        "outputVariableName": "SCORE",
+        "scoringFieldValues": {
+          "Name": {
+            "fieldValue": "INPUT_DATA.Name"
+          },
+          "Image": {
+            "fieldValue": "INPUT_DATA.Image"
+          }
+        }
+      }
+    },
+    "Output": {
+      "label": "Output",
+      "type": "OUTPUT",
+      "configuration": {
+        "sinkFields": {
+          "Name": {
+            "sinkFieldValue": "INPUT_DATA.Name"
+          },
+          "TagScores": {
+            "sinkFieldValue": "SCORE.scoreOutput.TagScores"
+          },
+          "CaptionScores": {
+            "sinkFieldValue": "SCORE.scoreOutput.CaptionScores"
+          }
+        }
+      }
+    }
+  },
+  "edges": [
+    {
+      "from": "Input",
+      "to": "Score_Data"
+    },
+    {
+      "from": "Score_Data",
+      "to": "Output"
+    }
+  ]
+}

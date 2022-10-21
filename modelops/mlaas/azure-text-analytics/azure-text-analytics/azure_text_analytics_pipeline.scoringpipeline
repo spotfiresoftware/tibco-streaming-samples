@@ -1,0 +1,51 @@
+{
+  "scoringFlows": {
+    "az_text_analytics_flow": {
+      "label": "az-text-analytics-flow",
+      "scoringFlowId": "4f19c9ae0f344fc195bd2e1af71acc56",
+      "parameters": []
+    }
+  },
+  "dataChannelConfiguration": {
+    "direction": "request-response",
+    "type": "rest",
+    "requestDataSchema": {
+      "id": {
+        "ordinal": 0,
+        "type": "string"
+      },
+      "comments": {
+        "ordinal": 1,
+        "type": "string"
+      }
+    },
+    "responseDataSchema": {
+      "Sentiment": {
+        "sinkFieldValue": "SCORE.scoreOutput.Sentiment"
+      },
+      "Positive": {
+        "sinkFieldValue": "SCORE.scoreOutput.Positive"
+      },
+      "Negative": {
+        "sinkFieldValue": "SCORE.scoreOutput.Negative"
+      },
+      "Neutral": {
+        "sinkFieldValue": "SCORE.scoreOutput.Neutral"
+      },
+      "id": {
+        "sinkFieldValue": "INPUT_DATA.id"
+      },
+      "Language": {
+        "sinkFieldValue": "SCORE.scoreOutput.Language"
+      }
+    },
+    "typeSpecificConfiguration": {
+      "uniqueIdentifierField": "id",
+      "tokenExpirationInSeconds": 0,
+      "channelEndpointPathPrefix": "aztextanalyticsflow",
+      "requestResponseTrace": false,
+      "makeAPIPublic": true,
+      "externalHostName": "aztextanalyticsflow"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{"type":"record","name":"topLevelRecord","fields":[
+    {"name":"Name","type":"string"},
+    {"name":"LabelScores",
+    	"type": {
+    		"type" : "array",
+    		"items" :{
+    			"name" : "labelscore_fields",
+    			"type" : "record",
+	        	 "fields" : [ 
+	    			{"name":"Label","type":"string"},
+	    			{"name":"Confidence","type":"double"}
+	    	    ]
+	    	 }
+    	 }
+    }
+ ]}

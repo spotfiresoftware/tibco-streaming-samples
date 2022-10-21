@@ -1,0 +1,40 @@
+{
+  "scoringFlows": {
+    "aws_rekog_flow": {
+      "label": "aws-rekog-flow",
+      "scoringFlowId": "213ee0542c4f4d11bda0f72c80ec8057",
+      "parameters": []
+    }
+  },
+  "dataChannelConfiguration": {
+    "direction": "request-response",
+    "type": "rest",
+    "requestDataSchema": {
+      "Name": {
+        "type": "string",
+        "ordinal": 0
+      },
+      "Image": {
+        "type": "string",
+        "contentEncoding": "base64",
+        "ordinal": 1
+      }
+    },
+    "responseDataSchema": {
+      "Name": {
+        "sinkFieldValue": "INPUT_DATA.Name"
+      },
+      "LabelScores": {
+        "sinkFieldValue": "SCORE.scoreOutput.LabelScores"
+      }
+    },
+    "typeSpecificConfiguration": {
+      "uniqueIdentifierField": "Name",
+      "tokenExpirationInSeconds": 0,
+      "channelEndpointPathPrefix": "amazonrekogflow",
+      "requestResponseTrace": false,
+      "makeAPIPublic": true,
+      "externalHostName": "amazonrekogflow"
+    }
+  }
+}

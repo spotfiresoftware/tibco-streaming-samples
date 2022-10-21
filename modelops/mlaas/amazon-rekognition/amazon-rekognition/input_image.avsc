@@ -1,0 +1,4 @@
+{"type":"record","name":"topLevelRecord","fields":[
+    {"name":"Name","type":"string"},
+    {"name":"Image","type":"bytes"}
+]}

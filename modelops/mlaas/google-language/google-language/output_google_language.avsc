@@ -1,0 +1,7 @@
+{"type":"record","name":"topLevelRecord","fields":[
+    {"name":"Sentiment","type":"double"},
+    {"name":"Magnitude","type":"double"},
+    {"name":"id","type":"string"},
+    {"name":"Language","type":"string"},
+    {"name":"Sentiment_Category","type":"string"}
+]}

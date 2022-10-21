@@ -1,0 +1,40 @@
+{
+  "scoringFlows": {
+    "google_vision_flow": {
+      "label": "google-vision-flow",
+      "scoringFlowId": "6fb5a9927cc7499a8d2c3d32f07bec0a",
+      "parameters": []
+    }
+  },
+  "dataChannelConfiguration": {
+    "direction": "request-response",
+    "type": "rest",
+    "requestDataSchema": {
+      "Name": {
+        "type": "string",
+        "ordinal": 0
+      },
+      "Image": {
+        "type": "string",
+        "contentEncoding": "base64",
+        "ordinal": 1
+      }
+    },
+    "responseDataSchema": {
+      "Name": {
+        "sinkFieldValue": "INPUT_DATA.Name"
+      },
+      "TagScores": {
+        "sinkFieldValue": "SCORE.scoreOutput.TagScores"
+      }
+    },
+    "typeSpecificConfiguration": {
+      "uniqueIdentifierField": "Name",
+      "tokenExpirationInSeconds": 0,
+      "channelEndpointPathPrefix": "googlevisionflow",
+      "requestResponseTrace": false,
+      "makeAPIPublic": true,
+      "externalHostName": "googlevisionflow"
+    }
+  }
+}

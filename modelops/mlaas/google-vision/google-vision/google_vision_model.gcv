@@ -1,0 +1,78 @@
+# Copyright (C) 2022, TIBCO Software Inc.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 
+# 3. Neither the name of the copyright holder nor the names of its contributors
+#    may be used to endorse or promote products derived from this software
+#    without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# import common packages needed for data manipulation
+import pandas as pd
+import numpy as np
+from typing import Iterable
+from typing import Tuple
+from datetime import datetime
+
+# import google specific library
+import google.cloud.vision
+
+idColumnName = 'Name'
+imgColumnName = 'Image'
+
+## get vision client   
+### Is there a TIMEOUT on how long this client is valid?
+vision_client = google.cloud.vision.ImageAnnotatorClient.from_service_account_file('service-acct.json')
+
+
+#-----------------------------------------------------------------------------
+def score(data: np.ndarray, column_names: Iterable[str]) -> Tuple[np.ndarray, Iterable[str]]:
+    #
+    # scoring logic goes in this function
+    #
+    ## Empty results list
+    results_list = []
+    # Convert from array to dataframe
+    input_data = pd.DataFrame(data, columns=column_names)    
+    ## Empty df to pass back if no results
+    vision_results = pd.DataFrame(columns=(idColumnName,'TagScores'))
+    ## Loop text in table
+    for index, row in input_data.iterrows():
+        if not pd.isna(row[idColumnName]):
+            # get labels from Google
+            imageContent = google.cloud.vision.Image(content=bytes(row[imgColumnName]))
+            visionResponse = vision_client.label_detection(image=imageContent)
+            #
+            img_results = {'Name' : row[idColumnName]}
+            # get image tag confidence and name
+            dfImageScore = []
+            for imgLabel in visionResponse.label_annotations:
+                dfImageScore.append({'Tag':imgLabel.description, 'Confidence':imgLabel.score})     
+            img_results.update({"TagScores" : dfImageScore})
+            results_list.append(img_results)
+
+    if len(results_list) > 0:
+        vision_results = pd.DataFrame.from_dict(results_list, orient='columns')
+    #
+    score_data = vision_results.to_numpy()
+    # return data
+    return score_data, None # score_columns

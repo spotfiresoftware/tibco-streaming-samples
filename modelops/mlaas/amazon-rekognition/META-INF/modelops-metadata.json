@@ -1,0 +1,58 @@
+{
+  "projectName" : "amazon-rekognition",
+  "projectId" : "ed169cfec727422daa804630f7c416ee",
+  "artifacts" : {
+    "a2bcda97a0da495aa9ab7ad94c90265f" : {
+      "name" : "/requirements.txt",
+      "path" : "amazon-rekognition/requirements.txt",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T20:17:04+0000",
+      "type" : "TEXT_FILE",
+      "revisionNumber" : 0
+    },
+    "2f1959ce5c6d43fcba4ff05d1a7c63a2" : {
+      "name" : "/input_image.avsc",
+      "path" : "amazon-rekognition/input_image.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T20:17:04+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "9e4cf5467d324432bb30dcf24bbdc943" : {
+      "name" : "/output_amazon_rekog.avsc",
+      "path" : "amazon-rekognition/output_amazon_rekog.avsc",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T20:17:04+0000",
+      "type" : "AVRO_SCHEMA",
+      "revisionNumber" : 0
+    },
+    "213ee0542c4f4d11bda0f72c80ec8057" : {
+      "name" : "/amazon_rekog_flow.scoringflow",
+      "path" : "amazon-rekognition/amazon_rekog_flow.scoringflow",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T20:17:04+0000",
+      "type" : "SCORING_FLOW",
+      "revisionNumber" : 0
+    },
+    "437f9c92397f4a479bd0974d1ac7f3ae" : {
+      "name" : "/amazon_rekognition_model.awsr",
+      "path" : "amazon-rekognition/amazon_rekognition_model.awsr",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T20:17:04+0000",
+      "type" : "IMAGE_LABELING_AWS_REKOGNITION",
+      "revisionNumber" : 0,
+      "inputSchema" : "2f1959ce5c6d43fcba4ff05d1a7c63a2",
+      "outputSchema" : "9e4cf5467d324432bb30dcf24bbdc943",
+      "dependencies" : [ "a2bcda97a0da495aa9ab7ad94c90265f" ]
+    },
+    "a72e62ace7a0460796c67b4384aa3121" : {
+      "name" : "/amazon_rekog_pipeline.scoringpipeline",
+      "path" : "amazon-rekognition/amazon_rekog_pipeline.scoringpipeline",
+      "author" : "admin",
+      "creationDate" : "2022-09-28T20:17:04+0000",
+      "type" : "SCORING_PIPELINE",
+      "revisionNumber" : 0
+    }
+  },
+  "propertyDefinitions" : [ ]
+}

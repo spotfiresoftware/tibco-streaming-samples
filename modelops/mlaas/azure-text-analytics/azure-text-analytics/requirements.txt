@@ -1,0 +1,4 @@
+azure-ai-textanalytics
+azure-core
+pandas
+numpy

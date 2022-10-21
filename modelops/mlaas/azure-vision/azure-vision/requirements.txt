@@ -1,0 +1,4 @@
+azure-cognitiveservices-vision-computervision
+msrest
+pandas
+numpy
