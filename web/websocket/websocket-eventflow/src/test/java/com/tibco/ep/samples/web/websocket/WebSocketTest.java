@@ -34,7 +34,8 @@ import com.tibco.ep.dtm.management.DtmCommand;
 import com.tibco.ep.testing.framework.Administration;
 import com.tibco.ep.testing.framework.Results;
 import com.tibco.ep.testing.framework.UnitTest;
-import org.eclipse.jetty.websocket.jsr356.ClientContainer;
+import org.eclipse.jetty.websocket.javax.client.JavaxWebSocketClientContainerProvider;
+import org.eclipse.jetty.websocket.javax.common.JavaxWebSocketContainer;
 import org.glassfish.jersey.uri.internal.JerseyUriBuilder;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -42,7 +43,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.websocket.ContainerProvider;
 import javax.websocket.DeploymentException;
 import javax.websocket.WebSocketContainer;
 import java.io.IOException;
@@ -87,7 +87,8 @@ public class WebSocketTest extends UnitTest {
     @Test
     public void EndpointTest() throws Exception {
 
-        WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+        JavaxWebSocketContainer container = (JavaxWebSocketContainer) JavaxWebSocketClientContainerProvider.getWebSocketContainer();
+        container.start();
 
         try {
             WebSocketClient client = waitForWAR(container);
@@ -98,9 +99,7 @@ public class WebSocketTest extends UnitTest {
             Assert.assertNotNull("Response message should not be null", response);
             Assert.assertTrue("Response message should contain the message", response.contains(messageContent));
         } finally {
-            if (container instanceof ClientContainer) {
-                ((ClientContainer) container).getClient().stop();
-            }
+            container.stop();
         }
 
     }
@@ -125,9 +124,6 @@ public class WebSocketTest extends UnitTest {
                 isTestSuccess = true;
                 break;
             } catch (IOException e) {
-                if (!"Connect failure".equals(e.getMessage())) {
-                    throw e;
-                }
                 Thread.sleep(1000);
             }
         }
