@@ -23,11 +23,8 @@ fi
 
 echo "done."
 
-# Tricky: parentVersion is a range, so merely supplying a version is
-# actually saying "at least this version." We want an exact, bounded
-# range of exactly one version.
-# https://www.mojohaus.org/versions-maven-plugin/update-parent-mojo.html
-if ! run_maven versions:update-parent "-DparentVersion=[${new_version}]" ; then
+# We can use a simple parent version if skipResolution is true.
+if ! run_maven org.codehaus.mojo:versions-maven-plugin:2.13.0:update-parent -DskipResolution=true "-DparentVersion=${new_version}" ; then
     echo "Project versions could not updated."
     exit 1
 fi
