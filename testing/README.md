@@ -1,6 +1,6 @@
 # Testing
 
-How to test TIBCO&reg; Streaming 11.0.0 projects.
+How to test TIBCO&reg; Streaming 11.0.1 projects.
 
 Samples :
 

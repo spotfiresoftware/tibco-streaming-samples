@@ -1,6 +1,6 @@
 # Structure
 
-How to structure TIBCO&reg; Streaming 11.0.0 projects.
+How to structure TIBCO&reg; Streaming 11.0.1 projects.
 
 Samples :
 

@@ -1,6 +1,6 @@
 # Web
 
-How to deploy web application in TIBCO&reg; Streaming 11.0.0 projects.
+How to deploy web application in TIBCO&reg; Streaming 11.0.1 projects.
 
 Samples :
 
