@@ -61,7 +61,7 @@ RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && dnf --assumeyes update && dnf
     unzip \
     libnsl \
     less \
-    java-11-openjdk-headless \
+    java-17-openjdk-headless \
     iproute \
     && dnf clean all
 
