@@ -43,7 +43,7 @@ Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase S
 
 See this the following capture from the NAR EventFlow build:
 
-![studio](../../../../../../nativelibrary/nar/nar-eventflow/src/site/resources/images/studiounit.gif)
+![studio](../../../../../../nativelibrary/nar/nar-eventflow/src/site/markdown/images/studiounit.gif)
 
 
 ## Building this sample from the command line
