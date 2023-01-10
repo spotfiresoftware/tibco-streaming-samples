@@ -87,7 +87,7 @@ Use [maven](https://maven.apache.org) to build from the command line or Continuo
 ![maven](images/maven.gif)
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2020-2023 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
