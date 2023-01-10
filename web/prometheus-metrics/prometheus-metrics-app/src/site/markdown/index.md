@@ -46,7 +46,7 @@ If docker cannot be found on the machine, the tests will only consists in a star
 application, without the Prometheus container start/stop and without the java integration test. 
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2020-2023 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

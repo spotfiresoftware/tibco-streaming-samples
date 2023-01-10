@@ -36,7 +36,7 @@ See this the following capture from the NAR EventFlow build:
 ![maven](../../../../../../nativelibrary/nar/nar-eventflow/src/site/resources/images/maven.gif)
 
 ---
-Copyright (c) 2020, TIBCO Software Inc.
+Copyright (c) 2020-2023 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

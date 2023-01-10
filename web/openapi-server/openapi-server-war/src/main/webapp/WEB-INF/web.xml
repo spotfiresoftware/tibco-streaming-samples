@@ -6,8 +6,7 @@
          version="3.0">
 
     <!-- vim: set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab : -->
-    <!-- Copyright 2020 TIBCO Software Inc. ALL RIGHTS RESERVED -->
-    <!-- TIBCO Software Inc. Confidential Information -->
+    <!-- Copyright 2020-2023 Cloud Software Group, Inc. ALL RIGHTS RESERVED -->
 
     <display-name>OpenAPI Generated REST API</display-name>
     <servlet>

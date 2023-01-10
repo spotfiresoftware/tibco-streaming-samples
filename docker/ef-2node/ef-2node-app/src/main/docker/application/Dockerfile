@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018 TIBCO Software Inc.
+# Copyright (c) 2018-2023 Cloud Software Group, Inc.
 # 
 FROM sbrt-base:${docker_base_version}
 
