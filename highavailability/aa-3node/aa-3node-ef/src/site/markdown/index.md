@@ -69,7 +69,7 @@ Use the [maven](https://maven.apache.org) as **mvn install** to build from the c
 
 
 ---
-Copyright (c) 2018-2019, TIBCO Software Inc.
+Copyright (c) 2018-2023 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

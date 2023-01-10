@@ -7,7 +7,7 @@ Samples :
 * [How to build and use native libraries with NAR.](nar/README.md)
 
 ---
-Copyright (c) 2018-2022, TIBCO Software Inc.
+Copyright (c) 2018-2023 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

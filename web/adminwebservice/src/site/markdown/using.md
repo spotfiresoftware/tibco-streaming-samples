@@ -29,7 +29,7 @@ This component is available via maven.  Include in your pom.xml file the followi
 ---
 
 ---
-Copyright (c) 2019, TIBCO Software Inc.
+Copyright (c) 2019-2023 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

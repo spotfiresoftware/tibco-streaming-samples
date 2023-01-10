@@ -88,7 +88,7 @@ update_in_project_directory() {
 
     echo "" >> ${index}
     echo "---" >> ${index}
-    echo "Copyright (c) 2018-$(date +%Y), TIBCO Software Inc." >> ${index}
+    echo "Copyright (c) 2018-$(date +%Y) Cloud Software Group, Inc." >> ${index}
     echo "" >> ${index}
     echo "Redistribution and use in source and binary forms, with or without" >> ${index}
     echo "modification, are permitted provided that the following conditions are met:" >> ${index}
