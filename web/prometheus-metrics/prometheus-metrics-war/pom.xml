@@ -42,7 +42,7 @@
     <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - WAR</description>
 
     <properties>
-        <prometheus.simpleclient.version>0.8.0</prometheus.simpleclient.version>
+        <prometheus.simpleclient.version>0.16.0</prometheus.simpleclient.version>
     </properties>
 
     <!-- common definitions for this version of StreamBase -->
@@ -65,7 +65,7 @@
         </dependency>
         <dependency>
             <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_servlet</artifactId>
+            <artifactId>simpleclient_servlet_jakarta</artifactId>
             <version>${prometheus.simpleclient.version}</version>
         </dependency>
     </dependencies>
