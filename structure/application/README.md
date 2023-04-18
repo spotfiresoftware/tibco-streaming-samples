@@ -5,9 +5,6 @@ How to structure a maven aggregate project with EventFlow fragment and applicati
 Samples :
 
 * [Structure: Application - EventFlow Fragment](application-ef/src/site/markdown/index.md)
-* [Structure: Application - EventFlow Fragment](application-ef/src/site/markdown/index.md)
-* [Structure: Application - EventFlow Fragment](application-ef/src/site/markdown/index.md)
-* [Structure: Application - EventFlow Fragment](application-ef/src/site/markdown/index.md)
 * [Structure: Application - Application](application-app/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._

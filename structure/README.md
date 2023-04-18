@@ -1,18 +1,9 @@
 # Structure
 
-How to structure TIBCO&reg; Streaming 10.6.3 projects.
+How to structure TIBCO&reg; Streaming 10.6.4 projects.
 
 Samples :
 
-* [Structure: Eventflow](eventflow/src/site/markdown/index.md)
-* [Structure: LiveView](liveview/src/site/markdown/index.md)
-* [Structure: Java](java/src/site/markdown/index.md)
-* [Structure: Eventflow](eventflow/src/site/markdown/index.md)
-* [Structure: LiveView](liveview/src/site/markdown/index.md)
-* [Structure: Java](java/src/site/markdown/index.md)
-* [Structure: Eventflow](eventflow/src/site/markdown/index.md)
-* [Structure: LiveView](liveview/src/site/markdown/index.md)
-* [Structure: Java](java/src/site/markdown/index.md)
 * [Structure: Eventflow](eventflow/src/site/markdown/index.md)
 * [Structure: LiveView](liveview/src/site/markdown/index.md)
 * [Structure: Java](java/src/site/markdown/index.md)

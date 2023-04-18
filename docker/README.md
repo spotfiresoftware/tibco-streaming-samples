@@ -1,9 +1,12 @@
 # Docker
 
-How to use Docker in TIBCO&reg; Streaming 10.6.3 projects.
+How to use Docker in TIBCO&reg; Streaming 10.6.4 projects.
 
 Samples :
 
+* [How to deploy a 2-node EventFlow application in Docker](ef-2node/README.md)
+* [How to deploy a LiveView application in Docker](lv-1node/README.md)
+* [How to user Docker to test proxy discovery](pd-test/README.md)
 * [How to deploy a 2-node EventFlow application in Docker](ef-2node/README.md)
 * [How to deploy a LiveView application in Docker](lv-1node/README.md)
 * [How to user Docker to test proxy discovery](pd-test/README.md)

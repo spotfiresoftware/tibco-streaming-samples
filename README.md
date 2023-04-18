@@ -1,16 +1,21 @@
-# TIBCO&reg; Streaming 10.6.3 Samples
+# TIBCO&reg; Streaming 10.6.4 Samples
 
-This GitHub repository contains a number of TIBCO&reg; Streaming 10.6.3 samples that can be cloned to your local workspace.
+This GitHub repository contains a number of TIBCO&reg; Streaming 10.6.4 samples that can be cloned to your local workspace.
 
 Samples :
 
-* [How to structure TIBCO&reg; Streaming 10.6.3 projects.](structure/README.md)
-* [How to test TIBCO&reg; Streaming 10.6.3 projects.](testing/README.md)
-* [How to use native libraries in TIBCO&reg; Streaming 10.6.3 projects.](nativelibrary/README.md)
-* [How to invoke Java from TIBCO&reg; Streaming 10.6.3 projects.](java/README.md)
-* [How to build Highly Available TIBCO&reg; Streaming 10.6.3 projects.](highavailability/README.md)
-* [How to use Docker in TIBCO&reg; Streaming 10.6.3 projects.](docker/README.md)
-* [How to deploy web application in TIBCO&reg; Streaming 10.6.3 projects.](web/README.md)
+* [How to structure TIBCO&reg; Streaming 10.6.4 projects.](structure/README.md)
+* [How to test TIBCO&reg; Streaming 10.6.4 projects.](testing/README.md)
+* [How to use native libraries in TIBCO&reg; Streaming 10.6.4 projects.](nativelibrary/README.md)
+* [How to invoke Java from TIBCO&reg; Streaming 10.6.4 projects.](java/README.md)
+* [How to build Highly Available TIBCO&reg; Streaming 10.6.4 projects.](highavailability/README.md)
+* [How to structure TIBCO&reg; Streaming 10.6.4 projects.](structure/README.md)
+* [How to test TIBCO&reg; Streaming 10.6.4 projects.](testing/README.md)
+* [How to use native libraries in TIBCO&reg; Streaming 10.6.4 projects.](nativelibrary/README.md)
+* [How to invoke Java from TIBCO&reg; Streaming 10.6.4 projects.](java/README.md)
+* [How to build Highly Available TIBCO&reg; Streaming 10.6.4 projects.](highavailability/README.md)
+* [How to use Docker in TIBCO&reg; Streaming 10.6.4 projects.](docker/README.md)
+* [How to deploy web application in TIBCO&reg; Streaming 10.6.4 projects.](web/README.md)
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.
