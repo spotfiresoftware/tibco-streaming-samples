@@ -95,6 +95,7 @@
                                 <modelPackage>com.tibco.ep.samples.web.openapi.server.model</modelPackage>
                                 <returnResponse>true</returnResponse>
                                 <useSwaggerAnnotations>false</useSwaggerAnnotations>
+                                <useJakartaEe>true</useJakartaEe>
                             </configOptions>
                         </configuration>
                     </execution>

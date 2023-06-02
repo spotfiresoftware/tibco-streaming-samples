@@ -43,7 +43,8 @@
     <description>How to create a WAR which has a WebSocket endpoint</description>
 
     <properties>
-        <jakarta.websocket.api.version>1.1.1</jakarta.websocket.api.version>
+        <jakarta.websocket.api.version>2.1.0</jakarta.websocket.api.version>
+        <jakarta.jakartaee.api.version>10.0.0</jakarta.jakartaee.api.version>
         <maven.war.plugin.version>3.2.3</maven.war.plugin.version>
     </properties>
     <!-- common definitions for this version of StreamBase -->
@@ -59,6 +60,12 @@
             <groupId>jakarta.websocket</groupId>
             <artifactId>jakarta.websocket-api</artifactId>
             <version>${jakarta.websocket.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakarta.jakartaee.api.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

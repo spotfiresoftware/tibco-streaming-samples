@@ -30,8 +30,8 @@
 
 package com.tibco.ep.samples.web.websocket;
 
-import javax.websocket.ClientEndpointConfig;
-import javax.ws.rs.core.HttpHeaders;
+import jakarta.websocket.ClientEndpointConfig;
+import jakarta.ws.rs.core.HttpHeaders;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;

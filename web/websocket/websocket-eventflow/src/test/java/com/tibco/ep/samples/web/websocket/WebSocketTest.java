@@ -34,8 +34,8 @@ import com.tibco.ep.dtm.management.DtmCommand;
 import com.tibco.ep.testing.framework.Administration;
 import com.tibco.ep.testing.framework.Results;
 import com.tibco.ep.testing.framework.UnitTest;
-import org.eclipse.jetty.websocket.javax.client.JavaxWebSocketClientContainerProvider;
-import org.eclipse.jetty.websocket.javax.common.JavaxWebSocketContainer;
+import org.eclipse.jetty.websocket.jakarta.client.JakartaWebSocketClientContainerProvider;
+import org.eclipse.jetty.websocket.jakarta.common.JakartaWebSocketContainer;
 import org.glassfish.jersey.uri.internal.JerseyUriBuilder;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -43,8 +43,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.websocket.DeploymentException;
-import javax.websocket.WebSocketContainer;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.WebSocketContainer;
 import java.io.IOException;
 
 import static com.tibco.ep.samples.web.websocket.WebSocketClient.messageContent;
@@ -87,7 +87,7 @@ public class WebSocketTest extends UnitTest {
     @Test
     public void EndpointTest() throws Exception {
 
-        JavaxWebSocketContainer container = (JavaxWebSocketContainer) JavaxWebSocketClientContainerProvider.getWebSocketContainer();
+        JakartaWebSocketContainer container = (JakartaWebSocketContainer) JakartaWebSocketClientContainerProvider.getWebSocketContainer();
         container.start();
 
         try {
