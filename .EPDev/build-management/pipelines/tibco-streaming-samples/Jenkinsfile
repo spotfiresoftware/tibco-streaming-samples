@@ -11,7 +11,7 @@ String platform = jobUtil.getJobPlatform(defaultPlatform: "linux")
 String executorLabel = jobUtil.getStrBuildLabelEx(
     platform: platform, params: params,
     base: [ all: "c.unix-tools",
-           linux: "(o.rh7 || o.almalinux7) && c.docker-compatible-linux-3.10 && c.unix-tools && a.x86_64 && q.str",
+           linux: "(o.rh7 || o.almalinux7) && c.docker-compatible-linux-3.10 && c.unix-tools && q.str",
            macos: "o.macos",
            windows: "o.windows && a.x86_64" ],
 )
