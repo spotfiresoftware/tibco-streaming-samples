@@ -82,12 +82,9 @@ pipeline {
 
                     epDeclarative.buildInit(
                         pomFile: 'src/pom.xml',
-                        containsUpstream: true, // because runtime
-                        upstreamPipeline: "EventProcessing/" + streamingPipeline,
-                        upstreamMilestoneStem: streamingPipeline,
-                        upstreamVersion: 'pom-property:sbrt.version',
                         javaTool: jobUtil.getOracleJava11Tool(),
                         mavenTool: jobUtil.getMaven36Tool(),
+			testPlatforms: [ "macos", "windows" ],
                         primaryPlatform: "linux"
                     )
 
