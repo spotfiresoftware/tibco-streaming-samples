@@ -1,0 +1,116 @@
+/
+// Copyright 2021-2023 Cloud Software Group, Inc.
+//
+//
+
+@Library('workflowLibs') _
+
+def jobUtil = new com.tibco.workflow.JobUtil()
+
+String platform = jobUtil.getJobPlatform(defaultPlatform: "linux")
+
+String executorLabel = jobUtil.getStrBuildLabelEx(
+    platform: platform, params: params,
+    base: [ all: "c.unix-tools",
+           linux: "(o.rh7 || o.almalinux7) && c.docker-compatible-linux-3.10 && c.unix-tools && a.x86_64 && q.str",
+           macos: "o.macos",
+           windows: "o.windows && a.x86_64" ],
+)
+
+pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '2' ))
+        quietPeriod(600)
+        timeout(time: 4, unit: 'HOURS')
+        skipDefaultCheckout() // to subdirectory, see below
+    }
+
+    triggers {
+        // Poll once a day.
+        pollSCM('H 0 * * *’)
+    }
+
+    parameters {
+        choice(name: 'deployArtifacts', choices: ['never', 'default', 'always'], // never first; just for testing
+               description: 'The default is never to deploy because this is a test-only pipeline.')
+
+        string(name: 'mavenExtras', defaultValue: '',
+               description: 'Extra JVM options for Maven, usually -DskipTests and the like.')
+
+        booleanParam(name: 'cleanWorkspace', defaultValue: true, description: 'Clean workspace before build.')
+
+
+        choice(name: 'buildVerbose', choices: ['default', 'pipeline', 'tools' ],
+               description: 'Make build more verbose with pipeline and tool diagnostics.')
+    }
+    
+    agent {
+        node {
+            label "${executorLabel}"        }
+    }
+
+    environment { // Not persisted in Artifactory build record.
+        // Needed for Maven CommonSettings.
+        TIBCO_EP_HOME = "${env.WORKSPACE}/EP"
+    }
+
+    stages {
+        stage ('janitor-before-job') {
+            steps {
+                script {
+                    epDeclarative.preCleanup()
+                }
+            }
+        }
+
+        stage ('checkout') {
+            steps {
+                // Check out to a subdirectory to avoid clashes with TIBCO_EP_HOME
+                // and other helper directories in the workspace.
+                dir ('src') {
+                    checkout scm
+                }
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                script {
+                    def jobUtil = new com.tibco.workflow.JobUtil()
+
+                    def streamingPipeline = "runtime"
+                    def platform = "linux" // the one platform for which we build.
+
+                    epDeclarative.buildInit(
+                        pomFile: 'src/pom.xml',
+                        containsUpstream: true, // because runtime
+                        upstreamPipeline: "EventProcessing/" + streamingPipeline,
+                        upstreamMilestoneStem: streamingPipeline,
+                        upstreamVersion: 'pom-property:sbrt.version',
+                        javaTool: jobUtil.getOracleJava11Tool(),
+                        mavenTool: jobUtil.getMaven36Tool(),
+                        primaryPlatform: "linux"
+                    )
+
+                    epDeclarative.buildMaven(
+                        goals: "install",
+                        platform: platform)
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                epDeclarative.postAlways()
+            }
+        }
+
+        cleanup {
+            script {
+                epDeclarative.postCleanup()
+            }
+        }
+    }
+}
