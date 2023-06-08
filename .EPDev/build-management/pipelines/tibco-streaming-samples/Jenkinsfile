@@ -11,9 +11,9 @@ String platform = jobUtil.getJobPlatform(defaultPlatform: "linux")
 String executorLabel = jobUtil.getStrBuildLabelEx(
     platform: platform, params: params,
     base: [ all: "c.unix-tools",
-           linux: "(o.rh7 || o.almalinux7) && c.docker-compatible-linux-3.10 && c.unix-tools && q.str",
+           linux: "(o.rh8 || o.almalinux8) && c.docker-compatible-linux-3.10 && c.unix-tools && q.str",
            macos: "o.macos",
-           windows: "o.windows && a.x86_64" ],
+           windows: "o.windows && c.windows-10-compatible && a.x86_64" ],
 )
 
 pipeline {
@@ -37,6 +37,15 @@ pipeline {
                description: 'Extra JVM options for Maven, usually -DskipTests and the like.')
 
         booleanParam(name: 'cleanWorkspace', defaultValue: true, description: 'Clean workspace before build.')
+
+	// Change authors always get succcess emails.
+        // Team branches send failure emails to the team, too.
+        string(name: 'notificationEmail', defaultValue: 'when:team:hello@cloud.team, change-authors',
+               description: 'Email addresses for notifications on failure.')
+
+        // Just notify change authors on any branch, since this will never get released.
+        string(name: 'successEmail', defaultValue: 'change-authors',
+               description: 'Email addresses for notifications on success.')
 
 
         choice(name: 'buildVerbose', choices: ['default', 'pipeline', 'tools' ],
@@ -83,7 +92,7 @@ pipeline {
                     epDeclarative.buildInit(
                         pomFile: 'src/pom.xml',
                         javaTool: jobUtil.getOracleJava11Tool(),
-                        mavenTool: jobUtil.getMaven36Tool(),
+                        mavenTool: jobUtil.getMaven38Tool(),
 			testPlatforms: [ "macos", "windows" ],
                         primaryPlatform: "linux"
                     )
