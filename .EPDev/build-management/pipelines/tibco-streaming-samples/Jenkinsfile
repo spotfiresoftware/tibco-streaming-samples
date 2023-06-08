@@ -84,15 +84,13 @@ pipeline {
         stage ('Build') {
             steps {
                 script {
-                    def jobUtil = new com.tibco.workflow.JobUtil()
-
+		    def newJobUtil = new com.tibco.workflow.JobUtil()
                     def streamingPipeline = "runtime"
-                    def platform = "linux" // the one platform for which we build.
-
+		    def newPlatform = "linux"
                     epDeclarative.buildInit(
                         pomFile: 'src/pom.xml',
-                        javaTool: jobUtil.getOracleJava11Tool(),
-                        mavenTool: jobUtil.getMaven38Tool(),
+                        javaTool: newJobUtil.getOracleJava11Tool(),
+                        mavenTool: newJobUtil.getMaven38Tool(),
 			testPlatforms: [ "macos", "windows" ],
                         primaryPlatform: "linux"
                     )
