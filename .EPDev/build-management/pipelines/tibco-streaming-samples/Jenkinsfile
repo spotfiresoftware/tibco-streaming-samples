@@ -26,7 +26,7 @@ pipeline {
 
     triggers {
         // Poll once a day.
-        pollSCM('H 0 * * *’)
+	pollSCM('H 0 * * *')
     }
 
     parameters {
