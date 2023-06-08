@@ -89,7 +89,7 @@ pipeline {
 		    def newPlatform = "linux"
                     epDeclarative.buildInit(
                         pomFile: 'src/pom.xml',
-                        javaTool: newJobUtil.getOracleJava11Tool(),
+                        javaTool: newJobUtil.getOracleJava17Tool(),
                         mavenTool: newJobUtil.getMaven38Tool(),
 			testPlatforms: [ "macos", "windows" ],
                         primaryPlatform: "linux"
