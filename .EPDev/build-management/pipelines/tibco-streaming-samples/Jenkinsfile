@@ -50,6 +50,10 @@ pipeline {
 
         choice(name: 'buildVerbose', choices: ['default', 'pipeline', 'tools' ],
                description: 'Make build more verbose with pipeline and tool diagnostics.')
+
+
+	string(name: 'streamingTargetVersion', defaultValue: '',
+            description: 'Override the version of Streaming used by the samples.')
     }
     
     agent {
@@ -59,7 +63,7 @@ pipeline {
 
     environment { // Not persisted in Artifactory build record.
         // Needed for Maven CommonSettings.
-        TIBCO_EP_HOME = "${env.WORKSPACE}/EP"
+        TIBCO_EP_HOME = "${env.WORKSPACE}/"
     }
 
     stages {
@@ -94,6 +98,12 @@ pipeline {
 			testPlatforms: [ "macos", "windows" ],
                         primaryPlatform: "linux"
                     )
+		
+		    // Override the streaming target version if supplied
+                    if (params.streamingTargetVersion) {
+                        env.STREAMING_VERSION = params.streamingTargetVersion
+                    }
+
 
                     epDeclarative.buildMaven(
                         goals: "install",
