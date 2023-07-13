@@ -52,8 +52,12 @@ pipeline {
                description: 'Make build more verbose with pipeline and tool diagnostics.')
 
 
-	string(name: 'streamingTargetVersion', defaultValue: '',
-            description: 'Override the version of Streaming used by the samples.')
+	//string(name: 'streamingTargetVersion', defaultValue: '',
+   		 //description: 'Override the version of Streaming used by the samples.')
+
+	string(name: 'PROJECT_VERSION', defaultValue: '',
+		 description: 'The version of Streaming that the samples use.')
+
     }
     
     agent {
@@ -100,9 +104,13 @@ pipeline {
                     )
 		
 		    // Override the streaming target version if supplied
-                    if (params.streamingTargetVersion) {
-                        env.STREAMING_VERSION = params.streamingTargetVersion
-                    }
+                    // if (params.streamingTargetVersion) {
+                    //   env.STREAMING_VERSION = params.streamingTargetVersion
+                    //  }
+			
+			if (params.PROJECT_VERSION) {
+                      		  env.PROJECT_VERSION = params.PROJECT_VERSION
+                   	 }
 
 
                     epDeclarative.buildMaven(
