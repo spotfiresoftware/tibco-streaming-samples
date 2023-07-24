@@ -35,7 +35,7 @@
     <groupId>com.tibco.modelops</groupId>
     <artifactId>google-language</artifactId>
     <version>1.0.0</version>
-    <name>TIBCO ModelOps MLaaS Google Language Sentiment Sample</name>
+    <name>Spotfire ModelOps MLaaS Google Language Sentiment Sample</name>
     <packaging>pom</packaging>
  
     <build>

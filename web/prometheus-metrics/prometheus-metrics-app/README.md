@@ -1,6 +1,6 @@
 # Web: Prometheus Metrics Integration App
 
-How to integrate with Prometheus Metrics in TIBCO Streaming. - Application
+How to integrate with Prometheus Metrics in Spotfire Streaming. - Application
 
 * [prometheus-metrics-app](src/site/markdown/index.md)
 

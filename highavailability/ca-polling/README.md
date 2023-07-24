@@ -7,7 +7,7 @@ Samples :
 * [HA: cluster aware polling - EventFlow Fragment](ca-polling-ef/src/site/markdown/index.md)
 * [HA: cluster aware polling - Application](ca-polling-app/src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
+_This is a Spotfire approved sample._
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

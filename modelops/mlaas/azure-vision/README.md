@@ -2,20 +2,20 @@
 
 ## Introduction
 
-This sample project demonstrates calling the [Azure Cognitive Services Computer Vision service](https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/) from TIBCO ModelOps.  This GitHub repository contains the artifacts of a TIBCO ModelOps Project that can be imported into TIBCO ModelOps to allow you to analyze image data.  The input takes a name and an image file name for image analysis. 
+This sample project demonstrates calling the [Azure Cognitive Services Computer Vision service](https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/) from Spotfire ModelOps.  This GitHub repository contains the artifacts of a Spotfire ModelOps Project that can be imported into Spotfire ModelOps to allow you to analyze image data.  The input takes a name and an image file name for image analysis. 
 
 NOTE: Use of Azure Cognitive Services may incur costs in your Azure account.
 
 The basic steps for using this sample are:
 
-1. Clone this GitHub repository locally and Import the project into TIBCO ModelOps.
+1. Clone this GitHub repository locally and Import the project into Spotfire ModelOps.
 1. Obtain the needed information from Azure - an Azure Key and Endpoint for Cognitive Services.
 1. Modify the azure_vision_model with the key and endpoint.
 1. Update the scoring flow and pipeline to use the modified script.
 1. Approve and deploy the azure_vision_pipeline in your ModelOps environment to deploy a REST service.
 1. Run the example Python script on your machine to test the deployed REST pipeline.
 
-## Clone this Project and Import into TIBCO ModelOps
+## Clone this Project and Import into Spotfire ModelOps
 
 You will want to clone this GitHub project locally.  Once you have the files locally, you can either:
 * Build a project zip file using maven with the pom.xml and azure-vision.xml files provided.
@@ -29,13 +29,13 @@ The zip file can be built by running maven in the repository directory:
 ```
 mvn install
 ```
-This will create a zip file in the ```target``` folder called azure-vision-1.0.0.zip.  This zip file can be imported into TIBCO ModelOps using the **Import a Project** option on the Projects menu.  See [Managing Projects and Artifacts](https://docs.tibco.com/emp/modelops/1.2.0/doc/html/user/managing-projects-and-artificats.html).
+This will create a zip file in the ```target``` folder called azure-vision-1.0.0.zip.  This zip file can be imported into Spotfire ModelOps using the **Import a Project** option on the Projects menu.  See [Managing Projects and Artifacts](https://docs.tibco.com/emp/modelops/1.2.0/doc/html/user/managing-projects-and-artificats.html).
 
-Once you have selected the archive and created the project, you should see the project view with the listed project artifacts in TIBCO ModelOps.
+Once you have selected the archive and created the project, you should see the project view with the listed project artifacts in Spotfire ModelOps.
 
 ### Upload project artifacts
 
-You can create a project in TIBCO ModelOps and upload all the artifacts from the local azure-vision directory into that created project.  In TIBCO ModelOps, **Create a new project** and then add the artifacts to the newly created project.
+You can create a project in Spotfire ModelOps and upload all the artifacts from the local azure-vision directory into that created project.  In Spotfire ModelOps, **Create a new project** and then add the artifacts to the newly created project.
 
 You will next need to select the azure_vision_model and set the **Model Properties**:
 1. Set the Input Schema to the input_image.avsc file.
@@ -45,13 +45,13 @@ You will next need to select the azure_vision_model and set the **Model Properti
 
 ## Obtain Information from Azure for Cognitive Services
 
-After getting the project created in TIBCO ModelOps, now you need to get the information to call the Azure Computer Vision analysis service. You need to obtain a valid Azure Key and Endpoint URL for Cognitive Services from Azure. 
+After getting the project created in Spotfire ModelOps, now you need to get the information to call the Azure Computer Vision analysis service. You need to obtain a valid Azure Key and Endpoint URL for Cognitive Services from Azure. 
 
 The exact steps for you may vary based on what privileges you have in Azure.  To obtain the Key and Endpoint URL from Azure, Microsoft provides the following quick start guide [Quickstart: Create a Cognitive Services resource using the Azure portal](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account).  Copy the keys and endpoint that are displayed in the "Get the keys for your resource" steps.
 
 ## Modify the Python script with the key and endpoint
 
-Back in TIBCO ModelOps, select the azure_vision_model for editing (click or select it).  Modify the azureCognitiveKey and azureCognitiveEndpoint variables with the values obtained in the step above:
+Back in Spotfire ModelOps, select the azure_vision_model for editing (click or select it).  Modify the azureCognitiveKey and azureCognitiveEndpoint variables with the values obtained in the step above:
 
 ```python
 azureCognitiveKey = "ENTER_YOUR_KEY_HERE_FROM_AZURE_COGNITIVE_SERVICES"
@@ -97,7 +97,7 @@ python tmo_rest_imagelabel.py -h
 
 usage: tmo_rest_imagelabel.py [-h] [--url URL] [--imagefile IMAGEFILE] [--username [USERNAME]] [--password [PASSWORD]]
 
-This script will authenticate and send the provided image file to the given URL for a TIBCO ModelOps REST Pipeline endpoint.
+This script will authenticate and send the provided image file to the given URL for a Spotfire ModelOps REST Pipeline endpoint.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -115,7 +115,7 @@ The URL for the REST Request-Response endpoint will be https://\<subdomains\>.\<
 https://azurevisionflow.modelops_hostname/azurevisionflow
  ```
 
-The following shows an example of using the python script with example parameters.  You may need to include a username and password for your TIBCO ModelOps environment.
+The following shows an example of using the python script with example parameters.  You may need to include a username and password for your Spotfire ModelOps environment.
 
 ```
 python tmo_rest_imagelabel.py --url https://azurevisionflow.modelops.domain/azurevisionflow --imagefile 'mountainpic.jpg'
@@ -129,7 +129,7 @@ Successfully received API Token
  'cliffs"}],"Name":"mountainpic.jpg"}]')
 ```
 
-You have successfully deployed the Azure Computer Vision image labeling example to TIBCO ModelOps.  You can include it in other more complex scoring flows.
+You have successfully deployed the Azure Computer Vision image labeling example to Spotfire ModelOps.  You can include it in other more complex scoring flows.
 
 ---
 Copyright (c) 2022-2023 Cloud Software Group, Inc.

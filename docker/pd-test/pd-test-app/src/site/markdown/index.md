@@ -3,25 +3,25 @@
 Testing proxy discovery configurations can be difficult since often in test hardware, networks
 do not block the discovery messages.  This sample describes how to use docker to test proxy discovery.
 
-* [Creating an application archive project for Docker from TIBCO StreamBase Studio&trade;](#creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade)
+* [Creating an application archive project for Docker from Spotfire StreamBase Studio&trade;](#creating-an-application-archive-project-for-docker-from-spotfire-streambase-studio-trade)
 * [Machines and nodes](#machines-and-nodes)
 * [Changes to the default configurations](#changes-to-the-default-configurations)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 
-See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
+See also [Docker section in Spotfire&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
 
-<a name="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
+<a name="creating-an-application-archive-project-for-docker-from-spotfire-streambase-studio-trade"></a>
 
-## Creating an application archive project for Docker from TIBCO StreamBase Studio&trade;
+## Creating an application archive project for Docker from Spotfire StreamBase Studio&trade;
 
-TIBCO StreamBase Studio&trade; can generate a project containing the necessary files to build and 
+Spotfire StreamBase Studio&trade; can generate a project containing the necessary files to build and 
 test a Docker image by selecting **Enable Docker support** when creating an application archive project :
 
 ![create](images/create.png)
 
 Such a project includes :
 
-* A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO StreamBase runtime
+* A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the Spotfire StreamBase runtime
 * A [start-node](../../main/docker/base/start-node) script to start a node
 * An [application Dockerfile](../../main/docker/application/Dockerfile) to build an application image containing the application archive - this is based on the base image
 * Steps in [pom.xml](../../../pom.xml) that uses [fabric8io/docker-maven-plugin](http://dmp.fabric8.io/) to build the Docker image and start Docker containers for basic testing

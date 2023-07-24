@@ -39,7 +39,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <name>Docker</name>
-    <description>How to use Docker in TIBCO Streaming projects.</description>
+    <description>How to use Docker in Spotfire Streaming projects.</description>
 
     <modules>
         <module>ef-2node</module>

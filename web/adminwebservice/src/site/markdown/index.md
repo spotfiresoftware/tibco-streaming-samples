@@ -7,7 +7,7 @@ authentication services provided by the node web server, which means a valid use
 must to be provided for requesting the endpoints.
 
 * [Start an EventFlow Fragment](#start-eventflow-fragment)
-* [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
+* [Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-spotfire-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
 <a name="start-eventflow-fragment"></a>
@@ -15,17 +15,17 @@ must to be provided for requesting the endpoints.
 ## Start the EventFlow fragment sample
 
 In this sample, since the aim is demonstrating how to use administration web service, we have a blank sbapp, 
-which is not related with our demo. After Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;, 
+which is not related with our demo. After Use the **Run As -> EventFlow Fragment** menu option to run in Spotfire StreamBase Studio&trade;, 
 the **Administration web service** is automatically deployed on the node web server.
 Since we use **default-realm** in this sample, which does NOT require password when a connection originates from a trusted address, 
 just enter computer username as the username, and no password is needed,
 ![RunFromStudio](images/studio.gif)
 
-<a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
+<a name="building-this-sample-from-spotfire-streambase-studio-trade-and-running-the-unit-test-cases"></a>
 
-## Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases
+## Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases
 
-Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from TIBCO StreamBase Studio&trade; :
+Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from Spotfire StreamBase Studio&trade; :
 
 ![RunTestFromStudio](images/studiounit.gif)
 

@@ -9,14 +9,14 @@ node.
 * [Quick runthrough](#quick-runthrough)
 * [Prerequisites](#prerequisites)
 * [Clound native development lifecycle](#cloud-native-development-lifecycle)
-* [Creating an application archive project for Kubernetes from TIBCO Streaming Studio&trade;](#creating-an-application-archive-project-for-kubernetes-from-tibco-streaming-studio-trade)
+* [Creating an application archive project for Kubernetes from Spotfire Streaming Studio&trade;](#creating-an-application-archive-project-for-kubernetes-from-spotfire-streaming-studio-trade)
 * [Kubernetes permissions](#kubernetes-permissions)
 * [Cluster monitor](#cluster-monitor)
 * [Containers and nodes](#containers-and-nodes)
 * [Service discovery](#service-discovery)
 * [Exposing REST endpoints via node port](#exposing-rest-endpoints-via-node-port)
 * [Exposing REST endpoints via ingress](#exposing-rest-endpoints-via-ingress)
-* [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade)
+* [Building and running from Spotfire Streaming Studio&trade;](#building-and-running-from-spotfire-streaming-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Deployment](#deployment)
 * [Runtime settings](#runtime-settings)
@@ -52,7 +52,7 @@ In this sample we are using various technologies with terminology that overlap a
 ## Overview
 
 This sample consists of a basic eventflow fragment contained in an application archive.  Additional files are included to support deploying
-in a Kubernetes environment.  The sample shows how to build, deploy and use TIBCO Streaming applications in Kubernetes.
+in a Kubernetes environment.  The sample shows how to build, deploy and use Spotfire Streaming applications in Kubernetes.
 
 <a name="quick_runthrough"></a>
 
@@ -61,7 +61,7 @@ in a Kubernetes environment.  The sample shows how to build, deploy and use TIBC
 1. Install Docker and Kubernetes.  
   See [Prerequisites](#prerequisites).
 2. Build this project to create Docker images.  
-  See [Building and running from TIBCO Streaming Studio&trade;](#building-and-running-from-tibco-streaming-studio-trade) and 
+  See [Building and running from Spotfire Streaming Studio&trade;](#building-and-running-from-spotfire-streaming-studio-trade) and 
   [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 3. Use *kubectl apply* to grant permissions (if required )
 4. Use *kubectl apply* to start the Streaming Nodes in the Kubernetes cluster
@@ -154,11 +154,11 @@ Maven lifecycle mapping is :
 * **mvn post-integration-phase** - stop Docker container(s)
 * **mvn deploy** - push Docker images to registry
 
-The [TIBCO Streaming maven plugin](https://github.com/TIBCOSoftware/tibco-streaming-maven-plugin) provides the lifecycle.
+The [Spotfire Streaming maven plugin](https://github.com/TIBCOSoftware/tibco-streaming-maven-plugin) provides the lifecycle.
 
-<a name="creating-an-application-archive-project-for-kubernetes-from-tibco-streaming-studio-trade"></a>
+<a name="creating-an-application-archive-project-for-kubernetes-from-spotfire-streaming-studio-trade"></a>
 
-## Creating an application archive project for Kubernetes from TIBCO Streaming Studio&trade;
+## Creating an application archive project for Kubernetes from Spotfire Streaming Studio&trade;
 
 Create a new Streaming Project, select StreamBase Application and enable both Docker and Kubernetes :
 
@@ -300,7 +300,7 @@ The goal of this sample is to construct the deployment shown below :
 
 ![resources](images/kubernetes-docker.svg)
 
-<a name="building-and-running-from-tibco-Streaming-studio-trade"></a>
+<a name="building-and-running-from-spotfire-Streaming-studio-trade"></a>
 
 1. One POD contains one Streaming node and liveness probe
 2. A StatefulSet controls the set of PODs that forms the application cluster
@@ -312,10 +312,10 @@ The goal of this sample is to construct the deployment shown below :
 
 ## Service discovery
 
-The TIBCO streaming node detects that its deployed in kubernetes and autmatically switches to kubernetes based discovery.
+The Spotfire streaming node detects that its deployed in kubernetes and autmatically switches to kubernetes based discovery.
 
-Each TIBCO Streaming node creates an kubernetes service object and populates with service discovery data.  Other TIBCO Streaming nodes
-will detect these service objects to support discovery of remote TIBCO Streaming nodes.
+Each Spotfire Streaming node creates an kubernetes service object and populates with service discovery data.  Other Spotfire Streaming nodes
+will detect these service objects to support discovery of remote Spotfire Streaming nodes.
 
 Regardless of the ports used by the POD, the ports exposed to other pods via the service object are fixed :
 
@@ -385,7 +385,7 @@ Deployment Directories = /var/opt/tibco/streambase/node/efkubernetesapp0.default
 Install Time = 2020-03-24 10:26:14 +0000 UTC
 Last Start Time = 2020-03-24 10:27:24 +0000 UTC
 Build Type = PRODUCTION
-Product Version = TIBCO StreamBase Runtime 11.0.0-SNAPSHOT (build 2003240528 UNTESTED-nd.master.linux-276)
+Product Version = Spotfire StreamBase Runtime 11.0.0-SNAPSHOT (build 2003240528 UNTESTED-nd.master.linux-276)
 Product Installation Directory = /opt/tibco/streambase
 Sensitive Configuration Data Encryption = Disabled
 Secure Communication Profile Name = None
@@ -394,7 +394,7 @@ Secure Communication Profile Name = None
 Webservice calls within a pod should similarly use the hostname set to the service object name :
 
 ```
-$ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:tibco -X POST "http://efkubernetesapp0-default-efkubernetesapp/admin/v1/targets/services?command=display" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "parameters=" | jq
+$ kubectl exec ef-kubernetes-app-0 -- curl -s -u tibco:Spotfire -X POST "http://efkubernetesapp0-default-efkubernetesapp/admin/v1/targets/services?command=display" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "parameters=" | jq
 {
   "results": [
     {
@@ -472,7 +472,7 @@ ef-kubernetes-app   NodePort   10.99.219.246   <none>        8008:31448/TCP   10
 REST clients can now run administration commands external to the cluster using the nodeport ( 31448 in this case ) :
 
 ```shell
-$ curl -s -u tibco:tibco -X POST "http://localhost:31448/admin/v1/targets/services?command=display" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "parameters=" | jq
+$ curl -s -u tibco:Spotfire -X POST "http://localhost:31448/admin/v1/targets/services?command=display" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "parameters=" | jq
 {
   "results": [
     {
@@ -585,9 +585,9 @@ External clients can now access the webservice :
 
 Note that to avoid possible cross-origin (CORS) issue, the explore URL will need to be replaced with the ingress URL ( for example, replace *http://ef-kubernetes-app-0:8008/apidoc/healthcheck.json* with *http://localhost/apidoc/healthcheck.json* ).
 
-<a name="building-and-running-from-tibco-streaming-studio-trade"></a>
+<a name="building-and-running-from-spotfire-streaming-studio-trade"></a>
 
-## Building and running from TIBCO Streaming Studio&trade;
+## Building and running from Spotfire Streaming Studio&trade;
 
 Useful plugins include :
 

@@ -1,6 +1,6 @@
 # Structure
 
-How to structure TIBCO&reg; Streaming 11.0.1 projects.
+How to structure Spotfire&reg; Streaming 11.0.1 projects.
 
 Samples :
 

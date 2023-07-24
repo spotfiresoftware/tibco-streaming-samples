@@ -6,7 +6,7 @@ This sample describes how to write junit unit tests for EventFlow fragments.
 * [Using the test framework](#using-the-test-framework)
 * [Starting, stopping and loading configuration](#starting-stopping-and-loading-configuration)
 * [Test cases](#test-cases)
-* [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
+* [Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-spotfire-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
 <a name="eventflow-under-test"></a>
@@ -141,11 +141,11 @@ API to enqueue tubles and verify the results :
     }
 ```
 
-<a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
+<a name="building-this-sample-from-spotfire-streambase-studio-trade-and-running-the-unit-test-cases"></a>
 
-## Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases
+## Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases
 
-Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from TIBCO StreamBase Studio&trade; :
+Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from Spotfire StreamBase Studio&trade; :
 
 ![RunFromStudio](images/studiounit.gif)
 

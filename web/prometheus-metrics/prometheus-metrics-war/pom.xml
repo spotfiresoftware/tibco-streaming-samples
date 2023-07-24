@@ -39,7 +39,7 @@
     <packaging>war</packaging>
     <version>2.0.0</version>
     <name>Web: Prometheus Metrics Integration WAR</name>
-    <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - WAR</description>
+    <description>How to integrate with Prometheus Metrics in Spotfire Streaming. - WAR</description>
 
     <properties>
         <prometheus.simpleclient.version>0.8.0</prometheus.simpleclient.version>

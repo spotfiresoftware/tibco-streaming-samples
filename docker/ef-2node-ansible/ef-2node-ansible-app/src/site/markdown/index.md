@@ -3,16 +3,16 @@
 This sample describes how to deploy an application archive containing an EventFlow fragment to Docker managed by Ansible.
 
 * [Prerequisites](#prerequisites)
-* [Loading this sample in TIBCO StreamBase Studio&trade;](#loading-this-sample-in-tibco-streambase-studio-trade)
+* [Loading this sample in Spotfire StreamBase Studio&trade;](#loading-this-sample-in-spotfire-streambase-studio-trade)
 * [Ansible part of this project](#ansible-part-of-this-project)
 * [Containers and nodes](#containers-and-nodes)
 * [Changes to the default pom.xml file - profiles](#changes-to-the-default-pom-file-profiles)
-* [Building and running from TIBCO StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
+* [Building and running from Spotfire StreamBase Studio&trade;](#building-and-running-from-spotfire-streambase-studio-trade)
 * [Example of Ansible task and maven plugin configuration](#example-of-ansible-task-and-maven-plugin-configuration)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Additional Ansible playbooks](#additional-ansible-playbooks)
 
-See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/latest/doc/html/admin/part-docker.html).
+See also [Docker section in Spotfire&reg; Streaming documentation](https://docs.tibco.com/pub/str/latest/doc/html/admin/part-docker.html).
 
 <a name="prerequisites"></a>
 
@@ -27,16 +27,16 @@ Ansible cannot run on a Windows host natively. Please see more information under
 
 All Ansible playbooks are executed based on configuration file and inventory file. Both files are included in the project. Please see more detailed description in [Ansible part of this project paragraph](#ansible-part-of-this-project) below. 
 
-<a name="loading-this-sample-in-tibco-streambase-studio-trade"></a>
+<a name="loading-this-sample-in-spotfire-streambase-studio-trade"></a>
 
-## Loading this sample in TIBCO StreamBase Studio&trade;
+## Loading this sample in Spotfire StreamBase Studio&trade;
 
-To be able to run this sample in TIBCO StreamBase Studio™ please refer to [Using Tibco Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md).
+To be able to run this sample in Spotfire StreamBase Studio™ please refer to [Using Spotfire Streambase Studio GitHub page](https://github.com/TIBCOSoftware/tibco-streaming-samples/blob/master/docs/studio.md).
 
 Below you can find a list of files this project is based on:
 
 * An Ansible [playbook file](../../main/ansible/project-playbook.yml) with set of tasks divided in three groups: build docker images, test docker images and application, clean (remove docker images build in this playbook).
-* A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO StreamBase runtime
+* A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the Spotfire StreamBase runtime
 * A [start-node](../../main/docker/base/start-node) script to start a node
 * An [application Dockerfile](../../main/docker/application/Dockerfile) to build an application image containing the application archive - this is based on the base image
 * [Trusted hosts HOCON configuration](../../main/configurations/security.conf) so that each container can run epadmin commands on the cluster
@@ -136,11 +136,11 @@ installed, hence the maven [pom.xml](../../../pom.xml) file is updated to detect
     </profiles>
 ``` 
 
-<a name="building-and-running-from-tibco-streambase-studio-trade"></a>
+<a name="building-and-running-from-spotfire-streambase-studio-trade"></a>
 
-## Building and running from TIBCO StreamBase Studio&trade;
+## Building and running from Spotfire StreamBase Studio&trade;
 
-Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase Studio&trade; or Run As shortcut.  Tests can
+Use the **Run As -> Maven install** menu option to build from Spotfire StreamBase Studio&trade; or Run As shortcut.  Tests can
 be skipped if required by ticking the **Skip tests**. It is important to add **PATH** variable under Environment tab with value: **/bin:/usr/bin:/usr/local/bin:/usr/sbin**. 
 
 ![maven](images/studio-conf-ansible.jpg)

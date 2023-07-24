@@ -1,6 +1,6 @@
 # Java
 
-How to invoke Java from TIBCO&reg; Streaming 11.0.1 projects.
+How to invoke Java from Spotfire&reg; Streaming 11.0.1 projects.
 
 Samples :
 

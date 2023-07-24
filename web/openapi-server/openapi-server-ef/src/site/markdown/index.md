@@ -4,7 +4,7 @@ This sample describes how to use a WAR which is created with OpenAPI Code Genera
 
 * [Create a WAR file with OpenAPI Code Generation tool](#create-war)
 * [Create a no-op EventFlow fragment and declare the WAR as a dependency](#declare-the-war-as-a-dependency)
-* [Running this sample from TIBCO StreamBase Studio&trade;](#running-this-sample-from-tibco-streambase-studiotrade)
+* [Running this sample from Spotfire StreamBase Studio&trade;](#running-this-sample-from-spotfire-streambase-studiotrade)
 * [Using "epadmin display web" command to retrieve information about web server](#using-epadmin-display-web-command-to-retrieve-information)
 * [Using HelpUI to send request to test endpoint](#using-helpui)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
@@ -33,10 +33,10 @@ way as any other maven dependency:
     </dependency>
 ``` 
 
-<a name="running-this-sample-from-tibco-streambase-studiotrade"></a>
+<a name="running-this-sample-from-spotfire-streambase-studiotrade"></a>
 
-## Running this sample from TIBCO StreamBase Studio&trade;
-Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;:
+## Running this sample from Spotfire StreamBase Studio&trade;
+Use the **Run As -> EventFlow Fragment** menu option to run in Spotfire StreamBase Studio&trade;:
 
 
 <a name="using-epadmin-display-web-command-to-retrieve-information"></a>

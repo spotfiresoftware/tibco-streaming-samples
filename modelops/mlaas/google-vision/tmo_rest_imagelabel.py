@@ -36,7 +36,7 @@ import pprint
 import argparse
 
 parser = argparse.ArgumentParser(
-    description='''This script will authenticate and send the provided image file to the given URL for a TIBCO ModelOps REST Pipeline endpoint.''')
+    description='''This script will authenticate and send the provided image file to the given URL for a Spotfire ModelOps REST Pipeline endpoint.''')
 parser.add_argument('--url', help='(required) Complete URL to REST pipeline. Example: https://googlevisionflow.modelops_domain/googlevisionflow')
 parser.add_argument('--imagefile', help='Image file to send to image analysis.')
 parser.add_argument('--username', nargs='?', help='Username if needed.', default='')

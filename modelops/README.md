@@ -1,6 +1,6 @@
-# TIBCO&reg; ModelOps Samples
+# Spotfire&reg; ModelOps Samples
 
-This directory contains TIBCO&reg; ModelOps sample projects that can be added
+This directory contains Spotfire&reg; ModelOps sample projects that can be added
 to your local ModelOps sandbox(es), or duplicated into your own space(s).
 
 

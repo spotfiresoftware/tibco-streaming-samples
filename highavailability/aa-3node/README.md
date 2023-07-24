@@ -7,7 +7,7 @@ Samples :
 * [HA: 3-node active active - EventFlow Fragment](aa-3node-ef/src/site/markdown/index.md)
 * [HA: 3-node active active - Application](aa-3node-app/src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
+_This is a Spotfire approved sample._
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

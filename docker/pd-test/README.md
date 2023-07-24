@@ -7,7 +7,7 @@ Samples :
 * [How to user Docker to test proxy discovery - EventFlow Fragment](pd-test-eventflow/README.md)
 * [Docker: proxy discovery test - Application](pd-test-app/src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
+_This is a Spotfire approved sample._
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

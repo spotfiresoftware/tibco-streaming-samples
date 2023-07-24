@@ -39,7 +39,7 @@
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
     <name>HA: cluster aware polling - EventFlow Fragment</name>
-    <description>How to use cluster aware in TIBCO Streaming projects - EventFlow Fragment</description>
+    <description>How to use cluster aware in Spotfire Streaming projects - EventFlow Fragment</description>
 
     <properties>
 	    <!-- FIXTHIS - see SB-46972 -->

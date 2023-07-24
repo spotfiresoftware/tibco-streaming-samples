@@ -7,7 +7,7 @@ Samples :
 * [Structure: Application - EventFlow Fragment](application-ef/src/site/markdown/index.md)
 * [Structure: Application - Application](application-app/src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
+_This is a Spotfire approved sample._
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

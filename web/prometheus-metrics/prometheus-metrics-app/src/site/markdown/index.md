@@ -1,11 +1,11 @@
 # Web : Prometheus Metrics - APP
 
-This sample describes how to retrieve TIBCO&reg; Streaming Metrics into Prometheus.
+This sample describes how to retrieve Spotfire&reg; Streaming Metrics into Prometheus.
 
 ## Prometheus integration
 
 A node **A** will be started containing the **prometheus-metrics-ef** event flow, itself depending
-on the **prometheus-metrics-war** WAR. Upon startup, TIBCO&reg; Streaming will detect the WAR and
+on the **prometheus-metrics-war** WAR. Upon startup, Spotfire&reg; Streaming will detect the WAR and
 deploy it in its administration web engine. The Prometheus REST Endpoint will then begin to serve
 Metrics data in a Prometheus consumable way.
 
@@ -31,7 +31,7 @@ In this sample, an integration test is defined in the **pom.xml** file. The test
   metrics from node A through a **prometheus.yml** file.
 * Wait for node A to come up
 * Trigger the java integration test: it consists in polling the Prometheus instance HTTP
-  interface for a builtin TIBCO&reg; Streaming Metric name to come up.
+  interface for a builtin Spotfire&reg; Streaming Metric name to come up.
 * Stop the Prometheus docker container
 * Stop node A
 

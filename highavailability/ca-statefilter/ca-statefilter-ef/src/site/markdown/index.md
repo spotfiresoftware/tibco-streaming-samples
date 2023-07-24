@@ -4,8 +4,8 @@ This sample describes how to build an EventFlow fragment with a cluster-aware st
 
 * [Enable cluster aware settings in operator](#enable-cluster-aware-settings-in-operator)
 * [Design notes](#design-notes)
-* [Running this sample from TIBCO StreamBase Studio&trade;](#running-this-sample-from-tibco-streambase-studio-trade)
-* [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
+* [Running this sample from Spotfire StreamBase Studio&trade;](#running-this-sample-from-spotfire-streambase-studio-trade)
+* [Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-spotfire-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
 <a name="enable-cluster-aware-settings-in-operator"></a>
@@ -26,22 +26,22 @@ The cluster aware option **Active on a single node in the cluster** was selected
 * Only one node in the cluster will process the metronome tuples regardless of the number of nodes
 * Should the node processing the metronome tuples fail, another node in the cluster will start processing the tuples
 
-<a name="running-this-sample-from-tibco-streambase-studio-trade"></a>
+<a name="running-this-sample-from-spotfire-streambase-studio-trade"></a>
 
-## Running this sample from TIBCO StreamBase Studio&trade;
+## Running this sample from Spotfire StreamBase Studio&trade;
 
-Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;.
+Use the **Run As -> EventFlow Fragment** menu option to run in Spotfire StreamBase Studio&trade;.
 
 Note that here we are unit testing the business logic rather than cluster aware - in this sample we test cluster aware in
 the application archive integration test cases.
 
 ![RunFromStudio](images/studio.gif)
 
-<a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
+<a name="building-this-sample-from-spotfire-streambase-studio-trade-and-running-the-unit-test-cases"></a>
 
-## Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases
+## Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases
 
-Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from TIBCO StreamBase Studio&trade; :
+Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from Spotfire StreamBase Studio&trade; :
 
 ![RunFromStudio](images/studiounit.gif)
 

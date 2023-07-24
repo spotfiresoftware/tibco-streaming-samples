@@ -35,7 +35,7 @@
     <groupId>com.tibco.modelops</groupId>
     <artifactId>google-vision</artifactId>
     <version>1.0.0</version>
-    <name>TIBCO ModelOps MLaaS Google Vision API Sample</name>
+    <name>Spotfire ModelOps MLaaS Google Vision API Sample</name>
     <packaging>pom</packaging>
  
     <build>

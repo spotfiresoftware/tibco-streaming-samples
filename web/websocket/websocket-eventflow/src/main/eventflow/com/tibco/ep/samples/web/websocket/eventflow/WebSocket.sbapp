@@ -2,7 +2,7 @@
 <modify version="10.5.0">
     <add>
         <gui.metadata>
-            <property name="description" value="\\&#10;\\ Copyright(c) 2020. TIBCO Software Inc.&#10;\\ All rights Reserved. Confidential &amp; Proprietary.&#10;\\"/>
+            <property name="description" value="\\&#10;\\ Copyright(c) 2020-2023 Cloud Software Group, Inc.&#10;\\ All rights Reserved. Confidential &amp; Proprietary.&#10;\\"/>
         </gui.metadata>
         <annotations>
             <annotation name="hygienic"/>

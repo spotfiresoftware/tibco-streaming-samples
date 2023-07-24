@@ -2,20 +2,20 @@
 
 ## Introduction
 
-This sample project demonstrates calling [Amazon Rekognition for image analysis](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html) from TIBCO ModelOps.  This GitHub repository contains the artifacts of a TIBCO ModelOps Project that can be imported into TIBCO ModelOps to allow you to analyze image data.  The input takes a name and an image file name for image labeling analysis. 
+This sample project demonstrates calling [Amazon Rekognition for image analysis](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html) from Spotfire ModelOps.  This GitHub repository contains the artifacts of a Spotfire ModelOps Project that can be imported into Spotfire ModelOps to allow you to analyze image data.  The input takes a name and an image file name for image labeling analysis. 
 
 NOTE: Use of Amazon Comprehend may incur costs in your Amazon account.
 
 The basic steps for using this sample are:
 
-1. Clone this GitHub repository locally and Import the project into TIBCO ModelOps.
+1. Clone this GitHub repository locally and Import the project into Spotfire ModelOps.
 1. Obtain the needed authentication keys from Amazon.
 1. Modify the amazon_rekognition_model with the authentication keys.
 1. Update the scoring flow and pipeline to use the modified script.
 1. Approve and deploy the amazon_rekog_pipeline in your ModelOps environment to deploy a REST service.
 1. Run the example Python script on your machine to test the deployed REST pipeline.
 
-## Clone this Project and Import into TIBCO ModelOps
+## Clone this Project and Import into Spotfire ModelOps
 
 You will want to clone this GitHub project locally.  Once you have the files locally, you can either:
 * Build a project zip file using maven with the pom.xml and amazon-rekognition.xml files provided.
@@ -29,13 +29,13 @@ The zip file can be built by running maven in the repository directory:
 ```
 mvn install
 ```
-This will create a zip file in the ```target``` folder called amazon-rekognition-1.0.0.zip.  This zip file can be imported into TIBCO ModelOps using the **Import a Project** option on the Projects menu.  See [Managing Projects and Artifacts](https://docs.tibco.com/emp/modelops/1.2.0/doc/html/user/managing-projects-and-artificats.html).
+This will create a zip file in the ```target``` folder called amazon-rekognition-1.0.0.zip.  This zip file can be imported into Spotfire ModelOps using the **Import a Project** option on the Projects menu.  See [Managing Projects and Artifacts](https://docs.tibco.com/emp/modelops/1.2.0/doc/html/user/managing-projects-and-artificats.html).
 
-Once you have selected the archive and created the project, you should see the project view with the listed project artifacts in TIBCO ModelOps.
+Once you have selected the archive and created the project, you should see the project view with the listed project artifacts in Spotfire ModelOps.
 
 ### Upload project artifacts
 
-You can create a project in TIBCO ModelOps and upload all the artifacts from the local amazon-rekognition directory into that created project.  In TIBCO ModelOps, **Create a new project** and then add the artifacts to the newly created project.
+You can create a project in Spotfire ModelOps and upload all the artifacts from the local amazon-rekognition directory into that created project.  In Spotfire ModelOps, **Create a new project** and then add the artifacts to the newly created project.
 
 You will next need to select the amazon_rekognition_model and set the **Model Properties**:
 1. Set the Input Schema to the input_image.avsc file.
@@ -45,13 +45,13 @@ You will next need to select the amazon_rekognition_model and set the **Model Pr
 
 ## Obtain Authentication Information from Amazon
 
-After getting the project created in TIBCO ModelOps, now you need to get the authentication information from Amazon to call the Comprehend service.  The sample uses federated user access in which a user access and secret key are provided in addition to the role ARN to assume in order to access the Amazon Comprehend service. The [Authentication and access control for Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/auth-and-access-control.html) article can help you find the authentication method that will work for your environment.  The exact steps for you may vary based on what privileges you have in Amazon and how your account is configured.  
+After getting the project created in Spotfire ModelOps, now you need to get the authentication information from Amazon to call the Comprehend service.  The sample uses federated user access in which a user access and secret key are provided in addition to the role ARN to assume in order to access the Amazon Comprehend service. The [Authentication and access control for Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/auth-and-access-control.html) article can help you find the authentication method that will work for your environment.  The exact steps for you may vary based on what privileges you have in Amazon and how your account is configured.  
 
 These instructions do not provide information for all Amazon authentication scenarios.  The important piece is to get a session from Amazon using the boto3 python library.  Some useful links from the Amazon Boto3 documentation are [Boto3 Credentials](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) and [Boto3 Session reference](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/core/session.html).  
 
 ## Modify the Python script with authentication keys
 
-Back in TIBCO ModelOps, select the amazon_rekognition_model for editing (click or select it).  Modify the aws_access_keyIn, aws_secret_keyIn, aws_rolearn (role to assume) and aws_region variables with the values obtained in the step above:
+Back in Spotfire ModelOps, select the amazon_rekognition_model for editing (click or select it).  Modify the aws_access_keyIn, aws_secret_keyIn, aws_rolearn (role to assume) and aws_region variables with the values obtained in the step above:
 
 ```python
 aws_access_keyIn="ENTER_YOUR_AWS_ACCESS_KEY_HERE"  
@@ -99,7 +99,7 @@ python tmo_rest_imagelabel.py -h
 
 usage: tmo_rest_imagelabel.py [-h] [--url URL] [--imagefile IMAGEFILE] [--username [USERNAME]] [--password [PASSWORD]]
 
-This script will authenticate and send JSON input to the given URL for a TIBCO ModelOps REST Pipeline endpoint.
+This script will authenticate and send JSON input to the given URL for a Spotfire ModelOps REST Pipeline endpoint.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -118,7 +118,7 @@ https://amazonrekogflow.modelops_hostname/amazonrekogflow
  ```
 
 
-The following shows an example of using the python script with example parameters.  You may need to include a username and password for your TIBCO ModelOps environment.
+The following shows an example of using the python script with example parameters.  You may need to include a username and password for your Spotfire ModelOps environment.
 
 ```
 python tmo_rest_imagelabel.py --url https://amazonrekogflow.modelops.domain/amazonrekogflow --imagefile 'mountainpic.jpg'
@@ -131,7 +131,7 @@ Successfully received API Token
  'Activities"},{"Confidence":74.14285278320312,"Label":"Mountain"},{"Confidence":72.57720947265625,"Label":"Water"},{"Confidence":71.74688720703125,"Label":"River"},{"Confidence":69.25418853759766,"Label":"Rock"},{"Confidence":66.43350219726562,"Label":"Clothing"},{"Confidence":66.43350219726562,"Label":"Apparel"},{"Confidence":62.991031646728516,"Label":"Road"},{"Confidence":61.541500091552734,"Label":"Promontory"},{"Confidence":60.42869186401367,"Label":"Slate"},{"Confidence":56.03702926635742,"Label":"Piste"},{"Confidence":56.03702926635742,"Label":"Snow"},{"Confidence":56.03702926635742,"Label":"Sport"},{"Confidence":56.03702926635742,"Label":"Sports"},{"Confidence":55.77503967285156,"Label":"Hiking"},{"Confidence":55.48444366455078,"Label":"Painting"},{"Confidence":55.48444366455078,"Label":"Art"},{"Confidence":55.00431442260742,"Label":"Archaeology"}],"Name":"mountainpic.jpg"}]')
 ```
 
-You have successfully deployed the Amazon Rekognition example to TIBCO ModelOps.  You can include it in other more complex scoring flows.
+You have successfully deployed the Amazon Rekognition example to Spotfire ModelOps.  You can include it in other more complex scoring flows.
 
 ---
 Copyright (c) 2022-2023 Cloud Software Group, Inc.

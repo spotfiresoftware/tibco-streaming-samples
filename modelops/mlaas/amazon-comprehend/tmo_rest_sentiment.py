@@ -37,7 +37,7 @@ import pprint
 import argparse
 
 parser = argparse.ArgumentParser(
-    description='''This script will authenticate and send JSON input to the given URL for a TIBCO ModelOps REST Pipeline endpoint.''')
+    description='''This script will authenticate and send JSON input to the given URL for a Spotfire ModelOps REST Pipeline endpoint.''')
 parser.add_argument('--url', help='(required) Complete URL to REST pipeline. Example: https://awscomprehendflow.modelops_domain/awscomprehendflow')
 parser.add_argument('--input', help='(required) JSON input to pipeline, e.g. { "comments": "This was a lovely little place", "id": "683278" }')
 parser.add_argument('--username', nargs='?', help='Username if needed.', default='')

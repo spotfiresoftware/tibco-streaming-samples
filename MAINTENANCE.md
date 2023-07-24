@@ -23,7 +23,7 @@ projects.
 
 ## Basics ##
 
-Each TIBCO Streaming release eventually gets a branch named for the
+Each Spotfire Streaming release eventually gets a branch named for the
 version. The latest release version becomes the default branch
 for this repository.
 
@@ -35,7 +35,7 @@ denoted by the `parentVersion` parameter for the
 next version. Transitions to the next snapshot version need
 `-DallowSnapshots=true` as well.
 
-When transitioning to release versions, internal TIBCO developers need
+When transitioning to release versions, internal Spotfire developers need
 to use special Maven settings that allow access to release canididate
 artifact repositories.
 

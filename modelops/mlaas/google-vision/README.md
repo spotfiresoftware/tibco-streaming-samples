@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This sample project demonstrates calling the [Google Vision AI API](https://cloud.google.com/vision) for analyzing images from TIBCO ModelOps.  This GitHub repository contains the artifacts of a TIBCO ModelOps Project that can be imported into TIBCO ModelOps to allow you to analyze image data.  The input takes a name and an image file name for image analysis. 
+This sample project demonstrates calling the [Google Vision AI API](https://cloud.google.com/vision) for analyzing images from Spotfire ModelOps.  This GitHub repository contains the artifacts of a Spotfire ModelOps Project that can be imported into Spotfire ModelOps to allow you to analyze image data.  The input takes a name and an image file name for image analysis. 
 
 NOTE: Use of Google Vision API may incur costs in your Google account.
 
 The basic steps for using this sample are:
 
-1. Clone this GitHub repository locally and Import the project into TIBCO ModelOps.
+1. Clone this GitHub repository locally and Import the project into Spotfire ModelOps.
 1. Obtain a Google service account json file and enable Google Vision API.
 1. Modify the service-acct.json file with your service account information.
 1. Modify the google_vision_model to use the updated service-acct version.
@@ -16,7 +16,7 @@ The basic steps for using this sample are:
 1. Approve and deploy the google_vision_pipeline in your ModelOps environment to deploy a REST service.
 1. Run example Python script on your machine to test the deployed REST pipeline.
 
-## Clone this Project and Import into TIBCO ModelOps
+## Clone this Project and Import into Spotfire ModelOps
 
 You will want to clone this GitHub project locally.  Once you have the files locally, you can either:
 * Build a project zip file using maven with the pom.xml and google-vision.xml files provided.
@@ -30,13 +30,13 @@ The zip file can be built by running maven in the repository directory:
 ```
 mvn install
 ```
-This will create a zip file in the ```target``` folder called google-vision-1.0.0.zip.  This zip file can be imported into TIBCO ModelOps using the **Import a Project** option on the Projects menu.  See [Managing Projects and Artifacts](https://docs.tibco.com/emp/modelops/1.2.0/doc/html/user/managing-projects-and-artificats.html).
+This will create a zip file in the ```target``` folder called google-vision-1.0.0.zip.  This zip file can be imported into Spotfire ModelOps using the **Import a Project** option on the Projects menu.  See [Managing Projects and Artifacts](https://docs.tibco.com/emp/modelops/1.2.0/doc/html/user/managing-projects-and-artificats.html).
 
-Once you have selected the archive and created the project, you should see the project view with the listed project artifacts in TIBCO ModelOps.
+Once you have selected the archive and created the project, you should see the project view with the listed project artifacts in Spotfire ModelOps.
 
 ### Upload project artifacts
 
-You can create a project in TIBCO ModelOps and upload all the artifacts from the local google-vision directory into that created project.  In TIBCO ModelOps, **Create a new project** and then add the artifacts to the newly created project.
+You can create a project in Spotfire ModelOps and upload all the artifacts from the local google-vision directory into that created project.  In Spotfire ModelOps, **Create a new project** and then add the artifacts to the newly created project.
 
 You will next need to select the google_vision_model and set the **Model Properties**:
 1. Set the Input Schema to the input_image.avsc file.
@@ -48,13 +48,13 @@ You will next need to select the google_vision_model and set the **Model Propert
 
 ## Obtain Information and Configure Google Vision API
 
-After getting the project created in TIBCO ModelOps, now you need to get authentication information from Google in order to call the Google Vision API.  You will need to obtain a service account json file that will be used for authenticating, and you will need to enable Google Vision API for the account.
+After getting the project created in Spotfire ModelOps, now you need to get authentication information from Google in order to call the Google Vision API.  You will need to obtain a service account json file that will be used for authenticating, and you will need to enable Google Vision API for the account.
 
 The specific way you enable the API and get the service account JSON file may vary.  Google provides useful instructions at [Quickstart: Setup the Vision API](https://cloud.google.com/vision/docs/setup).   Once the API is enabled and you have the json file downloaded, you are ready to go to the next step.
 
 ## Modify the service-acct artifact
 
-Back in TIBCO ModelOps, select the service-acct artifact for editing.  Open your service account json file that you downloaded, select the entire text, copy the text and paste it over the service-acct text in TIBCO ModelOps, effectively replacing the placeholder text with your service account values.  **Save** the updated service-acct artifact.
+Back in Spotfire ModelOps, select the service-acct artifact for editing.  Open your service account json file that you downloaded, select the entire text, copy the text and paste it over the service-acct text in Spotfire ModelOps, effectively replacing the placeholder text with your service account values.  **Save** the updated service-acct artifact.
 
 ## Modify the Model Properties
 
@@ -97,7 +97,7 @@ python tmo_rest_imagelabel.py -h
 
 usage: tmo_rest_imagelabel.py [-h] [--url URL] [--imagefile IMAGEFILE] [--username [USERNAME]] [--password [PASSWORD]]
 
-This script will authenticate and send the provided image file to the given URL for a TIBCO ModelOps REST Pipeline endpoint.
+This script will authenticate and send the provided image file to the given URL for a Spotfire ModelOps REST Pipeline endpoint.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -115,7 +115,7 @@ The URL for the REST Request-Response endpoint will be https://\<subdomains\>.\<
 https://googlevisionflow.modelops_hostname/googlevisionflow
  ```
 
-The following shows an example of using the python script with example parameters.  You may need to include a username and password for your TIBCO ModelOps environment.
+The following shows an example of using the python script with example parameters.  You may need to include a username and password for your Spotfire ModelOps environment.
 
 ```
 python tmo_rest_imagelabel.py --url https://googlevisionflow.modelops.domain/googlevisionflow --imagefile 'mountainpic.jpg'
@@ -129,7 +129,7 @@ Successfully received API Token
  'phenomenon"}],"Name":"mountainpic.jpg"}]')
 ```
 
-You have successfully deployed the Google Vision API image labeling example to TIBCO ModelOps.  You can include it in other more complex scoring flows.
+You have successfully deployed the Google Vision API image labeling example to Spotfire ModelOps.  You can include it in other more complex scoring flows.
 
 ---
 Copyright (c) 2022-2023 Cloud Software Group, Inc.

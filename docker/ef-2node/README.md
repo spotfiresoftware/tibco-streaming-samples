@@ -7,7 +7,7 @@ Samples :
 * [How to deploy a 2-node EventFlow application in Docker - EventFlow Fragment](ef-2node-eventflow/README.md)
 * [Docker: 2-node EventFlow - Application](ef-2node-app/src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
+_This is a Spotfire approved sample._
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

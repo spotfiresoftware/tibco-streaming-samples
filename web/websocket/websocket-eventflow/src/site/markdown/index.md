@@ -4,7 +4,7 @@ This sample describes how to use a WAR which has a WebSocket endpoint in an Even
 
 * [Create a WAR file which has a web socket endpoint](#create-websocket-endpoint)
 * [Create a blank EventFlow fragment and declare the WAR as a dependency](#declare-the-war-as-a-dependency)
-* [Running this sample from TIBCO StreamBase Studio&trade;](#running-this-sample-from-tibco-streambase-studiotrade)
+* [Running this sample from Spotfire StreamBase Studio&trade;](#running-this-sample-from-spotfire-streambase-studiotrade)
 * [Using "epadmin display web" command to retrieve information about web server](#using-epadmin-display-web-command-to-retrieve-information)
 * [Using "WebSocketClient"  to to connect to the WebSocket endpoint](#using-websocketclient-to-connect-to-the-websocket-endpoint)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
@@ -33,10 +33,10 @@ way as any other maven dependency:
     </dependency>
 ``` 
 
-<a name="running-this-sample-from-tibco-streambase-studiotrade"></a>
+<a name="running-this-sample-from-spotfire-streambase-studiotrade"></a>
 
-## Running this sample from TIBCO StreamBase Studio&trade;
-Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;:
+## Running this sample from Spotfire StreamBase Studio&trade;
+Use the **Run As -> EventFlow Fragment** menu option to run in Spotfire StreamBase Studio&trade;:
 ![RunFromStudio](images/studio.gif)
 
 

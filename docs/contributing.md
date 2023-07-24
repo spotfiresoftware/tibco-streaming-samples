@@ -8,7 +8,7 @@ We follow the GitHub flow process, including :
 
 * Repository is public - ie read-only to everyone.
 * Collaborators are users with direct push access to the repository
-    * Are from TIBCO Streaming engineering team
+    * Are from Spotfire Streaming engineering team
     * Are part of github team @streambasesamples
 * Any user can submit a pull request
     * The request should mention @streambasesamples
@@ -47,8 +47,8 @@ We follow the GitHub flow process, including :
     * Care must be taken to keep the metadata intact ( for example maintain copyright and license information ) so that the maven site info reports are correct.
 * It must be possible for anyone to setup their own maven repository, build and execute all tests.
 * Samples must go through standard development process including :
-  * Requirements - reviewed by TIBCO engineering
-  * Design - reviewed by TIBCO engineering
+  * Requirements - reviewed by Spotfire engineering
+  * Design - reviewed by Spotfire engineering
   * Implementation - reviewed by any collaborator
   * Testing
 * Commit messages should be clear and concise, describing the change well and referencing jira or github issue number.  

@@ -1,6 +1,6 @@
 # Docker
 
-How to use Docker in TIBCO&reg; Streaming 11.0.1 projects.
+How to use Docker in Spotfire&reg; Streaming 11.0.1 projects.
 
 Samples :
 

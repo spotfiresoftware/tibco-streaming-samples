@@ -2,20 +2,20 @@
 
 ## Introduction
 
-This sample project demonstrates calling the [Amazon Comprehend Sentiment Analysis service](https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html) from TIBCO ModelOps.  This GitHub repository contains the artifacts of a TIBCO ModelOps Project that can be imported into TIBCO ModelOps to allow you to analyze text data for sentiment using the Amazon Comprehend service.  The input takes an id and a comment for sentiment analysis. 
+This sample project demonstrates calling the [Amazon Comprehend Sentiment Analysis service](https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html) from Spotfire ModelOps.  This GitHub repository contains the artifacts of a Spotfire ModelOps Project that can be imported into Spotfire ModelOps to allow you to analyze text data for sentiment using the Amazon Comprehend service.  The input takes an id and a comment for sentiment analysis. 
 
 NOTE: Use of Amazon Comprehend may incur costs in your Amazon account.
 
 The basic steps for using this sample are:
 
-1. Clone this GitHub repository locally and Import the project into TIBCO ModelOps.
+1. Clone this GitHub repository locally and Import the project into Spotfire ModelOps.
 1. Obtain the needed authentication keys from Amazon.
 1. Modify the amazon_comprehend_model with the authentication keys.
 1. Update the scoring flow and pipeline to use the modified script.
 1. Approve and deploy the amazon_comprehend_pipeline in your ModelOps environment to deploy a REST service.
 1. Run the example Python script on your machine to test the deployed REST pipeline.
 
-## Clone this Project and Import into TIBCO ModelOps
+## Clone this Project and Import into Spotfire ModelOps
 
 You will want to clone this GitHub project locally.  Once you have the files locally, you can either:
 * Build a project zip file using maven with the pom.xml and amazon-comprehend.xml files provided.
@@ -29,13 +29,13 @@ The zip file can be built by running maven in the repository directory:
 ```
 mvn install
 ```
-This will create a zip file in the ```target``` folder called amazon-comprehend-1.0.0.zip.  This zip file can be imported into TIBCO ModelOps using the **Import a Project** option on the Projects menu.  See [Managing Projects and Artifacts](https://docs.tibco.com/emp/modelops/1.2.0/doc/html/user/managing-projects-and-artificats.html).
+This will create a zip file in the ```target``` folder called amazon-comprehend-1.0.0.zip.  This zip file can be imported into Spotfire ModelOps using the **Import a Project** option on the Projects menu.  See [Managing Projects and Artifacts](https://docs.tibco.com/emp/modelops/1.2.0/doc/html/user/managing-projects-and-artificats.html).
 
-Once you have selected the archive and created the project, you should see the project view with the listed project artifacts in TIBCO ModelOps.
+Once you have selected the archive and created the project, you should see the project view with the listed project artifacts in Spotfire ModelOps.
 
 ### Upload project artifacts
 
-You can create a project in TIBCO ModelOps and upload all the artifacts from the local amazon-comprehend directory into that created project.  In TIBCO ModelOps, **Create a new project** and then add the artifacts to the newly created project.
+You can create a project in Spotfire ModelOps and upload all the artifacts from the local amazon-comprehend directory into that created project.  In Spotfire ModelOps, **Create a new project** and then add the artifacts to the newly created project.
 
 You will next need to select the amazon_comprehend_model and set the **Model Properties**:
 1. Set the Input Schema to the input_sentiment.avsc file.
@@ -45,13 +45,13 @@ You will next need to select the amazon_comprehend_model and set the **Model Pro
 
 ## Obtain Authentication Information from Amazon
 
-After getting the project created in TIBCO ModelOps, now you need to get the authentication information from Amazon to call the Comprehend service.  The sample uses federated user access in which a user access and secret key are provided in addition to the role ARN to assume in order to access the Amazon Comprehend service. The [Authentication and access control for Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/auth-and-access-control.html) article can help you find the authentication method that will work for your environment.  The exact steps for you may vary based on what privileges you have in Amazon and how your account is configured.  
+After getting the project created in Spotfire ModelOps, now you need to get the authentication information from Amazon to call the Comprehend service.  The sample uses federated user access in which a user access and secret key are provided in addition to the role ARN to assume in order to access the Amazon Comprehend service. The [Authentication and access control for Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/auth-and-access-control.html) article can help you find the authentication method that will work for your environment.  The exact steps for you may vary based on what privileges you have in Amazon and how your account is configured.  
 
 These instructions do not provide information for all Amazon authentication scenarios.  The important piece is to get a session from Amazon using the boto3 python library.  Some useful links from the Amazon Boto3 documentation are [Boto3 Credentials](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) and [Boto3 Session reference](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/core/session.html).  
 
 ## Modify the Python script with the authentication keys
 
-Back in TIBCO ModelOps, select the amazon_comprehend_model for editing (click or select it).  Modify the aws_access_keyIn, aws_secret_keyIn, aws_rolearn (role to assume) and aws_region variables with the values obtained in the step above:
+Back in Spotfire ModelOps, select the amazon_comprehend_model for editing (click or select it).  Modify the aws_access_keyIn, aws_secret_keyIn, aws_rolearn (role to assume) and aws_region variables with the values obtained in the step above:
 
 ```python
 aws_access_keyIn="ENTER_YOUR_AWS_ACCESS_KEY_HERE"  
@@ -99,7 +99,7 @@ python tmo_rest_sentiment.py -h
 
 usage: tmo_rest_sentiment.py [-h] [--url URL] [--input INPUT] [--username [USERNAME]] [--password [PASSWORD]]
 
-This script will authenticate and send JSON input to the given URL for a TIBCO ModelOps REST Pipeline endpoint.
+This script will authenticate and send JSON input to the given URL for a Spotfire ModelOps REST Pipeline endpoint.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -116,7 +116,7 @@ The URL for the REST Request-Response endpoint will be https://\<subdomains\>.\<
 https://awscomprehendflow.modelops_hostname/awscomprehendflow
  ```
 
-The following shows an example of using the python script with example parameters.  You may need to include a username and password for your TIBCO ModelOps environment.
+The following shows an example of using the python script with example parameters.  You may need to include a username and password for your Spotfire ModelOps environment.
 
 ```
 python tmo_rest_sentiment.py --url https://awscomprehendflow.modelops.domain/awscomprehendflow --input "{ 'comments': 'This was a lovely little place walking distance from downtown. Lisa was very responsive. My best Airbnb experience yet!', 'id': '683278' }"
@@ -139,7 +139,7 @@ Successfully received API Token
 '[{"Neutral":1.1588036431930959E-4,"Negative":0.9997251629829407,"Mixed":5.470220639836043E-5,"Positive":1.0423709318274632E-4,"id":"683278","Sentiment":"NEGATIVE"}]'
 ```
 
-You have successfully deployed the Amazon Comprehend Sentiment example to TIBCO ModelOps.  You can include it in other more complex scoring flows.
+You have successfully deployed the Amazon Comprehend Sentiment example to Spotfire ModelOps.  You can include it in other more complex scoring flows.
 
 ---
 Copyright (c) 2022-2023 Cloud Software Group, Inc.
