@@ -278,8 +278,8 @@
                                 <waitfor maxwait="10" maxwaitunit="minute" checkevery="500"
                                          timeoutproperty="atimeout">
                                     <resourcecontains
-                                            resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/bootstrap/default-engine-for-com.tibco.ep.samples.web.prometheus-metrics-ef.log"
-                                            substring="Waiting for termination signal "/>
+                                            resource="${project.build.directory}/test-nodes/A.${project.artifactId}/logs/default-engine-for-com.tibco.ep.samples.web.prometheus-metrics-ef.log"
+                                            substring=" sbd at "/>
                                 </waitfor>
                                 <fail message="Application on node A failed to startup in time">
                                     <condition>
