@@ -1,6 +1,6 @@
 # Web: Prometheus Metrics Integration EventFlow
 
-How to integrate with Prometheus Metrics in TIBCO Streaming. - EventFlow
+How to integrate with Prometheus Metrics in Spotfire Streaming. - EventFlow
 
 * [prometheus-metrics-ef](src/site/markdown/index.md)
 

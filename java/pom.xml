@@ -39,7 +39,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <name>Java</name>
-    <description>How to invoke Java from TIBCO Streaming projects.</description>
+    <description>How to invoke Java from Spotfire Streaming projects.</description>
 
     <modules>
         <module>javafunction</module>

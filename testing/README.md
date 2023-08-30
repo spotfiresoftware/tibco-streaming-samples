@@ -1,6 +1,6 @@
 # Testing
 
-How to test TIBCO&reg; Streaming 11.1.0-SNAPSHOT projects.
+How to test Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.
 
 Samples :
 

@@ -18,9 +18,9 @@ The EventFlow POM is updated with a dependency to the WAR:
     </dependencies>
 ```
 
-## Running this sample from TIBCO StreamBase Studio&trade;
+## Running this sample from Spotfire StreamBase Studio&trade;
 
-Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;
+Use the **Run As -> EventFlow Fragment** menu option to run in Spotfire StreamBase Studio&trade;
 
 See this the following capture from the NAR EventFlow build:
 

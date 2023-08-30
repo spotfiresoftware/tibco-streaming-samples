@@ -40,7 +40,7 @@
     <packaging>ep-application</packaging>
     <version>1.0.0</version>
     <name>HA: cluster aware polling - Application</name>
-    <description>How to use cluster aware in TIBCO Streaming projects - Application</description>
+    <description>How to use cluster aware in Spotfire Streaming projects - Application</description>
 
     <!-- common definitions for this version of StreamBase -->
     <parent>

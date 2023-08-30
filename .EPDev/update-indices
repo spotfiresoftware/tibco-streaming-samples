@@ -29,8 +29,8 @@ update_in_project_directory() {
     local -r dir=$(pwd)
 
     local -r artifactId=$(get_project_property 'project.artifactId')
-    local -r name=$(get_project_property 'project.name' | sed -e "s+TIBCO Streaming +TIBCO\&reg; Streaming ${parent_version} +" -e "s+TIBCO StreamBase +TIBCO StreamBase\&reg; ${parent_version} +")
-    local -r description=$(get_project_property 'project.description' | sed -e "s+TIBCO Streaming +TIBCO\&reg; Streaming ${parent_version} +" -e "s+TIBCO StreamBase +TIBCO StreamBase\&reg; ${parent_version} +")
+    local -r name=$(get_project_property 'project.name' | sed -e "s+Spotfire Streaming +TIBCO\&reg; Streaming ${parent_version} +" -e "s+Spotfire StreamBase +Spotfire StreamBase\&reg; ${parent_version} +")
+    local -r description=$(get_project_property 'project.description' | sed -e "s+Spotfire Streaming +TIBCO\&reg; Streaming ${parent_version} +" -e "s+Spotfire StreamBase +Spotfire StreamBase\&reg; ${parent_version} +")
     local -r parentversion=$(get_project_property 'project.parent.version')
     local -r tibcosample=$(get_project_property 'com.tibco.ep.sb.studio.sample')
     local -r reldir=$(echo "${dir}" | sed -e s+^${here}/++)
@@ -46,7 +46,7 @@ update_in_project_directory() {
     then
 	echo "Overview:" >> ${index}
 	echo "" >> ${index}
-	echo "* [Using in TIBCO StreamBase Studio&trade; ${parent_version}](docs/studio.md)" >> ${index}
+	echo "* [Using in Spotfire StreamBase Studio&trade; ${parent_version}](docs/studio.md)" >> ${index}
 	echo "* [Contributing](docs/contributing.md)" >> ${index}
 	echo "* [License](docs/LICENSE)" >> ${index}
 	echo "" >> ${index}

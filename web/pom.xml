@@ -41,7 +41,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <name>Web</name>
-    <description>How to deploy web application in TIBCO Streaming projects.</description>
+    <description>How to deploy web application in Spotfire Streaming projects.</description>
 
     <modules>
         <module>adminwebservice</module>

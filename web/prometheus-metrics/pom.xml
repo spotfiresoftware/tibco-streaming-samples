@@ -39,7 +39,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <name>Web: Prometheus Metrics Integration</name>
-    <description>How to integrate with Prometheus Metrics in TIBCO Streaming.</description>
+    <description>How to integrate with Prometheus Metrics in Spotfire Streaming.</description>
 
     <properties>
         <com.tibco.ep.sb.studio.sample>true</com.tibco.ep.sb.studio.sample>

@@ -4,8 +4,8 @@ This sample describes how to build an EventFlow fragment suitable for 3-node act
 
 * [Store tuples in a query table backed by transactional memory](#store-tuples-in-a-query-table-backed-by-transactional-memory)
 * [Design notes](#design-notes)
-* [Running this sample from TIBCO StreamBase Studio&trade;](#running-this-sample-from-tibco-streambase-studio-trade)
-* [Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
+* [Running this sample from Spotfire StreamBase Studio&trade;](#running-this-sample-from-tibco-streambase-studio-trade)
+* [Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
 <a name="store-tuples-in-a-query-table-backed-by-transactional-memory"></a>
@@ -41,9 +41,9 @@ Finally, the tuples stored in the query table are partitioned by the **name** fi
 
 <a name="running-this-sample-from-tibco-streambase-studio-trade"></a>
 
-## Running this sample from TIBCO StreamBase Studio&trade;
+## Running this sample from Spotfire StreamBase Studio&trade;
 
-Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;, and then enqueue tuples :
+Use the **Run As -> EventFlow Fragment** menu option to run in Spotfire StreamBase Studio&trade;, and then enqueue tuples :
 
 Note that here we are unit testing the business logic rather than high availability - in this sample we test high availability in
 the application archive integration test cases.  The unit test cases can test high availability by loading an activating test versions 
@@ -53,9 +53,9 @@ of the application definition and node deployment configuration files.
 
 <a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
 
-## Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases
+## Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases
 
-Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from TIBCO StreamBase Studio&trade; :
+Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from Spotfire StreamBase Studio&trade; :
 
 ![RunFromStudio](images/studiounit.gif)
 

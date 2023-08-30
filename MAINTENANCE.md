@@ -40,7 +40,7 @@ local Maven repository; they are ignored when looking for new parent versions.
 
 ## Basics ##
 
-Each TIBCO Streaming release eventually gets a branch named for the
+Each Spotfire Streaming release eventually gets a branch named for the
 version. The latest release version becomes the default branch
 for this repository. 
 

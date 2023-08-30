@@ -39,7 +39,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <name>Structure</name>
-    <description>How to structure TIBCO Streaming projects.</description>
+    <description>How to structure Spotfire Streaming projects.</description>
 
     <modules>
         <module>eventflow</module>

@@ -41,15 +41,15 @@ configuration = {
 
 ```
 
-## Running this sample from TIBCO StreamBase Studio&trade;
+## Running this sample from Spotfire StreamBase Studio&trade;
 
-Use the **Run As -> EventFlow Fragment** menu option to run in TIBCO StreamBase Studio&trade;, and then enqueue tuples :
+Use the **Run As -> EventFlow Fragment** menu option to run in Spotfire StreamBase Studio&trade;, and then enqueue tuples :
 
 ![RunFromStudio](images/studio.gif)
 
-## Building this sample from TIBCO StreamBase Studio&trade; and running the unit test cases
+## Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases
 
-Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from TIBCO StreamBase Studio&trade; :
+Use the **Run As -> EventFlow Fragment Unit Test** menu option to build from Spotfire StreamBase Studio&trade; :
 
 ![RunFromStudio](images/studiounit.gif)
 

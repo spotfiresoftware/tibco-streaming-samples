@@ -1,6 +1,6 @@
 # Web: Prometheus Metrics Integration
 
-How to integrate with Prometheus Metrics in TIBCO Streaming.
+How to integrate with Prometheus Metrics in Spotfire Streaming.
 
 Samples :
 

@@ -1,6 +1,6 @@
 # HA
 
-How to build Highly Available TIBCO&reg; Streaming 11.1.0-SNAPSHOT projects.
+How to build Highly Available Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.
 
 Samples :
 

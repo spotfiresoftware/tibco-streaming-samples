@@ -1,6 +1,6 @@
 # Web: Prometheus Metrics Integration WAR
 
-How to integrate with Prometheus Metrics in TIBCO Streaming. - WAR
+How to integrate with Prometheus Metrics in Spotfire Streaming. - WAR
 
 * [prometheus-metrics-war](src/site/markdown/index.md)
 

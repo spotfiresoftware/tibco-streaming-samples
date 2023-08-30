@@ -1,6 +1,6 @@
 # Native
 
-How to use native libraries in TIBCO&reg; Streaming 11.1.0-SNAPSHOT projects.
+How to use native libraries in Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.
 
 Samples :
 

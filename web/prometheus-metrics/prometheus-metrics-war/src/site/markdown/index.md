@@ -1,6 +1,6 @@
 # Web : Prometheus Metrics - WAR
 
-This sample describes how to expose TIBCO&reg; Streaming node metrics as a Prometheus consumable
+This sample describes how to expose Spotfire&reg; Streaming node metrics as a Prometheus consumable
 REST endpoint.
 
 ## Initialize the servlet

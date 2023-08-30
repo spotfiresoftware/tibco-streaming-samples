@@ -1,6 +1,6 @@
 # Structure
 
-How to structure TIBCO&reg; Streaming 11.1.0-SNAPSHOT projects.
+How to structure Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.
 
 Samples :
 

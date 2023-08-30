@@ -38,7 +38,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <name>HA</name>
-    <description>How to build Highly Available TIBCO Streaming projects.</description>
+    <description>How to build Highly Available Spotfire Streaming projects.</description>
 
     <modules>
         <module>as-2node</module>
