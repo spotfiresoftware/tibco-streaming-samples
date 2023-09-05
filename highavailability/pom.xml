@@ -37,7 +37,7 @@
     <artifactId>highavailability</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>HA</name>
+    <name>HA: Samples</name>
     <description>How to build Highly Available Spotfire Streaming projects.</description>
 
     <modules>

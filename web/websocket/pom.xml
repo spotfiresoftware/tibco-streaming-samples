@@ -39,7 +39,7 @@
     <artifactId>websocket</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web: WebSocket WAR</name>
+    <name>Web: WebSocket</name>
     <description>How to create WAR which has a WebSocket endpoint and use it in an EventFlow project.</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>

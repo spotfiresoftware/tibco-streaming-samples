@@ -38,7 +38,7 @@
     <artifactId>docker</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Docker</name>
+    <name>Docker: Samples</name>
     <description>How to use Docker in Spotfire Streaming projects.</description>
 
     <modules>

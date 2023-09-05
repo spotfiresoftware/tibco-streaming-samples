@@ -39,7 +39,7 @@
     <artifactId>websocket-eventflow</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Web : websocket-eventflow</name>
+    <name>Web: WebSocket EventFlow</name>
     <description>How to use a WebSocket WAR in an EventFlow project.</description>
 
     <!-- common definitions for this version of StreamBase -->

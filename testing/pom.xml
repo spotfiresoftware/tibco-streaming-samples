@@ -38,7 +38,7 @@
     <artifactId>testing</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Testing</name>
+    <name>Testing: Samples</name>
     <description>How to test Spotfire Streaming projects.</description>
 
     <modules>

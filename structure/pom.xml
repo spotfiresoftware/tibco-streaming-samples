@@ -38,7 +38,7 @@
     <artifactId>structure</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Structure</name>
+    <name>Structure: Samples</name>
     <description>How to structure Spotfire Streaming projects.</description>
 
     <modules>

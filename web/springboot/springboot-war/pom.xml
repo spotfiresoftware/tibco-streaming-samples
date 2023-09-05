@@ -39,7 +39,7 @@
     <artifactId>springboot-war</artifactId>
     <packaging>war</packaging>
     <version>1.0.0</version>
-    <name>Web: create a Spring Boot WAR</name>
+    <name>Web: Spring Boot WAR</name>
     <description>How to use Spring Boot to create a WAR</description>
 
     <!-- common definitions for this version of StreamBase -->

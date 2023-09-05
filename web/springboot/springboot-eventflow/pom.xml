@@ -39,7 +39,7 @@
     <artifactId>springboot-eventflow</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
     <version>1.0.0</version>
-    <name>Web: springboot-eventflow</name>
+    <name>Web: Spring Boot EventFlow</name>
     <description>How to use a WAR created by Spring Boot in an EventFlow fragment.</description>
 
     <!-- common definitions for this version of StreamBase -->

@@ -40,7 +40,7 @@
     <artifactId>web</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web</name>
+    <name>Web: Samples</name>
     <description>How to deploy web application in Spotfire Streaming projects.</description>
 
     <modules>

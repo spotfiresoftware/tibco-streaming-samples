@@ -38,7 +38,7 @@
     <artifactId>java</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Java</name>
+    <name>Java: Samples</name>
     <description>How to invoke Java from Spotfire Streaming projects.</description>
 
     <modules>

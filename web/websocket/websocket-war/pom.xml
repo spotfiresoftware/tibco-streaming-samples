@@ -39,7 +39,7 @@
     <artifactId>websocket-war</artifactId>
     <packaging>war</packaging>
     <version>1.0.0</version>
-    <name>Web: create WebSocket WAR</name>
+    <name>Web: WebSocket WAR</name>
     <description>How to create a WAR which has a WebSocket endpoint</description>
 
     <properties>

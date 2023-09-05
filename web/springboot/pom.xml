@@ -39,7 +39,7 @@
     <artifactId>springboot</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Web: Spring Boot WAR</name>
+    <name>Web: Spring Boot</name>
     <description>How to use Spring Boot to create a WAR and use it in an EventFlow project</description>
 
     <url>https://github.com/TIBCOSoftware/tibco-streaming-samples</url>
