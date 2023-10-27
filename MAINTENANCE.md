@@ -38,6 +38,21 @@ mojo consults _remote_ repositories, **not** the local repository. It does not
 matter if the next version of the Streaming release artifacts are in your
 local Maven repository; they are ignored when looking for new parent versions.
 
+Alternatively, you can ensure that you have installed the Maven
+artifacts using the `epdev install maven` command of each product
+installation involved in the transition in the Maven local repository
+as configured by your defaults `.m2/settings.xml`, if it exists. And
+if not, the `epdev` commands will just install into `.m2/repository`
+as expected.
+
+These Streaming versions are relevant:
+
+* the version used in current branch
+* the version to be used in the new branch
+
+No special Maven settings file should be needed when running the update
+commands documented here.
+
 ## Basics ##
 
 Each Spotfire Streaming release eventually gets a branch named for the
