@@ -7,7 +7,7 @@ Samples :
 * [Web: WAR generation with OpenAPI Code Generation tool](openapi-server-war/src/site/markdown/index.md)
 * [Web: using OpenAPI generated WAR in EventFlow](openapi-server-ef/src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
+_This is a Spotfire approved sample._
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

@@ -7,7 +7,7 @@ Samples :
 * [HA: 2-node active standby - EventFlow Fragment](as-2node-ef/src/site/markdown/index.md)
 * [HA: 2-node active standby - Application](as-2node-app/src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
+_This is a Spotfire approved sample._
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

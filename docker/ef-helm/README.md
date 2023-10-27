@@ -7,7 +7,7 @@ Samples :
 * [Docker: Helm EventFlow - EventFlow Fragment](ef-helm-eventflow/src/site/markdown/index.md)
 * [Docker: Helm EventFlow - Application](ef-helm-app/src/site/markdown/index.md)
 
-_This is a TIBCO approved sample._
+_This is a Spotfire approved sample._
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

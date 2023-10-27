@@ -22,6 +22,7 @@ dependency-reduced-pom.xml
 
 # Editors
 **/*~
+*.bak
 
 # Operating systems
 .DS_Store
