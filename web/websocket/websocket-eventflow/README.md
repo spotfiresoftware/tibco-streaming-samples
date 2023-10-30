@@ -1,4 +1,4 @@
-# Web : websocket-eventflow
+# Web: WebSocket EventFlow
 
 How to use a WebSocket WAR in an EventFlow project.
 

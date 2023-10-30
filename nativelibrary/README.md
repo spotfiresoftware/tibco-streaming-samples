@@ -1,6 +1,6 @@
-# Native
+# Native: Samples
 
-How to use native libraries in Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.
+How to use native libraries in Spotfire&reg; Streaming 11.1.0 projects.
 
 Samples :
 

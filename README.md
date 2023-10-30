@@ -1,16 +1,16 @@
-# Spotfire&reg; Streaming 11.1.0-SNAPSHOT Samples
+# Spotfire&reg; Streaming 11.1.0 Samples
 
-This GitHub repository contains a number of Spotfire&reg; Streaming 11.1.0-SNAPSHOT samples that can be cloned to your local workspace.
+This GitHub repository contains a number of Spotfire&reg; Streaming 11.1.0 samples that can be cloned to your local workspace.
 
 Samples :
 
-* [How to structure Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.](structure/README.md)
-* [How to test Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.](testing/README.md)
-* [How to use native libraries in Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.](nativelibrary/README.md)
-* [How to invoke Java from Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.](java/README.md)
-* [How to build Highly Available Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.](highavailability/README.md)
-* [How to use Docker in Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.](docker/README.md)
-* [How to deploy web application in Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.](web/README.md)
+* [How to structure Spotfire&reg; Streaming 11.1.0 projects.](structure/README.md)
+* [How to test Spotfire&reg; Streaming 11.1.0 projects.](testing/README.md)
+* [How to use native libraries in Spotfire&reg; Streaming 11.1.0 projects.](nativelibrary/README.md)
+* [How to invoke Java from Spotfire&reg; Streaming 11.1.0 projects.](java/README.md)
+* [How to build Highly Available Spotfire&reg; Streaming 11.1.0 projects.](highavailability/README.md)
+* [How to use Docker in Spotfire&reg; Streaming 11.1.0 projects.](docker/README.md)
+* [How to deploy web application in Spotfire&reg; Streaming 11.1.0 projects.](web/README.md)
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

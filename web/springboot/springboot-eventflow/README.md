@@ -1,4 +1,4 @@
-# Web: springboot-eventflow
+# Web: Spring Boot EventFlow
 
 How to use a WAR created by Spring Boot in an EventFlow fragment.
 

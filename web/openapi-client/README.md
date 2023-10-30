@@ -1,4 +1,4 @@
-# Web: OpenAPI client
+# Web: OpenAPI Client
 
 How to generate a web client for Health check web service with OpenAPI Code Generation tool
 

@@ -1,11 +1,11 @@
-# Web: OpenAPI WAR
+# Web: OpenAPI Server
 
 How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool, and use it in an EventFlow project
 
 Samples :
 
-* [Web: WAR generation with OpenAPI Code Generation tool](openapi-server-war/src/site/markdown/index.md)
-* [Web: using OpenAPI generated WAR in EventFlow](openapi-server-ef/src/site/markdown/index.md)
+* [Web: OpenAPI Server WAR](openapi-server-war/src/site/markdown/index.md)
+* [Web: OpenAPI Server EventFlow](openapi-server-ef/src/site/markdown/index.md)
 
 _This is a Spotfire approved sample._
 
