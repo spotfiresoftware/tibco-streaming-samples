@@ -1,4 +1,4 @@
-# Web: using OpenAPI generated WAR in EventFlow
+# Web: OpenAPI Server EventFlow
 
 How to use an OpenAPI generated WAR in an EventFlow project
 

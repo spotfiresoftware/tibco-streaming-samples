@@ -1,4 +1,4 @@
-# Web: create WebSocket WAR
+# Web: WebSocket WAR
 
 How to create a WAR which has a WebSocket endpoint
 

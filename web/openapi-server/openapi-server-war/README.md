@@ -1,4 +1,4 @@
-# Web: WAR generation with OpenAPI Code Generation tool
+# Web: OpenAPI Server WAR
 
 How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool
 

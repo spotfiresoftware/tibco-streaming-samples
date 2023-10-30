@@ -1,6 +1,6 @@
-# Docker
+# Docker: Samples
 
-How to use Docker in Spotfire&reg; Streaming 11.1.0-SNAPSHOT projects.
+How to use Docker in Spotfire&reg; Streaming 11.2.0-SNAPSHOT projects.
 
 Samples :
 

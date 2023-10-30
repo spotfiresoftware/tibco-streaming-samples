@@ -1,4 +1,4 @@
-# Web: create a Spring Boot WAR
+# Web: Spring Boot WAR
 
 How to use Spring Boot to create a WAR
 
