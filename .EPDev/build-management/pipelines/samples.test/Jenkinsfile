@@ -130,6 +130,8 @@ pipeline {
 
                          epDeclarative.buildMaven(
                          goals: "install",
+			 //prometheus-metrics, skiping tests for this module
+			 options: "-pl !prometheus-metrics -am -Dmaven.test.skip=true",
                          platform: platform)
                   }
             }
