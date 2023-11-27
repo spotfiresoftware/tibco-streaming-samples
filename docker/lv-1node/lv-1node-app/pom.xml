@@ -163,7 +163,7 @@
                                                 <method>GET</method>
                                                 <status>200..399</status>
                                             </http>
-                                            <time>500000</time>
+                                            <time>600000</time>
                                         </wait>
                                         <namingStrategy>alias</namingStrategy>
                                     </run>
