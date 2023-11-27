@@ -129,9 +129,9 @@ pipeline {
                          }
 
                          epDeclarative.buildMaven(
-                         goals: "install",
+                         goals: "install -fae --batch-mode -DenvironmentVariables=BUILD_ID=${BUILD_ID},JOB_NAME=${JOB_NAME} ${mavenExtras} -Druntime-latest",
 			 //prometheus-metrics, skiping tests for this module
-			 options: "-pl !prometheus-metrics-app -am -Dmaven.test.skip=true",
+			 //options: "-pl !prometheus-metrics-app -am -Dmaven.test.skip=true",
                          platform: platform)
                   }
             }
