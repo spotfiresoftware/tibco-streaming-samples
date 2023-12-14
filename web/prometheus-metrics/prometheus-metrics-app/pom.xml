@@ -55,7 +55,7 @@
     <properties>
         <dockerDomain>example.com</dockerDomain>
         <skipDockerTests>true</skipDockerTests>
-        <!--        FIX THIS: TOZHU: SB-5130 -->
+        <!-- FIX THIS: TOZHU: SB-51300 -->
         <skipTests>true</skipTests>
     </properties>
 
