@@ -72,9 +72,10 @@ in a Kubernetes environment.  The sample shows how to build, deploy and use Spot
 ```shell
 # deploy application which triggers starting the pods
 
-$ kubectl apply -f ./ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
+$ kubectl apply -f ef-kubernetes-app/src/main/kubernetes/ef-kubernetes-app.yaml
 configmap/configuration created
 configmap/resources created
+clusterrolebinding.rbac.authorization.k8s.io/ef-kubernetes-app-rolebinding created
 statefulset.apps/ef-kubernetes-app created
 
 # get the status of the pods
@@ -300,7 +301,7 @@ The goal of this sample is to construct the deployment shown below :
 
 ![resources](images/kubernetes-docker.svg)
 
-<a name="building-and-running-from-tibco-Streaming-studio-trade"></a>
+<a name="building-and-running-from-tibco-streaming-studio-trade"></a>
 
 1. One POD contains one Streaming node and liveness probe
 2. A StatefulSet controls the set of PODs that forms the application cluster
@@ -520,18 +521,26 @@ for specific installation instructions.
 In the docker for mac case, installation consists of :
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
 namespace/ingress-nginx created
-configmap/nginx-configuration created
-configmap/tcp-services created
-configmap/udp-services created
-serviceaccount/nginx-ingress-serviceaccount created
-clusterrole.rbac.authorization.k8s.io/nginx-ingress-clusterrole created
-role.rbac.authorization.k8s.io/nginx-ingress-role created
-rolebinding.rbac.authorization.k8s.io/nginx-ingress-role-nisa-binding created
-clusterrolebinding.rbac.authorization.k8s.io/nginx-ingress-clusterrole-nisa-binding created
-deployment.apps/nginx-ingress-controller created
-limitrange/ingress-nginx created
+serviceaccount/ingress-nginx created
+serviceaccount/ingress-nginx-admission created
+role.rbac.authorization.k8s.io/ingress-nginx created
+role.rbac.authorization.k8s.io/ingress-nginx-admission created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+configmap/ingress-nginx-controller created
+service/ingress-nginx-controller created
+service/ingress-nginx-controller-admission created
+deployment.apps/ingress-nginx-controller created
+job.batch/ingress-nginx-admission-create created
+job.batch/ingress-nginx-admission-patch created
+ingressclass.networking.k8s.io/nginx created
+validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
 
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/provider/cloud-generic.yaml
 service/ingress-nginx created
@@ -542,17 +551,22 @@ Once the controller is installed, ingress configurations can be applied using **
 
 ```shell
 $ kubectl apply -f - <<!
+apiVersion: networking.k8s.io/v1
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
 metadata:
   name: web
 spec:
+  ingressClassName: nginx
   rules:
   - http:
       paths:
-      - backend:
-          serviceName: efkubernetesapp0-default-efkubernetesapp
-          servicePort: 80
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: efkubernetesapp0-default-efkubernetesapp
+              port:
+                number: 80
 !
 ```
 
