@@ -134,6 +134,11 @@
                             <goal>start</goal>
                         </goals>
                         <configuration>
+                          <!-- SB-51897 -->
+                          <log>
+                                  <level>DEBUG</level>
+                          </log>
+
                             <startParallel>true</startParallel>
                             <skip>${skipDockerTests}</skip>
                             <autoCreateCustomNetworks>true</autoCreateCustomNetworks>
