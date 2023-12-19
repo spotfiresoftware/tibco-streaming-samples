@@ -129,7 +129,8 @@ pipeline {
                          }
 
                          epDeclarative.buildMaven(
-                         goals: "install -DskipDockerTests=true",
+                         goals: "install",
+				// -DskipDockerTests=true,
                          platform: platform)
                   }
             }
