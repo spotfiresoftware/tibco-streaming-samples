@@ -129,7 +129,7 @@ pipeline {
                          }
 
                          epDeclarative.buildMaven(
-                         goals: "install",
+                         goals: "install -fae --batch-mode -DenvironmentVariables=BUILD_ID=${BUILD_ID},JOB_NAME=${JOB_NAME} ${mavenExtras} -Druntime-latest",
 				// -DskipDockerTests=true,
                          platform: platform)
                   }
