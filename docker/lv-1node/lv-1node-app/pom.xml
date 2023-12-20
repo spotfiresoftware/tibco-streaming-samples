@@ -159,16 +159,16 @@
                                             <enabled>true</enabled>
                                         </log>
                                         <ports> 
-                                            <port>11080:11080</port>
+                                            <port>11081:11081</port>
                                         </ports>
                                         <wait>
                                             <!-- <log>COMMAND FINISHED</log> -->
                                             <http>
-                                                <url>http://localhost:11080</url>
+                                                <url>http://localhost:11081</url>
                                                 <method>GET</method>
                                                 <status>200..399</status>
                                             </http>
-                                            <time>600000</time>
+                                            <time>500000</time>
                                         </wait>
                                         <namingStrategy>alias</namingStrategy>
                                     </run>
