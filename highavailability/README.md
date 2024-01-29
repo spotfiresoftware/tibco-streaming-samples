@@ -1,6 +1,6 @@
 # HA
 
-How to build Highly Available TIBCO&reg; Streaming 10.6.4 projects.
+How to build Highly Available TIBCO&reg; Streaming 10.6.5 projects.
 
 Samples :
 
@@ -13,7 +13,7 @@ Samples :
 * [How to use the cluster aware state filter](ca-statefilter/README.md)
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
