@@ -87,7 +87,16 @@ RUN /usr/sbin/useradd \
 #
 RUN mkdir -p ${STREAMING_PRODUCT_HOME}
 COPY maven ${STREAMING_PRODUCT_HOME}
-RUN chmod a+x ${STREAMING_PRODUCT_HOME}/start-node
+#
+# Add execute permission which is stripped during COPY command
+#
+RUN chmod a+x \
+    ${STREAMING_PRODUCT_HOME}/start-node \
+    ${STREAMING_PRODUCT_HOME}/distrib/tibco/bin/ep* \
+    ${STREAMING_PRODUCT_HOME}/distrib/kabira/bin/sw* \
+    ${STREAMING_PRODUCT_HOME}/distrib/kabira/component/swcoordadmin/prodbin/swcoordadmin \
+    ${STREAMING_PRODUCT_HOME}/distrib/kabira/component/DtmEngine/prodbin/DtmEngine \
+    && chmod -R a-w ${STREAMING_PRODUCT_HOME}
 RUN ${docker.run.unpack}
 
 #
