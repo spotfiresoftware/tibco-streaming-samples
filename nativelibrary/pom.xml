@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (c) 2018-2023 Cloud Software Group, Inc.
+  Copyright (c) 2018-2024 Cloud Software Group, Inc.
   
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -41,8 +41,49 @@
     <name>Native</name>
     <description>How to use native libraries in Spotfire Streaming projects.</description>
 
-    <modules>
-        <module>nar</module>
-    </modules>
+    <profiles>
+        <!-- NAR inclusion in the sample reactor build requires
+             multiple profiles because profile activation does not
+             have OR logic feauture. -->
+        <profile>
+            <id>com.spotfire.str.samples.nar-unix-toolchain-support</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+
+            <modules>
+                <module>nar</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>com.spotfire.str.samples.nar-allow-local-anywhere</id>
+            <activation>
+                <property>
+                    <name>!env.CI</name>
+                </property>
+            </activation>
+
+            <modules>
+                <module>nar</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>com.spotfire.str.samples.nar-preferred-ms-toolchain</id>
+            <activation>
+                <property>
+                    <name>env.VS160COMNTOOLS</name>
+                </property>
+            </activation>
+
+            <modules>
+                <module>nar</module>
+            </modules>
+        </profile>
+
+    </profiles>
 
 </project>
