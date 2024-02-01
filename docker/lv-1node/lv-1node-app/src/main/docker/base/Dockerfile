@@ -81,8 +81,6 @@ RUN /usr/sbin/useradd \
 #
 RUN mkdir -p ${STREAMING_PRODUCT_HOME}
 COPY maven ${STREAMING_PRODUCT_HOME}
-RUN chmod a+x ${STREAMING_PRODUCT_HOME}/start-node
-RUN ${docker.run.unpack}
 
 #
 # Allow user access to nodes and applications
