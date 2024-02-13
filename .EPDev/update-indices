@@ -123,7 +123,9 @@ if $should_debug ; then
     echo "> end of project.basedir properties:"
 fi
 
-for project_directory in $(get_project_tree_property_ex '${project.basedir}/')
+# Stricter get_project_tree_property_ex '${project.basedir}/' often fails
+# with closed process stream.
+for project_directory in $(find $(pwd) -name pom.xml | xargs dirname)
 do
     (echo ">> ${project_directory}" && cd ${project_directory} && update_in_project_directory "${project_directory}")
 done
