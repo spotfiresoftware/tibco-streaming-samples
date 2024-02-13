@@ -2,9 +2,6 @@
 
 How to use native libraries in TIBCO&reg; Streaming 10.6.5 projects.
 
-Samples :
-
-* [How to build and use native libraries with NAR.](nar/README.md)
 
 ---
 Copyright (c) 2018-2024 Cloud Software Group, Inc.

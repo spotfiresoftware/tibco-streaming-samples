@@ -4,8 +4,8 @@ How to use the cluster aware state filter
 
 Samples :
 
-* [HA: cluster aware state filter - EventFlow Fragment](ca-statefilter-ef/src/site/markdown/index.md)
 * [HA: cluster aware state filter - Application](ca-statefilter-app/src/site/markdown/index.md)
+* [HA: cluster aware state filter - EventFlow Fragment](ca-statefilter-ef/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 

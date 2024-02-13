@@ -5,7 +5,6 @@ How to poll the filesystem with cluster aware operators
 Samples :
 
 * [HA: cluster aware polling - EventFlow Fragment](ca-polling-ef/src/site/markdown/index.md)
-* [HA: cluster aware polling - Application](ca-polling-app/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 

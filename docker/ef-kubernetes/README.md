@@ -5,12 +5,11 @@ How to deploy an EventFlow application in Docker with Kubernetes
 Samples :
 
 * [Docker: Kubernetes EventFlow - EventFlow Fragment](ef-kubernetes-eventflow/src/site/markdown/index.md)
-* [Docker: Kubernetes EventFlow - Application](ef-kubernetes-app/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

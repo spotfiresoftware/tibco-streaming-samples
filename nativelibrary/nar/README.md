@@ -4,8 +4,8 @@ How to build and use native libraries with NAR.
 
 Samples :
 
-* [Native: NAR - C++ Library](nar-cpplib/src/site/markdown/index.md)
 * [Native: NAR - EventFlow calling C++](nar-eventflow/src/site/markdown/index.md)
+* [Native: NAR - C++ Library](nar-cpplib/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 
