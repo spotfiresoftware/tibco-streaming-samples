@@ -4,8 +4,8 @@ How to build a 2-node active active deployment with dynamic data distribution po
 
 Samples :
 
-* [HA: proxy discovery - EventFlow Fragment](pd-2node-ef/src/site/markdown/index.md)
 * [HA: proxy discovery - Application](pd-2node-app/src/site/markdown/index.md)
+* [HA: proxy discovery - EventFlow Fragment](pd-2node-ef/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 

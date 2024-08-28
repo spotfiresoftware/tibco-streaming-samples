@@ -2,6 +2,10 @@
 
 How to deploy a 2-node EventFlow application in Docker managed by Ansible
 
+Samples :
+
+* [Ansible-Docker: 2-node EventFlow - Application](ef-2node-ansible-app/src/site/markdown/index.md)
+* [How to deploy a 2-node EventFlow application in Docker managed by Ansible - EventFlow Fragment](ef-2node-ansible-eventflow/README.md)
 
 _This is a TIBCO approved sample._
 

@@ -1,6 +1,6 @@
 # HA: cluster aware polling - EventFlow Fragment
 
-How to use cluster aware in TIBCO&reg; Streaming 10.6.5 projects - EventFlow Fragment
+How to use cluster aware in TIBCO&reg; Streaming 10.6.6 projects - EventFlow Fragment
 
 * [ca-polling-ef](src/site/markdown/index.md)
 

@@ -1,6 +1,6 @@
 # HA: cluster aware state filter - EventFlow Fragment
 
-How to build cluster aware TIBCO&reg; Streaming 10.6.5 projects - EventFlow Fragment
+How to build cluster aware TIBCO&reg; Streaming 10.6.6 projects - EventFlow Fragment
 
 * [ca-statefilter-ef](src/site/markdown/index.md)
 

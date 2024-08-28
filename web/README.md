@@ -1,14 +1,14 @@
 # Web
 
-How to deploy web application in TIBCO&reg; Streaming 10.6.5 projects.
+How to deploy web application in TIBCO&reg; Streaming 10.6.6 projects.
 
 Samples :
 
 * [How to integrate with Prometheus Metrics in TIBCO Streaming.](prometheus-metrics/README.md)
-* [Web: web client generation with OpenAPI Code Generation tool](openapi-client/src/site/markdown/index.md)
-* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
-* [How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool, and use it in an EventFlow project](openapi-server/README.md)
 * [How to create WAR which has a WebSocket endpoint and use it in an EventFlow project.](websocket/README.md)
+* [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
+* [Web: web client generation with OpenAPI Code Generation tool](openapi-client/src/site/markdown/index.md)
+* [How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool, and use it in an EventFlow project](openapi-server/README.md)
 
 ---
 Copyright (c) 2018-2024 Cloud Software Group, Inc.

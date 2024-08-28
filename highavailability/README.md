@@ -1,14 +1,16 @@
 # HA
 
-How to build Highly Available TIBCO&reg; Streaming 10.6.5 projects.
+How to build Highly Available TIBCO&reg; Streaming 10.6.6 projects.
 
 Samples :
 
-* [How to build a 3-node active active deployment with dynamic data distribution policy.](aa-3node/README.md)
 * [How to build a 2-node active active deployment with dynamic data distribution policy.](aa-2node/README.md)
-* [How to build a 2-node active active deployment with dynamic data distribution policy and proxy discovery.](pd-2node/README.md)
-* [How to poll the filesystem with cluster aware operators](ca-polling/README.md)
+* [How to build a 3-node active active deployment with dynamic data distribution policy and disaster recovery.](aa-3node-dr/README.md)
+* [How to build a 3-node active active deployment with dynamic data distribution policy.](aa-3node/README.md)
 * [How to build a 2-node active standby deployment with static data distribution policy.](as-2node/README.md)
+* [How to poll the filesystem with cluster aware operators](ca-polling/README.md)
+* [How to use the cluster aware state filter](ca-statefilter/README.md)
+* [How to build a 2-node active active deployment with dynamic data distribution policy and proxy discovery.](pd-2node/README.md)
 
 ---
 Copyright (c) 2018-2024 Cloud Software Group, Inc.

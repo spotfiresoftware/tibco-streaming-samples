@@ -5,6 +5,7 @@ How to build a 3-node active active deployment with dynamic data distribution po
 Samples :
 
 * [HA: 3-node active active - Application](aa-3node-app/src/site/markdown/index.md)
+* [HA: 3-node active active - EventFlow Fragment](aa-3node-ef/src/site/markdown/index.md)
 
 _This is a TIBCO approved sample._
 
