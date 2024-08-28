@@ -48,7 +48,7 @@
     <parent>
         <groupId>com.tibco.ep.sb.parent</groupId>
         <artifactId>ep-application-samples</artifactId>
-        <version>10.6.5</version>
+        <version>10.6.6</version>
         <relativePath/>
     </parent>
 
