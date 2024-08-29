@@ -108,10 +108,10 @@ pipeline {
 
                     epDeclarative.buildInit(
                         pomFile: 'src/pom.xml',
-                        // It would be nice to use the epDeclarative upstream
-                        // concept, but there are no clues in src/pom.xml.
-                        javaTool: jobUtil.getOpenJDK21Tool(),
-                        mavenTool: jobUtil.getMaven39Tool(),
+                        "upstreamVersion":"version",
+                        "mavenDeployMethod":"artifactory-maven-plugin",
+                        "javaTool":"upstreamVersion",
+                        "mavenTool":"upstreamVersion",
                         testPlatforms: [ "macos", "windows" ],
                         primaryPlatform: "linux",
                         skipJenkinsArtifactPublisher: [ any: true ]
