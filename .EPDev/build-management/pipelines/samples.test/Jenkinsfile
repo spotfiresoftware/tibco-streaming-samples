@@ -117,15 +117,16 @@ pipeline {
                          streamingVersion = params.streamingVersion
                        }
 
-                         epDeclarative.buildInit(
-                         pomFile: 'src/pom.xml',
+                    epDeclarative.buildInit(
+                        pomFile: 'src/pom.xml',
                         // It would be nice to use the epDeclarative upstream
                         // concept, but there are no clues in src/pom.xml.
-                         javaTool: newJobUtil.getOpenJDK21Tool(),
-                         mavenTool: newJobUtil.getMaven39Tool(),
-                         testPlatforms: [ "macos", "windows" ],
-                         primaryPlatform: "linux"
-                         )
+                        javaTool: newJobUtil.getOpenJDK21Tool(),
+                        mavenTool: newJobUtil.getMaven39Tool(),
+                        testPlatforms: [ "macos", "windows" ],
+                        primaryPlatform: "linux",
+                        skipJenkinsArtifactPublisher: [ any: true ]
+                    )
 
                         if (params.PROJECT_VERSION) {
                                  env.PROJECT_VERSION = params.PROJECT_VERSION
