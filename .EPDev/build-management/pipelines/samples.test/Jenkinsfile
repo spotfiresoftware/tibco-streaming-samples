@@ -6,7 +6,6 @@
 @Library('workflowLibs') _
 
 def jobUtil = new com.tibco.workflow.JobUtil()
-def pomUtil = new  com.tibco.workflow.PomUtil()
 
 String platform = jobUtil.getJobPlatform(defaultPlatform: "linux")
 
@@ -54,7 +53,7 @@ pipeline {
                description: 'Make build more verbose with pipeline and tool diagnostics.')
 
  	string(name: 'streamingVersion', defaultValue: '',
-               description: 'The version of Streaming under samples from the github_samples pipeline.')	
+               description: 'The version of Streaming that the samples should use.')	
 
     }
     
@@ -88,28 +87,21 @@ pipeline {
             }
         }
 
-	stage ('Fetch Streaming Version') {
-            steps {
-                script {
-		    def pom = readMavenPom file: 'src/pom.xml'
-                    def projectVersion = pom.version
-                    echo "Project Version: ${projectVersion}"
-                }
-            }
-        }
-
 	stage ('Build') {
             steps {
                 script {
-                         def newJobUtil = new com.tibco.workflow.JobUtil()
-                         def streamingPipeline = "runtime"
-                         def newPlatform = "linux"
+                    def pomUtil = new  com.tibco.workflow.PomUtil()
+                    def streamingPipeline = "runtime"
 
-                         // Check if the 'streamingVersion' parameter is provided.
-                         if (params.streamingVersion) {
-                         // Use the provided 'streamingVersion' instead of the fetched one.
-                         streamingVersion = params.streamingVersion
-                       }
+                    // Check if the 'streamingVersion' parameter is provided.
+                    if (params.streamingVersion) {
+                        // Use the provided 'streamingVersion' instead of the fetched one.
+                        streamingVersion = params.streamingVersion
+                    } else {
+                        streamingVersion = pomUtil.getPomProperty('src/structure/eventflow/pom.xml', 'parent.version')
+                    }
+
+                    println("Testing under Streaming version ${streamingVersion}.")
 
                     epDeclarative.buildInit(
                         pomFile: 'src/pom.xml',
