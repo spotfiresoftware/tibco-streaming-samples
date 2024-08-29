@@ -1,6 +1,7 @@
-// Copyright 2021-2023 Cloud Software Group, Inc.
 //
+// Copyright © 2021-2024. Cloud Software Group, Inc. All Rights Reserved.
 //
+
 
 @Library('workflowLibs') _
 
@@ -12,7 +13,7 @@ String platform = jobUtil.getJobPlatform(defaultPlatform: "linux")
 String executorLabel = jobUtil.getStrBuildLabelEx(
     platform: platform, params: params,
     base: [ all: "c.unix-tools",
-           linux: "(o.rh8 || o.almalinux8) && c.docker-compatible-linux-3.10 && c.unix-tools && q.str",
+           linux: "(o.rh8 || o.almalinux8 || o.rh9 || o.almalinux9 || o.debian12) && c.docker-compatible-linux-3.10 && c.unix-tools && q.str",
            macos: "o.macos",
            windows: "o.windows && c.windows-10-compatible && a.x86_64" ],
 )
@@ -118,8 +119,10 @@ pipeline {
 
                          epDeclarative.buildInit(
                          pomFile: 'src/pom.xml',
-                         javaTool: newJobUtil.getOracleJava17Tool(),
-                         mavenTool: newJobUtil.getMaven38Tool(),
+                        // It would be nice to use the epDeclarative upstream
+                        // concept, but there are no clues in src/pom.xml.
+                         javaTool: newJobUtil.getOpenJDK21Tool(),
+                         mavenTool: newJobUtil.getMaven39Tool(),
                          testPlatforms: [ "macos", "windows" ],
                          primaryPlatform: "linux"
                          )
@@ -129,9 +132,7 @@ pipeline {
                          }
 
                          epDeclarative.buildMaven(
-                         goals: "install", 
-				 // -fae --batch-mode -DenvironmentVariables=BUILD_ID=${BUILD_ID},JOB_NAME=${JOB_NAME} ${mavenExtras} -Druntime-latest",
-				// -DskipDockerTests=true,
+                         goals: "install",
                          platform: platform)
                   }
             }
