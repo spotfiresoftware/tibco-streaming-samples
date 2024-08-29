@@ -35,7 +35,7 @@
     <groupId>com.tibco.ep.samples.web</groupId>
     <artifactId>openapi-server-war</artifactId>
     <packaging>war</packaging>
-    <version>1.0.0</version>
+    <version>11.2.0-SNAPSHOT</version>
     <name>Web: OpenAPI Server WAR</name>
     <description>How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool</description>
 

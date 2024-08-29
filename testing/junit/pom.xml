@@ -37,7 +37,7 @@
     <groupId>com.tibco.ep.samples.testing</groupId>
     <artifactId>junit</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
-    <version>1.0.0</version>
+    <version>11.2.0-SNAPSHOT</version>
     <name>Testing: Junit</name>
     <description>How to write unit tests for EventFlow fragments.</description>
 

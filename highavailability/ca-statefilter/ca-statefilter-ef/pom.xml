@@ -37,7 +37,7 @@
     <groupId>com.tibco.ep.samples.highavailability</groupId>
     <artifactId>ca-statefilter-ef</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
-    <version>1.0.0</version>
+    <version>11.2.0-SNAPSHOT</version>
     <name>HA: cluster aware state filter - EventFlow Fragment</name>
     <description>How to build cluster aware Spotfire Streaming projects - EventFlow Fragment</description>
 
