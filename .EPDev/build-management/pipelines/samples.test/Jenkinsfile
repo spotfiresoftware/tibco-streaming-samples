@@ -101,6 +101,7 @@ pipeline {
                         streamingVersion = pomUtil.getPomProperty('src/structure/eventflow/pom.xml', 'parent.version')
                     }
 
+                    // This is not working.
                     println("Testing under Streaming version ${streamingVersion}.")
 
                     epDeclarative.buildInit(
