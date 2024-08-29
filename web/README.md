@@ -1,6 +1,6 @@
 # Web: Samples
 
-How to deploy web application in Spotfire&reg; Streaming 11.1.0 projects.
+How to deploy web application in Spotfire&reg; Streaming 11.2.0-SNAPSHOT projects.
 
 Samples :
 
