@@ -93,16 +93,18 @@ pipeline {
                     def pomUtil = new  com.tibco.workflow.PomUtil()
                     def streamingPipeline = "runtime"
 
-                    // Check if the 'streamingVersion' parameter is provided.
-                    if (params.streamingVersion) {
-                        // Use the provided 'streamingVersion' instead of the fetched one.
-                        streamingVersion = params.streamingVersion
-                    } else {
-                        streamingVersion = pomUtil.getPomProperty('src/structure/eventflow/pom.xml', 'parent.version')
-                    }
+                    if (false) {
+                        // Check if the 'streamingVersion' parameter is provided.
+                        if (params.streamingVersion) {
+                            // Use the provided 'streamingVersion' instead of the fetched one.
+                            streamingVersion = params.streamingVersion
+                        } else {
+                            streamingVersion = pomUtil.getPomProperty('src/structure/eventflow/pom.xml', 'parent.version')
+                        }
 
-                    // This is not working.
-                    println("Testing under Streaming version ${streamingVersion}.")
+                        // This is not working.
+                        println("Testing under Streaming version ${streamingVersion}.")
+                    }
 
                     epDeclarative.buildInit(
                         pomFile: 'src/pom.xml',
