@@ -114,7 +114,9 @@ pipeline {
                         "mavenTool":"upstreamVersion",
                         testPlatforms: [ "macos", "windows" ],
                         primaryPlatform: "linux",
-                        skipJenkinsArtifactPublisher: [ any: true ]
+                        skipJenkinsArtifactPublisher: [ any: true ],
+                        archiveArtifacts: [ failure: // entrails
+                                           [ artifacts: epDeclarative.getEPArchiveArtifactsForFailure() ] ]
                     )
 
                     epDeclarative.buildMaven(
