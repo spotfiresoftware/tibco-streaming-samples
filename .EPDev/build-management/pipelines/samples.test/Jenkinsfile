@@ -9,12 +9,26 @@ def jobUtil = new com.tibco.workflow.JobUtil()
 
 String platform = jobUtil.getJobPlatform(defaultPlatform: "linux")
 
+String macOSLabel = "(o.macos12 || o.macos13 || o.macos14 || o.macos15)"
+String linuxLabel = "( o.almalinux8 || o.rh8 || o.almalinux9 || o.rh9 || o.debian11 || o.debian12)"
+
+// On Linux and macOS, the container samples can run if Docker is present
+// along with an Ansible installation compatible with 2.8.  If Docker
+// is present but Ansible is not, that's not enough. Thus the ->
+// "implies" syntax.  Not yet forcing Docker -- we could, by changing
+// the -> to &&, or even do it _conditionally_.
+String containerLabel = "(c.docker-compatible-linux-3.10 -> c.ansible-2.8-compatible)"
+
+// Github samples use Visual Studio 2019 on Windows for NAR features.
+// See SB-53765 for context.
+def windowsNARLabel = "c.ms-toolset-v142"
+
 String executorLabel = jobUtil.getStrBuildLabelEx(
     platform: platform, params: params,
     base: [ all: "c.unix-tools && a.x86_64",
-           linux: "(o.rh8 || o.almalinux8 || o.rh9 || o.almalinux9 || o.debian12) && c.docker-compatible-linux-3.10 && c.unix-tools && q.str",
-           macos: "o.macos",
-           windows: "o.windows && c.windows-10-compatible && a.x86_64" ],
+           linux: "${linuxLabel} && ${containerLabel}",
+           macos: "${macOSLabel} && ${containerLabel}",
+           windows: "o.windows && c.windows-10-compatible && c.UTF-8-locale-configured && ${windowsNARLabel}" ],
 )
 
 pipeline {
