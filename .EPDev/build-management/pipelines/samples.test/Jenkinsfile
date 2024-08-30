@@ -123,6 +123,9 @@ pipeline {
                     epDeclarative.buildInit(
                         pomFile: 'src/pom.xml',
                         "upstreamVersion":"version",
+                        upstreamPipeline: "EventProcessing/" + streamingPipeline,
+                        upstreamMilestoneStem: streamingPipeline,
+                        upstreamUseReleaseCandidate: true, // tests of Streaming RCs
                         "mavenDeployMethod":"artifactory-maven-plugin",
                         "javaTool":"upstreamVersion",
                         "mavenTool":"upstreamVersion",
