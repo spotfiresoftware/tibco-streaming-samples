@@ -1,18 +1,18 @@
 # Web: Samples
 
-How to deploy web application in Spotfire&reg; Streaming 11.1.0 projects.
+How to deploy web application in Spotfire&reg; Streaming 11.1.1 projects.
 
 Samples :
 
 * [Web: Admin Web Service](adminwebservice/src/site/markdown/index.md)
+* [Web: OpenAPI Client](openapi-client/src/site/markdown/index.md)
 * [How to integrate with Prometheus Metrics in Spotfire Streaming.](prometheus-metrics/README.md)
 * [How to create WAR which has a WebSocket endpoint and use it in an EventFlow project.](websocket/README.md)
-* [Web: OpenAPI Client](openapi-client/src/site/markdown/index.md)
 * [How to create a WAR from OpenAPI specification documentation with OpenAPI Code Generation tool, and use it in an EventFlow project](openapi-server/README.md)
 * [How to use Spring Boot to create a WAR and use it in an EventFlow project](springboot/README.md)
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

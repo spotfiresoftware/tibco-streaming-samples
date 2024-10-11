@@ -4,13 +4,13 @@ How to build a 2-node active standby deployment with static data distribution po
 
 Samples :
 
-* [HA: 2-node active standby - EventFlow Fragment](as-2node-ef/src/site/markdown/index.md)
 * [HA: 2-node active standby - Application](as-2node-app/src/site/markdown/index.md)
+* [HA: 2-node active standby - EventFlow Fragment](as-2node-ef/src/site/markdown/index.md)
 
 _This is a Spotfire approved sample._
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

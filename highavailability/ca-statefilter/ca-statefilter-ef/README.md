@@ -1,11 +1,11 @@
 # HA: cluster aware state filter - EventFlow Fragment
 
-How to build cluster aware Spotfire&reg; Streaming 11.1.0 projects - EventFlow Fragment
+How to build cluster aware Spotfire&reg; Streaming 11.1.1 projects - EventFlow Fragment
 
 * [ca-statefilter-ef](src/site/markdown/index.md)
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

@@ -1,19 +1,19 @@
 # HA: Samples
 
-How to build Highly Available Spotfire&reg; Streaming 11.1.0 projects.
+How to build Highly Available Spotfire&reg; Streaming 11.1.1 projects.
 
 Samples :
 
-* [How to build a 2-node active standby deployment with static data distribution policy.](as-2node/README.md)
+* [How to use the cluster aware state filter](ca-statefilter/README.md)
 * [How to build a 2-node active active deployment with dynamic data distribution policy.](aa-2node/README.md)
 * [How to build a 3-node active active deployment with dynamic data distribution policy.](aa-3node/README.md)
+* [How to build a 2-node active standby deployment with static data distribution policy.](as-2node/README.md)
 * [How to build a 3-node active active deployment with dynamic data distribution policy and disaster recovery.](aa-3node-dr/README.md)
-* [How to build a 2-node active active deployment with dynamic data distribution policy and proxy discovery.](pd-2node/README.md)
 * [How to poll the filesystem with cluster aware operators](ca-polling/README.md)
-* [How to use the cluster aware state filter](ca-statefilter/README.md)
+* [How to build a 2-node active active deployment with dynamic data distribution policy and proxy discovery.](pd-2node/README.md)
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

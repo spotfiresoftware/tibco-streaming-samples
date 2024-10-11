@@ -1,13 +1,13 @@
 # Testing: Samples
 
-How to test Spotfire&reg; Streaming 11.1.0 projects.
+How to test Spotfire&reg; Streaming 11.1.1 projects.
 
 Samples :
 
 * [Testing: Junit](junit/src/site/markdown/index.md)
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

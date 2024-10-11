@@ -1,18 +1,18 @@
 # Docker: Samples
 
-How to use Docker in Spotfire&reg; Streaming 11.1.0 projects.
+How to use Docker in Spotfire&reg; Streaming 11.1.1 projects.
 
 Samples :
 
-* [How to deploy a 2-node EventFlow application in Docker](ef-2node/README.md)
-* [How to deploy a LiveView application in Docker](lv-1node/README.md)
-* [How to user Docker to test proxy discovery](pd-test/README.md)
-* [How to deploy a 2-node EventFlow application in Docker managed by Ansible](ef-2node-ansible/README.md)
-* [How to deploy an EventFlow application in Docker with Kubernetes](ef-kubernetes/README.md)
 * [How to deploy an EventFlow application in Docker with Kubernetes and Helm](ef-helm/README.md)
+* [How to deploy an EventFlow application in Docker with Kubernetes](ef-kubernetes/README.md)
+* [How to deploy a LiveView application in Docker](lv-1node/README.md)
+* [How to deploy a 2-node EventFlow application in Docker managed by Ansible](ef-2node-ansible/README.md)
+* [How to deploy a 2-node EventFlow application in Docker](ef-2node/README.md)
+* [How to user Docker to test proxy discovery](pd-test/README.md)
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

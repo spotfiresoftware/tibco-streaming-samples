@@ -4,13 +4,13 @@ How to use Spring Boot to create a WAR and use it in an EventFlow project
 
 Samples :
 
-* [Web: Spring Boot WAR](springboot-war/src/site/markdown/index.md)
 * [Web: Spring Boot EventFlow](springboot-eventflow/src/site/markdown/index.md)
+* [Web: Spring Boot WAR](springboot-war/src/site/markdown/index.md)
 
 _This is a Spotfire approved sample._
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2024 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
