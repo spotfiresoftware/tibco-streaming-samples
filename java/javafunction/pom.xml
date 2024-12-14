@@ -37,7 +37,7 @@
     <groupId>com.tibco.ep.samples</groupId>
     <artifactId>javafunction</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
-    <version>1.0.0</version>
+    <version>11.2.0-SNAPSHOT</version>
     <name>Java: Java Function</name>
     <description>How to invoke java code from EventFlow.</description>
 

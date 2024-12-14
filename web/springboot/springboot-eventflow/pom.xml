@@ -38,7 +38,7 @@
     <groupId>com.tibco.ep.samples.web</groupId>
     <artifactId>springboot-eventflow</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
-    <version>1.0.0</version>
+    <version>11.2.0-SNAPSHOT</version>
     <name>Web: Spring Boot EventFlow</name>
     <description>How to use a WAR created by Spring Boot in an EventFlow fragment.</description>
 

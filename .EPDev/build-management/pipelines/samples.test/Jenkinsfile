@@ -1,0 +1,158 @@
+//
+// Copyright © 2021-2024. Cloud Software Group, Inc. All Rights Reserved.
+//
+
+
+@Library('workflowLibs') _
+
+def jobUtil = new com.tibco.workflow.JobUtil()
+
+String platform = jobUtil.getJobPlatform(defaultPlatform: "linux")
+
+String macOSLabel = "(o.macos12 || o.macos13 || o.macos14 || o.macos15)"
+String linuxLabel = "( o.almalinux8 || o.rh8 || o.almalinux9 || o.rh9 || o.debian11 || o.debian12)"
+
+// On Linux and macOS, the container samples can run if Docker is present
+// along with an Ansible installation compatible with 2.8.  If Docker
+// is present but Ansible is not, that's not enough. Thus the ->
+// "implies" syntax.  Not yet forcing Docker -- we could, by changing
+// the -> to &&, or even do it _conditionally_.
+String containerLabel = "(c.docker-compatible-linux-3.10 -> c.ansible-2.8-compatible)"
+
+// Github samples use Visual Studio 2019 on Windows for NAR features.
+// See SB-53765 for context.
+def windowsNARLabel = "c.ms-toolset-v142"
+
+String executorLabel = jobUtil.getStrBuildLabelEx(
+    platform: platform, params: params,
+    base: [ all: "c.unix-tools && a.x86_64",
+           linux: "${linuxLabel} && ${containerLabel}",
+           macos: "${macOSLabel} && ${containerLabel}",
+           windows: "o.windows && c.windows-10-compatible && c.UTF-8-locale-configured && ${windowsNARLabel}" ],
+)
+
+pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '2' ))
+        quietPeriod(600)
+        timeout(time: 4, unit: 'HOURS')
+        skipDefaultCheckout() // to subdirectory, see below
+    }
+
+    triggers {
+        // Poll once a day.
+	pollSCM('H 0 * * *')
+    }
+
+    parameters {
+        choice(name: 'deployArtifacts', choices: ['never', 'default', 'always'], // never first; just for testing
+               description: 'The default is never to deploy because this is a test-only pipeline.')
+
+        string(name: 'mavenExtras', defaultValue: '',
+               description: 'Extra JVM options for Maven, usually -DskipTests and the like.')
+
+        booleanParam(name: 'cleanWorkspace', defaultValue: true, description: 'Clean workspace before build.')
+
+	// Change authors always get succcess emails.
+        // Team branches send failure emails to the team, too.
+        string(name: 'notificationEmail', defaultValue: 'when:team:streaming-sample-test-watchers@cloud-team, change-authors',
+               description: 'Email addresses for notifications on failure.')
+
+        // Just notify change authors on any branch, since this will never get released.
+        string(name: 'successEmail', defaultValue: 'change-authors',
+               description: 'Email addresses for notifications on success.')
+
+
+        choice(name: 'buildVerbose', choices: ['default', 'pipeline', 'tools' ],
+               description: 'Make build more verbose with pipeline and tool diagnostics.')
+
+ 	string(name: 'streamingVersion', defaultValue: '',
+               description: 'The version of Streaming that the samples should use.')	
+
+    }
+    
+    agent {
+        node {
+            label "${executorLabel}"     
+	 }
+    }
+
+    environment { // Not persisted in Artifactory build record.
+        // Needed for Maven CommonSettings.
+        TIBCO_EP_HOME = "${env.WORKSPACE}/"
+    }
+
+    stages {
+        stage ('janitor-before-job') {
+            steps {
+                script {
+                    epDeclarative.preCleanup()
+                }
+            }
+        }
+
+        stage ('checkout') {
+            steps {
+                // Check out to a subdirectory to avoid clashes with TIBCO_EP_HOME
+                // and other helper directories in the workspace.
+                dir ('src') {
+                    checkout scm
+                }
+            }
+        }
+
+	stage ('Build') {
+            steps {
+                script {
+                    def pomUtil = new  com.tibco.workflow.PomUtil()
+                    def streamingPipeline = "runtime"
+
+                    if (false) {
+                        // Check if the 'streamingVersion' parameter is provided.
+                        if (params.streamingVersion) {
+                            // Use the provided 'streamingVersion' instead of the fetched one.
+                            streamingVersion = params.streamingVersion
+                        } else {
+                            streamingVersion = pomUtil.getPomProperty('src/structure/eventflow/pom.xml', 'parent.version')
+                        }
+
+                        // This is not working.
+                        println("Testing under Streaming version ${streamingVersion}.")
+                    }
+
+                    epDeclarative.buildInit(
+                        pomFile: 'src/pom.xml',
+                        "upstreamVersion":"version",
+                        upstreamPipeline: "EventProcessing/" + streamingPipeline,
+                        upstreamMilestoneStem: streamingPipeline,
+                        upstreamUseReleaseCandidate: true, // tests of Streaming RCs
+                        testPlatforms: [ "macos", "windows" ],
+                        primaryPlatform: "linux",
+                        skipJenkinsArtifactPublisher: [ any: true ],
+                        archiveArtifacts: [ failure: // entrails
+                                           [ artifacts: epDeclarative.getEPArchiveArtifactsForFailure() ] ]
+                    )
+
+                    epDeclarative.buildMaven(
+                         goals: "install",
+                         platform: platform)
+                  }
+            }
+        }
+
+    }
+	
+    post {
+        always {
+            script {
+                epDeclarative.postAlways()
+            }
+        }
+
+        cleanup {
+            script {
+                epDeclarative.postCleanup()
+            }
+        }
+    }
+}

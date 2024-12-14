@@ -37,7 +37,7 @@
     <groupId>com.tibco.ep.samples.docker</groupId>
     <artifactId>lv-1node-app</artifactId>
     <packaging>ep-application</packaging>
-    <version>1.0.0</version>
+    <version>11.2.0-SNAPSHOT</version>
     <name>Docker: LiveView Web - Application</name>
     <description>How to deploy a LiveView Web application in Docker - Application</description>
 

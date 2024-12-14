@@ -37,7 +37,7 @@
     <groupId>com.tibco.ep.samples.nativelibrary</groupId>
     <artifactId>nar-eventflow</artifactId>
     <packaging>ep-eventflow-fragment</packaging>
-    <version>1.0.0</version>
+    <version>11.2.0-SNAPSHOT</version>
     <name>Native: NAR - EventFlow calling C++</name>
     <description>How to use a NAR dependency in an EventFlow fragment.</description>
 

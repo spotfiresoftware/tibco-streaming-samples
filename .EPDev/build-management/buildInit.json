@@ -1,0 +1,9 @@
+{
+    "upstreamVersion":"version",
+    "upstreamUseReleaseCandidate":"true",
+    "mavenDeployMethod":"artifactory-maven-plugin",
+    "mavenSnapshotRepo":"ep-snapshots",
+    "mavenReleaseRepo":"ep-rc",
+    "javaTool":"upstreamVersion",
+    "mavenTool":"upstreamVersion"
+}
