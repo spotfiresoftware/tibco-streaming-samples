@@ -1,5 +1,5 @@
 //
-// Copyright © 2021-2024. Cloud Software Group, Inc. All Rights Reserved.
+// Copyright © 2021-2025. Cloud Software Group, Inc. All Rights Reserved.
 //
 
 
@@ -9,7 +9,7 @@ def jobUtil = new com.tibco.workflow.JobUtil()
 
 String platform = jobUtil.getJobPlatform(defaultPlatform: "linux")
 
-String macOSLabel = "(o.macos12 || o.macos13 || o.macos14 || o.macos15)"
+String macOSLabel = "(o.macos13 || o.macos14 || o.macos15)"
 String linuxLabel = "( o.almalinux8 || o.rh8 || o.almalinux9 || o.rh9 || o.debian11 || o.debian12)"
 
 // On Linux and macOS, the container samples can run if Docker is present
