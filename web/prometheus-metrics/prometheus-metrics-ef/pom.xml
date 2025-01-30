@@ -39,7 +39,7 @@
     <packaging>ep-eventflow-fragment</packaging>
     <version>2.0.0</version>
     <name>Web: Prometheus Metrics Integration EventFlow</name>
-    <description>How to integrate with Prometheus Metrics in Spotfire Streaming. - EventFlow
+    <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - EventFlow
     </description>
 
     <properties>

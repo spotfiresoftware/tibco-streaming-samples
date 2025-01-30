@@ -6,7 +6,7 @@ resulting archive can then be used in a downstream EventFlow fragment.
 * [C++ Source](#c-source)
 * [Compilation to native library and generate NAR archive](#compilation-to-native-library-and-generate-nar-archive)
 * [Environmental requirements](#environmental-requirements)
-* [Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
+* [Building this sample from TIBCO StreamBase&reg; Studio and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
 <a name="c-source"></a>
@@ -124,9 +124,9 @@ VS120COMNTOOLS=C:\\Program Files\ (x86)\\Microsoft\ Visual\ Studio\ 12.0\\Common
 
 <a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
 
-## Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases
+## Building this sample from TIBCO StreamBase&reg; Studio and running the unit test cases
 
-Use the **Run As -> Maven install** menu option to build from Spotfire StreamBase Studio&trade; :
+Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase&reg; Studio :
 
 ![studio](images/studiounit.gif)
 

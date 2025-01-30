@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $(dirname "${0}")/common.bash
+source "$(dirname "$0")/common.bash"
 
 declare -r new_version="${1}"
 
@@ -9,7 +9,8 @@ if [ -z "${new_version}" ] ; then
     exit 2
 fi
 
-declare -r starting_version=$(get_current_parent_version)
+declare starting_version
+starting_version=$(get_current_parent_version)
 
 # Validation also brings down a lot of artifacts, which will
 # speed up subsequent operations.
@@ -31,6 +32,6 @@ fi
 
 echo "Checking for traces of previous versions; some could be benign."
 
-find . -name pom.xml | xargs grep -l -F "<version>${starting_version}</version>"
+find . -name pom.xml -print0 | xargs -0 grep -l -F "<version>${starting_version}</version>"
 
 echo "...done with check."

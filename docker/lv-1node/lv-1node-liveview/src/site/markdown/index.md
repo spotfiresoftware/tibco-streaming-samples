@@ -1,6 +1,6 @@
-# Docker : Spotfire LiveView&trade; Web
+# Docker : TIBCO LiveView&trade; Web
 
-This fragment is a copy of the **StreamBase LiveView Web Sample** available from Spotfire StreamBase Studio&trade;.
+This fragment is a copy of the **StreamBase LiveView Web Sample** available from TIBCO StreamBase&reg; Studio.
 
 ---
 Copyright (c) 2018-2023 Cloud Software Group, Inc.

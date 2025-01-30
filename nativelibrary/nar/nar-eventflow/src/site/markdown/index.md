@@ -6,7 +6,7 @@ This sample describes how to use a Native ARchive (.nar) dependency in an EventF
 * [Declare a java wrapper class](#declare-a-java-wrapper-class)
 * [Provide a engine configuration for EventFlow use](#provide-a-engine-configuration-for-eventflow-use)
 * [Using in EventFlow](#using-in-eventflow)
-* [Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
+* [Building this sample from TIBCO StreamBase&reg; Studio and running the unit test cases](#building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases)
 * [Building this sample from the command line and running the unit test cases](#building-this-sample-from-the-command-line-and-running-the-unit-test-cases)
 
 <a name="declare-the-nar-as-a-dependency"></a>
@@ -180,9 +180,9 @@ These functions can now be used in EventFlow :
 
 <a name="building-this-sample-from-tibco-streambase-studio-trade-and-running-the-unit-test-cases"></a>
 
-## Building this sample from Spotfire StreamBase Studio&trade; and running the unit test cases
+## Building this sample from TIBCO StreamBase&reg; Studio and running the unit test cases
 
-Use the **Run As -> Maven install** menu option to build from Spotfire StreamBase Studio&trade; :
+Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase&reg; Studio :
 
 ![studio](images/studiounit.gif)
 

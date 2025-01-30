@@ -38,7 +38,7 @@
     <packaging>pom</packaging>
     <version>11.2.0-SNAPSHOT</version>
     <name>HA: Samples</name>
-    <description>How to build Highly Available Spotfire Streaming projects.</description>
+    <description>How to build Highly Available TIBCO Streaming projects.</description>
 
     <modules>
         <module>as-2node</module>

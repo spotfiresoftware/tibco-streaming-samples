@@ -1,16 +1,16 @@
-# Docker : Spotfire LiveView&trade; Web
+# Docker : TIBCO LiveView&trade; Web
 
-This sample describes how to deploy an application archive containing a Spotfire LiveView&trade; Web fragment to Docker.
+This sample describes how to deploy an application archive containing a TIBCO LiveView&trade; Web fragment to Docker.
 
 * [Prerequisites](#prerequisites)
-* [Creating an application archive project for Docker from Spotfire StreamBase Studio&trade;](#creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade)
+* [Creating an application archive project for Docker from TIBCO StreamBase&reg; Studio](#creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade)
 * [Containers and nodes](#containers-and-nodes)
 * [Changes to the default docker configurations](#changes-to-the-default-docker-configurations)
-* [Building and running from Spotfire StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
+* [Building and running from TIBCO StreamBase&reg; Studio](#building-and-running-from-tibco-streambase-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Example docker commands](#example-docker-commands)
 
-See also [Docker section in Spotfire&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
+See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
 
 <a name="prerequisites"></a>
 
@@ -23,16 +23,16 @@ CPUs and Memory settings on the Advanced tab of Docker preferences.
 
 <a name="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
 
-## Creating an application archive project for Docker from Spotfire StreamBase Studio&trade;
+## Creating an application archive project for Docker from TIBCO StreamBase&reg; Studio
 
-Spotfire StreamBase Studio&trade; can generate a project containing the necessary files to build and 
+TIBCO StreamBase&reg; Studio can generate a project containing the necessary files to build and 
 test a Docker image by selecting **Enable Docker support** when creating an application archive project :
 
 ![create](images/create.png)
 
 Such a project includes :
 
-* A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the Spotfire StreamBase runtime
+* A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO Streaming Runtime
 * A [start-node](../../main/docker/base/start-node) script to start a node
 * An [application Dockerfile](../../main/docker/application/Dockerfile) to build an application image containing the application archive - this is based on the base image
 * Steps in [pom.xml](../../../pom.xml) that uses [fabric8io/docker-maven-plugin](http://dmp.fabric8.io/) to build the Docker image and start Docker containers for basic testing
@@ -46,7 +46,7 @@ Note that whilst this project will create a simple Docker image, changes to the 
 
 ## Containers and nodes
 
-In this sample we name the docker container as **A.lv-1node-app**,  which hosts the StreamBase node **A.lv-1node-app**, the Spotfire LiveView&trade; Web port 
+In this sample we name the docker container as **A.lv-1node-app**,  which hosts the StreamBase node **A.lv-1node-app**, the TIBCO LiveView&trade; Web port 
 11080 is published to the host :
 
 ![nodes](images/lv-docker.svg)
@@ -128,9 +128,9 @@ integration testing and wait until the web server is running :
 
 <a name="building-and-running-from-tibco-streambase-studio-trade"></a>
 
-## Building and running from Spotfire StreamBase Studio&trade;
+## Building and running from TIBCO StreamBase&reg; Studio
 
-Use the **Run As -> Maven install** menu option to build from Spotfire StreamBase Studio&trade; or Run As shortcut.  Tests can
+Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase&reg; Studio or Run As shortcut.  Tests can
 be skipped if required by ticking the **Skip tests** :
 
 ![maven](images/studio-build.gif)
@@ -170,7 +170,7 @@ Use the [docker run](https://docs.docker.com/engine/reference/run/) command.  In
 * **--hostname=A.example.com --network-alias=A.example.com --network=example.com** - set the container hostname and network name. This must match the docker network name and the [Trusted hosts HOCON configuration](../../main/configurations/security.conf)
 * **--name=A.lv-1node-app** - container name
 * **--env=NODENAME=A.lv-1node-app** - node name
-* **--publish 11080:11080** - publish the Spotfire LiveView&trade; Web port to the host
+* **--publish 11080:11080** - publish the TIBCO LiveView&trade; Web port to the host
 * **docker/lv-1node-app:1.0.0** - Docker image name
 
 ```shell
@@ -178,7 +178,7 @@ $ docker run --detach --hostname=A.example.com --network-alias=A.example.com --n
 ec0aaaa22b92707e74f15b9ada6e6c37c14669856744e88ebc1741b2b099cc0d
 ```
 
-### Connect to the Spotfire LiveView&trade; Web console
+### Connect to the TIBCO LiveView&trade; Web console
 
 Use a web browser at http://localhost:11080/ :
 

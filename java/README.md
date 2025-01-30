@@ -1,13 +1,13 @@
 # Java: Samples
 
-How to invoke Java from Spotfire&reg; Streaming 11.2.0-SNAPSHOT projects.
+How to invoke Java from TIBCO&reg; Streaming 11.2.0-SNAPSHOT projects.
 
 Samples :
 
 * [Java: Java Function](javafunction/src/site/markdown/index.md)
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2025 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

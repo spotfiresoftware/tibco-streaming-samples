@@ -55,7 +55,7 @@ commands documented here.
 
 ## Basics ##
 
-Each Spotfire Streaming release eventually gets a branch named for the
+Each TIBCO Streaming release eventually gets a branch named for the
 version. The latest release version becomes the default branch
 for this repository. 
 

@@ -39,7 +39,7 @@
     <packaging>pom</packaging>
     <version>11.2.0-SNAPSHOT</version>
     <name>Testing: Samples</name>
-    <description>How to test Spotfire Streaming projects.</description>
+    <description>How to test TIBCO Streaming projects.</description>
 
     <modules>
         <module>junit</module>

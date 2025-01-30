@@ -31,7 +31,7 @@
 #
 FROM almalinux:8
 
-LABEL description="Spotfire Streaming base image"
+LABEL description="TIBCO Streaming base image"
 LABEL PRODUCT_VERSION=${docker_base_version}
 
 #
@@ -69,7 +69,7 @@ RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && dnf --assumeyes update && dnf
 # Create a user to run nodes
 #
 RUN /usr/sbin/useradd \
-    --comment "Spotfire Streaming User" \
+    --comment "TIBCO Streaming User" \
     --create-home \
     --user-group \
     --password ${USER_NAME} \

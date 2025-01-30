@@ -41,7 +41,7 @@
     <packaging>ep-application</packaging>
     <version>2.0.0</version>
     <name>Web: Prometheus Metrics Integration App</name>
-    <description>How to integrate with Prometheus Metrics in Spotfire Streaming. - Application
+    <description>How to integrate with Prometheus Metrics in TIBCO Streaming. - Application
     </description>
 
     <!-- common definitions for this version of StreamBase -->

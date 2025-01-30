@@ -39,7 +39,7 @@
     <packaging>pom</packaging>
     <version>11.2.0-SNAPSHOT</version>
     <name>Structure: Samples</name>
-    <description>How to structure Spotfire Streaming projects.</description>
+    <description>How to structure TIBCO Streaming projects.</description>
 
     <modules>
         <module>eventflow</module>

@@ -1,10 +1,10 @@
-# Using in Spotfire StreamBase Studio&trade;
+# Using in TIBCO StreamBase&reg; Studio
 
 These samples are kept on-line in GitHub - this allows browsing of the samples on-line,
 support of contributions outside of TIBCO engineering and updates outside of the main
 product release lifecycle.
 
-The samples can also be imported into Spotfire StreamBase Studio&trade; :
+The samples can also be imported into TIBCO StreamBase&reg; Studio :
 
 ## Using the TIBCO samples menu
 
@@ -31,7 +31,7 @@ The local GitHub clone can be updated with **Pull from remote repositories now**
 
 ## Working with multiple projects
 
-By default, projects are organized in Spotfire StreamBase Studio&trade; in a flat structure :
+By default, projects are organized in TIBCO StreamBase&reg; Studio in a flat structure :
 
 ![flat](flat.png)
 

@@ -41,7 +41,7 @@
     <packaging>pom</packaging>
     <version>11.2.0-SNAPSHOT</version>
     <name>Web: Samples</name>
-    <description>How to deploy web application in Spotfire Streaming projects.</description>
+    <description>How to deploy web application in TIBCO Streaming projects.</description>
 
     <modules>
         <module>adminwebservice</module>

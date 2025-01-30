@@ -39,7 +39,7 @@
     <packaging>pom</packaging>
     <version>11.2.0-SNAPSHOT</version>
     <name>Native: Samples</name>
-    <description>How to use native libraries in Spotfire Streaming projects.</description>
+    <description>How to use native libraries in TIBCO Streaming projects.</description>
 
     <profiles>
         <!-- NAR inclusion in the sample reactor build requires

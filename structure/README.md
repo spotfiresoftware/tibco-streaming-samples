@@ -1,16 +1,16 @@
 # Structure: Samples
 
-How to structure Spotfire&reg; Streaming 11.2.0-SNAPSHOT projects.
+How to structure TIBCO&reg; Streaming 11.2.0-SNAPSHOT projects.
 
 Samples :
 
-* [Structure: Eventflow](eventflow/src/site/markdown/index.md)
-* [Structure: LiveView](liveview/src/site/markdown/index.md)
-* [Structure: Java](java/src/site/markdown/index.md)
 * [How to structure a maven aggregate project with EventFlow fragment and application archive.](application/README.md)
+* [Structure: Eventflow](eventflow/src/site/markdown/index.md)
+* [Structure: Java](java/src/site/markdown/index.md)
+* [Structure: LiveView](liveview/src/site/markdown/index.md)
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2025 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

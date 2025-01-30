@@ -1,17 +1,17 @@
 # Web: Prometheus Metrics Integration
 
-How to integrate with Prometheus Metrics in Spotfire Streaming.
+How to integrate with Prometheus Metrics in TIBCO Streaming.
 
 Samples :
 
-* [Web: Prometheus Metrics Integration WAR](prometheus-metrics-war/src/site/markdown/index.md)
-* [Web: Prometheus Metrics Integration EventFlow](prometheus-metrics-ef/src/site/markdown/index.md)
 * [Web: Prometheus Metrics Integration App](prometheus-metrics-app/src/site/markdown/index.md)
+* [Web: Prometheus Metrics Integration EventFlow](prometheus-metrics-ef/src/site/markdown/index.md)
+* [Web: Prometheus Metrics Integration WAR](prometheus-metrics-war/src/site/markdown/index.md)
 
-_This is a Spotfire approved sample._
+_This is a TIBCO approved sample._
 
 ---
-Copyright (c) 2018-2023 Cloud Software Group, Inc.
+Copyright (c) 2018-2025 Cloud Software Group, Inc.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

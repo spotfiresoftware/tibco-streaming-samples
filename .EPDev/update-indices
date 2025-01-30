@@ -7,7 +7,7 @@
 #
 
 
-source $(dirname "${0}")/common.bash
+source "$(dirname "$0")/common.bash"
 
 declare -r index="README.md"
 
@@ -21,7 +21,8 @@ if [ "${1}" == "--check-consistency" ] ; then
     fi
 fi
                                        
-declare -r parent_version=$(get_current_parent_version)
+declare parent_version
+parent_version=$(get_current_parent_version)
 
 echo "Updating indices for Streaming version ${parent_version}."
 
@@ -29,43 +30,53 @@ update_in_project_directory() {
     local -r dir=$(pwd)
 
     local -r artifactId=$(get_project_property 'project.artifactId')
-    local -r name=$(get_project_property 'project.name' | sed -e "s+Spotfire Streaming +Spotfire\&reg; Streaming ${parent_version} +" -e "s+Spotfire StreamBase +Spotfire StreamBase\&reg; ${parent_version} +")
-    local -r description=$(get_project_property 'project.description' | sed -e "s+Spotfire Streaming +Spotfire\&reg; Streaming ${parent_version} +" -e "s+Spotfire StreamBase +Spotfire StreamBase\&reg; ${parent_version} +")
-    local -r parentversion=$(get_project_property 'project.parent.version')
+    local -r name=$(get_project_property 'project.name' | sed -e "s+TIBCO Streaming +TIBCO\&reg; Streaming ${parent_version} +" -e "s+TIBCO StreamBase +TIBCO StreamBase\&reg; ${parent_version} +")
+    local -r description=$(get_project_property 'project.description' | sed -e "s+TIBCO Streaming +TIBCO\&reg; Streaming ${parent_version} +" -e "s+TIBCO StreamBase +TIBCO StreamBase\&reg; ${parent_version} +")
     local -r tibcosample=$(get_project_property 'com.tibco.ep.sb.studio.sample')
-    local -r reldir=$(echo "${dir}" | sed -e s+^${here}/++)
+    local -r reldir=${dir//$here\//}
 
-    > ${index} # Start empty.
+    true > ${index} # Start empty.
 
-    echo "# ${name}" >> ${index}
-    echo "" >> ${index}
-    echo "${description}" >> ${index}
-    echo "" >> ${index}
+    {
+        echo "# $name"
+        echo ""
 
-    if [ "${reldir}" = "" ]
-    then
-	echo "Overview:" >> ${index}
-	echo "" >> ${index}
-	echo "* [Using in Spotfire StreamBase Studio&trade; ${parent_version}](docs/studio.md)" >> ${index}
-	echo "* [Contributing](docs/contributing.md)" >> ${index}
-	echo "* [License](docs/LICENSE)" >> ${index}
-	echo "" >> ${index}
-	echo "Sample categories:" >> ${index}
-	echo "" >> ${index}
+        # Some projects don't have a description
+        if [[ "$description" != "null object or invalid expression" ]]; then
+            echo "$description"
+            echo ""
+        fi
+    } >> $index
+
+    if [[ -z "${reldir}" ]]; then
+        {
+            echo "Overview:"
+            echo ""
+            echo "* [Using in TIBCO StreamBase&reg; Studio ${parent_version}](docs/studio.md)"
+            echo "* [Contributing](docs/contributing.md)"
+            echo "* [License](docs/LICENSE)"
+            echo ""
+            echo "Sample categories:"
+            echo ""
+        } >> $index
     fi
 
     if [ -f ${index}-sub ]
     then
 	nonmodules=$(grep -v html ${index}-sub | wc -l | tr -d ' \t')
 	modules=$(grep html ${index}-sub | wc -l | tr -d ' \t')
-	if [ ${nonmodules} = 0 -a ${modules} -gt 1 ]
+	if [ "${nonmodules}" = 0 ] && [ "${modules}" -gt 1 ];
 	then
-	    echo "This is a maven aggregator project consisting of the following maven modules :" >> ${index}
-	    echo >> ${index}
-	elif [ "${reldir}" != "" ]
+        {
+	        echo "This is a maven aggregator project consisting of the following maven modules :"
+	        echo
+        } >> ${index}
+	elif [ -n "${reldir}" ]
 	then
-	    echo "Samples :" >> ${index}
-	    echo >> ${index}        
+        {
+            echo "Samples :"
+            echo
+        } >> ${index}        
 	fi
 	cat ${index}-sub >> ${index}
 	rm -f ${index}-sub
@@ -73,64 +84,62 @@ update_in_project_directory() {
 
     if [ -f src/site/markdown/index.md ]
     then
-	echo "* [${artifactId}](src/site/markdown/index.md)" >> ${index}
-	echo "* [${name}]($(basename ${reldir})/src/site/markdown/index.md)" >> ../${index}-sub
-    elif [ "${reldir}" != "" ]
+	    echo "* [${artifactId}](src/site/markdown/index.md)" >> ${index}
+	    echo "* [${name}]($(basename ${reldir})/src/site/markdown/index.md)" >> ../${index}-sub
+    elif [  -n "${reldir}" ]
     then
-	echo "* [${description}]($(basename ${reldir})/README.md)" >> ../${index}-sub
+	    echo "* [${description}]($(basename "${reldir}")/README.md)" >> ../${index}-sub
     fi
 
     if [ "${tibcosample}" = "true" ]
     then
-	echo "" >> ${index}
-	echo "_This is a Spotfire approved sample._" >> ${index}
+        echo "" >> ${index}
+        echo "_This is a TIBCO approved sample._" >> ${index}
     fi
 
-    echo "" >> ${index}
-    echo "---" >> ${index}
-    echo "Copyright (c) 2018-$(date +%Y) Cloud Software Group, Inc." >> ${index}
-    echo "" >> ${index}
-    echo "Redistribution and use in source and binary forms, with or without" >> ${index}
-    echo "modification, are permitted provided that the following conditions are met:" >> ${index}
-    echo "" >> ${index}
-    echo "* Redistributions of source code must retain the above copyright notice, this" >> ${index}
-    echo "  list of conditions and the following disclaimer." >> ${index}
-    echo "" >> ${index}
-    echo "* Redistributions in binary form must reproduce the above copyright notice," >> ${index}
-    echo "  this list of conditions and the following disclaimer in the documentation" >> ${index}
-    echo "  and/or other materials provided with the distribution." >> ${index}
-    echo "" >> ${index}
-    echo "* Neither the name of the copyright holder nor the names of its" >> ${index}
-    echo "  contributors may be used to endorse or promote products derived from" >> ${index}
-    echo "  this software without specific prior written permission." >> ${index}
-    echo "" >> ${index}
-    echo "THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"" >> ${index}
-    echo "AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE" >> ${index}
-    echo "IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE" >> ${index}
-    echo "DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE" >> ${index}
-    echo "FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL" >> ${index}
-    echo "DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR" >> ${index}
-    echo "SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER" >> ${index}
-    echo "CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY," >> ${index}
-    echo "OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE" >> ${index}
-    echo "OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE." >> ${index}
+    {
+        echo ""
+        echo "---"
+        echo "Copyright (c) 2018-$(date +%Y) Cloud Software Group, Inc."
+        echo ""
+        echo "Redistribution and use in source and binary forms, with or without"
+        echo "modification, are permitted provided that the following conditions are met:"
+        echo ""
+        echo "* Redistributions of source code must retain the above copyright notice, this"
+        echo "  list of conditions and the following disclaimer."
+        echo ""
+        echo "* Redistributions in binary form must reproduce the above copyright notice,"
+        echo "  this list of conditions and the following disclaimer in the documentation"
+        echo "  and/or other materials provided with the distribution."
+        echo ""
+        echo "* Neither the name of the copyright holder nor the names of its"
+        echo "  contributors may be used to endorse or promote products derived from"
+        echo "  this software without specific prior written permission."
+        echo ""
+        echo "THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\""
+        echo "AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE"
+        echo "IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE"
+        echo "DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE"
+        echo "FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL"
+        echo "DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR"
+        echo "SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER"
+        echo "CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,"
+        echo "OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE"
+        echo "OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+
+    } >> $index
 }
 
-declare project_directory
-if $should_debug ; then
-    echo "> project.basedir properties:"
-    get_project_tree_property_ex '${project.basedir}/'
-    echo "> end of project.basedir properties:"
-fi
 
-# Stricter get_project_tree_property_ex '${project.basedir}/' often fails
-# with closed process stream.
-for project_directory in $(find $(pwd) -name pom.xml | xargs dirname)
+declare project_directory
+
+for project_directory in $(find "$(pwd)" -name pom.xml -print0 | xargs -0 dirname)
 do
-    (echo ">> ${project_directory}" && cd ${project_directory} && update_in_project_directory "${project_directory}")
+    (
+        echo ">> ${project_directory}" && cd "${project_directory}" && update_in_project_directory "${project_directory}"
+    )
 done
 
 # Just list the indexed files.
 find . -name ${index} | grep -v /target/ | xargs git add
-git status .
-find . -name ${index} | grep -v /target/ | xargs git commit -m "Sample index updates."
+echo "Sample indexes updated, stopped before commit."

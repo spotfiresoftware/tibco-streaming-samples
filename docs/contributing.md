@@ -8,7 +8,7 @@ We follow the GitHub flow process, including :
 
 * Repository is public - ie read-only to everyone.
 * Collaborators are users with direct push access to the repository
-    * Are from Spotfire Streaming engineering team
+    * Are from TIBCO Streaming engineering team
     * Are part of github team @streambasesamples
 * Any user can submit a pull request
     * The request should mention @streambasesamples

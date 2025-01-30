@@ -3,15 +3,15 @@
 This sample describes how to deploy an application archive containing an EventFlow fragment to Docker.
 
 * [Prerequisites](#prerequisites)
-* [Creating an application archive project for Docker from Spotfire StreamBase Studio&trade;](#creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade)
+* [Creating an application archive project for Docker from TIBCO StreamBase&reg; Studio](#creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade)
 * [Containers and nodes](#containers-and-nodes)
 * [Changes to the default docker configurations](#changes-to-the-default-docker-configurations)
-* [Building and running from Spotfire StreamBase Studio&trade;](#building-and-running-from-tibco-streambase-studio-trade)
+* [Building and running from TIBCO StreamBase&reg; Studio](#building-and-running-from-tibco-streambase-studio-trade)
 * [Building this sample from the command line and running the integration test cases](#building-this-sample-from-the-command-line-and-running-the-integration-test-cases)
 * [Example docker commands](#example-docker-commands)
 * [Potential problems](#potential-problems)
 
-See also [Docker section in Spotfire&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
+See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
 
 <a name="prerequisites"></a>
 
@@ -28,16 +28,16 @@ CPUs and Memory settings on the Advanced tab of Docker preferences.
 
 <a name="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
 
-## Creating an application archive project for Docker from Spotfire StreamBase Studio&trade;
+## Creating an application archive project for Docker from TIBCO StreamBase&reg; Studio
 
-Spotfire StreamBase Studio&trade; can generate a project containing the necessary files to build and 
+TIBCO StreamBase&reg; Studio can generate a project containing the necessary files to build and 
 test a Docker image by selecting **Enable Docker support** when creating an application archive project :
 
 ![create](images/create.png)
 
 Such a project includes :
 
-* A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the Spotfire StreamBase runtime
+* A [base Dockerfile](../../main/docker/base/Dockerfile) to build a base image containing Linux, utilities and the TIBCO Streaming Runtime
 * A [start-node](../../main/docker/base/start-node) script to start a node
 * An [application Dockerfile](../../main/docker/application/Dockerfile) to build an application image containing the application archive - this is based on the base image
 * Steps in [pom.xml](../../../pom.xml) that uses [fabric8io/docker-maven-plugin](http://dmp.fabric8.io/) to build the Docker image and start Docker containers for basic testing
@@ -124,9 +124,9 @@ and include running **epadmin display cluster** when the nodes are started - thi
 
 <a name="building-and-running-from-tibco-streambase-studio-trade"></a>
 
-## Building and running from Spotfire StreamBase Studio&trade;
+## Building and running from TIBCO StreamBase&reg; Studio
 
-Use the **Run As -> Maven install** menu option to build from Spotfire StreamBase Studio&trade; or Run As shortcut.  Tests can
+Use the **Run As -> Maven install** menu option to build from TIBCO StreamBase&reg; Studio or Run As shortcut.  Tests can
 be skipped if required by ticking the **Skip tests** :
 
 ![maven](images/studio-build.gif)

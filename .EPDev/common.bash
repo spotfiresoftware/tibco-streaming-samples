@@ -27,19 +27,12 @@ fi
 
 # Force certain profiles for complete active project coverage. See MAINTENANCE.md.
 run_maven() {
-    ${MVN} -PactiveAnsible -B -e "${@}"
+    ${MVN} -B -e "${@}"
 }
 
 # Get a property of a single project.
 get_project_property() {
-    run_maven -N -q -Dexec.executable='echo' -Dexec.args="\${${1}}" exec:exec
-}
-
-# Get property *expression* for a tree of projects. Needed because the exec mojo
-# will not allow us to convert project.basedir as a String, as the value is
-# a File.
-get_project_tree_property_ex() {
-    run_maven -q -Dexec.executable='echo' -Dexec.args="${1}" exec:exec
+    run_maven help:evaluate -Dexpression="$1" -q -DforceStdout
 }
 
 # Get the current parent version of the reference project.
