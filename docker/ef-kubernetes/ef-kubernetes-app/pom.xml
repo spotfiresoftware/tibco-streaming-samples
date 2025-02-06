@@ -144,7 +144,7 @@
                             <skip>${skipDockerBuild}</skip>
                             <images>
                                 <image>
-                                    <name>clustermonitor:%l</name>
+                                    <name>clustermonitor:%v</name>
                                     <build>
                                         <dockerFileDir>${project.basedir}/src/main/docker/clustermonitor</dockerFileDir>
                                         <optimise>true</optimise>
@@ -174,7 +174,7 @@
                             <skip>${skipDockerBuild}</skip>
                             <images>
                                 <image>
-                                    <name>clustermonitor:%l</name>
+                                    <name>clustermonitor:%v</name>
                                     <build/>
                                 </image>
                             </images>
@@ -193,7 +193,7 @@
                             <autoCreateCustomNetworks>true</autoCreateCustomNetworks>
                             <images>
                                 <image>
-                                    <name>%a:%l</name>
+                                    <name>%a:%v</name>
                                     <alias>A.${project.artifactId}</alias>
                                     <run>
                                         <network>
@@ -215,7 +215,7 @@
                                     </run>
                                 </image>
                                 <image>
-                                    <name>%a:%l</name>
+                                    <name>%a:%v</name>
                                     <alias>B.${project.artifactId}</alias>
                                     <run>
                                         <network>
@@ -237,7 +237,7 @@
                                     </run>
                                 </image>
                                 <image>
-                                    <name>%a:%l</name>
+                                    <name>%a:%v</name>
                                     <alias>C.${project.artifactId}</alias>
                                     <run>
                                         <network>
