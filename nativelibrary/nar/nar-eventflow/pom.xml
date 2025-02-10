@@ -101,4 +101,14 @@
         </profile>
     </profiles>
 
+    <!-- For the standard portable nar-generated Java wrapper. -->
+    <dependencies>
+        <dependency>
+            <groupId>com.tibco.ep.samples.nativelibrary</groupId>
+            <artifactId>nar-cpplib</artifactId>
+            <version>${project.version}</version>
+            <type>nar</type>
+        </dependency>
+    </dependencies>
+    
 </project>
