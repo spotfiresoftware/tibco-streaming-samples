@@ -39,8 +39,8 @@ public class CallCpp {
         // Don't load the native library when we're typechecking in studio
         //
         if (System.getProperty("streambase.ide.is-running") == null) {
-            System.loadLibrary("nar-cpplib-1.0.0");
-            System.out.println("loaded shared lib");
+            NarSystem.loadLibrary();
+            System.out.println("Loaded shared library");
         }
     }
 
