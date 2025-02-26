@@ -233,7 +233,7 @@ docker image.  To support this an additional maven execution step is needed in p
                         <configuration>
                             <images>
                                 <image>
-                                    <name>clustermonitor:%l</name>
+                                    <name>clustermonitor:%v</name>
                                     <build>
                                         <dockerFileDir>${project.basedir}/src/main/docker/clustermonitor</dockerFileDir>
                                         <optimise>true</optimise>
@@ -262,7 +262,7 @@ docker image.  To support this an additional maven execution step is needed in p
                         <configuration>
                             <images>
                                 <image>
-                                    <name>clustermonitor:%l</name>
+                                    <name>clustermonitor:%v</name>
                                     <build/>
                                 </image>
                             </images>
