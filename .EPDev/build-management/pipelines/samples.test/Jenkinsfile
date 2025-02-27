@@ -73,7 +73,8 @@ pipeline {
     
     agent {
         node {
-            label "${executorLabel}"     
+            //label "${executorLabel}"
+            label "guedstrje03.spotfire.com"
 	 }
     }
 
