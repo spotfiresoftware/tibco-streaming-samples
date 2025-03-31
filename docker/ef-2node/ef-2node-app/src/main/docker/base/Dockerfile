@@ -1,5 +1,6 @@
 #
-#  Copyright (c) 2018-2023 Cloud Software Group, Inc.
+#  Copyright (c) 2018-2025 Cloud Software Group, Inc.
+#  All Rights Reserved. Confidential and Proprietary.
 #  
 #  Redistribution and use in source and binary forms, with or without
 #  modification, are permitted provided that the following conditions are met:
@@ -29,6 +30,7 @@
 #
 # Dockerfile for Streaming generic base image
 #
+FROM eclipse-temurin:22-jdk AS java-image
 FROM almalinux:8
 
 LABEL description="TIBCO Streaming base image"
@@ -42,6 +44,12 @@ ENV STREAMING_RUNTIME_HOME     /var/opt/tibco/streambase
 ENV JAVA_HOME        /etc/alternatives/jre
 ENV PATH             /bin:/usr/sbin:${STREAMING_PRODUCT_HOME}/distrib/tibco/bin
 ENV USER_NAME        tibco
+
+COPY --from=java-image /opt/java/openjdk $JAVA_HOME
+
+RUN ln -s $JAVA_HOME/bin/java /usr/bin/java \
+    && ln -s $JAVA_HOME/bin/javac /usr/bin/javac \
+    && ln -s $JAVA_HOME/bin/jar /usr/bin/jar
 
 #
 # Add required additional packages
@@ -61,7 +69,6 @@ RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && dnf --assumeyes update && dnf
     unzip \
     libnsl \
     less \
-    java-17-openjdk-headless \
     iproute \
     && dnf clean all
 
@@ -77,10 +84,25 @@ RUN /usr/sbin/useradd \
     ${USER_NAME}
 
 #
-# Install runtime
+# Copy platform archive
 #
 RUN mkdir -p ${STREAMING_PRODUCT_HOME}
 COPY maven ${STREAMING_PRODUCT_HOME}
+
+#
+# Unpack the platform archive and set permissions
+#
+RUN cd ${STREAMING_PRODUCT_HOME} \
+    && unzip platform_linuxx86_64.zip \
+    && rm platform_linuxx86_64.zip \
+    && sed -i 's/\r//' ${STREAMING_PRODUCT_HOME}/start-node \
+    && chmod a+x \
+        ${STREAMING_PRODUCT_HOME}/start-node \
+        ${STREAMING_PRODUCT_HOME}/distrib/tibco/bin/ep* \
+        ${STREAMING_PRODUCT_HOME}/distrib/kabira/bin/sw* \
+        ${STREAMING_PRODUCT_HOME}/distrib/kabira/component/swcoordadmin/prodbin/swcoordadmin \
+        ${STREAMING_PRODUCT_HOME}/distrib/kabira/component/DtmEngine/prodbin/DtmEngine \
+    && chmod -R a-w ${STREAMING_PRODUCT_HOME}
 
 #
 # Allow user access to nodes and applications

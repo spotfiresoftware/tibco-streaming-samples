@@ -1,6 +1,7 @@
 #!/bin/sh
 #
-#  Copyright (c) 2018-2023 Cloud Software Group, Inc.
+#  Copyright (c) 2018-2025 Cloud Software Group, Inc.
+#  All Rights Reserved. Confidential and Proprietary.
 #  
 #  Redistribution and use in source and binary forms, with or without
 #  modification, are permitted provided that the following conditions are met:
@@ -206,12 +207,23 @@ epadmin --username=${USER_NAME} --password=${USER_NAME} install node \
     --nodename=${STREAMING_NODENAME} \
     --nodedirectory=${STREAMING_RUNTIME_HOME}/node \
     ${args}
+
+if [ $? != 0 ]; then
+    echo "Failed to install node"
+    exit 1
+fi
+
 if [ "${POD_NAMESPACE}" != "" ]
 then
     adminport=$(epadmin getadminport node --installpath=${STREAMING_RUNTIME_HOME}/node/${STREAMING_NODENAME})
     epadmin --adminport=${adminport} start node
 else
     epadmin --servicename=${STREAMING_NODENAME} start node
+fi
+
+if [ $? != 0 ]; then
+    echo "Failed to start node"
+    exit 1
 fi
 
 #

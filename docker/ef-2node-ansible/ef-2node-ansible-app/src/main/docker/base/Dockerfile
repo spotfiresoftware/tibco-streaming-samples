@@ -1,4 +1,6 @@
-#  Copyright (c) 2018-2023 Cloud Software Group, Inc.
+#
+#  Copyright (c) 2018-2025 Cloud Software Group, Inc.
+#  All Rights Reserved. Confidential and Proprietary.
 #  
 #  Redistribution and use in source and binary forms, with or without
 #  modification, are permitted provided that the following conditions are met:
@@ -30,6 +32,7 @@
 #
 ### Build temporary image in multi-stage docker image build process
 #
+FROM eclipse-temurin:22-jdk AS java-image
 FROM almalinux:8 AS build
 
 ###Note: LABEL statement build by Ansible playbook
@@ -73,6 +76,12 @@ ENV JAVA_HOME        /etc/alternatives/jre
 ENV PATH             /bin:/usr/sbin:${STREAMING_PRODUCT_HOME}/distrib/tibco/bin
 ENV USER_NAME        tibco
 
+COPY --from=java-image /opt/java/openjdk $JAVA_HOME
+
+RUN ln -s $JAVA_HOME/bin/java /usr/bin/java \
+    && ln -s $JAVA_HOME/bin/javac /usr/bin/javac \
+    && ln -s $JAVA_HOME/bin/jar /usr/bin/jar
+
 #
 # Add required additional packages
 #
@@ -91,7 +100,6 @@ RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && dnf --assumeyes update && dnf
     unzip \
     libnsl \
     less \
-    java-17-openjdk-headless \
     iproute \
     && dnf clean all
 
