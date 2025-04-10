@@ -61,9 +61,11 @@ pipeline {
         string(name: 'successEmail', defaultValue: 'change-authors',
                description: 'Email addresses for notifications on success.')
 
-
         choice(name: 'buildVerbose', choices: ['default', 'pipeline', 'tools' ],
                description: 'Make build more verbose with pipeline and tool diagnostics.')
+
+        string(name: 'buildLabel', defaultValue: '',
+               description: 'Jenkins build label override.')
 
  	string(name: 'streamingVersion', defaultValue: '',
                description: 'The version of Streaming that the samples should use.')	
