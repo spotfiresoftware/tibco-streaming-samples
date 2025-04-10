@@ -2,7 +2,6 @@
 // Copyright © 2021-2025. Cloud Software Group, Inc. All Rights Reserved.
 //
 
-
 @Library('workflowLibs') _
 
 def jobUtil = new com.tibco.workflow.JobUtil()
@@ -128,11 +127,27 @@ pipeline {
                         upstreamUseReleaseCandidate: true, // tests of Streaming RCs
                         testPlatforms: [ "macos", "windows" ],
                         primaryPlatform: "linux",
+                        useCachedMavenRepository: true,
                         skipJenkinsArtifactPublisher: [ any: true ],
                         archiveArtifacts: [ failure: // entrails
                                            [ artifacts: epDeclarative.getEPArchiveArtifactsForFailure() ] ]
                     )
 
+                    // Same as project version.
+                    String streamingVersion = epDeclarative.getPomVersion()
+
+                    if (!"linux".equals(platform)) {
+                        // Get Linux Intel runtime for container samples.
+                        epDeclarative.buildMavenSimple(
+                            newMavenSettingsArgs: [
+                                settingsPath: "${env.WORKSPACE}/linux-maven-settings.xml",
+                                epNativePlatformQualifier: "linux"
+                            ],
+                            goals: "dependency:get -N -Dartifact=com.tibco.ep.sb.rt:platform_linuxx86_64:${streamingVersion}:zip",
+                            platform: platform)
+
+                    }
+                    
                     epDeclarative.buildMaven(
                          goals: "install",
                          platform: platform)
