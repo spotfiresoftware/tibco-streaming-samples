@@ -11,9 +11,9 @@ This sample describes how to deploy an application archive containing an EventFl
 * [Example docker commands](#example-docker-commands)
 * [Potential problems](#potential-problems)
 
-See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/10.4.0/doc/html/admin/part-docker.html).
+See also [Docker section in TIBCO&reg; Streaming documentation](https://docs.tibco.com/pub/str/11.1.1/doc/html/admin/docker-create.html).
 
-<a name="prerequisites"></a>
+<a id="prerequisites"></a>
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ CPUs and Memory settings on the Advanced tab of Docker preferences.
 
 ![resources](images/resources.png)
 
-<a name="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
+<a id="creating-an-application-archive-project-for-docker-from-tibco-streambase-studio-trade"></a>
 
 ## Creating an application archive project for Docker from TIBCO StreamBase&reg; Studio
 
@@ -47,7 +47,7 @@ Such a project includes :
 
 Note that whilst this project will create a simple Docker image, changes to the project may be required for additional behaviours. 
 
-<a name="containers-and-nodes"></a>
+<a id="containers-and-nodes"></a>
 
 ## Containers and nodes
 
@@ -57,7 +57,7 @@ In this sample we name the docker container as **A.ef-2node-app**,  which hosts 
 
 The two containers have network access to each other, but not to the docker host.
 
-<a name="changes-to-the-default-docker-configurations"></a>
+<a id="changes-to-the-default-docker-configurations"></a>
 
 ## Changes to the default docker configurations
 
@@ -122,7 +122,7 @@ and include running **epadmin display cluster** when the nodes are started - thi
     </exec>
 ```
 
-<a name="building-and-running-from-tibco-streambase-studio-trade"></a>
+<a id="building-and-running-from-tibco-streambase-studio-trade"></a>
 
 ## Building and running from TIBCO StreamBase&reg; Studio
 
@@ -137,7 +137,7 @@ manage containers :
 
 ![maven](images/studio-run.gif)
 
-<a name="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
+<a id="building-this-sample-from-the-command-line-and-running-the-integration-test-cases"></a>
 
 ## Building this sample from the command line and running the integration test cases
 
@@ -145,7 +145,7 @@ Use the [maven](https://maven.apache.org) as **mvn install** to build from the c
 
 ![maven](images/maven.gif)
 
-<a name="example-docker-commands"></a>
+<a id="example-docker-commands"></a>
 
 ## Example docker commands
 
@@ -298,7 +298,7 @@ $ docker stop B.ef-2node-app
 $ docker rm B.ef-2node-app
 ```
 
-<a name="potential-problems"></a>
+<a id="potential-problems"></a>
 
 ## Potential problems
 
